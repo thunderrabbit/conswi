@@ -1,0 +1,100 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://PausedPopup.gd" type="Script" id=1]
+
+[node name="HUD" type="Node2D" index="0"]
+
+[node name="Button" type="Button" parent="." index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 470.0
+margin_top = 19.0
+margin_right = 579.0
+margin_bottom = 70.0
+rect_pivot_offset = Vector2( 0, 0 )
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "pause"
+flat = false
+align = 1
+
+[node name="PausedPopup" type="Popup" parent="." index="1"]
+
+pause_mode = 2
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 40.0
+margin_top = 17.0
+margin_right = 544.0
+margin_bottom = 580.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+popup_exclusive = false
+script = ExtResource( 1 )
+_sections_unfolded = [ "Pause" ]
+
+[node name="Label" type="Label" parent="PausedPopup" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 75.0
+margin_top = 67.0
+margin_right = 426.0
+margin_bottom = 485.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused paused "
+autowrap = true
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Button" type="Button" parent="PausedPopup" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 177.0
+margin_top = 365.0
+margin_right = 285.0
+margin_bottom = 408.0
+rect_pivot_offset = Vector2( 0, 0 )
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "GO"
+flat = false
+align = 1
+
+[connection signal="pressed" from="Button" to="PausedPopup" method="_on_PauseButton_pressed"]
+
+[connection signal="pressed" from="PausedPopup/Button" to="PausedPopup" method="_on_UnpauseButton_pressed"]
+
+
