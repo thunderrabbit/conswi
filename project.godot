@@ -11,13 +11,15 @@ config_version=3
 [application]
 
 config/name="ConSwi"
-run/main_scene="res://Game.tscn"
+run/main_scene="res://SplashScreen/SplashScreen.tscn"
 config/icon="res://icon.png"
 run/name="ConSwi"
 
 [autoload]
 
 HUD="*res://HUD.tscn"
+Globals="*res://helpers/Globals.gd"
+SceneSwitcher="*res://helpers/SceneSwitcher.gd"
 
 [display]
 

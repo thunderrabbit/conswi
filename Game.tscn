@@ -2,7 +2,7 @@
 
 [ext_resource path="res://LevelTimer.gd" type="Script" id=1]
 
-[node name="GameNode2D" type="Node2D" index="0"]
+[node name="GameNode2D" type="Node2D"]
 
 [node name="LevelTimer" type="Timer" parent="." index="0"]
 
