@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://SplashScreen/SplashScreen.gd" type="Script" id=1]
+[ext_resource path="res://images/items.png" type="Texture" id=2]
+[ext_resource path="res://SubScenes/TileSprite.gd" type="Script" id=3]
 
 [node name="SplashScreen" type="Node2D" index="0"]
 
@@ -32,6 +34,11 @@ text = "ConSwi"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+
+[node name="TileImage" type="Sprite" parent="." index="2"]
+
+texture = ExtResource( 2 )
+script = ExtResource( 3 )
 
 [connection signal="timeout" from="Timer" to="." method="_on_SplashScreen_Timer_timeout"]
 

@@ -18,8 +18,10 @@ run/name="ConSwi"
 [autoload]
 
 HUD="*res://HUD.tscn"
-Globals="*res://helpers/Globals.gd"
+G="*res://helpers/Globals.gd"
 SceneSwitcher="*res://helpers/SceneSwitcher.gd"
+Helpers="*res://helpers/Helpers.gd"
+TileDatabase="*res://helpers/TileDatabase.gd"
 
 [display]
 
