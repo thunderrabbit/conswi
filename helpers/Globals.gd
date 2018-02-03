@@ -1,6 +1,6 @@
 extends Node
 
-const splashscreen_timeout = 2
+const splashscreen_timeout = 0.2
 
 ##  http://www.gamefromscratch.com/post/2015/02/23/Godot-Engine-Tutorial-Part-6-Multiple-Scenes-and-Global-Variables.aspx
 const GLOBALtop_space = 30		# Might just move the Popup down instead

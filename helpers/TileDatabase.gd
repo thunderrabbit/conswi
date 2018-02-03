@@ -3,7 +3,7 @@ extends Node
 const ITEM_NAME         = 0
 const ITEM_SPRITE       = 3
 
-var TileDatabase = [
+var tiles = [
 	{
 		ITEM_NAME : "Pig",
 		ITEM_SPRITE : G.TYPE_PIG,
@@ -45,5 +45,5 @@ func _ready():
 	randomize()
 
 func random_type():
-	return randi() % TileDatabase.size()
+	return randi() % tiles.size()
 
