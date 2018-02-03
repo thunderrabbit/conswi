@@ -14,7 +14,7 @@ func _init():
 
 func set_tile_type(my_tile_type):
 	var icon = my_tile_type   # Fack figure out Database later	TileDatabase.get_item_sprite(my_type_ordinal)
-#	set_pos(get_size()/2)
+#	set_position(get_size()/2)
 #	set_scale(Vector2(1,1))
 	set_texture(preload("res://images/items.png"))
 	set_region(true)

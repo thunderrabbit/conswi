@@ -29,7 +29,7 @@ func set_shape(shape_array, tile_type = 1):
             var sprite = Sprite.new()
             sprite.set_script(sprite_script)
             sprite.set_tile_type(tile_type)
-            sprite.set_pos(Helpers.slot_to_pixels(loc))
+            sprite.set_position(Helpers.slot_to_pixels(loc))
             add_child(sprite)
 
 # once shape has been shown for requirements, we need to shrink it
@@ -85,7 +85,7 @@ func shrunk_shape(obj, key):
 func display_quantity(quantity):
 	# once the spinner is done, we want it to tell us
 	spinner.connect("qty_reached",self,"_displayed_quantity")
-	spinner.set_pos(Vector2(90,90))	# hardcoded until I can figure out positioning
+	spinner.set_position(Vector2(90,90))	# hardcoded until I can figure out positioning
 	spinner.show()					# just in case
 	spinner.set_delay(tick_delay)
 	spinner.set_target(quantity)	# tell spinner where to stop

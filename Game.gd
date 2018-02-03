@@ -79,9 +79,6 @@ func start_level(level_num):
 	level_reqs.level_requires(current_level.level_requirements)
 	buttons.prepare_to_play_level(level_num)
 
-	if Helpers.debug_level == 0:
-		get_node("/root/GameScene/DebugOutput").hide()
-
 # turn input off for all children while display requirements / show cut scenes and the like
 func grok_input(boolean):
 	buttons.grok_input(boolean)
@@ -278,7 +275,7 @@ func piece_unclicked():
 
 		swipe_shape = SwipeShape.instance()
 		swipe_shape.set_shape(ShapeShifter.getBitmapOfSwipeCoordinates(swipe_array),clicked_this_piece_type)
-		swipe_shape.set_pos(Helpers.slot_to_pixels(dimensions["topleft"]))
+		swipe_shape.set_position(Helpers.slot_to_pixels(dimensions["topleft"]))
 		add_child(swipe_shape)
 		if swipe_was_required:
 			swipe_shape.connect("shrunk_shape",self,"shrank_required_shape")

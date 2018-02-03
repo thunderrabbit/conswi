@@ -63,7 +63,7 @@ func display_next_requirement():
 		currently_showing_shape.connect("displayed_shape",self,"shape_has_been_displayed")
 		currently_showing_shape.set_shape(ShapeShifter.getBitmapOfSwipeName(currently_showing_name))
 		print("hardcoded shape display location")
-		currently_showing_shape.set_pos(Helpers.slot_to_pixels(Vector2(3,5)))
+		currently_showing_shape.set_position(Helpers.slot_to_pixels(Vector2(3,5)))
 		add_child(currently_showing_shape)
 		currently_showing_shape.display_quantity(reqd_qty)
 

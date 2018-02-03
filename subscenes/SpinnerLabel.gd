@@ -3,7 +3,7 @@ extends Label
 var value = 0		# this is the current value
 var target = 0		# if in spin mode, these is our destination
 var tick_delay = 0.73	# how many seconds to wait between ticks when spinning
-onready var tick_timer = get_node("TickTimer")		# will point to the timer
+onready var tick_timer = Timer.new()
 
 signal qty_reached
 
