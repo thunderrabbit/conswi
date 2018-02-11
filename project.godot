@@ -26,10 +26,12 @@ ShapeShifter="*res://helpers/ShapeShifter.gd"
 ShapeDatabase="*res://helpers/ShapeDatabase.gd"
 LevelDatabase="*res://levels/LevelDatabase.gd"
 VisibleSwipeOverlay="*res://VisibleSwipeOverlay.gd"
+Background="*res://subscenes/Background.tscn"
 
 [display]
 
-window/size/width=600
+window/size/width=640
+window/size/height=1280
 window/size/resizable=false
 window/handheld/orientation="portrait"
 window/handheld/emulate_touchscreen=true
