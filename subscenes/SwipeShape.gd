@@ -41,12 +41,12 @@ func set_shape(shape_array, tile_type = 1):
 func shrink_shape(go_to_loc):
 	var ratio = 0.2
 	var effect = get_node("Tween")
-	effect.connect("tween_complete", self, "shrunk_shape")
-	effect.interpolate_property(self, 'transform/scale',
+	effect.connect("tween_completed", self, "shrunk_shape")
+	effect.interpolate_property(self, "scale",
 			self.get_scale(), Vector2(ratio, ratio), 0.9,
 			Tween.TRANS_QUAD, Tween.EASE_OUT)
-	effect.interpolate_property(self, 'transform/pos',
-			self.get_pos(), go_to_loc, 0.9,
+	effect.interpolate_property(self, "position",
+			self.get_position(), go_to_loc, 0.9,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	effect.start()
 
@@ -54,15 +54,15 @@ func shrink_shape(go_to_loc):
 func fly_away_randomly():
 	var go_to_loc = Helpers.slot_to_pixels(Vector2(10,10))
 	var effect = get_node("Tween")
-	effect.connect("tween_complete", self, "flew_away")
-	effect.interpolate_property(self, 'transform/scale',
+	effect.connect("tween_completed", self, "flew_away")
+	effect.interpolate_property(self, 'scale',
 			self.get_scale(), Vector2(5, 5), 0.9,
 			Tween.TRANS_QUAD, Tween.EASE_OUT)
-	effect.interpolate_property(self, 'transform/pos',
-			self.get_pos(), go_to_loc, 0.9,
+	effect.interpolate_property(self, 'pos',
+			self.get_position(), go_to_loc, 0.9,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	effect.interpolate_property(self, 'transform/rot', 0, 600, 0.9, Tween.TRANS_LINEAR, Tween.EASE_OUT)
-	effect.interpolate_property(self, 'visibility/opacity',
+	effect.interpolate_property(self, 'rot', 0, 600, 0.9, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	effect.interpolate_property(self, 'opacity',
 			1, 0, 0.9,
 			Tween.TRANS_QUAD, Tween.EASE_OUT)
 	effect.start()
