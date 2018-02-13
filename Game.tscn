@@ -8,7 +8,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 345.2, 338 )
 
-[node name="GameNode2D" type="Node2D"]
+[node name="GameNode2D" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 
@@ -29,7 +29,7 @@ autostart = false
 [node name="LevelTimer" type="Timer" parent="." index="2"]
 
 process_mode = 1
-wait_time = 1.0
+wait_time = 19.0
 one_shot = false
 autostart = false
 script = ExtResource( 2 )

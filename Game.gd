@@ -38,12 +38,13 @@ func _ready():
 	add_child(buttons)
 
 	Helpers.game_scene = self		# so Players know where to appear
-	time_label = get_node("LevelTimerLabel")
+	time_label = get_node("LevelTimer/LevelTimerLabel")
 
 	# tell the Magnetism timer to call Helpers.magnetism_called (every MAGNETISM_TIME seconds)
 	get_node("Magnetism").connect("timeout", get_node("/root/Helpers"), "magnetism_called", [])
 
 	level_reqs = LevelRequirements.instance()
+	level_reqs.set_game_scene(self)
 	add_child(level_reqs)
 
 	# TODO: add START button overlay
@@ -140,13 +141,11 @@ func level_over(reason):
 	buttons.level_ended(reason)
 
 # this is only to handle orphaned swipes
-func _on_Orphan_Swipe_Catcher_input_event( viewport, event, shape_idx ):
-	if event.type == InputEvent.MOUSE_BUTTON \
-	and event.button_index == BUTTON_LEFT:
-		if event.pressed:
-			pass
-		else: # not event.pressed:
-			piece_unclicked()
+func _on_OrphanSwipeCatcher_input_event( viewport, event, shape_idx ):
+	if event is InputEventMouseButton:
+		if event.button_index == 1:
+			if !event.pressed:
+				piece_unclicked()
 
 func _process(delta):
 
@@ -308,6 +307,7 @@ func piece_entered(position, piece_type):
 		Helpers.board[position].highlight()
 	VisibleSwipeOverlay.draw_this_swipe(swipe_array,TileDatabase.TileDatabase[piece_type].ITEM_COLOR)
 	VisibleSwipeOverlay.set_z(100)
+
 func adjacent(pos1, pos2):
 	# https://www.gamedev.net/forums/topic/516685-best-algorithm-to-find-adjacent-tiles/?tab=comments#comment-4359055
 	var xOffsets = [ 0, 1, 0, -1]

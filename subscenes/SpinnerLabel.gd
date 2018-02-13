@@ -1,7 +1,7 @@
 extends Label
 
 var value = 0		# this is the current value
-var target = 0		# if in spin mode, these is our destination
+var target = 0		# if in spin mode, this is our destination
 var tick_delay = 0.73	# how many seconds to wait between ticks when spinning
 onready var tick_timer = Timer.new()
 
@@ -9,6 +9,7 @@ signal qty_reached
 
 func _ready():
 	tick_timer.connect("timeout",self,"_check_spin_qty")
+	add_child(tick_timer)  # so it gets processed()
 
 func set_value(value):
 	self.value = value
@@ -28,11 +29,16 @@ func start_tick_from(start_value):
 func inc_value():
 	set_value(value + 1)
 
+func dec_value():
+	set_value(value - 1)
+
 func _check_spin_qty():
 	if self.value < self.target:
 		inc_value()
+	elif self.value > self.target:
+		dec_value()
+
 	if self.value == self.target:
-		print("we reached the target of ", self.target)
 		tick_timer.stop()
 		emit_signal("qty_reached")
 	else: 
