@@ -3,10 +3,11 @@ extends Sprite
 var sprite_loc = []
 
 func _init():
+	# within the image map, these are the locations of the tiles
 						# left, top, width, height
-	sprite_loc.push_back(Rect2(35, 23, 65, 65));
-	sprite_loc.push_back(Rect2(120, 23, 65, 65));
-	sprite_loc.push_back(Rect2(200, 23, 65, 65));
+	sprite_loc.push_back(Rect2(35, 23, 65, 65));		# cat?
+	sprite_loc.push_back(Rect2(120, 23, 65, 65));		# dog?
+	sprite_loc.push_back(Rect2(200, 23, 65, 65));		# etc
 	sprite_loc.push_back(Rect2(287, 23, 65, 65));
 	sprite_loc.push_back(Rect2(376, 23, 65, 65));
 	sprite_loc.push_back(Rect2(459, 23, 65, 65));
