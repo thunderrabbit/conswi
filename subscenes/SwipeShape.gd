@@ -69,13 +69,13 @@ func fly_away_randomly():
 
 # swipe need not exist after it has flown away
 func flew_away(obj, key):
-	if key == 'transform/scale':	# (callback only once per tween)
+	if key == ':scale':	# (callback only once per tween)
 		queue_free()
 
 # After shape has been shrunk
 func shrunk_shape(obj, key):
 	# call back to LevelRequirements
-	if key == 'transform/scale':	# (callback only once per tween)
+	if key == ':scale':	# (callback only once per tween)
 		emit_signal("shrunk_shape")
 
 # `display_quantity()` is only used when showing the user what
