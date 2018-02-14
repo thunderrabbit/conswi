@@ -42,7 +42,7 @@ func add_effect():
 
 func is_shadow():
 	my_sprite.is_shadow()
-	clear_shapes()  # remove collider so we cannot touch it
+	#clear_shapes()  # remove collider so we cannot touch it
 
 # This will be called by GameScene
 func start_swipe_effect():

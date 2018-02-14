@@ -74,7 +74,7 @@ func unhighlight():
 
 func darken():
 	mytile.my_sprite.darken()
-	mytile.clear_shapes()
+#	mytile.clear_shapes()
 
 func level_ended():
 	darken()
