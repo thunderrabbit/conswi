@@ -14,13 +14,15 @@ var slot_gap_h        = slot_gap
 var slot_gap_v        = slot_gap
 var buttons_across    = 5
 
+const LevelSelectButton = preload("LevelSelectButton.tscn")
+
 func _ready():
     var button_loc = Vector2(0,0)
     for level in range(1,51):
         button_loc = level_to_pixels(level)
-        var level_but = Button.new()
+        var level_but = LevelSelectButton.instance()
         level_but.set_position(button_loc)
-        level_but.set_text(String(level))
+        level_but.set_level(level)
         level_but.set_size(Vector2(SLOT_SIZE,SLOT_SIZE))
         level_but.connect("pressed",self,"_on_Button_pressed",[level])
         add_child(level_but)
