@@ -6,19 +6,20 @@ extends Node2D
 # here so it is clear that they are only used here.
 # Feel free to arrange these buttons in a better way.
 
-const SLOT_SIZE       = 70
+const SLOT_SIZE       = 90
 var left_space        = 30
 var top_space         = 30
-var slot_gap          = 35
+var slot_gap          = 25
 var slot_gap_h        = slot_gap
 var slot_gap_v        = slot_gap
-var buttons_across    = 5
+var buttons_across    = 4
+var num_buttons       = 12
 
 const LevelSelectButton = preload("LevelSelectButton.tscn")
 
 func _ready():
     var button_loc = Vector2(0,0)
-    for level in range(1,51):
+    for level in range(1,num_buttons+1):
         button_loc = level_to_pixels(level)
         var level_but = LevelSelectButton.instance()
         level_but.set_position(button_loc)
