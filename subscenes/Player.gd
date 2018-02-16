@@ -1,6 +1,6 @@
 extends Node
 
-const Tile = preload("res://SubScenes/TileArea2D.tscn")
+const Segment = preload("res://tiles/Segment.tscn")
 
 var mytile = null	# visible in queue, while moving, when nailed
 var myshadow = null	# only visible when moving
@@ -14,12 +14,12 @@ func _ready():
 
 func set_type(new_tile_type_ordinal):
 	# instantiate 1 Tile each for our player and shadow.
-	mytile = Tile.instance()
+	mytile = Segment.instance()
 	mytile.set_tile_type(new_tile_type_ordinal)
 	# add Tile to scene
 	add_child(mytile)
 
-	myshadow = Tile.instance()
+	myshadow = Segment.instance()
 	myshadow.set_tile_type(new_tile_type_ordinal)
 	# Tell Tile to tell its sprite it's a shadow
 	myshadow.is_shadow()
@@ -32,11 +32,11 @@ func set_position(player_position):
 	if not nailed:
 		myshadow.set_position(Helpers.slot_to_pixels(Vector2(player_position.x, column_height(player_position.x))))   ## shadow
 	#	var shadowsprite = myshadow.get_node("TileSprite")
-		if myshadow.my_sprite != null:
+		if myshadow != null:
 			if should_show_shadow:
-				myshadow.my_sprite.show()
+				myshadow.show()
 			else:
-				myshadow.my_sprite.hide()
+				myshadow.hide()
 
 # player has been nailed so it should animate or whatever
 func nail_player():

@@ -1,6 +1,6 @@
 extends Node2D
 
-const sprite_script = preload("res://subscenes/TileSprite.gd")
+const sprite_script = preload("res://tiles/Segment.gd")
 onready var spinner = get_node("SpinnerLabel")
 onready var pauser = Timer.new()
 
