@@ -1,18 +1,22 @@
 extends Node
 
 const Segment = preload("res://tiles/Segment.tscn")
+const PlayerArea = preload("res://tiles/PlayerArea2D.tscn")
 
 var mytile = null	# visible in queue, while moving, when nailed
 var myshadow = null	# only visible when moving
+var mytouchzone = null  # only after nailed
 var my_position
 var should_show_shadow = false
 var nailed = false
+var tile_type = null
 
 func _ready():
 	add_to_group("players")		# to simplify clearing game scene
 	set_process_input(false)
 
 func set_type(new_tile_type_ordinal):
+	tile_type = new_tile_type_ordinal
 	# instantiate 1 Tile each for our player and shadow.
 	mytile = Segment.instance()
 	mytile.set_tile_type(new_tile_type_ordinal)
@@ -40,8 +44,12 @@ func set_position(player_position):
 
 # player has been nailed so it should animate or whatever
 func nail_player():
-	# remove player's shadow
-	mytile.become_swipable()
+	# now that we are nailed, we are touchable
+	mytouchzone = PlayerArea.instance()
+	mytouchzone.set_tile_type(tile_type)
+	add_child(mytouchzone)
+	
+	# now that we are nailed, we have no shadow
 	myshadow.queue_free()
 	nailed = true
 	pass
