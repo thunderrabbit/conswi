@@ -75,13 +75,13 @@ func set_show_shadow(should_i):
 	set_position(my_position)
 
 func highlight():
-	mytile.my_sprite.highlight()
+	mytile.highlight()
 
 func unhighlight():
-	mytile.my_sprite.unhighlight()
+	mytile.unhighlight()
 
 func darken():
-	mytile.my_sprite.darken()
+	mytile.darken()
 #	mytile.clear_shapes()
 
 func level_ended():
