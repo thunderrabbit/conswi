@@ -95,7 +95,4 @@ func prepareBitmap(swipeDimensions,bitmapArray):
 
 func printBitmap(theBitmap):
 	print(theBitmap)
-	if Helpers.debug_level > 0:
-		var debout = get_node("/root/GameScene/DebugOutput")
-		debout.set_text(String(theBitmap))
 
