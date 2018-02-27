@@ -306,7 +306,6 @@ func piece_entered(position, piece_type):
 		swipe_array.append(position)
 		Helpers.board[position].highlight()
 	VisibleSwipeOverlay.draw_this_swipe(swipe_array,TileDatabase.tiles[piece_type].ITEM_COLOR)
-	VisibleSwipeOverlay.set_z(100)
 
 func adjacent(pos1, pos2):
 	# https://www.gamedev.net/forums/topic/516685-best-algorithm-to-find-adjacent-tiles/?tab=comments#comment-4359055
