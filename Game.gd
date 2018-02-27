@@ -252,7 +252,7 @@ func nail_player():
 
 func piece_clicked(position, piece_type):
 	clicked_this_piece_type = piece_type
-	VisibleSwipeOverlay.set_swipe_color(TileDatabase.TileDatabase[piece_type].ITEM_COLOR)
+	VisibleSwipeOverlay.set_swipe_color(TileDatabase.tiles[piece_type].ITEM_COLOR)
 	swipe_mode = true
 	swipe_array.append(position)
 	Helpers.board[position].highlight()
@@ -305,7 +305,7 @@ func piece_entered(position, piece_type):
 	else:
 		swipe_array.append(position)
 		Helpers.board[position].highlight()
-	VisibleSwipeOverlay.draw_this_swipe(swipe_array,TileDatabase.TileDatabase[piece_type].ITEM_COLOR)
+	VisibleSwipeOverlay.draw_this_swipe(swipe_array,TileDatabase.tiles[piece_type].ITEM_COLOR)
 	VisibleSwipeOverlay.set_z(100)
 
 func adjacent(pos1, pos2):
