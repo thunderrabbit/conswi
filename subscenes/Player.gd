@@ -47,7 +47,13 @@ func nail_player():
 	# now that we are nailed, we are touchable
 	mytouchzone = PlayerArea.instance()
 	mytouchzone.set_tile_type(tile_type)
+	mytouchzone.become_swipable()
+	mytouchzone.set_position(Helpers.slot_to_pixels(my_position))
+	mytouchzone.set_process_input(true)
+	mytouchzone.set_pickable(true)
 	add_child(mytouchzone)
+	print(mytouchzone.position)
+	print(mytouchzone.global_position)
 	
 	# now that we are nailed, we have no shadow
 	myshadow.queue_free()
