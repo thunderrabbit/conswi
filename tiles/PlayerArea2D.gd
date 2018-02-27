@@ -10,10 +10,10 @@ var is_swipable = false			# will prevent clicks from signalling GameScene
 var tile_type = null
 
 func _ready():
-	self.connect("clicked", get_node("/root/GameScene"), "piece_clicked", [])
-	self.connect("unclicked", get_node("/root/GameScene"), "piece_unclicked", [])
-	self.connect("entered", get_node("/root/GameScene"), "piece_entered", [])
-	self.connect("exited", get_node("/root/GameScene"), "piece_exited", [])
+	self.connect("clicked", get_node("/root/GameNode2D"), "piece_clicked", [])
+	self.connect("unclicked", get_node("/root/GameNode2D"), "piece_unclicked", [])
+	self.connect("entered", get_node("/root/GameNode2D"), "piece_entered", [])
+	self.connect("exited", get_node("/root/GameNode2D"), "piece_exited", [])
 
 func set_tile_type(type):
 	tile_type = type
