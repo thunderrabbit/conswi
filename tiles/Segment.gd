@@ -21,6 +21,13 @@ func set_tile_type(my_tile_type):
 	set_region(true)
 	set_region_rect(sprite_loc[icon])
 
+# This will be called by GameScene
+func start_swipe_effect():
+	# This is where to do some fancy vanishing effect per tile
+	# in Godot 2 version, the effect was set up when the tile was created
+#	effect.start()
+	hide()
+
 func is_shadow():
 	set_modulate(Color(1,1,1, 0.3))
 
