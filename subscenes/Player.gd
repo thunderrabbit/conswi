@@ -95,4 +95,5 @@ func level_ended():
 
 func remove_yourself():
 	Helpers.board[my_position] = null
+	mytouchzone.queue_free()
 	mytile.start_swipe_effect()		# release yourself
