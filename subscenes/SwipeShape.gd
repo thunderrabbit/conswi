@@ -58,10 +58,10 @@ func fly_away_randomly():
 	effect.interpolate_property(self, 'scale',
 			self.get_scale(), Vector2(5, 5), 0.9,
 			Tween.TRANS_QUAD, Tween.EASE_OUT)
-	effect.interpolate_property(self, 'pos',
+	effect.interpolate_property(self, 'position',
 			self.get_position(), go_to_loc, 0.9,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	effect.interpolate_property(self, 'rot', 0, 600, 0.9, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	effect.interpolate_property(self, 'rotation', 0, 6, 0.9, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	effect.interpolate_property(self, 'opacity',
 			1, 0, 0.9,
 			Tween.TRANS_QUAD, Tween.EASE_OUT)
