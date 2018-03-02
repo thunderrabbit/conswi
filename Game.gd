@@ -251,6 +251,10 @@ func nail_player():
 	Helpers.board[Vector2(player_position.x, player_position.y)] = player		## this is the piece so we can find it later
 
 func piece_clicked(position, piece_type):
+	var swipe_length = swipe_array.size()
+	if swipe_length == 1:
+		# probably a duplicate click
+		return
 	clicked_this_piece_type = piece_type
 	VisibleSwipeOverlay.set_swipe_color(TileDatabase.tiles[piece_type].ITEM_COLOR)
 	swipe_mode = true
