@@ -278,7 +278,7 @@ func piece_unclicked():
 
 		swipe_shape = SwipeShape.instance()
 		swipe_shape.set_shape(ShapeShifter.getBitmapOfSwipeCoordinates(swipe_array),clicked_this_piece_type)
-		swipe_shape.set_position(Helpers.slot_to_pixels(dimensions["topleft"]))
+		swipe_shape.set_position(Helpers.slot_to_pixels(dimensions["topleft"], false))		# change false to true to debug position
 		add_child(swipe_shape)
 		if swipe_was_required:
 			swipe_shape.connect("shrunk_shape",self,"shrank_required_shape")

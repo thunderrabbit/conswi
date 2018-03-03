@@ -29,7 +29,7 @@ func set_shape(shape_array, tile_type = 1):
             var sprite = Sprite.new()
             sprite.set_script(sprite_script)
             sprite.set_tile_type(tile_type)
-            sprite.set_position(Helpers.slot_to_pixels(loc))
+            sprite.set_position(Helpers.slot_to_pixels(loc,false))		# change false to true to debug position
             add_child(sprite)
 
 # once shape has been shown for requirements, we need to shrink it
