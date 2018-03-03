@@ -251,8 +251,12 @@ func nail_player():
 	Helpers.board[Vector2(player_position.x, player_position.y)] = player		## this is the piece so we can find it later
 
 func piece_clicked(position, piece_type):
+	var swipe_length = swipe_array.size()
+	if swipe_length == 1:
+		# probably a duplicate click
+		return
 	clicked_this_piece_type = piece_type
-	VisibleSwipeOverlay.set_swipe_color(TileDatabase.TileDatabase[piece_type].ITEM_COLOR)
+	VisibleSwipeOverlay.set_swipe_color(TileDatabase.tiles[piece_type].ITEM_COLOR)
 	swipe_mode = true
 	swipe_array.append(position)
 	Helpers.board[position].highlight()
@@ -274,7 +278,7 @@ func piece_unclicked():
 
 		swipe_shape = SwipeShape.instance()
 		swipe_shape.set_shape(ShapeShifter.getBitmapOfSwipeCoordinates(swipe_array),clicked_this_piece_type)
-		swipe_shape.set_position(Helpers.slot_to_pixels(dimensions["topleft"]))
+		swipe_shape.set_position(Helpers.slot_to_pixels(dimensions["topleft"], false))		# change false to true to debug position
 		add_child(swipe_shape)
 		if swipe_was_required:
 			swipe_shape.connect("shrunk_shape",self,"shrank_required_shape")
@@ -305,8 +309,7 @@ func piece_entered(position, piece_type):
 	else:
 		swipe_array.append(position)
 		Helpers.board[position].highlight()
-	VisibleSwipeOverlay.draw_this_swipe(swipe_array,TileDatabase.TileDatabase[piece_type].ITEM_COLOR)
-	VisibleSwipeOverlay.set_z(100)
+	VisibleSwipeOverlay.draw_this_swipe(swipe_array,TileDatabase.tiles[piece_type].ITEM_COLOR)
 
 func adjacent(pos1, pos2):
 	# https://www.gamedev.net/forums/topic/516685-best-algorithm-to-find-adjacent-tiles/?tab=comments#comment-4359055

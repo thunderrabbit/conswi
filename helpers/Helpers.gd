@@ -106,13 +106,26 @@ func instantiatePlayer(player_position):
 	else:
 		return false	# no more tiles available
 
-func pixels_to_slot(pixels):
+func pixels_to_slot(pixels, debug=false):
+	if debug:
+		print("pixels ", pixels)
+		print(G.GLOBALleft_space, " ", G.GLOBALtop_space, " ", G.SLOT_SIZE, " ", G.GLOBALslot_gap_v, " ", G.GLOBALslot_gap_h)
+		print(".x - left ", (pixels.x - G.GLOBALleft_space), " / ", (G.SLOT_SIZE + G.GLOBALslot_gap_h), "\t((( ", (pixels.x - G.GLOBALleft_space) / (G.SLOT_SIZE + G.GLOBALslot_gap_h))
+		print(".y - top ", (pixels.y - G.GLOBALtop_space), " / ", (G.SLOT_SIZE + G.GLOBALslot_gap_v), "\t\t,", (pixels.y - G.GLOBALtop_space) / (G.SLOT_SIZE + G.GLOBALslot_gap_v), " )))")
 	return Vector2((pixels.x - G.GLOBALleft_space) / (G.SLOT_SIZE + G.GLOBALslot_gap_h),
 					(pixels.y - G.GLOBALtop_space) / (G.SLOT_SIZE + G.GLOBALslot_gap_v))
 
-func slot_to_pixels(slot):
-	return Vector2(G.GLOBALleft_space+(G.SLOT_SIZE + G.GLOBALslot_gap_h)*(slot.x), 
-				    G.GLOBALtop_space+(G.SLOT_SIZE + G.GLOBALslot_gap_v)*(slot.y))
+func slot_to_pixels(slot, debug=false):
+	if debug:
+		print("slot ", slot)
+		print(G.GLOBALleft_space, " + ", (G.SLOT_SIZE + G.GLOBALslot_gap_h), " * ", (slot.x), "\t",
+			G.GLOBALleft_space, " + ", (G.SLOT_SIZE + G.GLOBALslot_gap_h) * (slot.x), "\t",
+			G.GLOBALleft_space + (G.SLOT_SIZE + G.GLOBALslot_gap_h) * (slot.x), "\t")
+		print(G.GLOBALtop_space, " + ", (G.SLOT_SIZE + G.GLOBALslot_gap_v), " * ", (slot.y), "\t",
+			G.GLOBALtop_space, " + ", (G.SLOT_SIZE + G.GLOBALslot_gap_v) * (slot.y), "\t",
+			G.GLOBALtop_space + (G.SLOT_SIZE + G.GLOBALslot_gap_v) * (slot.y), "\t")
+	return Vector2(G.GLOBALleft_space+((G.SLOT_SIZE + G.GLOBALslot_gap_h)*(slot.x)),
+				    G.GLOBALtop_space+((G.SLOT_SIZE + G.GLOBALslot_gap_v)*(slot.y)))
 
 func steering_pad_pixels():
 	return Vector2(G.GLOBALleft_space+(G.SLOT_SIZE + G.GLOBALslot_gap_h)*(slots_across / 2), 

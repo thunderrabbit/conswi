@@ -29,7 +29,7 @@ func set_shape(shape_array, tile_type = 1):
             var sprite = Sprite.new()
             sprite.set_script(sprite_script)
             sprite.set_tile_type(tile_type)
-            sprite.set_position(Helpers.slot_to_pixels(loc))
+            sprite.set_position(Helpers.slot_to_pixels(loc,false))		# change false to true to debug position
             add_child(sprite)
 
 # once shape has been shown for requirements, we need to shrink it
@@ -38,32 +38,32 @@ func set_shape(shape_array, tile_type = 1):
 # as the destination.   Plus when shapes are swiped, I think this
 # same function can be used to tell the swipe where to go if it
 # matches required shape
-func shrink_shape(go_to_loc):
+func shrink_shape(go_to_loc, duration = 0.9):
 	var ratio = 0.2
 	var effect = get_node("Tween")
 	effect.connect("tween_completed", self, "shrunk_shape")
 	effect.interpolate_property(self, "scale",
-			self.get_scale(), Vector2(ratio, ratio), 0.9,
+			self.get_scale(), Vector2(ratio, ratio), duration,
 			Tween.TRANS_QUAD, Tween.EASE_OUT)
 	effect.interpolate_property(self, "position",
-			self.get_position(), go_to_loc, 0.9,
+			self.get_position(), go_to_loc, duration,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	effect.start()
 
 # TODO: make it random
-func fly_away_randomly():
+func fly_away_randomly(duration = 0.9):
 	var go_to_loc = Helpers.slot_to_pixels(Vector2(10,10))
 	var effect = get_node("Tween")
 	effect.connect("tween_completed", self, "flew_away")
 	effect.interpolate_property(self, 'scale',
-			self.get_scale(), Vector2(5, 5), 0.9,
+			self.get_scale(), Vector2(5, 5), duration,
 			Tween.TRANS_QUAD, Tween.EASE_OUT)
-	effect.interpolate_property(self, 'pos',
-			self.get_position(), go_to_loc, 0.9,
+	effect.interpolate_property(self, 'position',
+			self.get_position(), go_to_loc, duration,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	effect.interpolate_property(self, 'rot', 0, 600, 0.9, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	effect.interpolate_property(self, 'rotation', 0, 6, duration, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	effect.interpolate_property(self, 'opacity',
-			1, 0, 0.9,
+			1, 0, duration,
 			Tween.TRANS_QUAD, Tween.EASE_OUT)
 	effect.start()
 
