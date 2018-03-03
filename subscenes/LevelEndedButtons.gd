@@ -26,7 +26,7 @@ func _on_TryAgain_pressed():
 
 func _on_MainMenu_pressed():
     Helpers.clear_game_board() # so no tiles appear behind the main menu buttons
-    get_node("/root/SceneSwitcher").goto_scene("res://LevelScene.tscn")
+    get_node("/root/SceneSwitcher").goto_scene("res://LevelSelect/LevelSelectScene.tscn")
 
 func _on_NextLevel_pressed():
 	game_scene.requested_next_level()
