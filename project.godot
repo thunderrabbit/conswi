@@ -32,9 +32,10 @@ Background="*res://subscenes/Background.tscn"
 
 window/size/width=640
 window/size/height=1280
-window/size/resizable=false
 window/handheld/orientation="portrait"
-window/handheld/emulate_touchscreen=true
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
+window/stretch/shrink="1"
 
 [gdnative]
 
