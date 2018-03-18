@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/11.png-14e4738191ad7b36d709cf8946f921d2.stex"
+path="res://.import/numberplate.png-994d716f574f9ac0f51876503cc59982.stex"
 
 [deps]
 
-source_file="res://images/levelselect/numbers/11.png"
-source_md5="d1d0813e3fc6858531b05ad25a2641c2"
+source_file="res://images/levelselect/numberplate.png"
+source_md5="de5e14878ec6cb67aaabd02f8c0251d9"
 
-dest_files=[ "res://.import/11.png-14e4738191ad7b36d709cf8946f921d2.stex" ]
-dest_md5="ef94f73958b8627cf0df57d635f2a963"
+dest_files=[ "res://.import/numberplate.png-994d716f574f9ac0f51876503cc59982.stex" ]
+dest_md5="69a7db7779e2f32dbf7db335b5da6b52"
 
 [params]
 
