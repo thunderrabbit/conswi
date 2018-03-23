@@ -34,7 +34,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="Sement" type="Sprite" parent="." index="2"]
+[node name="SplashIcon" type="Sprite" parent="." index="2"]
 
 script = ExtResource( 2 )
 
