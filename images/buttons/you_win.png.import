@@ -7,10 +7,10 @@ path="res://.import/you_win.png-65c86bbc0136ed08e3b90b580caa27b5.stex"
 [deps]
 
 source_file="res://images/buttons/you_win.png"
-source_md5="91616b6098295d3d868346e0ba3211ed"
+source_md5="afb29d4970a6d90c0074c0b0fa522dc2"
 
 dest_files=[ "res://.import/you_win.png-65c86bbc0136ed08e3b90b580caa27b5.stex" ]
-dest_md5="51f107a77e3b228fe1a8037df4ed3ddc"
+dest_md5="f0fcd60ddf876a1bfd703160f824d05f"
 
 [params]
 
