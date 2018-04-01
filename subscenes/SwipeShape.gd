@@ -13,7 +13,7 @@ signal shrunk_shape				# after shape has finished shrinking
 # add sprites to this object in the shape they are meant to represent
 # shape_array for bo3 is [3,1,1,1] which comes from ShapeDatabase
 # shape_array is a width-prefixed 1D array which represents a 2D swipe
-func set_shape(shape_array, tile_type = 1):
+func set_shape(shape_array, tile_type = G.TYPE_DOG):
     var width = int(shape_array[0]) # is a float otherwise.. why??
     var num = 0					# how far along 1D array are we?
     var loc = Vector2(0,0)		# where the shape will be shown
