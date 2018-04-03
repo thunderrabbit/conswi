@@ -25,6 +25,7 @@ func _ready():
         level_but.set_position(button_loc)
         level_but.set_level(level)
         level_but.set_size(Vector2(SLOT_SIZE,SLOT_SIZE))
+
         level_but.connect("pressed",self,"_on_Button_pressed",[level])
         add_child(level_but)
 
