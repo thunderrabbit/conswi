@@ -6,7 +6,7 @@ extends Node2D
 # here so it is clear that they are only used here.
 # Feel free to arrange these buttons in a better way.
 
-const SLOT_SIZE       = 90
+const SLOT_SIZE       = 140
 var left_space        = 30
 var top_space         = 30
 var slot_gap          = 25
