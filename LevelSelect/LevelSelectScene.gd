@@ -12,7 +12,7 @@ var top_space         = 30
 var slot_gap          = 25
 var slot_gap_h        = slot_gap
 var slot_gap_v        = slot_gap
-var buttons_across    = 4
+var buttons_across    = 3
 var num_buttons       = 12
 
 const LevelSelectButton = preload("LevelSelectButton.tscn")
