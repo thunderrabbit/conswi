@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://images/levelselect/base.png" type="Texture" id=1]
-[ext_resource path="res://LevelSelect/LevelSelectButton.gd" type="Script" id=2]
+[ext_resource path="res://LevelSelect/LevelSelectButton.gd" type="Script" id=1]
+[ext_resource path="res://images/levelselect/base.png" type="Texture" id=2]
 [ext_resource path="res://images/levelselect/numberplate.png" type="Texture" id=3]
 [ext_resource path="res://images/levelselect/numbers/01.png" type="Texture" id=4]
 [ext_resource path="res://images/levelselect/icons/emptydog.png" type="Texture" id=5]
@@ -24,33 +24,37 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-texture_normal = ExtResource( 1 )
-script = ExtResource( 2 )
+script = ExtResource( 1 )
 _sections_unfolded = [ "Textures" ]
 
-[node name="plate" type="Sprite" parent="." index="0"]
+[node name="background" type="Sprite" parent="." index="0"]
+
+position = Vector2( 47.7304, 46.2295 )
+texture = ExtResource( 2 )
+
+[node name="plate" type="Sprite" parent="." index="1"]
 
 position = Vector2( 47.5209, 37.1527 )
 texture = ExtResource( 3 )
 
-[node name="number" type="Sprite" parent="." index="1"]
+[node name="number" type="Sprite" parent="." index="2"]
 
 position = Vector2( 49.8378, 37.2232 )
 texture = ExtResource( 4 )
 
-[node name="icon1" type="Sprite" parent="." index="2"]
+[node name="icon1" type="Sprite" parent="." index="3"]
 
 position = Vector2( 29.5822, 68.1042 )
 scale = Vector2( 0.405897, 0.405897 )
 texture = ExtResource( 5 )
 
-[node name="icon2" type="Sprite" parent="." index="3"]
+[node name="icon2" type="Sprite" parent="." index="4"]
 
 position = Vector2( 48.8143, 68.1042 )
 scale = Vector2( 0.405897, 0.405897 )
 texture = ExtResource( 5 )
 
-[node name="icon3" type="Sprite" parent="." index="4"]
+[node name="icon3" type="Sprite" parent="." index="5"]
 
 position = Vector2( 68.4598, 67.0702 )
 scale = Vector2( 0.405897, 0.405897 )
