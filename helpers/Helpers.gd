@@ -71,7 +71,7 @@ func queue_wo_fill():
 	# Display queued pieces on top right
 	var x = slots_across - queue_length
 	for tile in queue_upcoming:
-		tile.set_position(Vector2(x,0))
+		tile.set_player_position(Vector2(x,0))
 		x += 1
 
 
@@ -101,7 +101,7 @@ func instantiatePlayer(player_position):
 	game_scene.player = queue_next()
 	if game_scene.player != null:
 		# Move the player
-		game_scene.player.set_position(player_position)
+		game_scene.player.set_player_position(player_position)
 		return true		# we had tiles available
 	else:
 		return false	# no more tiles available

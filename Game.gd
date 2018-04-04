@@ -238,7 +238,7 @@ func stop_magnetism():
 func move_player(x, y):
 	player_position.x += x
 	player_position.y += y
-	player.set_position(player_position)
+	player.set_player_position(player_position)
 
 # nail player to board
 func nail_player():

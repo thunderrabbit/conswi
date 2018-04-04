@@ -30,7 +30,7 @@ func set_type(new_tile_type_ordinal):
 	add_child(myshadow)
 
 # update player sprite display
-func set_position(player_position):
+func set_player_position(player_position):
 	my_position = player_position
 	mytile.set_position(Helpers.slot_to_pixels(player_position))
 	if nailed:
@@ -75,12 +75,12 @@ func move_down_if_room():
 		if Helpers.board[below_me] == null:
 			Helpers.board[below_me] = self
 			Helpers.board[my_position] = null
-			set_position(below_me)
+			set_player_position(below_me)
 
 func set_show_shadow(should_i):
 	should_show_shadow = should_i
 	# set position forces shdadow to show up or not
-	set_position(my_position)
+	set_player_position(my_position)
 
 func highlight():
 	mytile.highlight()
