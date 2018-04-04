@@ -33,7 +33,9 @@ func set_type(new_tile_type_ordinal):
 func set_position(player_position):
 	my_position = player_position
 	mytile.set_position(Helpers.slot_to_pixels(player_position))
-	if not nailed:
+	if nailed:
+		mytouchzone.set_position(Helpers.slot_to_pixels(player_position))
+	else:
 		myshadow.set_position(Helpers.slot_to_pixels(Vector2(player_position.x, column_height(player_position.x))))   ## shadow
 	#	var shadowsprite = myshadow.get_node("TileSprite")
 		if myshadow != null:
