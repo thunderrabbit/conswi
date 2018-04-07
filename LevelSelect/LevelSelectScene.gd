@@ -8,10 +8,10 @@ extends Node2D
 
 const SLOT_SIZE       = 140
 var left_space        = 30
-var top_space         = 30
-var slot_gap          = 25
+var top_space         = 90
+var slot_gap          = 60
 var slot_gap_h        = slot_gap
-var slot_gap_v        = slot_gap
+var slot_gap_v        = slot_gap * 2
 var buttons_across    = 3
 var num_buttons       = 12
 
