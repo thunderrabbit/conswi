@@ -12,4 +12,4 @@ var debug_level = 0			# boolean for now
 var queue_len = 3			# queue is upcoming tiles
 var tiles = []				# fill this to define tiles
 
-var level_requirements = { "ta3":1 }	# should not be empty so levels do not insta-win
+var level_requirements = { "bo3":1 }	# should not be empty so levels do not insta-win
