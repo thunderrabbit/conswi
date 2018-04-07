@@ -17,4 +17,3 @@ func _init():
 			G.TYPE_CAT,
 			G.TYPE_DOG]
 	max_tiles_avail = 1330
-	level_requirements = { "ta3":1 }
