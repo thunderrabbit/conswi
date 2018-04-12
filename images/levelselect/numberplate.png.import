@@ -7,10 +7,10 @@ path="res://.import/numberplate.png-994d716f574f9ac0f51876503cc59982.stex"
 [deps]
 
 source_file="res://images/levelselect/numberplate.png"
-source_md5="de5e14878ec6cb67aaabd02f8c0251d9"
+source_md5="d9cca53a827f7c9d42e1f827217720f3"
 
 dest_files=[ "res://.import/numberplate.png-994d716f574f9ac0f51876503cc59982.stex" ]
-dest_md5="69a7db7779e2f32dbf7db335b5da6b52"
+dest_md5="3ca3ff86033b395df3268c9a442bba3f"
 
 [params]
 
