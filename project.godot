@@ -12,7 +12,7 @@ config_version=3
 
 config/name="ConSwi"
 run/main_scene="res://SplashScreen/SplashScreen.tscn"
-config/icon="res://icon.png"
+config/icon="res://images/levelselect/icons/dog.png"
 run/name="ConSwi"
 
 [autoload]
