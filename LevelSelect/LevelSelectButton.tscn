@@ -1,12 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://LevelSelect/LevelSelectButton.gd" type="Script" id=1]
 [ext_resource path="res://images/levelselect/base.png" type="Texture" id=2]
 [ext_resource path="res://images/levelselect/numberplate.png" type="Texture" id=3]
 [ext_resource path="res://images/levelselect/numbers/01.png" type="Texture" id=4]
-[ext_resource path="res://images/levelselect/icons/emptydog_left.png" type="Texture" id=5]
-[ext_resource path="res://images/levelselect/icons/emptydog_center.png" type="Texture" id=6]
-[ext_resource path="res://images/levelselect/icons/emptydog_right.png" type="Texture" id=7]
 
 [node name="LevelSelectButton" type="TextureButton" index="0"]
 
@@ -49,18 +46,16 @@ texture = ExtResource( 4 )
 
 position = Vector2( 46.9202, 47.2627 )
 scale = Vector2( 1.22112, 1.20077 )
-texture = ExtResource( 5 )
+_sections_unfolded = [ "Region" ]
 
 [node name="icon2" type="Sprite" parent="." index="4"]
 
 position = Vector2( 47.9734, 46.8124 )
 scale = Vector2( 1.21603, 1.21577 )
-texture = ExtResource( 6 )
 
 [node name="icon3" type="Sprite" parent="." index="5"]
 
 position = Vector2( 47.658, 46.5123 )
 scale = Vector2( 1.24656, 1.22578 )
-texture = ExtResource( 7 )
 
 
