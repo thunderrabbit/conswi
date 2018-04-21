@@ -19,9 +19,7 @@ const LevelSelectButton = preload("LevelSelectButton.tscn")
 
 func _init():
 	var button_loc = Vector2(0,0)
-	print("buttons for level")
 	for level in range(1,num_buttons+1):
-		print("button for level")
 		button_loc = level_to_pixels(level)
 		var level_but = LevelSelectButton.instance()
 		level_but.set_position(button_loc)
