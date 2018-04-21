@@ -7,8 +7,8 @@ extends Node2D
 # Feel free to arrange these buttons in a better way.
 
 const SLOT_SIZE       = 140
-var left_space        = 30
-var top_space         = 90
+var left_space        = 70
+var top_space         = 190
 var slot_gap          = 60
 var slot_gap_h        = slot_gap
 var slot_gap_v        = slot_gap * 2
@@ -19,9 +19,7 @@ const LevelSelectButton = preload("LevelSelectButton.tscn")
 
 func _init():
 	var button_loc = Vector2(0,0)
-	print("buttons for level")
 	for level in range(1,num_buttons+1):
-		print("button for level")
 		button_loc = level_to_pixels(level)
 		var level_but = LevelSelectButton.instance()
 		level_but.set_position(button_loc)
@@ -29,7 +27,7 @@ func _init():
 		level_but.set_size(Vector2(SLOT_SIZE,SLOT_SIZE))
 		level_but.set_button_type(G.TYPE_DOG)
 		level_but.set_qty_active(2)
-		level_but.scale_to(Vector2(2,2))
+		level_but.scale_to(Vector2(1,1))
 		level_but.connect("pressed",self,"_on_Button_pressed",[level])
 		add_child(level_but)
 

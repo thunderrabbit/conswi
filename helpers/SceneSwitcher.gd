@@ -10,7 +10,7 @@ func _ready():
     current_scene = root.get_child(root.get_child_count() -1)
 
 func goto_scene(path):
-	print("going to", path)
+	print("going to ", path)
     # This function will usually be called from a signal callback,
     # or some other function from the running scene.
     # Deleting the current scene at this point might be

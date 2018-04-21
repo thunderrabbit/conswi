@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/base.png-dde5222e3a5b316ef13d14835fe79b2d.stex"
+path="res://.import/level_01_bg_x2.png-1e39220afef87f814f548a6436cffd7b.stex"
 
 [deps]
 
-source_file="res://images/levelselect/base.png"
-source_md5="18d76b84622a6787b9e39a0e9c6b8831"
+source_file="res://images/levelselect/numberedplates/level_01_bg_x2.png"
+source_md5="7e82bee6c787a59492e5a7787c72d3f7"
 
-dest_files=[ "res://.import/base.png-dde5222e3a5b316ef13d14835fe79b2d.stex" ]
-dest_md5="dbac6d4289624cf015f32d1b4337832e"
+dest_files=[ "res://.import/level_01_bg_x2.png-1e39220afef87f814f548a6436cffd7b.stex" ]
+dest_md5="aa534297c88dbcf3e9b0bc0876f5eb51"
 
 [params]
 
