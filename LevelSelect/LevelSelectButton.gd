@@ -4,7 +4,8 @@ var my_type = G.TYPE_BEAR
 var my_type_string = ""
 
 func set_level(level):
-	var path_to_num = String("res://images/levelselect/numberedplates/level_" + String(level).pad_zeros(2) + "_bg_x1.png")
+	level = 1 # only needed while we have only 1 level to test with
+	var path_to_num = String("res://images/levelselect/numberedplates/level_" + String(level).pad_zeros(2) + "_bg_x2.png")
 	$background.set_texture(load(path_to_num))
 
 func set_button_type(type = G.TYPE_DOG):
@@ -13,7 +14,7 @@ func set_button_type(type = G.TYPE_DOG):
 
 func _set_icon_active(icon_num):
 	var which_icon = icon_num	# -1 to account for zero-indexed array `icons`
-	var path_to_icon = String("res://images/levelselect/icons/level_01_" + self.my_type_string + String(which_icon) + "_" + "1x.png")
+	var path_to_icon = String("res://images/levelselect/icons/level_01_" + self.my_type_string + String(which_icon) + "_" + "2x.png")
 	get_node("icon"+String(icon_num)).set_texture(load(path_to_icon))
 
 func set_qty_active(qty = 3):
