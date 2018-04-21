@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://LevelSelect/LevelSelectButton.gd" type="Script" id=1]
-[ext_resource path="res://images/levelselect/numberedplates/Level_01x1.png" type="Texture" id=2]
+[ext_resource path="res://images/levelselect/numberedplates/level_01_bg_x1.png" type="Texture" id=2]
 
 [node name="LevelSelectButton" type="TextureButton" index="0"]
 
