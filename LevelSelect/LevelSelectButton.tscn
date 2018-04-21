@@ -3,7 +3,7 @@
 [ext_resource path="res://LevelSelect/LevelSelectButton.gd" type="Script" id=1]
 [ext_resource path="res://images/levelselect/numberedplates/level_01_bg_x1.png" type="Texture" id=2]
 
-[node name="LevelSelectButton" type="TextureButton" index="0"]
+[node name="LevelSelectButton" type="TextureButton"]
 
 anchor_left = 0.0
 anchor_top = 0.0
