@@ -8,6 +8,8 @@
 
 config_version=3
 
+=false
+
 [application]
 
 config/name="ConSwi"
@@ -40,6 +42,10 @@ window/stretch/shrink="1"
 [gdnative]
 
 singletons=[  ]
+
+[image]
+
+=false
 
 [input]
 
