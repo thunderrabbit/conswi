@@ -10,7 +10,7 @@ source_file="res://images/levelselect/icons/sheep.png"
 source_md5="7050757e500929833a4fba8c0c7f6d72"
 
 dest_files=[ "res://.import/sheep.png-1a9eee7e0a33c72bbcf95a16319a6c79.stex" ]
-dest_md5="36e2251fbd906ec19e9bc8a56417647c"
+dest_md5="70357bb30fca071b19a35cc1026e7d24"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

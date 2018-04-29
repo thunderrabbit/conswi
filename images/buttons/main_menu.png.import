@@ -10,7 +10,7 @@ source_file="res://images/buttons/main_menu.png"
 source_md5="b1284a326d014b316dab68655f76cdda"
 
 dest_files=[ "res://.import/main_menu.png-764c4615ebfed1c6a002210d0f2d58cb.stex" ]
-dest_md5="ba969ea4b6a995ede86e0992f4713b7d"
+dest_md5="89bd1d01844339a43f2821f9fbd5b8d4"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

@@ -35,7 +35,7 @@ texture = ExtResource( 2 )
 
 position = Vector2( 46.9202, 47.2627 )
 scale = Vector2( 1.22112, 1.20077 )
-_sections_unfolded = [ "Region" ]
+_sections_unfolded = [ "Animation", "Region" ]
 
 [node name="icon2" type="Sprite" parent="." index="3"]
 

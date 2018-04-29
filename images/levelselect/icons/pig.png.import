@@ -10,7 +10,7 @@ source_file="res://images/levelselect/icons/pig.png"
 source_md5="812f9fb29dad7a560f8ef1f50a29c44d"
 
 dest_files=[ "res://.import/pig.png-44b30cfb06906d5a2beae089b5711d59.stex" ]
-dest_md5="aab8d1354086e7f7437613bdc55ebcf9"
+dest_md5="93b844ff05067b4f5d9483774e78caf5"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

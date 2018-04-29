@@ -10,7 +10,7 @@ source_file="res://images/levelselect/icons/snake.png"
 source_md5="281cd065c398c519751dcb0af139d9eb"
 
 dest_files=[ "res://.import/snake.png-ac151f0aa08b09f376f10c6991cb439f.stex" ]
-dest_md5="e4815b3a22d94363e5fcca9627fd9624"
+dest_md5="5050aeab49e3db06d6ca0a6fd3091ad7"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

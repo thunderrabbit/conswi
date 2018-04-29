@@ -10,7 +10,7 @@ source_file="res://images/levelselect/numbers/11.png"
 source_md5="d1d0813e3fc6858531b05ad25a2641c2"
 
 dest_files=[ "res://.import/11.png-14e4738191ad7b36d709cf8946f921d2.stex" ]
-dest_md5="ef94f73958b8627cf0df57d635f2a963"
+dest_md5="1ac83a6a6b6c39bb6ff8d49a888c14f6"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

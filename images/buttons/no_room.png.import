@@ -10,7 +10,7 @@ source_file="res://images/buttons/no_room.png"
 source_md5="337a0c4bf246e3bf0aa60e8e125a51ab"
 
 dest_files=[ "res://.import/no_room.png-0ab72149398651b3aa315095975d88af.stex" ]
-dest_md5="30534b3dab620489a654dd632b02347b"
+dest_md5="2607ca252634ed9b6371874a59dc1b41"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

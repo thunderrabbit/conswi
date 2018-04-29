@@ -10,7 +10,7 @@ source_file="res://images/buttons/no_tiles.png"
 source_md5="f4e118c8e526946fded5fda80f23d598"
 
 dest_files=[ "res://.import/no_tiles.png-631650dfebba76b7784f72f34b7e6d22.stex" ]
-dest_md5="ef607bc6ba7b590acca821f1dbf7df66"
+dest_md5="ca1fdef63f1cad0a07feea00578b7e65"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

@@ -10,7 +10,7 @@ source_file="res://images/buttons/play.png"
 source_md5="76b1f34acee0e9459f4104b05aeb5964"
 
 dest_files=[ "res://.import/play.png-411b3984cba50dc4474e150372d6b02c.stex" ]
-dest_md5="5c87aae2e53df099c2c68e1cee81b6f6"
+dest_md5="e5385c139c77cbed2cf1870b37836a7b"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
