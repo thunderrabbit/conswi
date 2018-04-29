@@ -22,7 +22,7 @@ func _init():
 	add_buttons_to_scene(world_type)
 
 func get_world_type():
-	return G.TYPE_DOG		# eventually load from local memory
+	return G.TYPE_SHEEP		# eventually load from local memory
 
 func add_buttons_to_scene(button_type):
 	var button_loc = Vector2(0,0)
