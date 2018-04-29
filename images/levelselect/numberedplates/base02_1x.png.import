@@ -10,7 +10,7 @@ source_file="res://images/levelselect/numberedplates/base02_1x.png"
 source_md5="d94cde6723b951fe5c6ef8697984739d"
 
 dest_files=[ "res://.import/base02_1x.png-f022c8144a61b52cc71acdc405fdcf22.stex" ]
-dest_md5="6358d297b53e6e4e9f19dc4a9cd27aa1"
+dest_md5="b2eb26c7c7a743348091413c9b1c335d"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
