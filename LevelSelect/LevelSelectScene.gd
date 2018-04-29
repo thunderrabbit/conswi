@@ -33,7 +33,7 @@ func add_buttons_to_scene(button_type):
 		level_but.set_level(level)
 		level_but.set_size(Vector2(SLOT_SIZE,SLOT_SIZE))
 		level_but.set_button_type(button_type)
-		level_but.set_qty_active(2)
+		level_but.set_qty_active(randi()%3+1)
 		level_but.scale_to(Vector2(1,1))
 		level_but.connect("pressed",self,"_on_Button_pressed",[level])
 		add_child(level_but)
