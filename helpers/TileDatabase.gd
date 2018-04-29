@@ -6,31 +6,31 @@ extends Node
 # but that syntax does not work
 var tiles = [
 	{
-		"ITEM_NAME" : "Pig",
+		"ITEM_NAME" : "pig",
 		"ITEM_COLOR" : Color(1, 1.0, 0.5, 1.0),
 	},
 	{
-		"ITEM_NAME" : "Sheep",
+		"ITEM_NAME" : "sheep",
 		"ITEM_COLOR" : Color(0, 1.0, 0.5, 1.0),
 	},
 	{
-		"ITEM_NAME" : "Panda",
+		"ITEM_NAME" : "panda",
 		"ITEM_COLOR" : Color(1, 1, 1, 1),
 	},
 	{
-		"ITEM_NAME" : "Dog",
+		"ITEM_NAME" : "dog",
 		"ITEM_COLOR" : Color(0, 0, 1, 1),
 	},
 	{
-		"ITEM_NAME" : "Cow",
+		"ITEM_NAME" : "cow",
 		"ITEM_COLOR" : Color(1.0, 0, 0.5, 1.0),
 	},
 	{
-		"ITEM_NAME" : "Cat",
+		"ITEM_NAME" : "cat",
 		"ITEM_COLOR" : Color(1.0, 0, 0.5, 1.0),
 	},
 	{
-		"ITEM_NAME" : "Bear",
+		"ITEM_NAME" : "bear",
 		"ITEM_COLOR" : Color(1.0, 0, 0.5, 1.0),
 	},
 ]
