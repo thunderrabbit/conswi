@@ -18,6 +18,13 @@ var num_buttons       = 12
 const LevelSelectButton = preload("LevelSelectButton.tscn")
 
 func _init():
+	var world_type = get_world_type()
+	add_buttons_to_scene(world_type)
+
+func get_world_type():
+	return G.TYPE_DOG		# eventually load from local memory
+
+func add_buttons_to_scene(button_type):
 	var button_loc = Vector2(0,0)
 	for level in range(1,num_buttons+1):
 		button_loc = level_to_pixels(level)
@@ -25,7 +32,7 @@ func _init():
 		level_but.set_position(button_loc)
 		level_but.set_level(level)
 		level_but.set_size(Vector2(SLOT_SIZE,SLOT_SIZE))
-		level_but.set_button_type(G.TYPE_DOG)
+		level_but.set_button_type(button_type)
 		level_but.set_qty_active(2)
 		level_but.scale_to(Vector2(1,1))
 		level_but.connect("pressed",self,"_on_Button_pressed",[level])
