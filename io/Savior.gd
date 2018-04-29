@@ -100,6 +100,21 @@ func save_num_stars(world,level, stars = 0):
 
 ####################################################
 #
+#   "high" level function reads high score
+#    This should be used within rest of game
+func read_high_score(world,level):
+	var world_string = "fix_in_Savior" #  Need to create based on TileDatabase:  WorldDatabase.tiles[my_type]["ITEM_NAME"]
+	return self._read_value(world_string + String(level) + "score")
+####################################################
+#
+#   "high" level function reads num_stars
+#    This should be used within rest of game
+func read_num_stars(world,level):
+	var world_string = "fix_in_Savior" #  Need to create based on TileDatabase:  WorldDatabase.tiles[my_type]["ITEM_NAME"]
+	return self._read_value(world_string + String(level) + "stars")
+
+####################################################
+#
 #   Only load from encrypted file
 #   If anyone tampers with local text file,
 #      they cannot change their score or w/e
