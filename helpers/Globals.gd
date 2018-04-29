@@ -9,11 +9,15 @@ const GLOBALslot_gap_v = 5
 const GLOBALslot_gap_h = 5
 const SLOT_SIZE = 57
 
+const MAX_STARS = 3				# per level, shown on level select screen; used by high score saver, Savior.gd
+
+# arbitrarily ordered ways to win or lose a level
 const LEVEL_WIN 		= 1
 const LEVEL_NO_ROOM		= 2
 const LEVEL_NO_TIME		= 3
 const LEVEL_NO_TILES	= 4
 
+# The order of these types must match icon.png
 const TYPE_PIG			= 0
 const TYPE_SHEEP		= 1
 const TYPE_PANDA		= 2
