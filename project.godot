@@ -8,8 +8,6 @@
 
 config_version=3
 
-=false
-
 [application]
 
 config/name="ConSwi"
@@ -19,6 +17,7 @@ run/name="ConSwi"
 
 [autoload]
 
+Savior="*res://io/Savior.gd"
 HUD="*res://HUD.tscn"
 G="*res://helpers/Globals.gd"
 SceneSwitcher="*res://helpers/SceneSwitcher.gd"
@@ -42,10 +41,6 @@ window/stretch/shrink="1"
 [gdnative]
 
 singletons=[  ]
-
-[image]
-
-=false
 
 [input]
 
