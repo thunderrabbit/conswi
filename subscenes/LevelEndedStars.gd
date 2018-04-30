@@ -17,9 +17,13 @@ func _ready():
 #
 #  	This will be public to the GD star_display.gd
 func star_display_show_end_level(info_for_star_calculation, level_num): # maybe level_num should be in info_for_star_calculation, but it still needs to go to next function
-	_calculate_stars_for_level(info_for_star_calculation, level_num)
-	var game = self			# when star_display and therefore this function is in different .gd, it will need to call game
-	self.game_scene._on_level_over_stars_displayed()		# fake signal emitted by star_display.gd
+	var num_stars = _calculate_stars_for_level(info_for_star_calculation, level_num)
+	for i in range(1,num_stars):
+		# instantiate Tile of type TYPE
+		# if this is last star, tell it to emit _on_last_star_displayed() callback when finished flying
+		# fly it into place
+		pass
+	self._on_last_star_displayed()	# fake emit
 
 #######################################################
 #
@@ -29,3 +33,7 @@ func _calculate_stars_for_level(info_for_star_calculation, level_num):
 	var num_stars = randi()%3+1
 	print("remaining pieces: ", existing_sprites.size())
 	Savior.save_num_stars(G.TYPE_DOG, level_num, num_stars)
+	return num_stars
+
+func _on_last_star_displayed():
+	self.game_scene._on_level_over_stars_displayed()		# fake signal emitted by star_display.gd
