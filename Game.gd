@@ -3,6 +3,7 @@ extends Node2D
 const forcelevel0 = false
 
 const Buttons = preload("res://SubScenes/Buttons.gd")
+const PostLevelStars = preload("res://subscenes/LevelEndedStars.gd")
 const LevelRequirements = preload("res://SubScenes/LevelRequirements.tscn")
 const SwipeShape = preload("res://SubScenes/SwipeShape.tscn")
 
@@ -26,6 +27,7 @@ var gravity_called = false # true = move down 1 unit via gravity
 
 var player_position			# Vector2 of slot player is in
 var player					# Two (2) tiles: (player and shadow)
+var post_level_stars		# Show stars after level is over
 var buttons					# Steering Pad / Start buttons
 var level_reqs				# HUD showing level requirements
 var clicked_this_piece_type = 0				# set when swipe is started
@@ -34,6 +36,10 @@ var swipe_array = []			# the pieces in the swipe
 var swipe_shape = null			# will animate shape user swiped
 
 func _ready():
+	self.post_level_stars = PostLevelStars.new()
+	self.post_level_stars.set_game_scene(self)
+	add_child(self.post_level_stars)
+
 	buttons = Buttons.new()			# Buttons pre/post level
 	# buttons are kinda like a HUD but for input, not output
 	buttons.set_game_scene(self)
@@ -154,31 +160,13 @@ func _level_over_prep(reason):
 #    Then send that info to be displayed asynchronously
 func _level_over_display_stars(reason):
 	var collect_info_for_stars = reason
-	var star_display = self				# when star_display is a separate .gd game will need to call it
-	star_display.star_display_show_end_level(collect_info_for_stars)
+	self.post_level_stars.star_display_show_end_level(collect_info_for_stars,self.level_num)
 
 #######################################################
 #
 #  	signal catcher
 func _on_level_over_stars_displayed():
 	self.level_over_stars_were_displayed()
-
-#######################################################
-#
-#  	This will be public to the GD star_display.gd
-func star_display_show_end_level(info_for_star_calculation):
-	_calculate_stars_for_level(info_for_star_calculation)
-	var game = self			# when star_display and therefore this function is in different .gd, it will need to call game
-	game._on_level_over_stars_displayed()		# fake signal emitted by star_display.gd
-
-#######################################################
-#
-#  	This will be private to the GD star_display.gd
-func _calculate_stars_for_level(info_for_star_calculation):
-	var existing_sprites = get_tree().get_nodes_in_group("players")
-	var num_stars = randi()%3+1
-	print("remaining pieces: ", existing_sprites.size())
-	Savior.save_num_stars(G.TYPE_DOG, self.level_num, num_stars)
 
 func level_over_stars_were_displayed():
 	self._level_over_display_buttons(self.level_over_reason)
