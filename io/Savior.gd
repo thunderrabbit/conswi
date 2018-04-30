@@ -105,6 +105,7 @@ func save_num_stars(world,level, stars = 0):
 func read_high_score(world,level):
 	var world_string = "fix_in_Savior" #  Need to create based on TileDatabase:  WorldDatabase.tiles[my_type]["ITEM_NAME"]
 	return self._read_value(world_string + String(level) + "score")
+
 ####################################################
 #
 #   "high" level function reads num_stars
