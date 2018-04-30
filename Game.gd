@@ -14,6 +14,8 @@ const MIN_DROP_MODE_TIME = 0.004   # wait this long between move-down when in dr
 const MAGNETISM_TIME = 0.2504
 
 var current_level	= null	# will hold level definition
+var level_over_reason = 0	# remember why we lost so we can slowly end the level, telling each overlay why we lost
+var level_num = 0			# will hold integer of level number
 var elapsed_time = 10		# pretend it has been 10 seconds so input can definitely be processed upon start
 var time_label				# will display time remain
 
@@ -64,10 +66,11 @@ func requested_play_level(level):
 func start_level(level_num):
 	set_process(false)		# not sure that this actually helps
 	grok_input(false)		# don't allow keyboard input during display of requirements
+	self.level_num = level_num
 	if forcelevel0:
-		level_num = 0
+		self.level_num = 0
 
-	var levelGDScript = LevelDatabase.getExistingLevelGDScript(level_num)
+	var levelGDScript = LevelDatabase.getExistingLevelGDScript(self.level_num)
 	current_level = levelGDScript.new()		# load() gets a GDScript and new() instantiates it
 	# now that we have loaded the level, we can tell the game how it wants us to run
 	Helpers.grok_level(current_level)	# so we have level info available everywhere
@@ -78,7 +81,7 @@ func start_level(level_num):
 	Helpers.clear_game_board()
 
 	level_reqs.level_requires(current_level.level_requirements)
-	buttons.prepare_to_play_level(level_num)
+	buttons.prepare_to_play_level(self.level_num)
 
 # turn input off for all children while display requirements / show cut scenes and the like
 func grok_input(boolean):
@@ -117,7 +120,7 @@ func new_player():
 	player_position = Vector2(Helpers.slots_across/2, 0)
 	# check game over
 	if Helpers.board[Vector2(player_position.x, player_position.y)] != null:
-		level_over(G.LEVEL_NO_ROOM)
+		_level_over_prep(G.LEVEL_NO_ROOM)
 		return
 
 	if Helpers.instantiatePlayer(player_position):
@@ -128,7 +131,12 @@ func new_player():
 	else:
 		print("no more tiles available to play game!")
 
-func level_over(reason):
+#######################################################
+#
+#  Level is over, so we need to turn everything off
+#  Then show the player the results (asynchronously)
+func _level_over_prep(reason):
+	self.level_over_reason = reason
 	grok_input(false)	# buttons.level_ended will turn on buttons again
 
 	# gray out block sprites if existing
@@ -138,6 +146,44 @@ func level_over(reason):
 	var existing_sprites = get_tree().get_nodes_in_group("players")
 	for sprite in existing_sprites:
 		sprite.level_ended()
+	self._level_over_display_stars(self.level_over_reason)
+
+#######################################################
+#
+#    Need to collect all data to determine number of stars
+#    Then send that info to be displayed asynchronously
+func _level_over_display_stars(reason):
+	var collect_info_for_stars = reason
+	var star_display = self				# when star_display is a separate .gd game will need to call it
+	star_display.star_display_show_end_level(collect_info_for_stars)
+
+#######################################################
+#
+#  	signal catcher
+func _on_level_over_stars_displayed():
+	self.level_over_stars_were_displayed()
+
+#######################################################
+#
+#  	This will be public to the GD star_display.gd
+func star_display_show_end_level(info_for_star_calculation):
+	_calculate_stars_for_level(info_for_star_calculation)
+	var game = self			# when star_display and therefore this function is in different .gd, it will need to call game
+	game._on_level_over_stars_displayed()		# fake signal emitted by star_display.gd
+
+#######################################################
+#
+#  	This will be private to the GD star_display.gd
+func _calculate_stars_for_level(info_for_star_calculation):
+	var existing_sprites = get_tree().get_nodes_in_group("players")
+	var num_stars = randi()%3+1
+	print("remaining pieces: ", existing_sprites.size())
+	Savior.save_num_stars(G.TYPE_DOG, self.level_num, num_stars)
+
+func level_over_stars_were_displayed():
+	self._level_over_display_buttons(self.level_over_reason)
+
+func _level_over_display_buttons(reason):
 	buttons.level_ended(reason)
 
 # this is only to handle orphaned swipes
@@ -335,7 +381,7 @@ func shrank_required_shape():
 	level_reqs.clarify_requirements()
 
 func _on_LevelWon():
-	level_over(G.LEVEL_WIN)
+	_level_over_prep(G.LEVEL_WIN)
 
 func _on_LevelTimer_timeout():
-	level_over(G.LEVEL_NO_TIME)
+	_level_over_prep(G.LEVEL_NO_TIME)
