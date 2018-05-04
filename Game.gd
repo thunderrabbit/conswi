@@ -152,13 +152,13 @@ func _level_over_prep(reason):
 	var existing_sprites = get_tree().get_nodes_in_group("players")
 	for sprite in existing_sprites:
 		sprite.level_ended()
-	self._level_over_display_stars(self.level_over_reason)
+	self._show_stuff_after_level(self.level_over_reason)
 
 #######################################################
 #
 #    Need to collect all data to determine number of stars
 #    Then send that info to be displayed asynchronously
-func _level_over_display_stars(reason):
+func _show_stuff_after_level(reason):
 	var collect_info_for_stars = {'reason':reason,'level':self.level_num}
 	self.stars_after_level.star_display_show_end_level(collect_info_for_stars)
 
