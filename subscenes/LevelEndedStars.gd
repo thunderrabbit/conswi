@@ -19,13 +19,24 @@ func _ready():
 #  	This will be public to the GD star_display.gd
 func show_stuff_after_level(info_for_star_calculation):
 	self._decide_what_to_show(info_for_star_calculation)
+	self._show_stuff_after_level()
+
+func _show_stuff_after_level():
+	print("This is what we will do")
+	print(self._todo_after_level)
+
+	self._on_last_star_displayed()	# fake emit
+
+###
+# not really thought out
+func _display_stars(info_for_star_calculation):
 	var num_stars = _calculate_stars_for_level(info_for_star_calculation)
 	for i in range(1,num_stars):
 		# instantiate Tile of type TYPE
 		# if this is last star, tell it to emit _on_last_star_displayed() callback when finished flying
 		# fly it into place
 		pass
-	self._on_last_star_displayed()	# fake emit
+
 
 #######################################################
 #
