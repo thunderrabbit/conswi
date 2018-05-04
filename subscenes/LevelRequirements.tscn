@@ -2,7 +2,7 @@
 
 [ext_resource path="res://subscenes/LevelRequirements.gd" type="Script" id=1]
 
-[node name="LevelRequirements" type="Node2D"]
+[node name="LevelRequirements" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 
