@@ -3,7 +3,7 @@ extends Node2D
 const forcelevel0 = false
 
 const Buttons = preload("res://SubScenes/Buttons.gd")
-const PostLevelStars = preload("res://subscenes/LevelEndedStars.gd")
+const StarsAfterLevel = preload("res://subscenes/LevelEndedStars.gd")
 const LevelRequirements = preload("res://SubScenes/LevelRequirements.tscn")
 const SwipeShape = preload("res://SubScenes/SwipeShape.tscn")
 
@@ -27,7 +27,7 @@ var gravity_called = false # true = move down 1 unit via gravity
 
 var player_position			# Vector2 of slot player is in
 var player					# Two (2) tiles: (player and shadow)
-var post_level_stars		# Show stars after level is over
+var stars_after_level		# Show stars after level is over
 var buttons					# Steering Pad / Start buttons
 var level_reqs				# HUD showing level requirements
 var clicked_this_piece_type = 0				# set when swipe is started
@@ -36,9 +36,9 @@ var swipe_array = []			# the pieces in the swipe
 var swipe_shape = null			# will animate shape user swiped
 
 func _ready():
-	self.post_level_stars = PostLevelStars.new()
-	self.post_level_stars.set_game_scene(self)
-	add_child(self.post_level_stars)
+	self.stars_after_level = StarsAfterLevel.new()
+	self.stars_after_level.set_game_scene(self)
+	add_child(self.stars_after_level)
 
 	buttons = Buttons.new()			# Buttons pre/post level
 	# buttons are kinda like a HUD but for input, not output
@@ -160,7 +160,7 @@ func _level_over_prep(reason):
 #    Then send that info to be displayed asynchronously
 func _level_over_display_stars(reason):
 	var collect_info_for_stars = {'reason':reason,'level':self.level_num}
-	self.post_level_stars.star_display_show_end_level(collect_info_for_stars)
+	self.stars_after_level.star_display_show_end_level(collect_info_for_stars)
 
 #######################################################
 #
