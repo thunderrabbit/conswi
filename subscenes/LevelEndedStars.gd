@@ -16,7 +16,7 @@ func _ready():
 #######################################################
 #
 #  	This will be public to the GD star_display.gd
-func star_display_show_end_level(info_for_star_calculation): # maybe level_num should be in info_for_star_calculation, but it still needs to go to next function
+func show_stuff_after_level(info_for_star_calculation):
 	var num_stars = _calculate_stars_for_level(info_for_star_calculation)
 	for i in range(1,num_stars):
 		# instantiate Tile of type TYPE

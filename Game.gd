@@ -160,7 +160,7 @@ func _level_over_prep(reason):
 #    Then send that info to be displayed asynchronously
 func _show_stuff_after_level(reason):
 	var collect_info_for_stars = {'reason':reason,'level':self.level_num}
-	self.stars_after_level.star_display_show_end_level(collect_info_for_stars)
+	self.stars_after_level.show_stuff_after_level(collect_info_for_stars)
 
 #######################################################
 #
