@@ -38,6 +38,7 @@ func _decide_what_to_show(info_for_star_calc):
 		self._PlanToReduceTiles()		# these three can be in any order (this one blacks out the tiles)
 		self._PlanToAddTimeRemain()		# these three can be in any order
 		self._PlanToDisplayStars()		# add stars below score (or above) or whatever, but should be last
+		self._PlanToRemovePanel()		# remove panel from screen after a delay
 	else:
 		# this will black out the tiles, but *not* show score because score will not be there
 		self._PlanToReduceTiles()
@@ -56,6 +57,10 @@ func _PlanToAddTimeRemain():
 
 func _PlanToDisplayStars():
 	self._todo_after_level.push_back(G.STAR_DISPLAY_STARS)
+
+func _PlanToRemovePanel():
+	self._todo_after_level.push_back(G.STAR_REMOVE_PANEL)
+
 
 ###
 # not really thought out, but this will be called if G.STAR_DISPLAY_STARS is in self._todo_after_level
