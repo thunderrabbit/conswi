@@ -27,17 +27,6 @@ func _show_stuff_after_level():
 
 	self._on_last_star_displayed()	# fake emit
 
-###
-# not really thought out
-func _display_stars(info_for_star_calculation):
-	var num_stars = _calculate_stars_for_level(info_for_star_calculation)
-	for i in range(1,num_stars):
-		# instantiate Tile of type TYPE
-		# if this is last star, tell it to emit _on_last_star_displayed() callback when finished flying
-		# fly it into place
-		pass
-
-
 #######################################################
 #
 #  	This will determine what to display, and in what order
@@ -67,6 +56,16 @@ func _PlanToAddTimeRemain():
 
 func _PlanToDisplayStars():
 	self._todo_after_level.push_back(G.STAR_DISPLAY_STARS)
+
+###
+# not really thought out, but this will be called if G.STAR_DISPLAY_STARS is in self._todo_after_level
+func _display_stars(info_for_star_calculation):
+	var num_stars = _calculate_stars_for_level(info_for_star_calculation)
+	for i in range(1,num_stars):
+		# instantiate Tile of type TYPE
+		# if this is last star, tell it to emit _on_last_star_displayed() callback when finished flying
+		# fly it into place
+		pass
 
 #######################################################
 #
