@@ -159,8 +159,8 @@ func _level_over_prep(reason):
 #    Need to collect all data to determine number of stars
 #    Then send that info to be displayed asynchronously
 func _level_over_display_stars(reason):
-	var collect_info_for_stars = reason
-	self.post_level_stars.star_display_show_end_level(collect_info_for_stars,self.level_num)
+	var collect_info_for_stars = {'reason':reason,'level':self.level_num}
+	self.post_level_stars.star_display_show_end_level(collect_info_for_stars)
 
 #######################################################
 #
