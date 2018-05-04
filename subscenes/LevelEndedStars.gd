@@ -16,7 +16,7 @@ func _ready():
 
 #######################################################
 #
-#  	This will be public to the GD star_display.gd
+#  	Public so it can be called by Game.gd
 func show_stuff_after_level(info_for_star_calculation):
 	self._decide_what_to_show(info_for_star_calculation)
 	self._show_stuff_after_level()
