@@ -21,12 +21,6 @@ func show_stuff_after_level(info_for_star_calculation):
 	self._decide_what_to_show(info_for_star_calculation)
 	self._show_stuff_after_level()
 
-func _show_stuff_after_level():
-	print("This is what we will do")
-	print(self._todo_after_level)
-
-	self._on_last_star_displayed()	# fake emit
-
 #######################################################
 #
 #  	This will determine what to display, and in what order
@@ -62,6 +56,15 @@ func _PlanToRemovePanel():
 	self._todo_after_level.push_back(G.STAR_REMOVE_PANEL)
 
 
+func _show_stuff_after_level():
+	if not self._todo_after_level.size():
+		self._on_last_star_displayed()	# fake emit
+	else:
+		var do_this_next = self._todo_after_level.pop_front()
+		match do_this_next:
+			G.STAR_DISPLAY_BONUS:
+				self._display_bonus()
+		self._show_stuff_after_level()
 ###
 # not really thought out, but this will be called if G.STAR_DISPLAY_STARS is in self._todo_after_level
 func _display_stars(info_for_star_calculation):
