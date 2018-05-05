@@ -40,10 +40,10 @@ func _ready():
 	self.stars_after_level.set_game_scene(self)
 	add_child(self.stars_after_level)
 
-	buttons = Buttons.new()			# Buttons pre/post level
+	self.buttons = Buttons.new()			# Buttons pre/post level
 	# buttons are kinda like a HUD but for input, not output
-	buttons.set_game_scene(self)
-	add_child(buttons)
+	self.buttons.set_game_scene(self)
+	add_child(self.buttons)
 
 	Helpers.game_scene = self		# so Players know where to appear
 	time_label = get_node("LevelTimer/LevelTimerLabel")
