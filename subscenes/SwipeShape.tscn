@@ -3,7 +3,7 @@
 [ext_resource path="res://subscenes/SwipeShape.gd" type="Script" id=1]
 [ext_resource path="res://subscenes/SpinnerLabel.tscn" type="PackedScene" id=2]
 
-[node name="SwipeShape" type="Node2D" index="0"]
+[node name="SwipeShape" type="Node2D"]
 
 position = Vector2( 1.48897, 2.08455 )
 script = ExtResource( 1 )
@@ -19,5 +19,12 @@ playback/repeat = false
 playback/speed = 1.0
 
 [node name="SpinnerLabel" parent="." index="1" instance=ExtResource( 2 )]
+
+margin_left = -112.0
+margin_top = -1.0
+margin_right = -2.0
+margin_bottom = 61.0
+align = 1
+valign = 1
 
 
