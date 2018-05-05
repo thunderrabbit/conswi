@@ -17,11 +17,13 @@ func set_shape(shape_array, tile_type = G.TYPE_DOG):
     var width = int(shape_array[0]) # is a float otherwise.. why??
     var num = 0					# how far along 1D array are we?
     var loc = Vector2(0,0)		# where the shape will be shown
+    var total_tiles = 0			# so we can calcualte bonus required based on tile count
     # Loop through the bits of array after width
     for i in range(1, shape_array.size()):
         num = i - 1   # i starts at 1 due to width at position 0
         var bit = shape_array[i]
         if bit == 1:
+            total_tiles = total_tiles + 1
             # x and y are determined by how far along 1D array we are
             var x = num % width
             var y = num / width
@@ -31,6 +33,7 @@ func set_shape(shape_array, tile_type = G.TYPE_DOG):
             sprite.set_tile_type(tile_type)
             sprite.set_position(Helpers.slot_to_pixels(loc,false))		# change false to true to debug position
             add_child(sprite)
+    return total_tiles			# So we can eventually tell the level bonus, based on number of required tiles
 
 # once shape has been shown for requirements, we need to shrink it
 # for now, they all go to same (0,0) but soon they need to go to 
