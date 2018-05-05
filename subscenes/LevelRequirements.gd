@@ -35,6 +35,7 @@ func required_swipe_location(swipe_name):
 
 func reset_everything():
 	remove_old_requirements()
+	self.num_tiles_required = 0
 	requirements = {}
 	array_of_required_names = []
 	location_of_required_shape = {}
