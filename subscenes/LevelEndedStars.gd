@@ -79,6 +79,9 @@ func _show_stuff_after_level():
 
 func _display_bonus():
 	print("Display Bonus")
+	var points = get_node("BonusPoints")
+	points.show()
+	points.set_text(String(self._info_for_star_calc['num_tiles'] * 25))
 	self._show_stuff_after_level()  # simulate calling after animation complete
 	pass
 
