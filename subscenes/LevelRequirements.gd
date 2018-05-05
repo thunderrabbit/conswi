@@ -11,6 +11,7 @@ var location_of_required_shape = {}	# so we know where to display shape
 var required_shapes_hud = {}		# so we can update the shapes as swipes happen
 var currently_showing_shape = null	# so we can come back and know what shape to shrink
 var currently_showing_name = null	# so we can look up where to show it
+var num_tiles_required = 0			# so LevelEndedStars knows how big bonus should be
 
 func set_game_scene(gameScene):
 	connect("levelwon", gameScene, "_on_LevelWon")
@@ -48,6 +49,7 @@ func display_next_requirement():
 	# if no requirements, call back to GameScene to start playing
 	if array_of_required_names.size() == 0:
 		print("did not find any more requirements")
+		print("Total tiles required = ", self.num_tiles_required)
 		emit_signal("requirements_shown")
 	else:
 		# get first requirement in array
@@ -61,7 +63,8 @@ func display_next_requirement():
 		required_shapes_hud[currently_showing_name] = currently_showing_shape
 		# after shape has been displayed (and number counted down) we will shrink the shape
 		currently_showing_shape.connect("displayed_shape",self,"shape_has_been_displayed")
-		currently_showing_shape.set_shape(ShapeShifter.getBitmapOfSwipeName(currently_showing_name),G.TYPE_DOG)
+		var count_tiles_this_shape = currently_showing_shape.set_shape(ShapeShifter.getBitmapOfSwipeName(currently_showing_name),G.TYPE_DOG)
+		self.num_tiles_required = self.num_tiles_required + count_tiles_this_shape * reqd_qty
 		print("hardcoded shape display location")
 		currently_showing_shape.set_position(Helpers.slot_to_pixels(Vector2(3,5)))
 		add_child(currently_showing_shape)
