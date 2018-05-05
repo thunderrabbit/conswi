@@ -1,6 +1,7 @@
 extends Node2D
 
 const forcelevel0 = false
+const easywin = false
 
 const Buttons = preload("res://SubScenes/Buttons.gd")
 const StarsAfterLevel = preload("res://SubScenes/LevelEndedStars.tscn")
@@ -79,6 +80,9 @@ func start_level(level_num):
 	var levelGDScript = LevelDatabase.getExistingLevelGDScript(self.level_num)
 	current_level = levelGDScript.new()		# load() gets a GDScript and new() instantiates it
 	# now that we have loaded the level, we can tell the game how it wants us to run
+	if self.easywin:
+		current_level.debug_level = 1
+		current_level.fill_level = true
 	Helpers.grok_level(current_level)	# so we have level info available everywhere
 	GRAVITY_TIMEOUT = current_level.gravity_timeout
 
@@ -88,6 +92,7 @@ func start_level(level_num):
 
 	level_reqs.level_requires(current_level.level_requirements)
 	buttons.prepare_to_play_level(self.level_num)
+
 
 # turn input off for all children while display requirements / show cut scenes and the like
 func grok_input(boolean):
