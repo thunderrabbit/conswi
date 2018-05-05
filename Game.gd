@@ -3,7 +3,7 @@ extends Node2D
 const forcelevel0 = false
 
 const Buttons = preload("res://SubScenes/Buttons.gd")
-const StarsAfterLevel = preload("res://subscenes/LevelEndedStars.gd")
+const StarsAfterLevel = preload("res://SubScenes/LevelEndedStars.tscn")
 const LevelRequirements = preload("res://SubScenes/LevelRequirements.tscn")
 const SwipeShape = preload("res://SubScenes/SwipeShape.tscn")
 
@@ -36,7 +36,7 @@ var swipe_array = []			# the pieces in the swipe
 var swipe_shape = null			# will animate shape user swiped
 
 func _ready():
-	self.stars_after_level = StarsAfterLevel.new()
+	self.stars_after_level = StarsAfterLevel.instance()
 	self.stars_after_level.set_game_scene(self)
 	add_child(self.stars_after_level)
 
