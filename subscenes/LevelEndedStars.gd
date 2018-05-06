@@ -84,10 +84,12 @@ func _display_bonus():
 	
 	points.connect("qty_reached",self,"_show_stuff_after_level")
 	points.show()					# just in case
-	points.set_delay(0.001)
-	points.set_target(self._info_for_star_calc['num_tiles'] * 25)	# tell spinner where to stop
+	points.set_delay(0.05)
+	var bonus_target = self._info_for_star_calc['num_tiles'] * 25
+	points.set_target(bonus_target)	# tell spinner where to stop
+	points.set_increment(floor(bonus_target * 0.05))	# take twenty steps to count
 	points.start_tick_from(1)		# calls back to _displayed_quantity when finished
-#	points.set_value()
+
 	pass
 
 func _reduce_swipes():
