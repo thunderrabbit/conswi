@@ -79,8 +79,8 @@ func _show_stuff_after_level():
 
 func _display_bonus():
 	print("Display Bonus")
-	var points = get_node("BonusPoints")
-	points.show()
+	$BonusPanel.show()
+	var points = get_node("BonusPanel/BonusPoints")
 	
 	points.connect("qty_reached",self,"_show_stuff_after_level")
 	points.show()					# just in case
@@ -138,7 +138,7 @@ func _calculate_stars_for_level():
 
 func _remove_panel():
 	print("Remove Panel")
-	get_node("BonusPoints").hide()
+	$BonusPanel.hide()
 	self._show_stuff_after_level()  # simulate calling after animation complete
 	pass
 
