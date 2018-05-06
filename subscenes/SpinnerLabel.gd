@@ -22,13 +22,22 @@ func set_value(value):
 func set_target(target):
 	self.target = target
 
+func set_target_increase(increase):
+	self.target = self.value + increase
+
+func set_target_decrease(decrease):
+	self.target = self.value - decrease
+
 func set_delay(delay):
 	self.tick_delay = delay
 
-func start_tick_from(start_value):
-	set_value(start_value)
+func start_tick():
 	tick_timer.set_wait_time(tick_delay)
 	tick_timer.start()
+
+func start_tick_from(start_value):
+	set_value(start_value)
+	self.start_tick()
 
 func inc_value(increment = 1):
 	set_value(value + increment)
