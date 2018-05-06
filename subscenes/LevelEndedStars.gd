@@ -81,21 +81,16 @@ func _display_bonus():
 	print("Display Bonus")
 	$BonusPanel.show()
 	var points = get_node("BonusPanel/BonusPoints")
-	
 	points.connect("qty_reached",self,"_show_stuff_after_level")
-	points.show()					# just in case
 	points.set_delay(0.05)
 	var bonus_target = self._info_for_star_calc['num_tiles'] * 25
 	points.set_target(bonus_target)	# tell spinner where to stop
 	points.set_increment(floor(bonus_target * 0.05))	# take twenty steps to count
 	points.start_tick_from(1)		# calls back to _displayed_quantity when finished
 
-	pass
-
 func _reduce_swipes():
 	print("Reduce Swipes")
 	self._show_stuff_after_level()  # simulate calling after animation complete
-	pass
 
 #####################################################
 #
@@ -110,12 +105,10 @@ func _reduce_swipes():
 func _reduce_tiles():
 	print("Reduce Tiles")
 	self._show_stuff_after_level()  # simulate calling after animation complete
-	pass
 
 func _add_time_remain():
 	print("Add Time Remain")
 	self._show_stuff_after_level()  # simulate calling after animation complete
-	pass
 
 ###
 # not really thought out, but this will be called if G.STAR_DISPLAY_STARS is in self._todo_after_level
@@ -142,7 +135,6 @@ func _remove_panel():
 	print("Remove Panel")
 	$BonusPanel.hide()
 	self._show_stuff_after_level()  # simulate calling after animation complete
-	pass
 
 func _on_last_star_displayed():
 	self.game_scene._on_level_over_stars_displayed()		# fake signal emitted by star_display.gd
