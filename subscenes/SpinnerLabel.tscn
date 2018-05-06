@@ -3,7 +3,7 @@
 [ext_resource path="res://SpinnerLableFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://subscenes/SpinnerLabel.gd" type="Script" id=2]
 
-[node name="SpinnerLabel" type="Label" index="0"]
+[node name="SpinnerLabel" type="Label"]
 
 anchor_left = 0.0
 anchor_top = 0.0

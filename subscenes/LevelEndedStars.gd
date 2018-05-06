@@ -81,8 +81,13 @@ func _display_bonus():
 	print("Display Bonus")
 	var points = get_node("BonusPoints")
 	points.show()
-	points.set_text(String(self._info_for_star_calc['num_tiles'] * 25))
-	self._show_stuff_after_level()  # simulate calling after animation complete
+	
+	points.connect("qty_reached",self,"_show_stuff_after_level")
+	points.show()					# just in case
+	points.set_delay(0.001)
+	points.set_target(self._info_for_star_calc['num_tiles'] * 25)	# tell spinner where to stop
+	points.start_tick_from(1)		# calls back to _displayed_quantity when finished
+#	points.set_value()
 	pass
 
 func _reduce_swipes():
@@ -133,6 +138,7 @@ func _calculate_stars_for_level():
 
 func _remove_panel():
 	print("Remove Panel")
+	get_node("BonusPoints").hide()
 	self._show_stuff_after_level()  # simulate calling after animation complete
 	pass
 
