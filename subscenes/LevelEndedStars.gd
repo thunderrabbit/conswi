@@ -90,7 +90,12 @@ func _display_bonus():
 
 func _reduce_swipes():
 	print("Reduce Swipes")
-	self._show_stuff_after_level()  # simulate calling after animation complete
+	var points = get_node("BonusPanel/BonusPoints")
+	var bonus_reduction = self._info_for_star_calc['waste_swipes'] * 5
+	points.set_delay(0.01)
+	points.set_target_decrease(bonus_reduction)
+	points.set_increment(1)
+	points.start_tick()
 
 #####################################################
 #
