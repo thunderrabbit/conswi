@@ -6,6 +6,9 @@
 [node name="LevelEndedStars" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
+swipe_lose_delay = 0.5
+lose_points_per_swipe = 5
+points_per_tile = 25
 
 [node name="BonusPanel" type="Panel" parent="." index="0"]
 
@@ -33,5 +36,12 @@ margin_right = 237.0
 margin_bottom = 96.0
 size_flags_stretch_ratio = 2.0
 _sections_unfolded = [ "Anchor", "Grow Direction", "Size Flags", "custom_colors", "custom_fonts", "custom_styles" ]
+
+[node name="extra_pauser" type="Timer" parent="." index="1"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = true
+autostart = false
 
 
