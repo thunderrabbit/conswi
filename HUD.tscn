@@ -97,10 +97,10 @@ align = 1
 
 [node name="WastedSwipeCount" parent="." index="2" instance=ExtResource( 2 )]
 
-margin_left = 361.0
-margin_top = 207.0
-margin_right = 591.0
-margin_bottom = 292.0
+margin_left = 464.0
+margin_top = 863.0
+margin_right = 575.0
+margin_bottom = 948.0
 align = 2
 clip_text = true
 
