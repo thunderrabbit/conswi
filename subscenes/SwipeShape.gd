@@ -76,7 +76,7 @@ func come_back_to_location(obj, key):
 	if key != ':scale':	# (callback only once per tween)
 		return
 	var duration = 0.9
-	var go_to_loc = Helpers.slot_to_pixels(Vector2(8,4))
+	var go_to_loc = HUD.get_node('WastedSwipeCount').get_global_position()
 	var effect = get_node("Tween")
 	effect.connect("tween_completed", self, "flew_away")
 	effect.interpolate_property(self, 'scale', self.get_scale(), Vector2(0.02, 0.02), duration, Tween.TRANS_QUAD, Tween.EASE_OUT)
