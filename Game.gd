@@ -1,7 +1,7 @@
 extends Node2D
 
 const forcelevel0 = false
-const easywin = false
+export var easywin = false
 
 const Buttons = preload("res://SubScenes/Buttons.gd")
 const StarsAfterLevel = preload("res://SubScenes/LevelEndedStars.tscn")
