@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://PausedPopup.gd" type="Script" id=1]
+[ext_resource path="res://subscenes/SpinnerLabel.tscn" type="PackedScene" id=2]
 
 [node name="HUD" type="Node2D" index="0"]
 
@@ -31,6 +32,7 @@ align = 1
 [node name="PausedPopup" type="Popup" parent="." index="1"]
 
 pause_mode = 2
+visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -92,6 +94,15 @@ group = null
 text = "GO"
 flat = false
 align = 1
+
+[node name="WastedSwipeCount" parent="." index="2" instance=ExtResource( 2 )]
+
+margin_left = 361.0
+margin_top = 207.0
+margin_right = 591.0
+margin_bottom = 292.0
+align = 2
+clip_text = true
 
 [connection signal="pressed" from="Button" to="PausedPopup" method="_on_PauseButton_pressed"]
 
