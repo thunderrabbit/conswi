@@ -36,7 +36,7 @@ var swipe_mode= false			# if true, then we are swiping
 var swipe_array = []			# the pieces in the swipe
 var swipe_shape = null			# will animate shape user swiped
 
-var wasted_swipes = []
+var wasted_swipes = 0
 
 func _ready():
 	self.stars_after_level = StarsAfterLevel.instance()
@@ -73,7 +73,7 @@ func requested_play_level(level):
 	start_level(level)
 
 func start_level(level_num):
-	self.wasted_swipes = []	# wasted swipes will count against bonus
+	self.wasted_swipes = 0	# wasted swipes will count against bonus
 	set_process(false)		# not sure that this actually helps
 	grok_input(false)		# don't allow keyboard input during display of requirements
 	self.level_num = level_num
@@ -170,7 +170,7 @@ func _show_stuff_after_level(reason):
 	var collect_info_for_stars = {'reason':reason,
 									'level':self.level_num,
 									'num_tiles':self.level_reqs.num_tiles_required,
-									'waste_swipes':self.wasted_swipes.size()
+									'waste_swipes':self.wasted_swipes
 								}
 	self.stars_after_level.show_stuff_after_level(collect_info_for_stars)
 
@@ -330,8 +330,9 @@ func piece_unclicked():
 			swipe_shape.connect("shrunk_shape",self,"shrank_required_shape")
 			swipe_shape.shrink_shape(level_reqs.required_swipe_location(swipe_name))
 		else:
+			swipe_shape.connect("flew_away", self, "inc_wasted_swipe_counter")
 			swipe_shape.fly_away_randomly()
-			self.wasted_swipes.push_back(swipe_shape)
+			self.wasted_swipes = self.wasted_swipes + 1
 		# TODO add animation swipe_shape.animate()
 		for pos in swipe_array:
 			if Helpers.board[pos] != null:
@@ -339,6 +340,10 @@ func piece_unclicked():
 				Helpers.board[pos].remove_yourself()
 	swipe_array.clear()
 	swipe_mode = false
+
+func inc_wasted_swipe_counter():
+	print("wasted this many swipes: ", self.wasted_swipes)		# should be displayed on screen
+	print("Add a coutner for that number on the screen")
 
 func piece_entered(position, piece_type):
 	if not swipe_mode:
