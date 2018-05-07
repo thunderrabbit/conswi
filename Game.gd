@@ -344,6 +344,7 @@ func piece_unclicked():
 func inc_wasted_swipe_counter():
 	print("wasted this many swipes: ", self.wasted_swipes)		# should be displayed on screen
 	print("Add a coutner for that number on the screen")
+	HUD.get_node('WastedSwipeCount').set_value(self.wasted_swipes)
 
 func piece_entered(position, piece_type):
 	if not swipe_mode:
