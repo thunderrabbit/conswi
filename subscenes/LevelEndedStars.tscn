@@ -1,42 +1,47 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://subscenes/LevelEndedStars.gd" type="Script" id=1]
-[ext_resource path="res://Fonts/Helmet-Regular.ttf" type="DynamicFontData" id=2]
-
-[sub_resource type="DynamicFont" id=1]
-
-size = 70
-use_mipmaps = false
-use_filter = false
-font_data = ExtResource( 2 )
-_sections_unfolded = [ "Font", "Font/fallback", "Resource", "Settings" ]
+[ext_resource path="res://subscenes/SpinnerLabel.tscn" type="PackedScene" id=2]
 
 [node name="LevelEndedStars" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
+swipe_lose_delay = 0.5
+lose_points_per_swipe = 5
+points_per_tile = 25
 
-[node name="BonusPoints" type="Label" parent="." index="0"]
+[node name="BonusPanel" type="Panel" parent="." index="0"]
 
 visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 164.0
-margin_top = 726.0
-margin_right = 428.0
-margin_bottom = 818.0
+margin_left = 210.0
+margin_top = 734.0
+margin_right = 462.0
+margin_bottom = 845.0
 rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
+mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_fonts/font = SubResource( 1 )
-text = "100"
-align = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_fonts" ]
+size_flags_vertical = 1
+_sections_unfolded = [ "Material", "Visibility" ]
+
+[node name="BonusPoints" parent="BonusPanel" index="0" instance=ExtResource( 2 )]
+
+margin_left = 7.0
+margin_top = 11.0
+margin_right = 237.0
+margin_bottom = 96.0
+size_flags_stretch_ratio = 2.0
+_sections_unfolded = [ "Anchor", "Grow Direction", "Size Flags", "custom_colors", "custom_fonts", "custom_styles" ]
+
+[node name="extra_pauser" type="Timer" parent="." index="1"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = true
+autostart = false
 
 

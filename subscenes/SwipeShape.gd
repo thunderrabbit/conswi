@@ -9,6 +9,7 @@ const pause_time = tick_delay	# pause after countup quantity
 
 signal displayed_shape			# after shape has been displayed+paused
 signal shrunk_shape				# after shape has finished shrinking
+signal flew_away				# after the wasted swipe has vanished
 
 # add sprites to this object in the shape they are meant to represent
 # shape_array for bo3 is [3,1,1,1] which comes from ShapeDatabase
@@ -55,25 +56,40 @@ func shrink_shape(go_to_loc, duration = 0.9):
 
 # TODO: make it random
 func fly_away_randomly(duration = 0.9):
-	var go_to_loc = Helpers.slot_to_pixels(Vector2(10,10))
+	print("first tween starting")
+	var go_to_loc = Helpers.slot_to_pixels(Vector2(4,10))
+	var effect = get_node("Tween")
+	effect.connect("tween_completed", self, "come_back_to_location")
+	effect.interpolate_property(self, 'scale', self.get_scale(), Vector2(5, 5), duration, Tween.TRANS_QUAD, Tween.EASE_OUT)
+	effect.interpolate_property(self, 'position', self.get_position(), go_to_loc, duration,	Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	effect.interpolate_property(self, 'rotation', 0, 6, duration, Tween.TRANS_LINEAR, Tween.EASE_OUT_IN)
+	effect.interpolate_property(self, 'opacity', 1, 0, duration, Tween.TRANS_QUAD, Tween.EASE_OUT)
+	effect.start()
+
+##################################################
+#
+#   The idea here is the wasted swipes can be collected somewhere and then count against the user.
+#   Maybe I can just log a number instead of showing the swipes on the side
+#
+func come_back_to_location(obj, key):
+	print("new tween starting")
+	if key != ':scale':	# (callback only once per tween)
+		return
+	var duration = 0.9
+	var go_to_loc = HUD.get_node('WastedSwipeCount').get_global_position()
 	var effect = get_node("Tween")
 	effect.connect("tween_completed", self, "flew_away")
-	effect.interpolate_property(self, 'scale',
-			self.get_scale(), Vector2(5, 5), duration,
-			Tween.TRANS_QUAD, Tween.EASE_OUT)
-	effect.interpolate_property(self, 'position',
-			self.get_position(), go_to_loc, duration,
-			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	effect.interpolate_property(self, 'rotation', 0, 6, duration, Tween.TRANS_LINEAR, Tween.EASE_OUT)
-	effect.interpolate_property(self, 'opacity',
-			1, 0, duration,
-			Tween.TRANS_QUAD, Tween.EASE_OUT)
+	effect.interpolate_property(self, 'scale', self.get_scale(), Vector2(0.02, 0.02), duration, Tween.TRANS_QUAD, Tween.EASE_OUT)
+	effect.interpolate_property(self, 'position', self.get_position(), go_to_loc, duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	effect.interpolate_property(self, 'rotation', 0, 6, duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	effect.interpolate_property(self, 'opacity', 0, 1, duration, Tween.TRANS_QUAD, Tween.EASE_OUT)
 	effect.start()
 
 # swipe need not exist after it has flown away
 func flew_away(obj, key):
 	if key == ':scale':	# (callback only once per tween)
-		queue_free()
+		queue_free()	# cannot get them to act right so just kill them and don't save them
+		emit_signal("flew_away")
 
 # After shape has been shrunk
 func shrunk_shape(obj, key):
@@ -88,7 +104,7 @@ func shrunk_shape(obj, key):
 func display_quantity(quantity):
 	# once the spinner is done, we want it to tell us
 	spinner.connect("qty_reached",self,"_displayed_quantity")
-	spinner.set_position(Vector2(9,9))	# hardcoded until I can figure out positioning
+	spinner.set_position(Vector2(-90,-90))	# hardcoded until I can figure out positioning
 	spinner.show()					# just in case
 	spinner.set_delay(tick_delay)
 	spinner.set_target(quantity)	# tell spinner where to stop

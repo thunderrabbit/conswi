@@ -3,6 +3,9 @@ extends Node2D
 var game_scene
 var _todo_after_level
 var _info_for_star_calc
+export var swipe_lose_delay = 0.5
+export var lose_points_per_swipe = 5
+export var points_per_tile = 25
 
 #######################################################
 #
@@ -57,6 +60,11 @@ func _PlanToDisplayStars():
 func _PlanToRemovePanel():
 	self._todo_after_level.push_back(G.STAR_REMOVE_PANEL)
 
+func _pause_before_show_stuff():
+	var timer = $extra_pauser
+	timer.connect("timeout",self,"_show_stuff_after_level")
+	timer.set_wait_time(0.5)
+	timer.start()
 
 func _show_stuff_after_level():
 	if not self._todo_after_level.size():
@@ -79,16 +87,30 @@ func _show_stuff_after_level():
 
 func _display_bonus():
 	print("Display Bonus")
-	var points = get_node("BonusPoints")
-	points.show()
-	points.set_text(String(self._info_for_star_calc['num_tiles'] * 25))
-	self._show_stuff_after_level()  # simulate calling after animation complete
-	pass
+	$BonusPanel.show()
+	var points = get_node("BonusPanel/BonusPoints")
+	points.connect("qty_reached",self,"_pause_before_show_stuff")
+	points.set_delay(0.05)
+	var bonus_target = self._info_for_star_calc['num_tiles'] * self.points_per_tile
+	points.set_target(bonus_target)	# tell spinner where to stop
+	points.set_increment(floor(bonus_target * 0.05))	# take twenty steps to count
+	points.start_tick_from(1)		# calls back to _displayed_quantity when finished
 
 func _reduce_swipes():
 	print("Reduce Swipes")
-	self._show_stuff_after_level()  # simulate calling after animation complete
-	pass
+	var points = get_node("BonusPanel/BonusPoints")
+	var bonus_reduction = self._info_for_star_calc['waste_swipes'] * self.lose_points_per_swipe
+	print("lose ", bonus_reduction, " points")
+	points.set_delay(self.swipe_lose_delay)
+	points.set_target_decrease(bonus_reduction)
+	points.set_increment(self.lose_points_per_swipe)
+	
+	var wasted = HUD.get_node('WastedSwipeCount')
+	wasted.set_delay(self.swipe_lose_delay)
+	wasted.set_target(0)
+	wasted.set_increment(1)
+	wasted.start_tick()
+	points.start_tick()
 
 #####################################################
 #
@@ -103,12 +125,10 @@ func _reduce_swipes():
 func _reduce_tiles():
 	print("Reduce Tiles")
 	self._show_stuff_after_level()  # simulate calling after animation complete
-	pass
 
 func _add_time_remain():
 	print("Add Time Remain")
 	self._show_stuff_after_level()  # simulate calling after animation complete
-	pass
 
 ###
 # not really thought out, but this will be called if G.STAR_DISPLAY_STARS is in self._todo_after_level
@@ -133,8 +153,8 @@ func _calculate_stars_for_level():
 
 func _remove_panel():
 	print("Remove Panel")
+	$BonusPanel.hide()
 	self._show_stuff_after_level()  # simulate calling after animation complete
-	pass
 
 func _on_last_star_displayed():
 	self.game_scene._on_level_over_stars_displayed()		# fake signal emitted by star_display.gd
