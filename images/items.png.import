@@ -10,7 +10,7 @@ source_file="res://images/items.png"
 source_md5="4ecd67e735967110825d6bf8d42a4421"
 
 dest_files=[ "res://.import/items.png-13fff8625ef152feefe0ddd53b22797c.stex" ]
-dest_md5="7f8230c3ed137e9cadb8078627315129"
+dest_md5="35b97114ee4e459abba6dd9694fd7b1e"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
