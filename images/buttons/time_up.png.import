@@ -10,7 +10,7 @@ source_file="res://images/buttons/time_up.png"
 source_md5="5c6b713a0a0955a756601f93bd5f1a33"
 
 dest_files=[ "res://.import/time_up.png-30c432dae260e93105713493fffec7b0.stex" ]
-dest_md5="1944bd0fc095e728810977cc7cdf19d0"
+dest_md5="4632a270774fdc79c13bb2c913099571"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

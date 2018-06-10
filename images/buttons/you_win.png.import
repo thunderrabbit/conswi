@@ -10,7 +10,7 @@ source_file="res://images/buttons/you_win.png"
 source_md5="afb29d4970a6d90c0074c0b0fa522dc2"
 
 dest_files=[ "res://.import/you_win.png-65c86bbc0136ed08e3b90b580caa27b5.stex" ]
-dest_md5="44039d903af090ca8a782e3a4f874f0f"
+dest_md5="f0fcd60ddf876a1bfd703160f824d05f"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

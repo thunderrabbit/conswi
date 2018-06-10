@@ -10,7 +10,7 @@ source_file="res://images/buttons/you_lose.png"
 source_md5="470162e91674602ae3eb24962a58c0fa"
 
 dest_files=[ "res://.import/you_lose.png-cd43291a1618ed9e7ea21cffbe16f63e.stex" ]
-dest_md5="734e173bca4de62c33ebb56d06ca3fbd"
+dest_md5="46e900c218fcfb88952dfca63d013e34"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
