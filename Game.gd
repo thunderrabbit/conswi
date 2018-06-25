@@ -50,6 +50,7 @@ func _ready():
 
 	Helpers.game_scene = self		# so Players know where to appear
 	time_label = get_node("LevelTimer/LevelTimerLabel")
+	stop_level_timer()
 
 	# tell the Magnetism timer to call Helpers.magnetism_called (every MAGNETISM_TIME seconds)
 	get_node("Magnetism").connect("timeout", get_node("/root/Helpers"), "magnetism_called", [])
