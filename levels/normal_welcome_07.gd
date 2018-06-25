@@ -1,8 +1,6 @@
 extends "NormalLevel.gd"
 
 func _init():
-    width = 10
-    height = 16
     max_tiles_avail = 1900
     gravity_timeout = 10
     time_limit_in_sec = 3390
