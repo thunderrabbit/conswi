@@ -65,9 +65,9 @@ func display_next_requirement():
 		# after shape has been displayed (and number counted down) we will shrink the shape
 		currently_showing_shape.connect("displayed_shape",self,"shape_has_been_displayed")
 		var count_tiles_this_shape = currently_showing_shape.set_shape(ShapeShifter.getBitmapOfSwipeName(currently_showing_name),G.TYPE_DOG)
+		var swipe_dimensions = currently_showing_shape.dimensions
 		self.num_tiles_required = self.num_tiles_required + count_tiles_this_shape * reqd_qty
-		print("hardcoded shape display location")
-		currently_showing_shape.set_position(Helpers.slot_to_pixels(Vector2(3,5)))
+		currently_showing_shape.set_position(Helpers.offset_bottom_center_slot_in_pixels(swipe_dimensions))
 		add_child(currently_showing_shape)
 		currently_showing_shape.display_quantity(reqd_qty)
 
