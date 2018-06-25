@@ -17,7 +17,7 @@ signal flew_away				# after the wasted swipe has vanished
 func set_shape(shape_array, tile_type = G.TYPE_DOG):
     var width = int(shape_array[0]) # is a float otherwise.. why??
     var num = 0					# how far along 1D array are we?
-    var loc = Vector2(0,0)		# where the shape will be shown
+    var loc = Vector2(0,0)		# where individual sprites will be shown
     var total_tiles = 0			# so we can calcualte bonus required based on tile count
     # Loop through the bits of array after width
     for i in range(1, shape_array.size()):
