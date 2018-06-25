@@ -4,6 +4,7 @@ const sprite_script = preload("res://tiles/Segment.gd")
 onready var spinner = get_node("SpinnerLabel")
 onready var pauser = Timer.new()
 
+var dimensions = Vector2(0,0)	# will tell the size of the shape
 const tick_delay = 0.73			# pause between countup qty
 const pause_time = tick_delay	# pause after countup quantity
 
@@ -34,7 +35,14 @@ func set_shape(shape_array, tile_type = G.TYPE_DOG):
             sprite.set_tile_type(tile_type)
             sprite.set_position(Helpers.slot_to_pixels(loc,false))		# change false to true to debug position
             add_child(sprite)
+            _updateDimensions(loc)		# know how big swipe is
     return total_tiles			# So we can eventually tell the level bonus, based on number of required tiles
+
+func _updateDimensions(loc) :
+	if(loc.x > self.dimensions.x):
+		dimensions.x = loc.x
+	if(loc.y > self.dimensions.y):
+		dimensions.y = loc.y
 
 # once shape has been shown for requirements, we need to shrink it
 # for now, they all go to same (0,0) but soon they need to go to 
