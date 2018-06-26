@@ -12,11 +12,15 @@ var required_shapes_hud = {}		# so we can update the shapes as swipes happen
 var currently_showing_shape = null	# so we can come back and know what shape to shrink
 var currently_showing_name = null	# so we can look up where to show it
 var num_tiles_required = 0			# so LevelEndedStars knows how big bonus should be
+var show_finger = false				# usually do not show swiping finger (just on first couple levels)
 
 func set_game_scene(gameScene):
 	connect("levelwon", gameScene, "_on_LevelWon")
 	connect("requirements_shown", gameScene, "continue_start_level")
-	
+
+func show_finger_ka(show_finger):
+	self.show_finger = show_finger
+
 # first, just get an array of names that we can slowly loop through
 # and display each required shape
 func level_requires(level_requirements):
@@ -61,6 +65,8 @@ func display_next_requirement():
 		var reqd_qty = requirements[currently_showing_name]
 
 		currently_showing_shape = SwipeShape.instance()
+		currently_showing_shape.show_finger = self.show_finger
+
 		required_shapes_hud[currently_showing_name] = currently_showing_shape
 		# after shape has been displayed (and number counted down) we will shrink the shape
 		currently_showing_shape.connect("displayed_shape",self,"shape_has_been_displayed")
