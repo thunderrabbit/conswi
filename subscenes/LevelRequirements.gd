@@ -1,6 +1,6 @@
 extends Node2D
 
-const SwipeShape = preload("res://SubScenes/SwipeShape.tscn")
+const SwipeShape = preload("res://SubScenes/FingerSwipeShape.tscn")
 
 signal levelwon
 signal requirements_shown
