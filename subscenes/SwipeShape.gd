@@ -7,6 +7,7 @@ onready var pauser = Timer.new()
 var dimensions = Vector2(0,0)	# will tell the size of the shape
 const tick_delay = 0.73			# pause between countup qty
 const pause_time = tick_delay	# pause after countup quantity
+const numberic_offset_pixels = Vector2(-90,-90)			# maybe make into a var and calculate an offset when set_shape is called
 
 signal displayed_shape			# after shape has been displayed+paused
 signal shrunk_shape				# after shape has finished shrinking
@@ -112,7 +113,7 @@ func shrunk_shape(obj, key):
 func display_quantity(quantity):
 	# once the spinner is done, we want it to tell us
 	spinner.connect("qty_reached",self,"_displayed_quantity")
-	spinner.set_position(Vector2(-90,-90))	# hardcoded until I can figure out positioning
+	spinner.set_position(self.numberic_offset_pixels)	# hardcoded until I can figure out positioning
 	spinner.show()					# just in case
 	spinner.set_delay(tick_delay)
 	spinner.set_target(quantity)	# tell spinner where to stop
