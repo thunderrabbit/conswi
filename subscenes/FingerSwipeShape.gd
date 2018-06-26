@@ -1,15 +1,26 @@
 extends "res://subscenes/SwipeShape.gd"
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
+var show_finger = false		# if true, we will show the finger swiping from first to last tile
+var quantity = 0			# store quantity while finger is swiping
 
-func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
-	pass
+func swipe_finger():
+	if self.show_finger:
+		$Finger.set_visible(true)
+		$Tween.connect("tween_completed", self, "finger_swiped")
+		$Tween.interpolate_property($Finger, "position",
+				Vector2(20,20),
+				Vector2(200,200),
+				1, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+		$Tween.start()
+	else:
+#		print("no finger")
+		finger_swiped(null, null)			# usually do this; only show finger in first couple of levels
 
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
+func display_quantity(quantity):
+	self.quantity = quantity
+	print("swipe finger before display quantity")
+	swipe_finger()
+
+func finger_swiped(obj, key):
+	$Finger.set_visible(false)
+	.display_quantity(self.quantity)
