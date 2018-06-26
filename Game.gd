@@ -94,6 +94,7 @@ func start_level(level_num):
 	# in which case the slots_across will be too small to clear everything
 	Helpers.clear_game_board()
 
+	level_reqs.show_finger_ka(current_level.show_finger)
 	level_reqs.level_requires(current_level.level_requirements)
 	buttons.prepare_to_play_level(self.level_num)
 
