@@ -8,6 +8,7 @@ var min_swipe_len = 3		# higher is harder
 var max_tiles_avail = 32768	# including tiles used in fill_level = true
 var time_limit_in_sec = 180	# number of seconds to finish level
 var debug_level = 0			# boolean for now
+var show_finger = false		# will show finger on early levels (only with straight swipes because I do not know how otherwise)
 
 var queue_len = 3			# queue is upcoming tiles
 var tiles = []				# fill this to define tiles
