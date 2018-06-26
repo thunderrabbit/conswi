@@ -8,8 +8,13 @@
 
 script = ExtResource( 2 )
 
+[node name="Tween" parent="." index="0"]
+
+_sections_unfolded = [ "Pause", "playback" ]
+
 [node name="Finger" type="Sprite" parent="." index="2"]
 
+visible = false
 texture = ExtResource( 3 )
 
 
