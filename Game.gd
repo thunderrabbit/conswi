@@ -329,6 +329,7 @@ func piece_unclicked():
 		add_child(swipe_shape)
 		if swipe_was_required:
 			swipe_shape.connect("shrunk_shape",self,"shrank_required_shape")
+			# after swipe, move shape to correct/required shape location
 			swipe_shape.shrink_shape(level_reqs.required_swipe_location(swipe_name))
 		else:
 			swipe_shape.connect("flew_away", self, "inc_wasted_swipe_counter")
