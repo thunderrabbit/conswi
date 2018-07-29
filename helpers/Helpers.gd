@@ -125,7 +125,7 @@ func slot_to_pixels(slot, xfactor=1, debug=false):
 #		print(G.GLOBALtop_space, " + ", (G.SLOT_SIZE + G.GLOBALslot_gap_v), " * ", (slot.y), "\t",
 #			G.GLOBALtop_space, " + ", (G.SLOT_SIZE + G.GLOBALslot_gap_v) * (slot.y), "\t",
 #			G.GLOBALtop_space + (G.SLOT_SIZE + G.GLOBALslot_gap_v) * (slot.y), "\t")
-	return Vector2(G.GLOBALleft_space+((G.SLOT_SIZE + G.GLOBALslot_gap_h)*(slot.x)),
+	return Vector2(G.GLOBALleft_space+((G.SLOT_SIZE + G.GLOBALslot_gap_h)*(slot.x)*xfactor),
 				    G.GLOBALtop_space+((G.SLOT_SIZE + G.GLOBALslot_gap_v)*(slot.y)))
 
 func offset_bottom_center_slot_in_pixels(offset):

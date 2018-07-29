@@ -52,7 +52,7 @@ func _updateDimensions(loc) :
 # same function can be used to tell the swipe where to go if it
 # matches required shape
 func shrink_shape(go_to_loc, duration = 0.9):
-	var ratio = 0.2
+	var ratio = 0.4
 	var effect = get_node("Tween")
 	effect.connect("tween_completed", self, "shrunk_shape")
 	effect.interpolate_property(self, "scale",
