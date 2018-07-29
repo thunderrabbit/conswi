@@ -34,7 +34,7 @@ func set_shape(shape_array, tile_type = G.TYPE_DOG):
             var sprite = Sprite.new()
             sprite.set_script(sprite_script)
             sprite.set_tile_type(tile_type)
-            sprite.set_position(Helpers.slot_to_pixels(loc,false))		# change false to true to debug position
+            sprite.set_position(Helpers.slot_to_pixels(loc,1,false))	# change false to true to debug position. 1 is xfactor (larger pushes to right and fucks shit up)
             add_child(sprite)
             _updateDimensions(loc)		# know how big swipe is
     return total_tiles			# So we can eventually tell the level bonus, based on number of required tiles

@@ -115,7 +115,8 @@ func pixels_to_slot(pixels, debug=false):
 	return Vector2((pixels.x - G.GLOBALleft_space) / (G.SLOT_SIZE + G.GLOBALslot_gap_h),
 					(pixels.y - G.GLOBALtop_space) / (G.SLOT_SIZE + G.GLOBALslot_gap_v))
 
-func slot_to_pixels(slot, debug=false):
+# below, xfactor is used to push required swipes to the right so they can be seen
+func slot_to_pixels(slot, xfactor=1, debug=false):
 	if debug:
 		print("slot ", slot)
 #		print(G.GLOBALleft_space, " + ", (G.SLOT_SIZE + G.GLOBALslot_gap_h), " * ", (slot.x), "\t",
