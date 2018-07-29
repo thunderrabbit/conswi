@@ -46,10 +46,9 @@ func _updateDimensions(loc) :
 		dimensions.y = loc.y
 
 # once shape has been shown for requirements, we need to shrink it
-# for now, they all go to same (0,0) but soon they need to go to 
-# their own locations.  So this function will need to accept a Vector2
-# as the destination.   Plus when shapes are swiped, I think this
-# same function can be used to tell the swipe where to go if it
+# and put it in a location, so this function accepts a Vector2
+# as the destination.   Plus when shapes are swiped, this
+# same function is used to tell the swipe where to go if it
 # matches required shape
 func shrink_shape(go_to_loc, duration = 0.9):
 	var ratio = G.REQ_SHAPE_SHRINK_FACTOR
