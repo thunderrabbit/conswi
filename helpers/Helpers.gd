@@ -118,12 +118,12 @@ func pixels_to_slot(pixels, debug=false):
 func slot_to_pixels(slot, debug=false):
 	if debug:
 		print("slot ", slot)
-		print(G.GLOBALleft_space, " + ", (G.SLOT_SIZE + G.GLOBALslot_gap_h), " * ", (slot.x), "\t",
-			G.GLOBALleft_space, " + ", (G.SLOT_SIZE + G.GLOBALslot_gap_h) * (slot.x), "\t",
-			G.GLOBALleft_space + (G.SLOT_SIZE + G.GLOBALslot_gap_h) * (slot.x), "\t")
-		print(G.GLOBALtop_space, " + ", (G.SLOT_SIZE + G.GLOBALslot_gap_v), " * ", (slot.y), "\t",
-			G.GLOBALtop_space, " + ", (G.SLOT_SIZE + G.GLOBALslot_gap_v) * (slot.y), "\t",
-			G.GLOBALtop_space + (G.SLOT_SIZE + G.GLOBALslot_gap_v) * (slot.y), "\t")
+#		print(G.GLOBALleft_space, " + ", (G.SLOT_SIZE + G.GLOBALslot_gap_h), " * ", (slot.x), "\t",
+#			G.GLOBALleft_space, " + ", (G.SLOT_SIZE + G.GLOBALslot_gap_h) * (slot.x), "\t",
+#			G.GLOBALleft_space + (G.SLOT_SIZE + G.GLOBALslot_gap_h) * (slot.x), "\t")
+#		print(G.GLOBALtop_space, " + ", (G.SLOT_SIZE + G.GLOBALslot_gap_v), " * ", (slot.y), "\t",
+#			G.GLOBALtop_space, " + ", (G.SLOT_SIZE + G.GLOBALslot_gap_v) * (slot.y), "\t",
+#			G.GLOBALtop_space + (G.SLOT_SIZE + G.GLOBALslot_gap_v) * (slot.y), "\t")
 	return Vector2(G.GLOBALleft_space+((G.SLOT_SIZE + G.GLOBALslot_gap_h)*(slot.x)),
 				    G.GLOBALtop_space+((G.SLOT_SIZE + G.GLOBALslot_gap_v)*(slot.y)))
 
