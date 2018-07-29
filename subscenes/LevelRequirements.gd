@@ -25,7 +25,7 @@ func level_requires(level_requirements):
 	for reqd_name in requirements:
 		var num_required = location_of_required_shape.size()	# will determine where shape should be shown
 		array_of_required_names.append(reqd_name)
-		location_of_required_shape[reqd_name] = Helpers.slot_to_pixels(Vector2(num_required,1),1.5)
+		location_of_required_shape[reqd_name] = Helpers.slot_to_pixels(Vector2(num_required,1),G.REQ_SHAPE_SHRINK_LOCATION)
 	# now that we know what we require, start showing them one by one
 	display_next_requirement()
 

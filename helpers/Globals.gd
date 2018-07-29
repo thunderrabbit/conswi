@@ -32,3 +32,6 @@ const STAR_REDUCE_TILES = 2
 const STAR_ADD_TIME_REMAIN = 3
 const STAR_DISPLAY_STARS = 4
 const STAR_REMOVE_PANEL = 5
+
+const REQ_SHAPE_SHRINK_FACTOR = 0.4			# required shapes become this big compared to normal
+const REQ_SHAPE_SHRINK_LOCATION = 1.5		# required shapes display this many column widths apart
