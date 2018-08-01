@@ -1,4 +1,4 @@
-extends "NormalLevel.gd"
+extends "DogLevel.gd"
 
 func _init():
     max_tiles_avail = 70
