@@ -3,6 +3,7 @@ extends Node2D
 # from https://godotengine.org/qa/3829/how-to-draw-a-line-in-2d?show=3837#a3837
 var draw_slot_list = []
 var swipe_color
+var inc_mouse = true
 
 func _ready():
     set_process(true)
@@ -11,7 +12,8 @@ func _ready():
 func set_swipe_color(color):
     swipe_color = color
 
-func draw_this_swipe(swipe, color = Color(1.0, 1.0, 0.5, 1.0)):
+func draw_this_swipe(swipe, color = Color(1.0, 1.0, 0.5, 1.0), inc_mouse = true):
+    self.inc_mouse = inc_mouse
     draw_slot_list = swipe
     self.swipe_color = color
 

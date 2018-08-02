@@ -12,6 +12,8 @@ func swipe_finger():
 				Vector2(200,20),    # TODO do not hardcode this
 				1, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 		$Tween.start()
+		var swipe_array = [Vector2(2,6),Vector2(5,6)]
+		VisibleSwipeOverlay.draw_this_swipe(swipe_array,TileDatabase.tiles[G.TYPE_DOG].ITEM_COLOR)
 	else:
 #		print("no finger")
 		finger_swiped(null, null)			# usually do this; only show finger in first couple of levels
