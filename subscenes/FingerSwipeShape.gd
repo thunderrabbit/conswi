@@ -8,8 +8,8 @@ func swipe_finger():
 		$Finger.set_visible(true)
 		$Tween.connect("tween_completed", self, "finger_swiped")
 		$Tween.interpolate_property($Finger, "position",
-				Vector2(20,20),
-				Vector2(200,200),
+				Vector2(20,20),		# TODO do not hardcode this
+				Vector2(200,20),    # TODO do not hardcode this
 				1, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 		$Tween.start()
 	else:
