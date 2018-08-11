@@ -23,6 +23,7 @@ var inc_mouse = true
 func _ready():
 	set_process(true)
 	draw_slot_list = []
+	z_index = 5
 
 func set_swipe_color(color):
 	swipe_color = color
