@@ -15,14 +15,11 @@ func swipe_finger():
 		$Finger.set_visible(true)
 		$FingerTween.connect("tween_completed", self, "finger_swiped")
 		$FingerTween.connect("tween_step", self, "finger_moved_a_bit")
-		# I tried to use this for finger position,
-		#   but I think it is using a different coordinate system
-		#   because it is a child of this shape.
-		# Helpers.offset_bottom_center_slot_in_pixels(dimensions)
+		# Move finger relative to the swipe.  (NOTE This only works for horizontal swipes)
 		$FingerTween.interpolate_property($Finger, "position",
-				Vector2(0,0),		# TODO do not hardcode this
-				Vector2(200,0),    # TODO do not hardcode this
-				1,					# Duration of tween
+				Vector2(0,0),									# finger start position, relative to the swiped piece
+				Vector2(G.SLOT_SIZE * (dimensions.x+1),0),		# finger end position.  dimensions.x is the width of piece (starting from 0)
+				3,					# Duration of tween
 				Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 		$FingerTween.start()
 	else:
