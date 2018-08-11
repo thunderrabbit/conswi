@@ -14,7 +14,7 @@ func swipe_finger():
 				Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 		$FingerTween.start()
 		var swipe_array = [Vector2(2,6),Vector2(5,6)]
-		VisibleSwipeOverlay.draw_this_swipe(swipe_array,TileDatabase.tiles[G.TYPE_DOG].ITEM_COLOR)
+		VisibleSwipeOverlay.draw_this_swipe(swipe_array,TileDatabase.tiles[G.TYPE_DOG].ITEM_COLOR,false)	# false = do not add mouse pos to swipe
 	else:
 		finger_swiped(null, null)			# usually do this; only show finger in first couple of levels
 
