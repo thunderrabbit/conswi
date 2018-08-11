@@ -3,10 +3,18 @@ extends "res://subscenes/SwipeShape.gd"
 var show_finger = false		# if true, we will show the finger swiping from first to last tile
 var quantity = 0			# while finger is swiping, remembers how many of these swipes are needed so they can be displayed by parent class
 
+# Every time the tween updates position, the finger moves
+# func finger_moved_a_bit updates the swipe to match the finger.
+# It is in here that we should see about highlighting pieces that have been reached by the finger
+func finger_moved_a_bit ( object, key, elapsed, value ):
+	var swipe_array = [Helpers.offset_bottom_center_slot(dimensions),Helpers.pixels_to_slot($Finger.get_global_position())]
+	VisibleSwipeOverlay.draw_this_swipe(swipe_array,TileDatabase.tiles[G.TYPE_DOG].ITEM_COLOR,false)	# false = do not add mouse pos to swipe
+
 func swipe_finger():
 	if self.show_finger:
 		$Finger.set_visible(true)
 		$FingerTween.connect("tween_completed", self, "finger_swiped")
+		$FingerTween.connect("tween_step", self, "finger_moved_a_bit")
 		# I tried to use this for finger position,
 		#   but I think it is using a different coordinate system
 		#   because it is a child of this shape.
@@ -17,8 +25,6 @@ func swipe_finger():
 				1,					# Duration of tween
 				Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 		$FingerTween.start()
-		var swipe_array = [Helpers.offset_bottom_center_slot(dimensions),Helpers.offset_bottom_center_slot(Vector2(0,0))]
-		VisibleSwipeOverlay.draw_this_swipe(swipe_array,TileDatabase.tiles[G.TYPE_DOG].ITEM_COLOR,false)	# false = do not add mouse pos to swipe
 	else:
 		finger_swiped(null, null)			# usually do this; only show finger in first couple of levels
 
