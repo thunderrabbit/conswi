@@ -146,6 +146,9 @@ func slot_to_pixels(slot, xfactor=1, debug=false):
 func offset_bottom_center_slot_in_pixels(offset):
 	return slot_to_pixels(Vector2((slots_across-1) / 2, slots_down-1)-offset)
 
+func offset_bottom_center_slot(offset):
+	return Vector2((slots_across-1) / 2, slots_down-1)-offset
+
 func steering_pad_pixels():
 	return Vector2(G.GLOBALleft_space+(G.SLOT_SIZE + G.GLOBALslot_gap_h)*(slots_across / 2), 
 				    G.GLOBALtop_space+(G.SLOT_SIZE + G.GLOBALslot_gap_v)*(slots_down))
