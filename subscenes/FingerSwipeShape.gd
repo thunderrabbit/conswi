@@ -10,7 +10,8 @@ func swipe_finger():
 		$FingerTween.interpolate_property($Finger, "position",
 				Vector2(20,20),		# TODO do not hardcode this
 				Vector2(200,20),    # TODO do not hardcode this
-				1, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+				1,					# Duration of tween
+				Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 		$FingerTween.start()
 		var swipe_array = [Vector2(2,6),Vector2(5,6)]
 		VisibleSwipeOverlay.draw_this_swipe(swipe_array,TileDatabase.tiles[G.TYPE_DOG].ITEM_COLOR)
