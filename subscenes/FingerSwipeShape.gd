@@ -7,6 +7,10 @@ func swipe_finger():
 	if self.show_finger:
 		$Finger.set_visible(true)
 		$FingerTween.connect("tween_completed", self, "finger_swiped")
+		# I tried to use this for finger position,
+		#   but I think it is using a different coordinate system
+		#   because it is a child of this shape.
+		# Helpers.offset_bottom_center_slot_in_pixels(dimensions)
 		$FingerTween.interpolate_property($Finger, "position",
 				Vector2(20,20),		# TODO do not hardcode this
 				Vector2(200,20),    # TODO do not hardcode this
