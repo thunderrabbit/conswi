@@ -40,7 +40,8 @@ func _draw():
 		var draw_list = []
 		for slot in draw_slot_list:
 			draw_list.append(Helpers.slot_to_pixels(slot))
-		draw_list.append(get_global_mouse_position())	# make the swipe point to mouse (eventually, finger)
+		if inc_mouse:
+			draw_list.append(get_global_mouse_position())	# make the swipe point to mouse (eventually, finger)
 		var temp_draw_list = []
 		for ob in draw_list:
 			temp_draw_list.append(ob)
