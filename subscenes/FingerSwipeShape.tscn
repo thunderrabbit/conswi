@@ -17,7 +17,9 @@ _sections_unfolded = [ "Pause", "playback" ]
 visible = false
 z_index = 6
 texture = ExtResource( 3 )
-_sections_unfolded = [ "Z Index" ]
+centered = false
+offset = Vector2( -53, -20 )
+_sections_unfolded = [ "Offset", "Z Index" ]
 
 [node name="FingerTween" type="Tween" parent="." index="3"]
 

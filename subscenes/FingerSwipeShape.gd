@@ -12,8 +12,8 @@ func swipe_finger():
 		#   because it is a child of this shape.
 		# Helpers.offset_bottom_center_slot_in_pixels(dimensions)
 		$FingerTween.interpolate_property($Finger, "position",
-				Vector2(20,20),		# TODO do not hardcode this
-				Vector2(200,20),    # TODO do not hardcode this
+				Vector2(0,0),		# TODO do not hardcode this
+				Vector2(200,0),    # TODO do not hardcode this
 				1,					# Duration of tween
 				Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 		$FingerTween.start()
