@@ -148,3 +148,4 @@ func _displayed_quantity():
 func dramatically_paused_after_display():
 	print("shape paused after display")
 	emit_signal("displayed_shape")
+	VisibleSwipeOverlay.draw_this_swipe([])		# remove the swipe
