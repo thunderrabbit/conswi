@@ -1,3 +1,18 @@
+#    Copyright (C) 2018  Rob Nugen
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 extends Node2D
 
 const sprite_script = preload("res://tiles/Segment.gd")
@@ -34,7 +49,7 @@ func set_shape(shape_array, tile_type = G.TYPE_DOG):
             var sprite = Sprite.new()
             sprite.set_script(sprite_script)
             sprite.set_tile_type(tile_type)
-            sprite.set_position(Helpers.slot_to_pixels(loc,false))		# change false to true to debug position
+            sprite.set_position(Helpers.slot_to_pixels(loc,1,false))	# change false to true to debug position. 1 is xfactor (larger pushes to right and fucks shit up)
             add_child(sprite)
             _updateDimensions(loc)		# know how big swipe is
     return total_tiles			# So we can eventually tell the level bonus, based on number of required tiles
@@ -46,13 +61,12 @@ func _updateDimensions(loc) :
 		dimensions.y = loc.y
 
 # once shape has been shown for requirements, we need to shrink it
-# for now, they all go to same (0,0) but soon they need to go to 
-# their own locations.  So this function will need to accept a Vector2
-# as the destination.   Plus when shapes are swiped, I think this
-# same function can be used to tell the swipe where to go if it
+# and put it in a location, so this function accepts a Vector2
+# as the destination.   Plus when shapes are swiped, this
+# same function is used to tell the swipe where to go if it
 # matches required shape
 func shrink_shape(go_to_loc, duration = 0.9):
-	var ratio = 0.2
+	var ratio = G.REQ_SHAPE_SHRINK_FACTOR
 	var effect = get_node("Tween")
 	effect.connect("tween_completed", self, "shrunk_shape")
 	effect.interpolate_property(self, "scale",

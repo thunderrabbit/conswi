@@ -1,3 +1,18 @@
+#    Copyright (C) 2018  Rob Nugen
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 extends Node2D
 
 const forcelevel0 = false
@@ -326,10 +341,11 @@ func piece_unclicked():
 
 		swipe_shape = SwipeShape.instance()
 		swipe_shape.set_shape(ShapeShifter.getBitmapOfSwipeCoordinates(swipe_array),clicked_this_piece_type)
-		swipe_shape.set_position(Helpers.slot_to_pixels(dimensions["topleft"], false))		# change false to true to debug position
+		swipe_shape.set_position(Helpers.slot_to_pixels(dimensions["topleft"], 1, false))		# change false to true to debug position. 1 is xfactor (larger pushes to right and fucks shit up)
 		add_child(swipe_shape)
 		if swipe_was_required:
 			swipe_shape.connect("shrunk_shape",self,"shrank_required_shape")
+			# after swipe, move shape to correct/required shape location
 			swipe_shape.shrink_shape(level_reqs.required_swipe_location(swipe_name))
 		else:
 			swipe_shape.connect("flew_away", self, "inc_wasted_swipe_counter")

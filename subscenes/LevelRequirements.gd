@@ -1,3 +1,18 @@
+#    Copyright (C) 2018  Rob Nugen
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 extends Node2D
 
 const SwipeShape = preload("res://SubScenes/FingerSwipeShape.tscn")
@@ -29,7 +44,7 @@ func level_requires(level_requirements):
 	for reqd_name in requirements:
 		var num_required = location_of_required_shape.size()	# will determine where shape should be shown
 		array_of_required_names.append(reqd_name)
-		location_of_required_shape[reqd_name] = Helpers.slot_to_pixels(Vector2(num_required,1))
+		location_of_required_shape[reqd_name] = Helpers.slot_to_pixels(Vector2(num_required,1),G.REQ_SHAPE_SHRINK_LOCATION)
 	# now that we know what we require, start showing them one by one
 	display_next_requirement()
 
