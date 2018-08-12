@@ -13,6 +13,12 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+#####################################################################################
+#
+#  This is kinda like Globals, but for functions, most of which deal with placing tiles
+#
+#####################################################################################
+
 extends Node
 
 const Player = preload("res://SubScenes/Player.gd")

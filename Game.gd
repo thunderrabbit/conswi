@@ -13,6 +13,13 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+#####################################################################################
+#
+#   This code is probably too fat, but I don't know what makes sense to split out,
+#   nor how to do it.
+#
+#####################################################################################
+
 extends Node2D
 
 const forcelevel0 = false

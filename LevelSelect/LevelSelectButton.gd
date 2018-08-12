@@ -13,6 +13,16 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+#####################################################################################
+#
+#    LevelSelectButton instances are used on the level select screen
+#
+#    They are designed to show "stars" to indicate how well each level was passed.
+#    The stars will be animal faces corresponding to which World the player is in.
+#
+#    World one is Dog world, so up to three Dog faces will show up on each button.
+#
+#####################################################################################
 extends TextureButton
 
 var my_type = G.TYPE_BEAR
@@ -39,6 +49,7 @@ func set_qty_active(qty = 3):
 		_set_icon_active(icon)
 		icon = icon + 1
 
+##  I actually don't remember if this is being used to scale the images or just position them.
 func scale_to(scale):
 	$background.set_scale(scale)
 	$starbase.set_position($background.position)

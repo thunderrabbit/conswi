@@ -13,6 +13,14 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+#####################################################################################
+#
+#   Eventually I need to figure out a way to succinctly tell how many of each type of animal to show
+#
+#   It is easy enough to write it, but then how to handle the information.  Maybe I can just push them
+#   into an array and randomize the array.
+#
+#####################################################################################
 extends "NormalLevel.gd"
 
 func _init():

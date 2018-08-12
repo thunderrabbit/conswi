@@ -1,3 +1,26 @@
+#    Copyright (C) 2018  Rob Nugen
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+#####################################################################################
+#
+# This extends the swipe by adding a finger image to it which will visually show
+# the player how to swipe the shape.
+#
+# At this point, it can only swipe horizontally, but it can swipe any length piece
+#
+#####################################################################################
 extends "res://subscenes/SwipeShape.gd"
 
 var show_finger = false		# if true, we will show the finger swiping from first to last tile
