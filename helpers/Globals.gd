@@ -24,7 +24,7 @@ extends Node
 const splashscreen_timeout = 0.2
 
 ##  http://www.gamefromscratch.com/post/2015/02/23/Godot-Engine-Tutorial-Part-6-Multiple-Scenes-and-Global-Variables.aspx
-const GLOBALtop_space = 0		# Might just move the Popup down instead   # EGAD non-zero fucks up the Helpers slot_to_pixels calculation
+const GLOBALtop_space = 0		# Might just move the Popup down instead   # EGAD non-zero breaks the Helpers slot_to_pixels calculation
 const GLOBALleft_space = 20		# Space on the left  # non-zero messed up calculation, I thought, but now seems okay.  Maybe if both are non-zero it messes it up.
 const GLOBALslot_gap_v = 5
 const GLOBALslot_gap_h = 5
