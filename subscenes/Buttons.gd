@@ -15,8 +15,8 @@
 
 extends Node
 
-const SteeringPad = preload("res://SubScenes/SteeringPad.tscn")
-const EndLevelBut = preload("res://SubScenes/LevelEndedButtons.tscn")
+const SteeringPad = preload("res://subscenes/SteeringPad.tscn")
+const EndLevelBut = preload("res://subscenes/LevelEndedButtons.tscn")
 var parent_scene
 var endLevelButtons = null
 var steering_pad = null

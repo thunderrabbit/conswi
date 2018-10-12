@@ -15,7 +15,7 @@
 
 extends Node
 
-const Player = preload("res://SubScenes/Player.gd")
+const Player = preload("res://subscenes/Player.gd")
 
 var game_scene			# so we know where Players should appear
 var board = {}			# board of slots_across x slots_down
