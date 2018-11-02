@@ -7,10 +7,7 @@ path="res://.import/swipe_finger.png-b6d026a6343e92044ca96b77839f20d6.stex"
 [deps]
 
 source_file="res://images/swipe_finger.png"
-source_md5="f2dd3a24f0457294db798d732a2b9d05"
-
 dest_files=[ "res://.import/swipe_finger.png-b6d026a6343e92044ca96b77839f20d6.stex" ]
-dest_md5="ab3e680474a9f32bc7abcbedac323d51"
 
 [params]
 

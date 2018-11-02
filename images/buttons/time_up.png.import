@@ -7,10 +7,7 @@ path="res://.import/time_up.png-30c432dae260e93105713493fffec7b0.stex"
 [deps]
 
 source_file="res://images/buttons/time_up.png"
-source_md5="5c6b713a0a0955a756601f93bd5f1a33"
-
 dest_files=[ "res://.import/time_up.png-30c432dae260e93105713493fffec7b0.stex" ]
-dest_md5="4632a270774fdc79c13bb2c913099571"
 
 [params]
 

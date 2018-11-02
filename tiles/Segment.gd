@@ -20,13 +20,13 @@ var sprite_loc = []
 func _init():
 	# within the image map, these are the locations of the tiles
 						# left, top, width, height
-	sprite_loc.push_back(Rect2(35, 23, 65, 65));		# cat?
-	sprite_loc.push_back(Rect2(120, 23, 65, 65));		# dog?
-	sprite_loc.push_back(Rect2(200, 23, 65, 65));		# etc
-	sprite_loc.push_back(Rect2(287, 23, 65, 65));
-	sprite_loc.push_back(Rect2(376, 23, 65, 65));
-	sprite_loc.push_back(Rect2(459, 23, 65, 65));
-	sprite_loc.push_back(Rect2(547, 23, 65, 65));
+	sprite_loc.push_back(Rect2(0, 0, 100, 100));		# cat?
+	sprite_loc.push_back(Rect2(100, 0, 100, 100));		# dog?
+	sprite_loc.push_back(Rect2(200, 0, 100, 100));		# dog?
+	sprite_loc.push_back(Rect2(300, 0, 100, 100));		# dog?
+	sprite_loc.push_back(Rect2(400, 0, 100, 100));		# dog?
+	sprite_loc.push_back(Rect2(500, 0, 100, 100));		# dog?
+	sprite_loc.push_back(Rect2(600, 0, 100, 100));		# dog?
 
 func set_tile_type(my_tile_type):
 	var icon = my_tile_type   # Fack figure out Database later	TileDatabase.get_item_sprite(my_type_ordinal)

@@ -7,10 +7,7 @@ path="res://.import/no_room.png-0ab72149398651b3aa315095975d88af.stex"
 [deps]
 
 source_file="res://images/buttons/no_room.png"
-source_md5="337a0c4bf246e3bf0aa60e8e125a51ab"
-
 dest_files=[ "res://.import/no_room.png-0ab72149398651b3aa315095975d88af.stex" ]
-dest_md5="30534b3dab620489a654dd632b02347b"
 
 [params]
 

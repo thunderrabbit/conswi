@@ -7,10 +7,7 @@ path="res://.import/next_level.png-fdc4b09f441afeecbaa06a8ac93d3cd1.stex"
 [deps]
 
 source_file="res://images/buttons/next_level.png"
-source_md5="32f05a2a60b095c91f4591080ac848ae"
-
 dest_files=[ "res://.import/next_level.png-fdc4b09f441afeecbaa06a8ac93d3cd1.stex" ]
-dest_md5="f8b087614f4cc58b302aca2a242af244"
 
 [params]
 
