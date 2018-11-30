@@ -7,7 +7,10 @@ path="res://.import/background@2x.png-f2af6834648a3c971c33a060a77259ff.stex"
 [deps]
 
 source_file="res://images/background@2x.png"
+source_md5="acf456e4a46564f0a854d6470998a122"
+
 dest_files=[ "res://.import/background@2x.png-f2af6834648a3c971c33a060a77259ff.stex" ]
+dest_md5="3fc5a349a49fba7661e36d62d2e9d835"
 
 [params]
 

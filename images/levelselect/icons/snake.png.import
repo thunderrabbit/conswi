@@ -7,7 +7,10 @@ path="res://.import/snake.png-ac151f0aa08b09f376f10c6991cb439f.stex"
 [deps]
 
 source_file="res://images/levelselect/icons/snake.png"
+source_md5="281cd065c398c519751dcb0af139d9eb"
+
 dest_files=[ "res://.import/snake.png-ac151f0aa08b09f376f10c6991cb439f.stex" ]
+dest_md5="5050aeab49e3db06d6ca0a6fd3091ad7"
 
 [params]
 

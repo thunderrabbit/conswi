@@ -7,7 +7,10 @@ path="res://.import/dog.png-8c2e32949242dcf1f1cc0e0348921eeb.stex"
 [deps]
 
 source_file="res://images/levelselect/icons/dog.png"
+source_md5="c20ed8f39800e274981ea89f16ff6223"
+
 dest_files=[ "res://.import/dog.png-8c2e32949242dcf1f1cc0e0348921eeb.stex" ]
+dest_md5="b4d14f543eb5ce62b61150e4728dfd18"
 
 [params]
 

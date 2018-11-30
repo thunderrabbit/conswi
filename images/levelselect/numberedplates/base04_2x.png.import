@@ -7,7 +7,10 @@ path="res://.import/base04_2x.png-e73c4703a569eb1fa7dc8f468a1dcd13.stex"
 [deps]
 
 source_file="res://images/levelselect/numberedplates/base04_2x.png"
+source_md5="08cd4ce020ba3e5b2424224bda2b0aae"
+
 dest_files=[ "res://.import/base04_2x.png-e73c4703a569eb1fa7dc8f468a1dcd13.stex" ]
+dest_md5="ce7d084477155b310b3c7d1e60f1974d"
 
 [params]
 

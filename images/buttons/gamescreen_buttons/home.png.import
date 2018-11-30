@@ -7,7 +7,10 @@ path="res://.import/home.png-1f26d7bc368e91ec9c5982c09a01556f.stex"
 [deps]
 
 source_file="res://images/buttons/gamescreen_buttons/home.png"
+source_md5="ec3835c8e858267a678df1294003ff39"
+
 dest_files=[ "res://.import/home.png-1f26d7bc368e91ec9c5982c09a01556f.stex" ]
+dest_md5="8fbedc8a15fb2d9fa3208b7da2004210"
 
 [params]
 

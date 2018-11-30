@@ -7,7 +7,10 @@ path="res://.import/sheep.png-1a9eee7e0a33c72bbcf95a16319a6c79.stex"
 [deps]
 
 source_file="res://images/levelselect/icons/sheep.png"
+source_md5="7050757e500929833a4fba8c0c7f6d72"
+
 dest_files=[ "res://.import/sheep.png-1a9eee7e0a33c72bbcf95a16319a6c79.stex" ]
+dest_md5="70357bb30fca071b19a35cc1026e7d24"
 
 [params]
 

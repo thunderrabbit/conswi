@@ -7,7 +7,10 @@ path="res://.import/no_tiles.png-631650dfebba76b7784f72f34b7e6d22.stex"
 [deps]
 
 source_file="res://images/buttons/no_tiles.png"
+source_md5="f4e118c8e526946fded5fda80f23d598"
+
 dest_files=[ "res://.import/no_tiles.png-631650dfebba76b7784f72f34b7e6d22.stex" ]
+dest_md5="ef607bc6ba7b590acca821f1dbf7df66"
 
 [params]
 

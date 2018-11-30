@@ -7,7 +7,10 @@ path="res://.import/steering_pad.png-d2c063ac5a49af6a264e481d41caf3d5.stex"
 [deps]
 
 source_file="res://images/steering_pad.png"
+source_md5="3db85e418ba0115900f09dac57e929a7"
+
 dest_files=[ "res://.import/steering_pad.png-d2c063ac5a49af6a264e481d41caf3d5.stex" ]
+dest_md5="dcad3d1b75a14762285467c08ebcea70"
 
 [params]
 

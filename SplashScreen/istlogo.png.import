@@ -7,7 +7,10 @@ path="res://.import/istlogo.png-b64d1f509e0019973fd3261d39bd447e.stex"
 [deps]
 
 source_file="res://SplashScreen/istlogo.png"
+source_md5="a197723ef9cf528cce90b4858228b59e"
+
 dest_files=[ "res://.import/istlogo.png-b64d1f509e0019973fd3261d39bd447e.stex" ]
+dest_md5="ab07eaf2d99927022a6487d84e2f9a36"
 
 [params]
 

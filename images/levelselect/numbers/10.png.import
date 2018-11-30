@@ -7,7 +7,10 @@ path="res://.import/10.png-2011c3baf5156a78f703f9d8f492574b.stex"
 [deps]
 
 source_file="res://images/levelselect/numbers/10.png"
+source_md5="f349dbdd6615098eeb79d9ce76be64e0"
+
 dest_files=[ "res://.import/10.png-2011c3baf5156a78f703f9d8f492574b.stex" ]
+dest_md5="520d279c6981350a2f2a2d63dd18f7cc"
 
 [params]
 
