@@ -14,15 +14,25 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 extends Node2D
+var gowhere
 
 func _ready():
-	var new_player = $SplashIcon
-	new_player.set_tile_type(G.TYPE_DOG)
-	new_player.set_scale(Vector2(5,5))
-	new_player.set_position(OS.get_window_size()/2)
+#	new_player.set_tile_type(G.TYPE_DOG)
+#	new_player.set_scale(Vector2(5,5))
+#	new_player.set_position(OS.get_window_size()/2)
 
 	$Timer.set_wait_time(G.splashscreen_timeout)
 	$Timer.start()
 
 func _on_SplashScreen_Timer_timeout():
-	SceneSwitcher.goto_scene("res://LevelSelect/LevelSelectScene.tscn")
+	if G.current_screen < 2:
+		gowhere = "res://SplashScreen/SplashScreen2.tscn"
+		G.current_screen = G.current_screen + 1
+	else:
+		gowhere = "res://LevelSelect/LevelSelectScene.tscn"
+
+	SceneSwitcher.goto_scene(gowhere)
+	
+	
+
+#	
