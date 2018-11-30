@@ -25,10 +25,10 @@ extends Node2D
 const forcelevel0 = false
 export var easywin = false
 
-const Buttons = preload("res://SubScenes/Buttons.gd")
-const StarsAfterLevel = preload("res://SubScenes/LevelEndedStars.tscn")
-const LevelRequirements = preload("res://SubScenes/LevelRequirements.tscn")
-const SwipeShape = preload("res://SubScenes/SwipeShape.tscn")
+const Buttons = preload("res://subscenes/Buttons.gd")
+const StarsAfterLevel = preload("res://subscenes/LevelEndedStars.tscn")
+const LevelRequirements = preload("res://subscenes/LevelRequirements.tscn")
+const SwipeShape = preload("res://subscenes/SwipeShape.tscn")
 
 # gravity is what pulls the piece down slowly
 var GRAVITY_TIMEOUT = 1     # fake constant that will change with level
