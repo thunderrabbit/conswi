@@ -163,6 +163,7 @@ func new_player():
 
 	if Helpers.instantiatePlayer(player_position):
 		player.set_show_shadow(true)
+		player.set_draggable(true)
 		set_process(true)		# allows players to move
 		grok_input(true)		# now we can give keyboard input
 		start_gravity_timer()
