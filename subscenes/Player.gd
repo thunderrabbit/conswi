@@ -44,6 +44,12 @@ func set_type(new_tile_type_ordinal):
 	myshadow.is_shadow()
 	add_child(myshadow)
 
+# only the Player tiles will be set draggable (not the shadows)
+# This is set to true by Game.gd
+# This is set to false by Game via nail_player() down below
+func set_draggable(candrag):
+	mytile.set_draggable(candrag)
+
 # update player sprite display
 func set_player_position(player_position):
 	my_position = player_position
@@ -61,6 +67,8 @@ func set_player_position(player_position):
 
 # player has been nailed so it should animate or whatever
 func nail_player():
+	# now that we are nailed, we cannot be dragged
+	set_draggable(false)
 	# now that we are nailed, we are touchable
 	mytouchzone = PlayerArea.instance()
 	mytouchzone.set_tile_type(tile_type)
