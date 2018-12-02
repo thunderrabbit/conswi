@@ -32,6 +32,7 @@ const SwipeShape = preload("res://subscenes/SwipeShape.tscn")
 
 # gravity is what pulls the piece down slowly
 var GRAVITY_TIMEOUT = 1     # fake constant that will change with level
+var GRAVITY_FACTOR = 1		# how much slower to make gravity   (normally 1, but larger for easier testing)
 const MIN_TIME  = 0.07		# wait at least this long between processing inputs
 const MIN_DROP_MODE_TIME = 0.004   # wait this long between move-down when in drop_mode
 # mganetism pulls the pieces down quickly after swipes have erased pieces below them
@@ -110,7 +111,7 @@ func start_level(level_num):
 		current_level.debug_level = 1
 		current_level.fill_level = true
 	Helpers.grok_level(current_level)	# so we have level info available everywhere
-	GRAVITY_TIMEOUT = current_level.gravity_timeout
+	GRAVITY_TIMEOUT = current_level.gravity_timeout * self.GRAVITY_FACTOR
 
 	# TODO deal with the case that the current board is smaller then previous level
 	# in which case the slots_across will be too small to clear everything
