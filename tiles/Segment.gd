@@ -33,11 +33,9 @@ func _init():
 
 func set_tile_type(my_tile_type):
 	var icon = my_tile_type   # Fack figure out Database later	TileDatabase.get_item_sprite(my_type_ordinal)
-#	set_position(get_size()/2)
-#	set_scale(Vector2(1,1))
-	set_texture(preload("res://images/items.png"))
-	set_region(true)
-	set_region_rect(sprite_loc[icon])
+	set_texture(preload("res://images/items.png"))		# res://images/items.png is a spritesheet
+	set_region(true)									# we want a small part of it
+	set_region_rect(sprite_loc[icon])					# this is the part we want
 
 # This will be called by GameScene
 func start_swipe_effect():
