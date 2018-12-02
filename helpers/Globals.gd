@@ -21,8 +21,8 @@
 
 extends Node
 
-const finger_swipe_duration = 3		# how many seconds finger shows how to swipe
-const splashscreen_timeout = 3		# how many seconds to wait on splash screen
+const finger_swipe_duration = .3		# how many seconds finger shows how to swipe
+const splashscreen_timeout = .3		# how many seconds to wait on splash screen
 const max_spash_screens    = 2		# there are two splash screens
 var   current_screen = 1			# which screen to start
 
