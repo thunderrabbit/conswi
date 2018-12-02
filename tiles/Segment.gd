@@ -16,6 +16,9 @@
 extends Sprite
 
 var sprite_loc = []
+var draggable = false		# cannot drag unless is Player.mytile and is active in play area
+var dragging = false		# if true, means mouse is actively dragging
+var mouse_in = false		# if true, mouse can click and start dragging  TODO: solve for touch screens as well
 
 func _init():
 	# within the image map, these are the locations of the tiles
@@ -43,6 +46,10 @@ func start_swipe_effect():
 #	effect.start()
 	hide()
 
+# only the Player tiles will be set draggable (not the shadows)
+func set_draggable(candrag):
+	self.draggable = candrag
+
 func is_shadow():
 	set_modulate(Color(1,1,1, 0.3))
 
@@ -57,3 +64,27 @@ func unhighlight():
 # Called when level ends
 func darken():
 	set_modulate(Color(1,1,1,0.5))
+
+
+func _on_Area2D_input_event( viewport, event, shape_idx ):
+	if not draggable:
+		return
+
+	if  event is InputEventScreenTouch or event is InputEventMouseButton:
+		if event.pressed:
+			dragging = true
+			# need to tell Game to stop gravity
+			# emit_signal("clicked", Helpers.pixels_to_slot(get_position()), tile_type)
+		else: # not event.pressed:
+			#emit_signal("unclicked")
+			# need to tell Game to start gravity
+			dragging = false
+	if dragging:
+		position = get_viewport().get_mouse_position()
+
+func _on_Area2D_mouse_entered():
+	mouse_in = true
+
+
+func _on_Area2D_mouse_exited():
+	mouse_in = false
