@@ -162,11 +162,12 @@ func new_player():
 		return
 
 	if Helpers.instantiatePlayer(player_position):
-		player.set_show_shadow(true)
-		player.set_draggable(true)
-		set_process(true)		# allows players to move
-		grok_input(true)		# now we can give keyboard input
-		start_gravity_timer()
+		# Now the player is movable by dragging or by gravity
+		player.set_show_shadow(true)		# The shadow is at bottom, showing where tile will land
+		player.set_draggable(true)			# now that the player is movable, we can drag it
+		set_process(true)					# allows players to move
+		grok_input(true)					# now we can give keyboard input
+		start_gravity_timer()				# gravity needs to account for dragging somehow...
 	else:
 		print("no more tiles available to play game!")
 
