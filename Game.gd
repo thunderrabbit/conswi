@@ -323,6 +323,18 @@ func nail_player():
 	# tell board{} where the player is
 	Helpers.board[Vector2(player_position.x, player_position.y)] = player		## this is the piece so we can find it later
 
+######################################
+#
+#  Called when user starts dragging a piece.
+func piece_being_dragged():
+	stop_gravity_timer()		# level timer still going
+
+######################################
+#
+#  Called when user stops dragging a piece.
+func piece_done_dragged():
+	start_gravity_timer()		# level timer still going
+
 func piece_clicked(position, piece_type):
 	var swipe_length = swipe_array.size()
 	if swipe_length == 1:

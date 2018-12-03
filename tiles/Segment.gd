@@ -15,10 +15,17 @@
 
 extends Sprite
 
+signal drag_started
+signal drag_ended
+
 var sprite_loc = []
 var draggable = false		# cannot drag unless is Player.mytile and is active in play area
 var dragging = false		# if true, means mouse is actively dragging
 var mouse_in = false		# if true, mouse can click and start dragging  TODO: solve for touch screens as well
+
+func _ready():
+	self.connect("drag_started", get_node("/root/GameNode2D"), "piece_being_dragged", [])
+	self.connect("drag_ended", get_node("/root/GameNode2D"), "piece_done_dragged", [])
 
 func _init():
 	# within the image map, these are the locations of the tiles
@@ -72,9 +79,9 @@ func _on_Area2D_input_event( viewport, event, shape_idx ):
 		if event.pressed:
 			dragging = true
 			# need to tell Game to stop gravity
-			# emit_signal("clicked", Helpers.pixels_to_slot(get_position()), tile_type)
+			emit_signal("drag_started")
 		else: # not event.pressed:
-			#emit_signal("unclicked")
+			emit_signal("drag_ended")
 			# need to tell Game to start gravity
 			dragging = false
 	if dragging:
