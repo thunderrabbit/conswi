@@ -81,7 +81,7 @@ func _on_Area2D_input_event( viewport, event, shape_idx ):
 			# need to tell Game to stop gravity
 			emit_signal("drag_started")
 		else: # not event.pressed:
-			emit_signal("drag_ended")
+			emit_signal("drag_ended", Helpers.pixels_to_slot(position))
 			# need to tell Game to start gravity
 			dragging = false
 	if dragging:
