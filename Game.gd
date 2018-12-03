@@ -332,7 +332,8 @@ func piece_being_dragged():
 ######################################
 #
 #  Called when user stops dragging a piece.
-func piece_done_dragged():
+func piece_done_dragged(position):
+	player_position = position
 	start_gravity_timer()		# level timer still going
 
 func piece_clicked(position, piece_type):
