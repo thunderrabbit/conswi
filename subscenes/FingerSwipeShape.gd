@@ -42,7 +42,7 @@ func swipe_finger():
 		$FingerTween.interpolate_property($Finger, "position",
 				Vector2(0,0),									# finger start position, relative to the swiped piece
 				Vector2(G.SLOT_SIZE * (dimensions.x+1),0),		# finger end position.  dimensions.x is the width of piece (starting from 0)
-				3,					# Duration of tween
+				G.finger_swipe_duration,						# Duration of tween
 				Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 		$FingerTween.start()
 	else:

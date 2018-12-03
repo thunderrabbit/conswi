@@ -32,6 +32,7 @@ const SwipeShape = preload("res://subscenes/SwipeShape.tscn")
 
 # gravity is what pulls the piece down slowly
 var GRAVITY_TIMEOUT = 1     # fake constant that will change with level
+var GRAVITY_FACTOR = 1		# how much slower to make gravity   (normally 1, but larger for easier testing)
 const MIN_TIME  = 0.07		# wait at least this long between processing inputs
 const MIN_DROP_MODE_TIME = 0.004   # wait this long between move-down when in drop_mode
 # mganetism pulls the pieces down quickly after swipes have erased pieces below them
@@ -110,7 +111,7 @@ func start_level(level_num):
 		current_level.debug_level = 1
 		current_level.fill_level = true
 	Helpers.grok_level(current_level)	# so we have level info available everywhere
-	GRAVITY_TIMEOUT = current_level.gravity_timeout
+	GRAVITY_TIMEOUT = current_level.gravity_timeout * self.GRAVITY_FACTOR
 
 	# TODO deal with the case that the current board is smaller then previous level
 	# in which case the slots_across will be too small to clear everything
@@ -162,10 +163,12 @@ func new_player():
 		return
 
 	if Helpers.instantiatePlayer(player_position):
-		player.set_show_shadow(true)
-		set_process(true)		# allows players to move
-		grok_input(true)		# now we can give keyboard input
-		start_gravity_timer()
+		# Now the player is movable by dragging or by gravity
+		player.set_show_shadow(true)		# The shadow is at bottom, showing where tile will land
+		player.set_draggable(true)			# now that the player is movable, we can drag it
+		set_process(true)					# allows players to move
+		grok_input(true)					# now we can give keyboard input
+		start_gravity_timer()				# gravity needs to account for dragging somehow...
 	else:
 		print("no more tiles available to play game!")
 
@@ -319,6 +322,19 @@ func nail_player():
 
 	# tell board{} where the player is
 	Helpers.board[Vector2(player_position.x, player_position.y)] = player		## this is the piece so we can find it later
+
+######################################
+#
+#  Called when user starts dragging a piece.
+func piece_being_dragged():
+	stop_gravity_timer()		# level timer still going
+
+######################################
+#
+#  Called when user stops dragging a piece.
+func piece_done_dragged(position):
+	player_position = position
+	start_gravity_timer()		# level timer still going
 
 func piece_clicked(position, piece_type):
 	var swipe_length = swipe_array.size()

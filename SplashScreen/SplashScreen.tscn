@@ -33,7 +33,6 @@ margin_right = 45.0
 margin_bottom = 14.0
 rect_rotation = 19.7156
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1

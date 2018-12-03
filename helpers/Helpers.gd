@@ -133,8 +133,8 @@ func pixels_to_slot(pixels, debug=false):
 		print(G.GLOBALleft_space, " ", G.GLOBALtop_space, " ", G.SLOT_SIZE, " ", G.GLOBALslot_gap_v, " ", G.GLOBALslot_gap_h)
 		print(".x - left ", (pixels.x - G.GLOBALleft_space), " / ", (G.SLOT_SIZE + G.GLOBALslot_gap_h), "\t((( ", (pixels.x - G.GLOBALleft_space) / (G.SLOT_SIZE + G.GLOBALslot_gap_h))
 		print(".y - top ", (pixels.y - G.GLOBALtop_space), " / ", (G.SLOT_SIZE + G.GLOBALslot_gap_v), "\t\t,", (pixels.y - G.GLOBALtop_space) / (G.SLOT_SIZE + G.GLOBALslot_gap_v), " )))")
-	return Vector2((pixels.x - G.GLOBALleft_space) / (G.SLOT_SIZE + G.GLOBALslot_gap_h),
-					(pixels.y - G.GLOBALtop_space) / (G.SLOT_SIZE + G.GLOBALslot_gap_v))
+	return Vector2(floor((pixels.x - G.GLOBALleft_space) / (G.SLOT_SIZE + G.GLOBALslot_gap_h)),
+					floor((pixels.y - G.GLOBALtop_space) / (G.SLOT_SIZE + G.GLOBALslot_gap_v)))
 
 # below, xfactor is used to push required swipes to the right so they can be seen
 func slot_to_pixels(slot, xfactor=1, debug=false):

@@ -15,7 +15,17 @@
 
 extends Sprite
 
+signal drag_started
+signal drag_ended
+
 var sprite_loc = []
+var draggable = false		# cannot drag unless is Player.mytile and is active in play area
+var dragging = false		# if true, means mouse is actively dragging
+var mouse_in = false		# if true, mouse can click and start dragging  TODO: solve for touch screens as well
+
+func _ready():
+	self.connect("drag_started", get_node("/root/GameNode2D"), "piece_being_dragged", [])
+	self.connect("drag_ended", get_node("/root/GameNode2D"), "piece_done_dragged", [])
 
 func _init():
 	# within the image map, these are the locations of the tiles
@@ -30,11 +40,9 @@ func _init():
 
 func set_tile_type(my_tile_type):
 	var icon = my_tile_type   # Fack figure out Database later	TileDatabase.get_item_sprite(my_type_ordinal)
-#	set_position(get_size()/2)
-#	set_scale(Vector2(1,1))
-	set_texture(preload("res://images/items.png"))
-	set_region(true)
-	set_region_rect(sprite_loc[icon])
+	set_texture(preload("res://images/items.png"))		# res://images/items.png is a spritesheet
+	set_region(true)									# we want a small part of it
+	set_region_rect(sprite_loc[icon])					# this is the part we want
 
 # This will be called by GameScene
 func start_swipe_effect():
@@ -42,6 +50,10 @@ func start_swipe_effect():
 	# in Godot 2 version, the effect was set up when the tile was created
 #	effect.start()
 	hide()
+
+# only the Player tiles will be set draggable (not the shadows)
+func set_draggable(candrag):
+	self.draggable = candrag
 
 func is_shadow():
 	set_modulate(Color(1,1,1, 0.3))
@@ -57,3 +69,27 @@ func unhighlight():
 # Called when level ends
 func darken():
 	set_modulate(Color(1,1,1,0.5))
+
+
+func _on_Area2D_input_event( viewport, event, shape_idx ):
+	if not draggable:
+		return
+
+	if  event is InputEventScreenTouch or event is InputEventMouseButton:
+		if event.pressed:
+			dragging = true
+			# need to tell Game to stop gravity
+			emit_signal("drag_started")
+		else: # not event.pressed:
+			emit_signal("drag_ended", Helpers.pixels_to_slot(position))
+			# need to tell Game to start gravity
+			dragging = false
+	if dragging:
+		position = get_viewport().get_mouse_position()
+
+func _on_Area2D_mouse_entered():
+	mouse_in = true
+
+
+func _on_Area2D_mouse_exited():
+	mouse_in = false
