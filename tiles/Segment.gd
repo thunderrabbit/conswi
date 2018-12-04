@@ -21,7 +21,7 @@ signal drag_ended
 var sprite_loc = []
 var draggable = false		# cannot drag unless is Player.mytile and is active in play area
 var dragging = false		# if true, means mouse is actively dragging
-var mouse_in = false		# if true, mouse can click and start dragging  TODO: solve for touch screens as well
+
 const wd = 100.0			# width of each sprite image in items.png
 const ht = 100.0			# height of each sprite images in items.png
 
@@ -89,10 +89,3 @@ func _on_Area2D_input_event( viewport, event, shape_idx ):
 			dragging = false
 	if dragging:
 		position = get_viewport().get_mouse_position()
-
-func _on_Area2D_mouse_entered():
-	mouse_in = true
-
-
-func _on_Area2D_mouse_exited():
-	mouse_in = false
