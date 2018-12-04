@@ -22,6 +22,8 @@ var sprite_loc = []
 var draggable = false		# cannot drag unless is Player.mytile and is active in play area
 var dragging = false		# if true, means mouse is actively dragging
 var mouse_in = false		# if true, mouse can click and start dragging  TODO: solve for touch screens as well
+const wd = 100.0			# width of each sprite image in items.png
+const ht = 100.0			# height of each sprite images in items.png
 
 func _ready():
 	self.connect("drag_started", get_node("/root/GameNode2D"), "piece_being_dragged", [])
@@ -30,19 +32,20 @@ func _ready():
 func _init():
 	# within the image map, these are the locations of the tiles
 						# left, top, width, height
-	sprite_loc.push_back(Rect2(0, 0, 100, 100));		# cat?
-	sprite_loc.push_back(Rect2(100, 0, 100, 100));		# dog?
-	sprite_loc.push_back(Rect2(200, 0, 100, 100));		# dog?
-	sprite_loc.push_back(Rect2(300, 0, 100, 100));		# dog?
-	sprite_loc.push_back(Rect2(400, 0, 100, 100));		# dog?
-	sprite_loc.push_back(Rect2(500, 0, 100, 100));		# dog?
-	sprite_loc.push_back(Rect2(600, 0, 100, 100));		# dog?
+	sprite_loc.push_back(Rect2(0 * wd, 0, wd, ht));		# cat?
+	sprite_loc.push_back(Rect2(1 * wd, 0, wd, ht));		# dog?
+	sprite_loc.push_back(Rect2(2 * wd, 0, wd, ht));		# dog?
+	sprite_loc.push_back(Rect2(3 * wd, 0, wd, ht));		# dog?
+	sprite_loc.push_back(Rect2(4 * wd, 0, wd, ht));		# dog?
+	sprite_loc.push_back(Rect2(5 * wd, 0, wd, ht));		# dog?
+	sprite_loc.push_back(Rect2(6 * wd, 0, wd, ht));		# dog?
 
 func set_tile_type(my_tile_type):
 	var icon = my_tile_type   # Fack figure out Database later	TileDatabase.get_item_sprite(my_type_ordinal)
 	set_texture(preload("res://images/items.png"))		# res://images/items.png is a spritesheet
 	set_region(true)									# we want a small part of it
 	set_region_rect(sprite_loc[icon])					# this is the part we want
+	set_scale(Vector2(G.SLOT_SIZE/wd,G.SLOT_SIZE/ht))
 
 # This will be called by GameScene
 func start_swipe_effect():
