@@ -45,13 +45,16 @@ var requested_level = 52
 func _ready():
 	board = {}
 
-# clear the visual board; prepare the Dictionary board{}
+# clear the visual board
 func clear_game_board():
 	# clear block sprites if existing
 	var existing_players = get_tree().get_nodes_in_group("players")
 	for player in existing_players:
 		remove_child(player)
 
+# called after groking the level, because then we know how big it is
+# prepare the Dictionary board{}
+func prepare_board_and_queue():
 	board = {}
 	for i in range(slots_across):
 		for j in range(slots_down):
@@ -116,6 +119,7 @@ func grok_level(level_info):
 	debug_level = level_info.debug_level
 	max_tiles_avail = level_info.max_tiles_avail
 	upcoming_tiles = level_info.tiles
+	self.prepare_board_and_queue()
 
 func instantiatePlayer(player_position):
 	# queue_next returns null if max_tiles_available has been exceeded
