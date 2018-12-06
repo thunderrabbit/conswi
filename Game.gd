@@ -94,6 +94,7 @@ func requested_next_level():
 	requested_play_level(Helpers.requested_level)
 
 func requested_play_level(level):
+	Helpers.clear_game_board()
 	start_level(level)
 
 func start_level(level_num):
@@ -112,10 +113,6 @@ func start_level(level_num):
 		current_level.fill_level = true
 	Helpers.grok_level(current_level)	# so we have level info available everywhere
 	GRAVITY_TIMEOUT = current_level.gravity_timeout * self.GRAVITY_FACTOR
-
-	# TODO deal with the case that the current board is smaller then previous level
-	# in which case the slots_across will be too small to clear everything
-	Helpers.clear_game_board()
 
 	level_reqs.show_finger_ka(current_level.show_finger)
 	level_reqs.level_requires(current_level.level_requirements)
