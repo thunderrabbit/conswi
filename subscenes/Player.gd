@@ -119,6 +119,7 @@ func level_ended():
 	darken()
 
 func remove_yourself():
+	remove_from_group("players")
 	Helpers.board[my_position] = null
 	mytouchzone.queue_free()
 	mytile.start_swipe_effect()		# release yourself
