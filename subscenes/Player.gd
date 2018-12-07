@@ -116,6 +116,9 @@ func darken():
 #	mytile.clear_shapes()
 
 func level_ended():
+	if mytouchzone != null:
+		mytouchzone.set_process_input(false)
+		mytouchzone.set_pickable(false)
 	darken()
 
 func remove_yourself():
