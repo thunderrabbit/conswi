@@ -123,13 +123,13 @@ func grok_level(level_info):
 
 func instantiatePlayer(player_position):
 	# queue_next returns null if max_tiles_available has been exceeded
-	game_scene.player = queue_next()
-	if game_scene.player != null:
+	var new_player = queue_next()
+	if new_player != null:
 		# Move the player
-		game_scene.player.set_player_position(player_position)
-		return true		# we had tiles available
+		new_player.set_player_position(player_position)
+		return new_player		# we had tiles available
 	else:
-		return false	# no more tiles available
+		return null	# no more tiles available
 
 func pixels_to_slot(pixels, debug=false):
 	if debug:

@@ -144,7 +144,8 @@ func fill_game_board():
 		for down in range(Helpers.slots_down/2, Helpers.slots_down):
 			player_position = Vector2(across, down)
 
-			if Helpers.instantiatePlayer(player_position):
+			player = Helpers.instantiatePlayer(player_position)
+			if player != null:
 				# lock player into position on Helpers.board{}
 				nail_player()
 			else:
@@ -162,7 +163,8 @@ func new_player():
 		_level_over_prep(G.LEVEL_NO_ROOM)
 		return
 
-	if Helpers.instantiatePlayer(player_position):
+	player = Helpers.instantiatePlayer(player_position)
+	if player != null:
 		# Now the player is movable by dragging or by gravity
 		player.set_show_shadow(true)		# The shadow is at bottom, showing where tile will land
 		player.set_draggable(true)			# now that the player is movable, we can drag it
