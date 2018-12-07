@@ -17,10 +17,13 @@ extends Node
 
 const Buttons = preload("res://subscenes/Buttons.gd")
 const LevelRequirements = preload("res://subscenes/LevelRequirements.tscn")
+const StarsAfterLevel = preload("res://subscenes/LevelEndedStars.tscn")
 
 var game
 var buttons					# Steering Pad / Start buttons
 var level_reqs				# HUD showing level requirements
+var stars_after_level		# Show stars after level is over
+
 
 func _init():
 	self.buttons = Buttons.new()			# Buttons pre/post level
@@ -34,6 +37,10 @@ func addHUDtoGame(game):
 	level_reqs = LevelRequirements.instance()
 	level_reqs.set_game_scene(self.game)
 	add_child(level_reqs)
+
+	self.stars_after_level = StarsAfterLevel.instance()
+	self.stars_after_level.set_game_scene(self.game)
+	add_child(self.stars_after_level)
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.

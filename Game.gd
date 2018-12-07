@@ -27,7 +27,7 @@ const always_play_level_zero = false
 export var allow_easy_win = false
 
 const GameHUD = preload("res://GameHUD.gd")
-const StarsAfterLevel = preload("res://subscenes/LevelEndedStars.tscn")
+
 
 const SwipeShape = preload("res://subscenes/SwipeShape.tscn")
 
@@ -52,7 +52,6 @@ var gravity_called = false # true = move down 1 unit via gravity
 
 var player_position			# Vector2 of slot player is in
 var player					# Two (2) tiles: (player and shadow)
-var stars_after_level		# Show stars after level is over
 var game_hud
 
 
@@ -64,10 +63,6 @@ var swipe_shape = null			# will animate shape user swiped
 var wasted_swipes = 0
 
 func _ready():
-	self.stars_after_level = StarsAfterLevel.instance()
-	self.stars_after_level.set_game_scene(self)
-	add_child(self.stars_after_level)
-
 	self.game_hud = GameHUD.new()			# Buttons pre/post level
 	# game_hud is kinda like a HUD but for game, not app
 	self.game_hud.addHUDtoGame(self)
@@ -202,7 +197,7 @@ func _show_stuff_after_level(reason):
 									'num_tiles':game_hud.level_reqs.num_tiles_required,
 									'waste_swipes':self.wasted_swipes
 								}
-	self.stars_after_level.show_stuff_after_level(collect_info_for_stars)
+	game_hud.stars_after_level.show_stuff_after_level(collect_info_for_stars)
 
 #######################################################
 #
