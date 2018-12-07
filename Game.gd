@@ -114,10 +114,13 @@ func start_level(level_num):
 	Helpers.grok_level(current_level)	# so we have level info available everywhere
 	GRAVITY_TIMEOUT = current_level.gravity_timeout * self.GRAVITY_FACTOR
 
-	level_reqs.show_finger_ka(current_level.show_finger)
-	level_reqs.level_requires(current_level.level_requirements)
 	buttons.prepare_to_play_level(self.level_num)
 
+	# These show level requirements, which takes time
+	# after these animations complete, continue_start_level()
+	# is called via signal `requirements_shown` by LevelRequirements.gd
+	level_reqs.show_finger_ka(current_level.show_finger)
+	level_reqs.level_requires(current_level.level_requirements)
 
 # turn input off for all children while display requirements / show cut scenes and the like
 func grok_input(boolean):
