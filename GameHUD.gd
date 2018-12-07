@@ -24,13 +24,11 @@ var buttons					# Steering Pad / Start buttons
 var level_reqs				# HUD showing level requirements
 var stars_after_level		# Show stars after level is over
 
-
-func _init():
-	self.buttons = Buttons.new()			# Buttons pre/post level
-
 func addHUDtoGame(game):
 	self.game = game
+
 	# buttons are kinda like a HUD but for input, not output
+	self.buttons = Buttons.new()			# Buttons pre/post level
 	self.buttons.set_game_scene(self.game)
 	add_child(self.buttons)
 
