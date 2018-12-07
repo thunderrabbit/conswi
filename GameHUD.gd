@@ -15,14 +15,19 @@
 
 extends Node
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
+const Buttons = preload("res://subscenes/Buttons.gd")
 
-func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
-	pass
+var game
+var buttons					# Steering Pad / Start buttons
+
+func _init():
+	self.buttons = Buttons.new()			# Buttons pre/post level
+
+func addHUDtoGame(game):
+	self.game = game
+	# buttons are kinda like a HUD but for input, not output
+	self.buttons.set_game_scene(self.game)
+	add_child(self.buttons)
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.

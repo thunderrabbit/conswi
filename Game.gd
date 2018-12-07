@@ -26,7 +26,7 @@ extends Node2D
 const always_play_level_zero = false
 export var allow_easy_win = false
 
-const Buttons = preload("res://subscenes/Buttons.gd")
+const GameHUD = preload("res://GameHUD.gd")
 const StarsAfterLevel = preload("res://subscenes/LevelEndedStars.tscn")
 const LevelRequirements = preload("res://subscenes/LevelRequirements.tscn")
 const SwipeShape = preload("res://subscenes/SwipeShape.tscn")
@@ -53,7 +53,8 @@ var gravity_called = false # true = move down 1 unit via gravity
 var player_position			# Vector2 of slot player is in
 var player					# Two (2) tiles: (player and shadow)
 var stars_after_level		# Show stars after level is over
-var buttons					# Steering Pad / Start buttons
+var game_hud
+
 var level_reqs				# HUD showing level requirements
 var clicked_this_piece_type = 0				# set when swipe is started
 var swipe_mode= false			# if true, then we are swiping
@@ -67,10 +68,10 @@ func _ready():
 	self.stars_after_level.set_game_scene(self)
 	add_child(self.stars_after_level)
 
-	self.buttons = Buttons.new()			# Buttons pre/post level
-	# buttons are kinda like a HUD but for input, not output
-	self.buttons.set_game_scene(self)
-	add_child(self.buttons)
+	self.game_hud = GameHUD.new()			# Buttons pre/post level
+	# game_hud is kinda like a HUD but for game, not app
+	self.game_hud.addHUDtoGame(self)
+	add_child(self.game_hud)
 
 	Helpers.game_scene = self		# so Players know where to appear
 	time_label = get_node("LevelTimer/LevelTimerLabel")
@@ -115,7 +116,7 @@ func start_level(level_num):
 	Helpers.grok_level(current_level)	# so we have level info available everywhere
 	GRAVITY_TIMEOUT = current_level.gravity_timeout * self.GRAVITY_FACTOR
 
-	buttons.prepare_to_play_level(self.level_num)
+	game_hud.buttons.prepare_to_play_level(self.level_num)
 
 	# These show level requirements, which takes time
 	# after these animations complete, continue_start_level()
@@ -125,7 +126,7 @@ func start_level(level_num):
 
 # turn input off for all children while display requirements / show cut scenes and the like
 func grok_input(boolean):
-	buttons.grok_input(boolean)
+	game_hud.buttons.grok_input(boolean)
 
 func continue_start_level():
 	# magnetism makes the nailed pieces fall (all pieces in board{})
@@ -215,7 +216,7 @@ func level_over_stars_were_displayed():
 	self._level_over_display_buttons(self.level_over_reason)
 
 func _level_over_display_buttons(reason):
-	buttons.level_ended(reason)
+	game_hud.buttons.level_ended(reason)
 
 # this is only to handle orphaned swipes
 func _on_OrphanSwipeCatcher_input_event( viewport, event, shape_idx ):
