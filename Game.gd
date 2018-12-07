@@ -22,7 +22,8 @@
 
 extends Node2D
 
-const forcelevel0 = false
+# level zero allows for quickly testing swipe functionality
+const always_play_level_zero = false
 export var easywin = false
 
 const Buttons = preload("res://subscenes/Buttons.gd")
@@ -102,7 +103,7 @@ func start_level(level_num):
 	set_process(false)		# not sure that this actually helps
 	grok_input(false)		# don't allow keyboard input during display of requirements
 	self.level_num = level_num
-	if forcelevel0:
+	if always_play_level_zero:
 		self.level_num = 0
 
 	var levelGDScript = LevelDatabase.getExistingLevelGDScript(self.level_num)
