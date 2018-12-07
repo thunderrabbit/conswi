@@ -40,6 +40,15 @@ func addHUDtoGame(game):
 	self.stars_after_level.set_game_scene(self.game)
 	add_child(self.stars_after_level)
 
+func startLevel(current_level):
+	self.buttons.prepare_to_play_level()
+
+	# These show level requirements, which takes time
+	# after these animations complete, continue_start_level()
+	# is called via signal `requirements_shown` by LevelRequirements.gd
+	self.level_reqs.show_finger_ka(current_level.show_finger)
+	self.level_reqs.level_requires(current_level.level_requirements)
+
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.
 #	# Update game logic here.
