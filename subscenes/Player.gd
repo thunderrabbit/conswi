@@ -116,9 +116,13 @@ func darken():
 #	mytile.clear_shapes()
 
 func level_ended():
+	if mytouchzone != null:
+		mytouchzone.set_process_input(false)
+		mytouchzone.set_pickable(false)
 	darken()
 
 func remove_yourself():
+	remove_from_group("players")
 	Helpers.board[my_position] = null
 	mytouchzone.queue_free()
 	mytile.start_swipe_effect()		# release yourself

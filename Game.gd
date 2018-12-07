@@ -188,9 +188,9 @@ func _level_over_prep(reason):
 	stop_level_timer()
 
 	# gray out block sprites if existing
-	var existing_sprites = get_tree().get_nodes_in_group("players")
-	for sprite in existing_sprites:
-		sprite.level_ended()
+	var existing_players = get_tree().get_nodes_in_group("players")
+	for player in existing_players:
+		player.level_ended()
 	self._show_stuff_after_level(self.level_over_reason)
 
 #######################################################
