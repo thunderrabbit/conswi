@@ -28,7 +28,7 @@ export var allow_easy_win = false
 
 const GameHUD = preload("res://GameHUD.gd")
 const StarsAfterLevel = preload("res://subscenes/LevelEndedStars.tscn")
-const LevelRequirements = preload("res://subscenes/LevelRequirements.tscn")
+
 const SwipeShape = preload("res://subscenes/SwipeShape.tscn")
 
 # gravity is what pulls the piece down slowly
@@ -55,7 +55,7 @@ var player					# Two (2) tiles: (player and shadow)
 var stars_after_level		# Show stars after level is over
 var game_hud
 
-var level_reqs				# HUD showing level requirements
+
 var clicked_this_piece_type = 0				# set when swipe is started
 var swipe_mode= false			# if true, then we are swiping
 var swipe_array = []			# the pieces in the swipe
@@ -80,9 +80,7 @@ func _ready():
 	# tell the Magnetism timer to call Helpers.magnetism_called (every MAGNETISM_TIME seconds)
 	get_node("Magnetism").connect("timeout", get_node("/root/Helpers"), "magnetism_called", [])
 
-	level_reqs = LevelRequirements.instance()
-	level_reqs.set_game_scene(self)
-	add_child(level_reqs)
+
 
 	# TODO: add START button overlay
 	# which will trigger this call:
@@ -121,8 +119,8 @@ func start_level(level_num):
 	# These show level requirements, which takes time
 	# after these animations complete, continue_start_level()
 	# is called via signal `requirements_shown` by LevelRequirements.gd
-	level_reqs.show_finger_ka(current_level.show_finger)
-	level_reqs.level_requires(current_level.level_requirements)
+	game_hud.level_reqs.show_finger_ka(current_level.show_finger)
+	game_hud.level_reqs.level_requires(current_level.level_requirements)
 
 # turn input off for all children while display requirements / show cut scenes and the like
 func grok_input(boolean):
@@ -201,7 +199,7 @@ func _level_over_prep(reason):
 func _show_stuff_after_level(reason):
 	var collect_info_for_stars = {'reason':reason,
 									'level':self.level_num,
-									'num_tiles':self.level_reqs.num_tiles_required,
+									'num_tiles':game_hud.level_reqs.num_tiles_required,
 									'waste_swipes':self.wasted_swipes
 								}
 	self.stars_after_level.show_stuff_after_level(collect_info_for_stars)
@@ -365,7 +363,7 @@ func piece_unclicked():
 
 		var dimensions = ShapeShifter.getSwipeDimensions(swipe_array)
 		# figure out if the swipe is required
-		var swipe_was_required = level_reqs.swiped_piece(swipe_name)
+		var swipe_was_required = game_hud.level_reqs.swiped_piece(swipe_name)
 
 		swipe_shape = SwipeShape.instance()
 		swipe_shape.set_shape(ShapeShifter.getBitmapOfSwipeCoordinates(swipe_array),clicked_this_piece_type)
@@ -374,7 +372,7 @@ func piece_unclicked():
 		if swipe_was_required:
 			swipe_shape.connect("shrunk_shape",self,"shrank_required_shape")
 			# after swipe, move shape to correct/required shape location
-			swipe_shape.shrink_shape(level_reqs.required_swipe_location(swipe_name))
+			swipe_shape.shrink_shape(game_hud.level_reqs.required_swipe_location(swipe_name))
 		else:
 			swipe_shape.connect("flew_away", self, "inc_wasted_swipe_counter")
 			swipe_shape.fly_away_randomly()
@@ -431,7 +429,7 @@ func piece_exited(position, piece_type):
 
 func shrank_required_shape():
 	swipe_shape.queue_free()
-	level_reqs.clarify_requirements()
+	game_hud.level_reqs.clarify_requirements()
 
 func _on_LevelWon():
 	_level_over_prep(G.LEVEL_WIN)
