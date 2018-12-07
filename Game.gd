@@ -24,7 +24,7 @@ extends Node2D
 
 # level zero allows for quickly testing swipe functionality
 const always_play_level_zero = false
-export var easywin = false
+export var allow_easy_win = false
 
 const Buttons = preload("res://subscenes/Buttons.gd")
 const StarsAfterLevel = preload("res://subscenes/LevelEndedStars.tscn")
@@ -109,7 +109,7 @@ func start_level(level_num):
 	var levelGDScript = LevelDatabase.getExistingLevelGDScript(self.level_num)
 	current_level = levelGDScript.new()		# load() gets a GDScript and new() instantiates it
 	# now that we have loaded the level, we can tell the game how it wants us to run
-	if self.easywin:
+	if self.allow_easy_win:
 		current_level.debug_level = 1
 		current_level.fill_level = true
 	Helpers.grok_level(current_level)	# so we have level info available everywhere
