@@ -37,8 +37,8 @@ func set_game_scene(game_scene):
 	steering_pad.set_game_scene(parent_scene)
 	endLevelButtons.set_game_scene(parent_scene)
 
-func prepare_to_play_level(level):
-	print("buttons preparing for level ", level)
+func prepare_to_play_level():
+	print("buttons preparing for game")
 	# the steering pad is the left/right buttons at bottom
 	steering_pad.set_position(Helpers.steering_pad_pixels())
 	steering_pad.show()
