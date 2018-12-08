@@ -330,8 +330,7 @@ func piece_done_dragged(position):
 	start_gravity_timer()		# level timer still going
 
 func piece_clicked(position, piece_type):
-	var swipe_length = swipe_array.size()
-	if swipe_length == 1:
+	if swipe_array.size() == 1:
 		# probably a duplicate click
 		return
 	clicked_this_piece_type = piece_type
