@@ -305,7 +305,8 @@ func nail_player():
 ######################################
 #
 #  Called when user starts dragging a piece.
-func piece_being_dragged():
+#  param piece is not needed except for function whatstheword? function matching?  Fixes #26
+func piece_being_dragged(piece):
 	stop_gravity_timer()		# level timer still going
 
 ######################################
