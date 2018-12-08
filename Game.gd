@@ -207,7 +207,7 @@ func _level_over_display_buttons(reason):
 	game_hud.buttons.level_ended(reason)
 
 # this is only to handle orphaned swipes
-func _on_OrphanSwipeCatcher_input_event( viewport, event, shape_idx ):
+func _on_GameSwipeDetector_input_event( viewport, event, shape_idx ):
 	if event is InputEventMouseButton:
 		if event.button_index == 1:
 			if !event.pressed:
