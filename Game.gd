@@ -28,9 +28,6 @@ export var allow_easy_win = false
 
 const GameHUD = preload("res://GameHUD.gd")
 
-
-const SwipeShape = preload("res://subscenes/SwipeShape.tscn")
-
 # gravity is what pulls the piece down slowly
 var GRAVITY_TIMEOUT = 1     # fake constant that will change with level
 var GRAVITY_FACTOR = 1		# how much slower to make gravity   (normally 1, but larger = slower for testing)
@@ -55,18 +52,13 @@ var player					# Two (2) tiles: (player and shadow)
 var game_hud
 
 
-var clicked_this_piece_type = 0				# set when swipe is started
-var swipe_mode= false			# if true, then we are swiping
-var swipe_array = []			# the pieces in the swipe
-var swipe_shape = null			# will animate shape user swiped
-
-var wasted_swipes = 0
-
 func _ready():
 	self.game_hud = GameHUD.new()			# Buttons pre/post level
 	# game_hud is kinda like a HUD but for game, not app
 	self.game_hud.addHUDtoGame(self)
 	add_child(self.game_hud)
+
+	$GameSwipeDetector.Game = self
 
 	Helpers.game_scene = self		# so Players know where to appear
 	time_label = get_node("LevelTimer/LevelTimerLabel")
@@ -93,7 +85,6 @@ func requested_play_level(level):
 	start_level(level)
 
 func start_level(level_num):
-	self.wasted_swipes = 0	# wasted swipes will count against bonus
 	set_process(false)		# not sure that this actually helps
 	grok_input(false)		# don't allow keyboard input during display of requirements
 	self.level_num = level_num
@@ -111,6 +102,7 @@ func start_level(level_num):
 
 	# turn on buttons and show requirements for level
 	game_hud.startLevel(current_level)
+	$GameSwipeDetector.startLevel()
 
 # turn input off for all children while display requirements / show cut scenes and the like
 func grok_input(boolean):
@@ -190,7 +182,7 @@ func _show_stuff_after_level(reason):
 	var collect_info_for_stars = {'reason':reason,
 									'level':self.level_num,
 									'num_tiles':game_hud.level_reqs.num_tiles_required,
-									'waste_swipes':self.wasted_swipes
+									'waste_swipes':$GameSwipeDetector.wasted_swipes
 								}
 	game_hud.stars_after_level.show_stuff_after_level(collect_info_for_stars)
 
@@ -206,12 +198,6 @@ func level_over_stars_were_displayed():
 func _level_over_display_buttons(reason):
 	game_hud.buttons.level_ended(reason)
 
-# this is only to handle orphaned swipes
-func _on_GameSwipeDetector_input_event( viewport, event, shape_idx ):
-	if event is InputEventMouseButton:
-		if event.button_index == 1:
-			if !event.pressed:
-				piece_unclicked()
 
 func _process(delta):
 
@@ -329,96 +315,7 @@ func piece_done_dragged(position):
 	player_position = position
 	start_gravity_timer()		# level timer still going
 
-func piece_clicked(position, piece_type):
-	if swipe_array.size() == 1:
-		# probably a duplicate click
-		return
-	clicked_this_piece_type = piece_type
-	VisibleSwipeOverlay.set_swipe_color(TileDatabase.tiles[piece_type].ITEM_COLOR)
-	swipe_mode = true
-	swipe_array.append(position)
-	Helpers.board[position].highlight()		# tell Piece to appear as if it is swiped
 
-func piece_unclicked():
-	# make sure the swipe is long enough to count (per level basis)
-	if swipe_array.size() < current_level.min_swipe_len:
-		for pos in swipe_array:
-			Helpers.board[pos].unhighlight()
-	# the swipe is long enough
-	else:
-		if Helpers.debug_level > 0:
-			ShapeShifter.givenSwipe_showArray(swipe_array)
-		var swipe_name = ShapeShifter.givenSwipe_lookupName(swipe_array)
-
-		var dimensions = ShapeShifter.getSwipeDimensions(swipe_array)
-		# figure out if the swipe is required
-		var swipe_was_required = game_hud.level_reqs.swiped_piece(swipe_name)
-
-		swipe_shape = SwipeShape.instance()
-		swipe_shape.set_shape(ShapeShifter.getBitmapOfSwipeCoordinates(swipe_array),clicked_this_piece_type)
-		swipe_shape.set_position(Helpers.slot_to_pixels(dimensions["topleft"], 1, false))		# change false to true to debug position. 1 is xfactor (larger pushes to right and breaks things)
-		add_child(swipe_shape)
-		if swipe_was_required:
-			swipe_shape.connect("shrunk_shape",self,"shrank_required_shape")
-			# after swipe, move shape to correct/required shape location
-			swipe_shape.shrink_shape(game_hud.level_reqs.required_swipe_location(swipe_name))
-		else:
-			swipe_shape.connect("flew_away", self, "inc_wasted_swipe_counter")
-			swipe_shape.fly_away_randomly()
-			self.wasted_swipes = self.wasted_swipes + 1
-		# TODO add animation swipe_shape.animate()
-		for pos in swipe_array:
-			if Helpers.board[pos] != null:
-				Helpers.board[pos].unhighlight()  # restore color so the effect is pretty.  Only needed while the highlight is black
-				Helpers.board[pos].remove_yourself()
-	swipe_array.clear()
-	swipe_mode = false
-
-func inc_wasted_swipe_counter():
-	print("wasted this many swipes: ", self.wasted_swipes)		# should be displayed on screen
-	print("Add a coutner for that number on the screen")
-	HUD.get_node('WastedSwipeCount').set_value(self.wasted_swipes)
-
-func piece_entered(position, piece_type):
-	if not swipe_mode:
-		return
-	if clicked_this_piece_type != piece_type:
-		return
-	# ensure the position is adjacent to the last item in the array
-	if not adjacent(swipe_array.back(), position):
-		return
-	if position == swipe_array[swipe_array.size()-2]:
-		# we back tracked
-		var old_last = swipe_array.back()
-		swipe_array.pop_back()
-		Helpers.board[old_last].unhighlight()
-	else:
-		swipe_array.append(position)
-		Helpers.board[position].highlight()		# tell Piece to appear as if it is swiped
-	VisibleSwipeOverlay.draw_this_swipe(swipe_array,TileDatabase.tiles[piece_type].ITEM_COLOR)
-
-func adjacent(pos1, pos2):
-	# https://www.gamedev.net/forums/topic/516685-best-algorithm-to-find-adjacent-tiles/?tab=comments#comment-4359055
-	var xOffsets = [ 0, 1, 0, -1]
-	var yOffsets = [-1, 0, 1,  0]
-
-	var i = 0
-	var offset_pos2 = Vector2(-99,-99)
-	while i < xOffsets.size():
-		offset_pos2 = Vector2(pos2.x + xOffsets[i], pos2.y + yOffsets[i])
-		if pos1 == offset_pos2:
-			return true
-		i = i + 1
-	return false
-
-func piece_exited(position, piece_type):
-	# mouse moved out of a tile
-	# but we only care if it moved into a tile
-	pass
-
-func shrank_required_shape():
-	swipe_shape.queue_free()
-	game_hud.level_reqs.clarify_requirements()
 
 func _on_LevelWon():
 	_level_over_prep(G.LEVEL_WIN)
