@@ -15,7 +15,7 @@
 
 extends Sprite
 
-signal drag_started
+signal drag_started(piece)
 signal drag_ended
 
 var sprite_loc = []
