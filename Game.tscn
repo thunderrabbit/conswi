@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://LevelTimer.gd" type="Script" id=2]
 [ext_resource path="res://SpinnerLableFont.tres" type="DynamicFont" id=3]
+[ext_resource path="res://GameSwipeDetector.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -13,7 +14,7 @@ extents = Vector2( 345.2, 652.218 )
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Material", "Transform", "Visibility" ]
-easywin = false
+allow_easy_win = false
 
 [node name="GravityTimer" type="Timer" parent="." index="0"]
 
@@ -56,7 +57,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Hint", "Margin", "Material", "Mouse", "Rect", "Size Flags", "Theme", "Visibility", "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
 
-[node name="OrphanSwipeCatcher" type="Area2D" parent="." index="3"]
+[node name="GameSwipeDetector" type="Area2D" parent="." index="3"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -65,8 +66,9 @@ linear_damp = 0.1
 angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
+script = ExtResource( 4 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="OrphanSwipeCatcher" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameSwipeDetector" index="0"]
 
 position = Vector2( 331.557, 640.004 )
 shape = SubResource( 1 )
@@ -75,6 +77,6 @@ shape = SubResource( 1 )
 
 [connection signal="timeout" from="LevelTimer" to="." method="_on_LevelTimer_timeout"]
 
-[connection signal="input_event" from="OrphanSwipeCatcher" to="." method="_on_OrphanSwipeCatcher_input_event"]
+[connection signal="input_event" from="GameSwipeDetector" to="GameSwipeDetector" method="_on_GameSwipeDetector_input_event"]
 
 
