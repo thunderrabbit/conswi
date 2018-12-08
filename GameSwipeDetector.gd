@@ -8,6 +8,9 @@ var swipe_array = []			# the pieces in the swipe
 var swipe_shape = null			# will animate shape user swiped
 var wasted_swipes = 0
 var Game						# will point to GameNode
+enum SwipeState {IDLE, SWIPE = 5, DRAG}		# how should _input_event respond
+var swipe_state = SwipeState.SWIPE
+var dragging_piece = null					# when dragging a piece, this will refer to it
 
 func _ready():
 	# Called every time the node is added to the scene.
@@ -17,12 +20,25 @@ func _ready():
 func startLevel():
 	self.wasted_swipes = 0	# wasted swipes will count against bonus
 
-# this is only to handle orphaned swipes
+# this handles dragging pieces and orphaned swipes
 func _on_GameSwipeDetector_input_event( viewport, event, shape_idx ):
+	match swipe_state:
+		SwipeState.IDLE:
+			pass
+		SwipeState.SWIPE:
+			_on_GSD_swipe_event(event)
+		SwipeState.DRAG:
+			_on_GSD_drag_event(event)
+
+func _on_GSD_swipe_event(event):
 	if event is InputEventMouseButton:
 		if event.button_index == 1:
 			if !event.pressed:
 				piece_unclicked()
+
+func _on_GSD_drag_event(event):
+	# allows drag to happen quickly
+	dragging_piece.position = get_viewport().get_mouse_position()
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.
@@ -35,7 +51,7 @@ func piece_clicked(position, piece_type):
 		return
 	clicked_this_piece_type = piece_type
 	VisibleSwipeOverlay.set_swipe_color(TileDatabase.tiles[piece_type].ITEM_COLOR)
-	swipe_mode = true
+	swipe_state = SwipeState.SWIPE
 	swipe_array.append(position)
 	Helpers.board[position].highlight()		# tell Piece to appear as if it is swiped
 
@@ -72,7 +88,20 @@ func piece_unclicked():
 				Helpers.board[pos].unhighlight()  # restore color so the effect is pretty.  Only needed while the highlight is black
 				Helpers.board[pos].remove_yourself()
 	swipe_array.clear()
-	swipe_mode = false
+	swipe_state = SwipeState.IDLE
+
+######################################
+#
+#  Called when user starts dragging a piece.
+func piece_being_dragged(piece):
+	dragging_piece = piece
+	swipe_state = SwipeState.DRAG
+
+# not sure if this should put the piece in the slot or Game.  At this point Game does it though
+func piece_done_dragged(slot):
+	print("piece done dragged to ", slot)
+	swipe_state = SwipeState.IDLE
+	dragging_piece = null
 
 func inc_wasted_swipe_counter():
 	print("wasted this many swipes: ", self.wasted_swipes)		# should be displayed on screen
@@ -80,7 +109,7 @@ func inc_wasted_swipe_counter():
 	HUD.get_node('WastedSwipeCount').set_value(self.wasted_swipes)
 
 func piece_entered(position, piece_type):
-	if not swipe_mode:
+	if swipe_state != SwipeState.SWIPE:
 		return
 	if clicked_this_piece_type != piece_type:
 		return
