@@ -26,8 +26,10 @@ const wd = 100.0			# width of each sprite image in items.png
 const ht = 100.0			# height of each sprite images in items.png
 
 func _ready():
-	self.connect("drag_started", get_node("/root/GameNode2D"), "piece_being_dragged", [])
-	self.connect("drag_ended", get_node("/root/GameNode2D"), "piece_done_dragged", [])
+	self.connect("drag_started", get_node("/root/GameNode2D"), "piece_being_dragged")
+	self.connect("drag_started", get_node("/root/GameNode2D/GameSwipeDetector"), "piece_being_dragged")
+	self.connect("drag_ended", get_node("/root/GameNode2D"), "piece_done_dragged")
+	self.connect("drag_ended", get_node("/root/GameNode2D/GameSwipeDetector"), "piece_done_dragged")
 
 func _init():
 	# within the image map, these are the locations of the tiles
