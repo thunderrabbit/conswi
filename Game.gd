@@ -33,7 +33,7 @@ const SwipeShape = preload("res://subscenes/SwipeShape.tscn")
 
 # gravity is what pulls the piece down slowly
 var GRAVITY_TIMEOUT = 1     # fake constant that will change with level
-var GRAVITY_FACTOR = 1		# how much slower to make gravity   (normally 1, but larger for easier testing)
+var GRAVITY_FACTOR = 1		# how much slower to make gravity   (normally 1, but larger = slower for testing)
 const MIN_TIME  = 0.07		# wait at least this long between processing inputs
 const MIN_DROP_MODE_TIME = 0.004   # wait this long between move-down when in drop_mode
 # mganetism pulls the pieces down quickly after swipes have erased pieces below them
@@ -338,7 +338,7 @@ func piece_clicked(position, piece_type):
 	VisibleSwipeOverlay.set_swipe_color(TileDatabase.tiles[piece_type].ITEM_COLOR)
 	swipe_mode = true
 	swipe_array.append(position)
-	Helpers.board[position].highlight()
+	Helpers.board[position].highlight()		# tell Piece to appear as if it is swiped
 
 func piece_unclicked():
 	# make sure the swipe is long enough to count (per level basis)
@@ -395,7 +395,7 @@ func piece_entered(position, piece_type):
 		Helpers.board[old_last].unhighlight()
 	else:
 		swipe_array.append(position)
-		Helpers.board[position].highlight()
+		Helpers.board[position].highlight()		# tell Piece to appear as if it is swiped
 	VisibleSwipeOverlay.draw_this_swipe(swipe_array,TileDatabase.tiles[piece_type].ITEM_COLOR)
 
 func adjacent(pos1, pos2):
