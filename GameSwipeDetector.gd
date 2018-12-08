@@ -3,11 +3,11 @@ extends Area2D
 const SwipeShape = preload("res://subscenes/SwipeShape.tscn")
 
 var clicked_this_piece_type = 0				# set when swipe is started
-var swipe_mode= false			# if true, then we are swiping
-var swipe_array = []			# the pieces in the swipe
-var swipe_shape = null			# will animate shape user swiped
-var wasted_swipes = 0
-var Game						# will point to GameNode
+var swipe_mode= false						# if true, then we are swiping
+var swipe_array = []						# the pieces in the swipe
+var swipe_shape = null						# will animate shape user swiped
+var wasted_swipes = 0						# count against score
+var Game									# will point to GameNode
 enum SwipeState {IDLE, SWIPE = 5, DRAG}		# how should _input_event respond
 var swipe_state = SwipeState.SWIPE
 var dragging_piece = null					# when dragging a piece, this will refer to it
@@ -105,7 +105,7 @@ func piece_done_dragged(slot):
 
 func inc_wasted_swipe_counter():
 	print("wasted this many swipes: ", self.wasted_swipes)		# should be displayed on screen
-	print("Add a coutner for that number on the screen")
+	print("Add a counter for that number on the screen")
 	HUD.get_node('WastedSwipeCount').set_value(self.wasted_swipes)
 
 func piece_entered(position, piece_type):
