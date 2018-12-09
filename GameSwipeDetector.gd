@@ -8,7 +8,7 @@ var swipe_array = []						# the pieces in the swipe
 var swipe_shape = null						# will animate shape user swiped
 var wasted_swipes = 0						# count against score
 var Game									# will point to GameNode
-enum SwipeState {IDLE, SWIPE = 5, DRAG}		# how should _input_event respond
+var SwipeState = preload("res://enums/SwipeState.gd")
 var swipe_state = SwipeState.SWIPE
 var dragging_piece = null					# when dragging a piece, this will refer to it
 
