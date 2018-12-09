@@ -91,5 +91,4 @@ func _on_Area2D_input_event( viewport, event, shape_idx ):
 			emit_signal("drag_ended", Helpers.pixels_to_slot(position))
 			# need to tell Game to start gravity
 			swipe_state = SwipeState.IDLE
-	if swipe_state == SwipeState.DRAG:
-		position = get_viewport().get_mouse_position()
+
