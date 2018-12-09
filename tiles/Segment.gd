@@ -20,7 +20,9 @@ signal drag_ended
 
 var sprite_loc = []
 var draggable = false		# cannot drag unless is Player.mytile and is active in play area
-var dragging = false		# if true, means mouse is actively dragging
+
+var SwipeState = preload("res://enums/SwipeState.gd")
+var swipe_state = SwipeState.IDLE
 
 const wd = 100.0			# width of each sprite image in items.png
 const ht = 100.0			# height of each sprite images in items.png
@@ -82,12 +84,12 @@ func _on_Area2D_input_event( viewport, event, shape_idx ):
 
 	if  event is InputEventScreenTouch or event is InputEventMouseButton:
 		if event.pressed:
-			dragging = true
+			swipe_state = SwipeState.DRAG
 			# need to tell Game to stop gravity
 			emit_signal("drag_started", self)
 		else: # not event.pressed:
 			emit_signal("drag_ended", Helpers.pixels_to_slot(position))
 			# need to tell Game to start gravity
-			dragging = false
-	if dragging:
+			swipe_state = SwipeState.IDLE
+	if swipe_state == SwipeState.DRAG:
 		position = get_viewport().get_mouse_position()
