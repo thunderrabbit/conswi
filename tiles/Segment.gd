@@ -20,7 +20,8 @@ signal drag_ended
 
 var tile_type
 var sprite_loc = []
-var draggable = false		# cannot drag unless is Player.mytile and is active in play area
+var SwipeOptions = preload("res://enums/SwipeOptions.gd")
+var swipe_options = SwipeOptions.CANNOT
 
 var SwipeState = preload("res://enums/SwipeState.gd")
 var swipe_state = SwipeState.IDLE
@@ -61,7 +62,17 @@ func start_swipe_effect():
 
 # only the Player tiles will be set draggable (not the shadows)
 func set_draggable(candrag):
-	self.draggable = candrag
+	if candrag:
+		self.swipe_options = SwipeOptions.CAN_DRAG
+	else:
+		self.swipe_options = SwipeOptions.CANNOT
+
+# this is set by Player
+func set_swipeable(canswipe):
+	if canswipe:
+		self.swipe_options = SwipeOptions.CAN_SWIPE
+	else:
+		self.swipe_options = SwipeOptions.CANNOT
 
 func is_shadow():
 	set_modulate(Color(1,1,1, 0.3))
