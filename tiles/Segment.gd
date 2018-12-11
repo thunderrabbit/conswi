@@ -99,9 +99,15 @@ func darken():
 
 
 func _on_Area2D_input_event( viewport, event, shape_idx ):
-	if not draggable:
-		return
+	match swipe_options:
+		SwipeOptions.CANNOT:
+			return
+		SwipeOptions.CAN_DRAG:
+			_on_Segment_can_drag(event)
+		SwipeOptions.CAN_SWIPE:
+			_on_Segment_can_swipe(event)
 
+func _on_Segment_can_drag(event):
 	if  event is InputEventScreenTouch or event is InputEventMouseButton:
 		if event.pressed:
 			swipe_state = SwipeState.DRAG
@@ -111,4 +117,32 @@ func _on_Area2D_input_event( viewport, event, shape_idx ):
 			emit_signal("drag_ended", Helpers.pixels_to_slot(position))
 			# need to tell Game to start gravity
 			swipe_state = SwipeState.IDLE
+
+func _on_Segment_can_swipe(event):
+	print("swipe seg clicked or unclicked")
+	if swipe_options != SwipeOptions.CAN_SWIPE:
+		print("but not swipable (wtf how did we get past gateway func)")
+		return
+	if event is InputEventScreenTouch or event is InputEventMouseButton:
+		if event.pressed:
+			print("swipe seg clicked")
+			emit_signal("clicked", Helpers.pixels_to_slot(get_position()), self.tile_type)
+		else: # not event.pressed:
+			print("swipe seg unclicked")
+			emit_signal("unclicked")
+
+
+func _on_Segment_mouse_entered():
+	print("segment entered")
+	if swipe_options != SwipeOptions.CAN_SWIPE:
+		print("but not swipeable")
+		return
+	emit_signal("entered", Helpers.pixels_to_slot(get_position()), self.tile_type)
+
+func _on_Segment_mouse_exited():
+	print("segment exited")
+	if swipe_options != SwipeOptions.CAN_SWIPE:
+		print("but not swipeable")
+		return
+	emit_signal("exited", Helpers.pixels_to_slot(get_position()), self.tile_type)
 
