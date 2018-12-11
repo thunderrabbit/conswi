@@ -16,7 +16,6 @@
 extends Node
 
 const Segment = preload("res://tiles/Segment.tscn")
-const PlayerArea = preload("res://tiles/PlayerArea2D.tscn")
 
 var mytile = null	# visible in queue, while moving, when nailed
 var myshadow = null	# only visible when moving
@@ -54,11 +53,9 @@ func set_draggable(candrag):
 func set_player_position(player_position):
 	my_position = player_position
 	mytile.set_position(Helpers.slot_to_pixels(player_position))
-	if nailed:
-		mytouchzone.set_position(Helpers.slot_to_pixels(player_position))
-	else:
+	if not nailed:
+		# TODO make Helpers.shadowheight or column height
 		myshadow.set_position(Helpers.slot_to_pixels(Vector2(player_position.x, column_height(player_position.x))))   ## shadow
-	#	var shadowsprite = myshadow.get_node("TileSprite")
 		if myshadow != null:
 			if should_show_shadow:
 				myshadow.show()
@@ -68,23 +65,13 @@ func set_player_position(player_position):
 # player has been nailed so it should animate or whatever
 func nail_player():
 	# now that we are nailed, we cannot be dragged
-	set_draggable(false)
-	# now that we are nailed, we are touchable
-	mytouchzone = PlayerArea.instance()
-	mytouchzone.set_tile_type(tile_type)
-	mytouchzone.become_swipable()
-	mytouchzone.set_position(Helpers.slot_to_pixels(my_position))
-	mytouchzone.set_process_input(true)
-	mytouchzone.set_pickable(true)
-	add_child(mytouchzone)
-	print(mytouchzone.position)
-	print(mytouchzone.global_position)
+	mytile.set_draggable(false)
+	mytile.set_swipeable(true)
 	
 	# now that we are nailed, we have no shadow
 	myshadow.queue_free()
 	nailed = true
-	pass
-	
+
 func column_height(column):
 	var height = Helpers.slots_down-1
 	for i in range(Helpers.slots_down-1,0,-1):
@@ -124,5 +111,4 @@ func level_ended():
 func remove_yourself():
 	remove_from_group("players")
 	Helpers.board[my_position] = null
-	mytouchzone.queue_free()
 	mytile.start_swipe_effect()		# release yourself
