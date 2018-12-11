@@ -17,6 +17,10 @@ extends Sprite
 
 signal drag_started(piece)
 signal drag_ended
+signal clicked(piece)
+signal unclicked
+signal entered(piece)
+signal exited
 
 var tile_type
 var sprite_loc = []
@@ -34,6 +38,10 @@ func _ready():
 	self.connect("drag_started", get_node("/root/GameNode2D/GameSwipeDetector"), "piece_being_dragged")
 	self.connect("drag_ended", get_node("/root/GameNode2D"), "piece_done_dragged")
 	self.connect("drag_ended", get_node("/root/GameNode2D/GameSwipeDetector"), "piece_done_dragged")
+	self.connect("clicked", get_node("/root/GameNode2D/GameSwipeDetector"), "piece_clicked")
+	self.connect("unclicked", get_node("/root/GameNode2D/GameSwipeDetector"), "piece_unclicked")
+	self.connect("entered", get_node("/root/GameNode2D/GameSwipeDetector"), "piece_entered")
+	self.connect("exited", get_node("/root/GameNode2D/GameSwipeDetector"), "piece_exited")
 
 func _init():
 	# within the image map, these are the locations of the tiles
