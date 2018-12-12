@@ -26,6 +26,9 @@ func get_input():
 	var left = Input.is_action_pressed('ui_left')
 	var jump = false # this breaks my brain with swipe. Input.is_action_just_pressed('ui_select')
 
+	if is_on_floor():
+		print("I am floored")		# why does Tile stop above what I think is floor?
+
 	if is_on_floor() and jump:
 		velocity.y = jump_speed
 	if right:
@@ -83,7 +86,7 @@ func start_swipe_effect():
 func set_draggable(candrag):
 	if candrag:
 		self.swipe_options = SwipeOptions.CAN_DRAG
-		self.gravity = 5		# hope that only ONE tile at a time will fall
+		self.gravity = 590		# hope that only ONE tile at a time will fall
 	else:
 		self.swipe_options = SwipeOptions.CANNOT
 		self.gravity = 0		# if it is not draggable, it should not be falling, I think
@@ -96,6 +99,7 @@ func set_swipeable(canswipe):
 		self.swipe_options = SwipeOptions.CANNOT
 
 func is_shadow():
+	self.gravity = 5
 	set_modulate(Color(1,1,1, 0.3))
 
 # TODO create images/items_hightlight.png and swap out the image with set_texture
@@ -112,7 +116,7 @@ func darken():
 
 
 func _on_Area2D_input_event( viewport, event, shape_idx ):
-	pass
+	print("replace by _on_Tile_input_event")
 
 func _on_Segment_can_drag(event):
 	if  event is InputEventScreenTouch or event is InputEventMouseButton:
