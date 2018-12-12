@@ -15,7 +15,7 @@
 
 extends Node
 
-const Segment = preload("res://tiles/Segment.tscn")
+const Segment = preload("res://tiles/Tile.tscn")
 
 var mytile = null	# visible in queue, while moving, when nailed
 var myshadow = null	# only visible when moving
