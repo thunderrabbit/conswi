@@ -11,6 +11,30 @@ var tile_type
 var sprite_loc = []
 var SwipeOptions = preload("res://enums/SwipeOptions.gd")
 var swipe_options = SwipeOptions.CANNOT
+# http://docs.godotengine.org/en/3.0/tutorials/physics/physics_introduction.html#move-and-slide
+var run_speed = 350
+var jump_speed = -1000
+var gravity = 5
+
+var velocity = Vector2()
+
+func get_input():
+    velocity.x = 0
+    var right = Input.is_action_pressed('ui_right')
+    var left = Input.is_action_pressed('ui_left')
+    var jump = Input.is_action_just_pressed('ui_select')
+
+    if is_on_floor() and jump:
+            velocity.y = jump_speed
+    if right:
+            velocity.x += run_speed
+    if left:
+            velocity.x -= run_speed
+
+func _physics_process(delta):
+    velocity.y += gravity * delta
+    get_input()
+    velocity = move_and_slide(velocity, Vector2(0, -1))
 
 var SwipeState = preload("res://enums/SwipeState.gd")
 var swipe_state = SwipeState.IDLE
