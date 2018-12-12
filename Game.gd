@@ -30,7 +30,7 @@ const GameHUD = preload("res://GameHUD.gd")
 
 # gravity is what pulls the piece down slowly
 var GRAVITY_TIMEOUT = 1     # fake constant that will change with level
-var GRAVITY_FACTOR = 1		# how much slower to make gravity   (normally 1, but larger = slower for testing)
+var GRAVITY_FACTOR = 18888		# how much slower to make gravity   (normally 1, but larger = slower for testing)
 const MIN_TIME  = 0.07		# wait at least this long between processing inputs
 const MIN_DROP_MODE_TIME = 0.004   # wait this long between move-down when in drop_mode
 # mganetism pulls the pieces down quickly after swipes have erased pieces below them
