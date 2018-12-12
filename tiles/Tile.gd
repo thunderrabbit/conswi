@@ -99,7 +99,9 @@ func set_swipeable(canswipe):
 		self.swipe_options = SwipeOptions.CANNOT
 
 func is_shadow():
-	self.gravity = 5
+	self.gravity = 0
+	self.set_collision_layer_bit(0, false)	# ensure shadow does not block Tile both layer and mask are required
+	self.set_collision_mask_bit(0, false)	# ensure shadow does not block Tile both layer and mask are required
 	set_modulate(Color(1,1,1, 0.3))
 
 # TODO create images/items_hightlight.png and swap out the image with set_texture
