@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://LevelTimer.gd" type="Script" id=2]
@@ -9,6 +9,24 @@
 
 custom_solver_bias = 0.0
 extents = Vector2( 345.2, 652.218 )
+
+[sub_resource type="SegmentShape2D" id=2]
+
+custom_solver_bias = 0.0
+a = Vector2( -364.662, 1147.54 )
+b = Vector2( 277.162, 1149.33 )
+
+[sub_resource type="SegmentShape2D" id=3]
+
+custom_solver_bias = 0.0
+a = Vector2( 0, 0 )
+b = Vector2( -7.07996, 1236.79 )
+
+[sub_resource type="SegmentShape2D" id=4]
+
+custom_solver_bias = 0.0
+a = Vector2( -466.109, 14.6433 )
+b = Vector2( -480.212, 1305.03 )
 
 [node name="GameNode2D" type="Node2D" index="0"]
 
@@ -72,6 +90,43 @@ script = ExtResource( 4 )
 
 position = Vector2( 331.557, 640.004 )
 shape = SubResource( 1 )
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="." index="4"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D" index="0"]
+
+position = Vector2( 375.922, 72.9459 )
+shape = SubResource( 2 )
+
+[node name="KinematicBody2D2" type="KinematicBody2D" parent="." index="5"]
+
+position = Vector2( 668.775, -10.4397 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D2" index="0"]
+
+position = Vector2( -32.8256, -18.2364 )
+shape = SubResource( 3 )
+
+[node name="KinematicBody2D3" type="KinematicBody2D" parent="." index="6"]
+
+position = Vector2( 490.257, -16.7034 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D3" index="0"]
+
+shape = SubResource( 4 )
 
 [connection signal="timeout" from="GravityTimer" to="." method="_gravity_says_its_time"]
 
