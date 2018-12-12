@@ -86,7 +86,7 @@ func start_swipe_effect():
 func set_draggable(candrag):
 	if candrag:
 		self.swipe_options = SwipeOptions.CAN_DRAG
-		self.gravity = 590		# hope that only ONE tile at a time will fall
+		self.gravity = 50		# ensure only ONE tile at a time will fall
 	else:
 		self.swipe_options = SwipeOptions.CANNOT
 		self.gravity = 0		# if it is not draggable, it should not be falling, I think
