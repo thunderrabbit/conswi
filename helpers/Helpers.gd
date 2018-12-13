@@ -53,8 +53,8 @@ func clear_game_board():
 		remove_child(player)
 
 # called after groking the level, because then we know how big it is
-# prepare the Dictionary board{}
-func prepare_board_and_queue():
+func erase_board_and_queue():
+	# prepare the Dictionary board{}
 	board = {}
 	for i in range(slots_across):
 		for j in range(slots_down):
@@ -119,7 +119,7 @@ func grok_level(level_info):
 	debug_level = level_info.debug_level
 	max_tiles_avail = level_info.max_tiles_avail
 	upcoming_tiles = level_info.tiles
-	self.prepare_board_and_queue()
+	self.erase_board_and_queue()
 
 func instantiatePlayer(player_position):
 	# queue_next returns null if max_tiles_available has been exceeded
