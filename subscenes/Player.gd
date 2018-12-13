@@ -17,6 +17,10 @@ extends Node
 
 const Segment = preload("res://tiles/Tile.tscn")
 
+# after a Tile hits the floor, it should eventually be fully locked in place
+# This signal tells the game when it is time to send a new piece down
+signal player_landed_and_locked_so_send_next_piece(player)
+
 var mytile = null	# visible in queue, while moving, when nailed
 var myshadow = null	# only visible when moving
 var mytouchzone = null  # only after nailed
@@ -34,6 +38,7 @@ func _piece_hit_floor(piece):
 	# TODO #30: give a bit of leeway, unless the piece is in DROP mode
 	# TODO #33 make shadow come back if piece is off floor again
 	nail_player()
+	emit_signal("player_landed_and_locked_so_send_next_piece", self)
 
 func set_type(new_tile_type_ordinal):
 	tile_type = new_tile_type_ordinal

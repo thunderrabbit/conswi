@@ -148,6 +148,7 @@ func new_player():
 	player = Helpers.instantiatePlayer(player_position)
 	if player != null:
 		# Now the player is movable by dragging or by gravity
+		player.connect("player_landed_and_locked_so_send_next_piece", self, "_player_landed_what_do")
 		player.set_show_shadow(true)		# The shadow is at bottom, showing where tile will land
 		player.set_draggable(true)			# now that the player is movable, we can drag it
 		set_process(true)					# allows players to move
@@ -155,6 +156,7 @@ func new_player():
 		start_gravity_timer()				# gravity needs to account for dragging somehow...
 	else:
 		print("no more tiles available to play game!")
+		_level_over_prep(G.LEVEL_NO_TILES)
 
 #######################################################
 #
@@ -293,14 +295,16 @@ func move_player(x, y):
 	player.set_player_position(player_position)
 
 # nail player to board
-func nail_player():
+func _player_landed_what_do(playa_unused):
+	#TODO #32 make sure player is in right spot
 	set_process(false)			# disable motion until next player is created
 	set_process_input(false)	# ignore touches until next player is created
 	stop_gravity_timer()
-	player.nail_player()		# let player do what it needs when it's nailed
 
 	# tell board{} where the player is
+	# This is probably broken now that we use physics.  TOD #32 fix this
 	Helpers.board[Vector2(player_position.x, player_position.y)] = player		## this is the piece so we can find it later
+	new_player()
 
 ######################################
 #
