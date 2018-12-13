@@ -39,13 +39,10 @@ func get_input():
 	velocity.x = 0
 	var right = Input.is_action_pressed('ui_right')
 	var left = Input.is_action_pressed('ui_left')
-	var jump = false # this breaks my brain with swipe. Input.is_action_just_pressed('ui_select')
 
 	if is_on_floor():
 		print("I am floored")		# why does Tile stop above what I think is floor?
 
-	if is_on_floor() and jump:
-		velocity.y = jump_speed
 	if right:
 		velocity.x += run_speed
 	if left:
