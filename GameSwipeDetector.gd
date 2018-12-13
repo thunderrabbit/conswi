@@ -38,6 +38,7 @@ func _on_GSD_swipe_event(event):
 
 func _on_GSD_drag_event(event):
 	# allows drag to happen quickly
+	# TODO #31 fix drag via physics
 	dragging_piece.position = get_viewport().get_mouse_position()
 
 #func _process(delta):

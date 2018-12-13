@@ -21,6 +21,7 @@ signal clicked(piece)
 signal unclicked
 signal entered(piece)
 signal exited
+signal hit_floor(piece)
 
 var tile_type
 var sprite_loc = []
@@ -30,6 +31,7 @@ var swipe_options = SwipeOptions.CANNOT
 var run_speed = 350
 var jump_speed = -1000
 var gravity = 0
+var hit_floor_announced = false		# will keep us from repeatedly signalling hit floor
 
 var velocity = Vector2()
 
@@ -40,8 +42,11 @@ func get_input():
 	var right = Input.is_action_pressed('ui_right')
 	var left = Input.is_action_pressed('ui_left')
 
-	if is_on_floor():
-		print("I am floored")		# why does Tile stop above what I think is floor?
+	if is_on_floor() and not self.hit_floor_announced:
+		# TODO make this signal ONLY turn off shadow
+		# TODO #30 make Player.gd tell Game.gd after the tile has been on floor long enough
+		emit_signal("hit_floor", self)
+		self.hit_floor_announced = true
 
 	if right:
 		velocity.x += run_speed
@@ -139,6 +144,7 @@ func _on_Segment_can_drag(event):
 			# need to tell Game to stop gravity
 			emit_signal("drag_started", self)
 		else: # not event.pressed:
+			#TODO #31 fix drag via physics
 			emit_signal("drag_ended", Helpers.pixels_to_slot(position))
 			# need to tell Game to start gravity
 			swipe_state = SwipeState.IDLE
