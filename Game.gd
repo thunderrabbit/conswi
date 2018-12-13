@@ -37,6 +37,7 @@ const MIN_DROP_MODE_TIME = 0.004   # wait this long between move-down when in dr
 const MAGNETISM_TIME = 0.2504
 
 var current_level	= null	# will hold level definition
+var current_player_type	= 0	# Used to see if there are more Players available to play 
 var level_over_reason = 0	# remember why we lost so we can slowly end the level, telling each overlay why we lost
 var level_num = 0			# will hold integer of level number
 var elapsed_time = 10		# pretend it has been 10 seconds so input can definitely be processed upon start
@@ -138,6 +139,13 @@ func new_player():
 	drop_mode = false
 	stop_moving()
 
+	if Helpers.more_players_exist_boolean():
+		self.current_player_type = Helpers.get_next_player_type()
+	else:
+		# TODO #6 start some kinda timer to count down game end if no activity
+		print("no more tiles available to play game, but should not kill game instantly!")
+		_level_over_prep(G.LEVEL_NO_TILES)
+
 	# select top center position
 	player_position = Vector2(Helpers.slots_across/2, 0)
 	# check game over
@@ -154,9 +162,7 @@ func new_player():
 		set_process(true)					# allows players to move
 		grok_input(true)					# now we can give keyboard input
 		start_gravity_timer()				# gravity needs to account for dragging somehow...
-	else:
-		print("no more tiles available to play game!")
-		_level_over_prep(G.LEVEL_NO_TILES)
+
 
 #######################################################
 #

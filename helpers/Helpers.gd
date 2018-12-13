@@ -69,7 +69,18 @@ func magnetism_called():
 		if sprite != null:
 			sprite.move_down_if_room()
 
+func more_players_exist_boolean():
+	return upcoming_tiles.size() > 0
+
+func get_next_player_type():
+	if self.more_players_exist_boolean():
+		new_tile_type_ordinal = upcoming_tiles.front()
+		upcoming_tiles.pop_front()
+		return new_tile_type_ordinal
+
 func queue_wo_fill():
+	print("upcoming tiles")
+	print(upcoming_tiles)
 	while queue_upcoming.size() < queue_length and \
 			max_tiles_avail > 0:
 		max_tiles_avail = max_tiles_avail - 1
@@ -119,6 +130,7 @@ func grok_level(level_info):
 	debug_level = level_info.debug_level
 	max_tiles_avail = level_info.max_tiles_avail
 	upcoming_tiles = level_info.tiles
+	print(upcoming_tiles)
 	self.erase_board_and_queue()
 
 func instantiatePlayer(player_position):
