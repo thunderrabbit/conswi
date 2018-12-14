@@ -224,40 +224,6 @@ func _process(delta):
 		# turn on drop mode
 		input_y_direction = 1
 
-	# if we can move, move
-	if check_movable(input_x_direction, 0):
-		move_player(input_x_direction, 0)
-	elif check_movable(0, input_y_direction):
-		move_player(0, input_y_direction)
-	else:
-		if input_y_direction > 0:
-			nail_player()
-			new_player()
-
-	# now that gravity has done its job, we can turn it off
-	if gravity_called:
-		input_y_direction = 0
-		gravity_called = false
-
-func check_movable(x, y):
-	# x is side to side motion.  -1 = left   1 = right
-	if x == -1 or x == 1:
-		# check border
-		if player_position.x + x >= Helpers.slots_across or player_position.x + x < 0:
-			return false
-		# check collision
-		if Helpers.board[Vector2(player_position.x+x, player_position.y)] != null:
-			return false
-		return true
-	# y is up down motion.  1 = down     -1 = up, but key is not connected
-	if y == -1 or y == 1:
-		# check border
-		if player_position.y + y >= Helpers.slots_down or player_position.y + y < 0:
-			return false
-		if Helpers.board[Vector2(player_position.x, player_position.y+1)] != null:
-			return false
-		return true
-
 func stop_moving():
 	input_x_direction = 0
 	input_y_direction = 0
