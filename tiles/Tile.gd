@@ -57,6 +57,8 @@ func get_input():
 		velocity.x += run_speed
 	if left:
 		velocity.x -= run_speed
+	if swipe_state == SwipeState.DRAG:
+        velocity = (get_global_mouse_position() - get_position()) * 16
 
 func _physics_process(delta):
 	velocity.y += self.gravity * delta
@@ -156,7 +158,6 @@ func _on_Segment_can_drag(event):
 			self.velocity.y = 0								# stop from continuing to fall
 			emit_signal("drag_started", self)
 		else: # not event.pressed:
-			#TODO #31 fix drag via physics
 			emit_signal("drag_ended", Helpers.pixels_to_slot(position))
 			self.gravity = GRAVITY_NORMAL
 			swipe_state = SwipeState.IDLE
