@@ -37,8 +37,7 @@ func _on_GSD_swipe_event(event):
 				piece_unclicked()
 
 func _on_GSD_drag_event(event):
-	# allows drag to happen quickly
-	dragging_piece.position = get_viewport().get_mouse_position()
+	pass # instead use _physics_process in the actual tile
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.

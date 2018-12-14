@@ -53,8 +53,8 @@ func clear_game_board():
 		remove_child(player)
 
 # called after groking the level, because then we know how big it is
-# prepare the Dictionary board{}
-func prepare_board_and_queue():
+func erase_board_and_queue():
+	# prepare the Dictionary board{}
 	board = {}
 	for i in range(slots_across):
 		for j in range(slots_down):
@@ -69,42 +69,29 @@ func magnetism_called():
 		if sprite != null:
 			sprite.move_down_if_room()
 
-func queue_wo_fill():
-	while queue_upcoming.size() < queue_length and \
-			max_tiles_avail > 0:
-		max_tiles_avail = max_tiles_avail - 1
-		# new player will be a random of four colors
-		var new_tile_type_ordinal = TileDatabase.random_type()	
+func more_players_exist_boolean():
+	return max_tiles_avail > 0
 
-		if upcoming_tiles.size() > 1:
+####################################
+#
+# get_next_player_type is called by Game to decide what type of tile to display next
+#
+# This is where to put logic in case we want to semi-randomly define what tiles should be
+# but as it is, they are either random or exactly the same each time we play a level
+func get_next_player_type():
+	var new_tile_type_ordinal = 0
+	if self.more_players_exist_boolean():
+		max_tiles_avail = max_tiles_avail - 1
+		# upcoming_tiles are the tile types specified by the level definition
+		if upcoming_tiles.size():
+			# use the type specified by the level definition
 			new_tile_type_ordinal = upcoming_tiles.front()
 			upcoming_tiles.pop_front()
-
-		# debug overwrites everything and just give same tile
-		if self.debug_level == 1:
-			new_tile_type_ordinal = 0
-
-		var new_player = Player.new()
-
-		# Tell player what type it is
-		new_player.set_type(new_tile_type_ordinal)
-		add_child(new_player)
-
-		queue_upcoming.append(new_player)
-
-	# Display queued pieces on top right
-	var x = slots_across - queue_length
-	for tile in queue_upcoming:
-		tile.set_player_position(Vector2(x,0))
-		x += 1
-
-
-func queue_next():
-	queue_wo_fill()
-	var next_piece = queue_upcoming.front()
-	if next_piece != null:
-		queue_upcoming.pop_front()
-	return next_piece
+		# more_players_exist_boolean says we need more player types so just randomly choose
+		else:
+			# new player will be a random of four colors
+			new_tile_type_ordinal = TileDatabase.random_type()
+		return new_tile_type_ordinal
 
 # grok_level is not well designed in that it probably should *not* grok
 # values that are not used outside GameScene.
@@ -119,17 +106,36 @@ func grok_level(level_info):
 	debug_level = level_info.debug_level
 	max_tiles_avail = level_info.max_tiles_avail
 	upcoming_tiles = level_info.tiles
-	self.prepare_board_and_queue()
+	print(upcoming_tiles)
+	self.erase_board_and_queue()
 
-func instantiatePlayer(player_position):
-	# queue_next returns null if max_tiles_available has been exceeded
-	var new_player = queue_next()
-	if new_player != null:
-		# Move the player
-		new_player.set_player_position(player_position)
-		return new_player		# we had tiles available
-	else:
-		return null	# no more tiles available
+####################################
+#
+# Creates a player, based on type, but does not add it to Game
+# Game will add it via add_child
+#
+func instantiate_player(player_type):
+	# select top center position
+	var player_slot = Vector2(Helpers.slots_across/2, 0)
+
+	# check game over
+	# tbh this is code smelly, but Helpers knows what the board looks like.
+	# The issue is a conflict between
+	#     1. Godot physics engine (which Helpers does NOT know)
+	#     2. ConSwi Swipes, which physics engine does not know
+	#
+	if Helpers.board[player_slot] != null:
+		return null		# player has no room on screen so cannot be placed
+
+	var new_player = Player.new()
+
+	# Tell player what type it is
+	new_player.set_type(player_type)
+
+	# Tell the player where to show up, but Game.gd will actually put the player on the screen
+	new_player.set_player_slot(player_slot)
+	return new_player
+
 
 func pixels_to_slot(pixels, debug=false):
 	if debug:

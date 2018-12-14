@@ -30,13 +30,14 @@ const GameHUD = preload("res://GameHUD.gd")
 
 # gravity is what pulls the piece down slowly
 var GRAVITY_TIMEOUT = 1     # fake constant that will change with level
-var GRAVITY_FACTOR = 1		# how much slower to make gravity   (normally 1, but larger = slower for testing)
+var GRAVITY_FACTOR = 18888		# how much slower to make gravity   (normally 1, but larger = slower for testing)
 const MIN_TIME  = 0.07		# wait at least this long between processing inputs
 const MIN_DROP_MODE_TIME = 0.004   # wait this long between move-down when in drop_mode
 # mganetism pulls the pieces down quickly after swipes have erased pieces below them
 const MAGNETISM_TIME = 0.2504
 
 var current_level	= null	# will hold level definition
+var current_player_type	= 0	# Used to see if there are more Players available to play 
 var level_over_reason = 0	# remember why we lost so we can slowly end the level, telling each overlay why we lost
 var level_num = 0			# will hold integer of level number
 var elapsed_time = 10		# pretend it has been 10 seconds so input can definitely be processed upon start
@@ -119,6 +120,7 @@ func continue_start_level():
 	if current_level.fill_level:
 		fill_game_board()
 	new_player()
+#　まだ DNE	HUD.update_visual_queue()		# poll Helpers.upcoming pieces and place Segments or NON-PHYSICS visual thing
 
 func fill_game_board():
 	# top corner is 0,0
@@ -138,23 +140,27 @@ func new_player():
 	drop_mode = false
 	stop_moving()
 
-	# select top center position
-	player_position = Vector2(Helpers.slots_across/2, 0)
-	# check game over
-	if Helpers.board[Vector2(player_position.x, player_position.y)] != null:
-		_level_over_prep(G.LEVEL_NO_ROOM)
-		return
+	if Helpers.more_players_exist_boolean():
+		self.current_player_type = Helpers.get_next_player_type()
+	else:
+		# TODO #6 start some kinda timer to count down game end if no activity
+		print("no more tiles available to play game, but should not kill game instantly!")
+		_level_over_prep(G.LEVEL_NO_TILES)
 
-	player = Helpers.instantiatePlayer(player_position)
+	player = Helpers.instantiate_player(self.current_player_type)
 	if player != null:
 		# Now the player is movable by dragging or by gravity
+		player.connect("player_landed_and_locked_so_send_next_piece", self, "_player_landed_what_do")
 		player.set_show_shadow(true)		# The shadow is at bottom, showing where tile will land
 		player.set_draggable(true)			# now that the player is movable, we can drag it
 		set_process(true)					# allows players to move
 		grok_input(true)					# now we can give keyboard input
 		start_gravity_timer()				# gravity needs to account for dragging somehow...
+		add_child(player)
+		print(player.my_slot_position)
+		
 	else:
-		print("no more tiles available to play game!")
+		_level_over_prep(G.LEVEL_NO_ROOM)
 
 #######################################################
 #
@@ -218,40 +224,6 @@ func _process(delta):
 		# turn on drop mode
 		input_y_direction = 1
 
-	# if we can move, move
-	if check_movable(input_x_direction, 0):
-		move_player(input_x_direction, 0)
-	elif check_movable(0, input_y_direction):
-		move_player(0, input_y_direction)
-	else:
-		if input_y_direction > 0:
-			nail_player()
-			new_player()
-
-	# now that gravity has done its job, we can turn it off
-	if gravity_called:
-		input_y_direction = 0
-		gravity_called = false
-
-func check_movable(x, y):
-	# x is side to side motion.  -1 = left   1 = right
-	if x == -1 or x == 1:
-		# check border
-		if player_position.x + x >= Helpers.slots_across or player_position.x + x < 0:
-			return false
-		# check collision
-		if Helpers.board[Vector2(player_position.x+x, player_position.y)] != null:
-			return false
-		return true
-	# y is up down motion.  1 = down     -1 = up, but key is not connected
-	if y == -1 or y == 1:
-		# check border
-		if player_position.y + y >= Helpers.slots_down or player_position.y + y < 0:
-			return false
-		if Helpers.board[Vector2(player_position.x, player_position.y+1)] != null:
-			return false
-		return true
-
 func stop_moving():
 	input_x_direction = 0
 	input_y_direction = 0
@@ -293,14 +265,17 @@ func move_player(x, y):
 	player.set_player_position(player_position)
 
 # nail player to board
-func nail_player():
+func _player_landed_what_do(playa_unused):
+	#TODO #32 make sure player is in right spot
 	set_process(false)			# disable motion until next player is created
 	set_process_input(false)	# ignore touches until next player is created
 	stop_gravity_timer()
-	player.nail_player()		# let player do what it needs when it's nailed
 
 	# tell board{} where the player is
-	Helpers.board[Vector2(player_position.x, player_position.y)] = player		## this is the piece so we can find it later
+	# This is probably broken now that we use physics.  TODO #32 fix this
+# remove while we get the basics of phsyics working
+#	Helpers.board[Vector2(player_position.x, player_position.y)] = player		## this is the piece so we can find it later
+	new_player()
 
 ######################################
 #
