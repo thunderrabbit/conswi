@@ -30,6 +30,11 @@ var swipe_options = SwipeOptions.CANNOT
 # http://docs.godotengine.org/en/3.0/tutorials/physics/physics_introduction.html#move-and-slide
 var run_speed = 350
 var jump_speed = -1000
+const GRAVITY_NORMAL = 50		# when draggable, but not while dragged
+const GRAVITY_DRAGGING = 0		# no gravity while being dragged
+const GRAVITY_DROP = 600		# when in drop mode
+const GRAVITY_SHADOW = 0		# shadows do not respond to gravity
+
 var gravity = 0
 var hit_floor_announced = false		# will keep us from repeatedly signalling hit floor
 
@@ -54,7 +59,7 @@ func get_input():
 		velocity.x -= run_speed
 
 func _physics_process(delta):
-	velocity.y += gravity * delta
+	velocity.y += self.gravity * delta
 	get_input()
 	velocity = move_and_slide(velocity, Vector2(0, -1))
 
@@ -101,22 +106,28 @@ func start_swipe_effect():
 
 # only the Player tiles will be set draggable (not the shadows)
 func set_draggable(candrag):
+	# players are draggable while they are falling
 	if candrag:
+		# Piece is falling, and CAN be dragged, but is not being dragged until clicked
 		self.swipe_options = SwipeOptions.CAN_DRAG
-		self.gravity = 50		# ensure only ONE tile at a time will fall
+		self.gravity = GRAVITY_NORMAL		# ensure only ONE tile at a time will fall
 	else:
+		# set_swipeable(true) overrules this, so this is not really used, but just in case
 		self.swipe_options = SwipeOptions.CANNOT
-		self.gravity = 0		# if it is not draggable, it should not be falling, I think
+		self.gravity = GRAVITY_DRAGGING		# if it is not draggable, it should not be falling, I think
 
 # this is set by Player
 func set_swipeable(canswipe):
+	# Players are swipable after they hit the floor and lock in place
 	if canswipe:
+		# player CAN be swiped, but is not being swiped until player clicks
+		# Should probably PIN the tile to the screen here with physics, but how??
 		self.swipe_options = SwipeOptions.CAN_SWIPE
 	else:
 		self.swipe_options = SwipeOptions.CANNOT
 
 func is_shadow():
-	self.gravity = 0
+	self.gravity = GRAVITY_SHADOW			# shadows do not fall
 	self.set_collision_layer_bit(0, false)	# ensure shadow does not block Tile both layer and mask are required
 	self.set_collision_mask_bit(0, false)	# ensure shadow does not block Tile both layer and mask are required
 	set_modulate(Color(1,1,1, 0.3))
@@ -141,12 +152,12 @@ func _on_Segment_can_drag(event):
 	if  event is InputEventScreenTouch or event is InputEventMouseButton:
 		if event.pressed:
 			swipe_state = SwipeState.DRAG
-			# need to tell Game to stop gravity
+			self.gravity = GRAVITY_DRAGGING					# stop being affected by gravity
 			emit_signal("drag_started", self)
 		else: # not event.pressed:
 			#TODO #31 fix drag via physics
 			emit_signal("drag_ended", Helpers.pixels_to_slot(position))
-			# need to tell Game to start gravity
+			self.gravity = GRAVITY_NORMAL
 			swipe_state = SwipeState.IDLE
 
 func _on_Segment_can_swipe(event):
