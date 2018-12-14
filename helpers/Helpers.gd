@@ -148,15 +148,33 @@ func grok_level(level_info):
 	print(upcoming_tiles)
 	self.erase_board_and_queue()
 
-func instantiatePlayer(player_position):
-	# queue_next returns null if max_tiles_available has been exceeded
-	var new_player = queue_next()
-	if new_player != null:
-		# Move the player
-		new_player.set_player_position(player_position)
-		return new_player		# we had tiles available
-	else:
-		return null	# no more tiles available
+####################################
+#
+# Creates a player, based on type, but does not add it to Game
+# Game will add it via add_child
+#
+func instantiate_player(player_type):
+	# select top center position
+	var player_position = Vector2(Helpers.slots_across/2, 0)
+
+	# check game over
+	# tbh this is code smelly, but Helpers knows what the board looks like.
+	# The issue is a conflict between
+	#     1. Godot physics engine (which Helpers does NOT know)
+	#     2. ConSwi Swipes, which physics engine does not know
+	#
+	if Helpers.board[player_position] != null:
+		return null		# player has no room on screen so cannot be placed
+
+	var new_player = Player.new()
+
+	# Tell player what type it is
+	new_player.set_type(player_type)
+
+	# Tell the player where to show up, but Game.gd will actually put the player on the screen
+	new_player.set_player_position(player_position)
+	return new_player
+
 
 func pixels_to_slot(pixels, debug=false):
 	if debug:

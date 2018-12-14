@@ -147,14 +147,7 @@ func new_player():
 		print("no more tiles available to play game, but should not kill game instantly!")
 		_level_over_prep(G.LEVEL_NO_TILES)
 
-	# select top center position
-	player_position = Vector2(Helpers.slots_across/2, 0)
-	# check game over
-	if Helpers.board[Vector2(player_position.x, player_position.y)] != null:
-		_level_over_prep(G.LEVEL_NO_ROOM)
-		return
-
-	player = Helpers.instantiatePlayer(player_position)
+	player = Helpers.instantiate_player(self.current_player_type)
 	if player != null:
 		# Now the player is movable by dragging or by gravity
 		player.connect("player_landed_and_locked_so_send_next_piece", self, "_player_landed_what_do")
