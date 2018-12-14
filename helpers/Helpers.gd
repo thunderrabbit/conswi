@@ -155,7 +155,7 @@ func grok_level(level_info):
 #
 func instantiate_player(player_type):
 	# select top center position
-	var player_position = Vector2(Helpers.slots_across/2, 0)
+	var player_slot = Vector2(Helpers.slots_across/2, 0)
 
 	# check game over
 	# tbh this is code smelly, but Helpers knows what the board looks like.
@@ -163,7 +163,7 @@ func instantiate_player(player_type):
 	#     1. Godot physics engine (which Helpers does NOT know)
 	#     2. ConSwi Swipes, which physics engine does not know
 	#
-	if Helpers.board[player_position] != null:
+	if Helpers.board[player_slot] != null:
 		return null		# player has no room on screen so cannot be placed
 
 	var new_player = Player.new()
@@ -172,7 +172,7 @@ func instantiate_player(player_type):
 	new_player.set_type(player_type)
 
 	# Tell the player where to show up, but Game.gd will actually put the player on the screen
-	new_player.set_player_position(player_position)
+	new_player.set_player_slot(player_slot)
 	return new_player
 
 
