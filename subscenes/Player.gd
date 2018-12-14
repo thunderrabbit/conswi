@@ -24,7 +24,8 @@ signal player_landed_and_locked_so_send_next_piece(player)
 var mytile = null	# visible in queue, while moving, when nailed
 var myshadow = null	# only visible when moving
 var mytouchzone = null  # only after nailed
-var my_position
+var my_pixel_position = Vector2(9999,9999)		# Screen coordinates, 今 not specific location
+var my_slot_position = Vector2(1111,1111)		# Slot coordinates, 今 not specific location
 var should_show_shadow = false
 var nailed = false
 var tile_type = null
@@ -41,6 +42,9 @@ func _piece_hit_floor(piece):
 	emit_signal("player_landed_and_locked_so_send_next_piece", self)
 
 func set_type(new_tile_type_ordinal):
+	print("instantiate tiles and set type.")
+	print("Do we have a pixel position?", my_pixel_position)
+	print("Do we have a slot position?", my_slot_position)
 	tile_type = new_tile_type_ordinal
 	# instantiate 1 Tile each for our player and shadow.
 	mytile = Segment.instance()
@@ -65,11 +69,11 @@ func set_draggable(candrag):
 # update player sprite display
 func set_player_position(player_position):
 	# TODO #32 make sure pieces are in the right spot when locked into place
-	my_position = player_position
-	mytile.set_position(Helpers.slot_to_pixels(player_position))
+	my_slot_position = player_position
+	mytile.set_position(Helpers.slot_to_pixels(my_slot_position))
 	if not nailed:
 		# TODO make Helpers.shadowheight or column height
-		myshadow.set_position(Helpers.slot_to_pixels(Vector2(player_position.x, column_height(player_position.x))))   ## shadow
+		myshadow.set_position(Helpers.slot_to_pixels(Vector2(my_slot_position.x, column_height(my_slot_position.x))))   ## shadow
 		if myshadow != null:
 			if should_show_shadow:
 				myshadow.show()
@@ -95,17 +99,17 @@ func column_height(column):
 	return height
 
 func move_down_if_room():
-	var below_me = my_position + Vector2(0,1)
+	var below_me = my_slot_position + Vector2(0,1)
 	if below_me.y < Helpers.slots_down:
 		if Helpers.board[below_me] == null:
 			Helpers.board[below_me] = self
-			Helpers.board[my_position] = null
+			Helpers.board[my_slot_position] = null
 			set_player_position(below_me)
 
 func set_show_shadow(should_i):
 	should_show_shadow = should_i
 	# set position forces shdadow to show up or not
-	set_player_position(my_position)
+	set_player_position(my_slot_position)
 
 func highlight():
 	mytile.highlight()
@@ -125,5 +129,5 @@ func level_ended():
 
 func remove_yourself():
 	remove_from_group("players")
-	Helpers.board[my_position] = null
+	Helpers.board[my_slot_position] = null
 	mytile.start_swipe_effect()		# release yourself
