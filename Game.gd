@@ -273,7 +273,8 @@ func _player_landed_what_do(playa_unused):
 
 	# tell board{} where the player is
 	# This is probably broken now that we use physics.  TODO #32 fix this
-	Helpers.board[Vector2(player_position.x, player_position.y)] = player		## this is the piece so we can find it later
+# remove while we get the basics of phsyics working
+#	Helpers.board[Vector2(player_position.x, player_position.y)] = player		## this is the piece so we can find it later
 	new_player()
 
 ######################################
