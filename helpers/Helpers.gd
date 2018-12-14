@@ -93,45 +93,6 @@ func get_next_player_type():
 			new_tile_type_ordinal = TileDatabase.random_type()
 		return new_tile_type_ordinal
 
-func queue_wo_fill():
-	print("upcoming tiles")
-	print(upcoming_tiles)
-	while queue_upcoming.size() < queue_length and \
-			max_tiles_avail > 0:
-		max_tiles_avail = max_tiles_avail - 1
-		# new player will be a random of four colors
-		var new_tile_type_ordinal = TileDatabase.random_type()	
-
-		if upcoming_tiles.size() > 1:
-			new_tile_type_ordinal = upcoming_tiles.front()
-			upcoming_tiles.pop_front()
-
-		# debug overwrites everything and just give same tile
-		if self.debug_level == 1:
-			new_tile_type_ordinal = 0
-
-		var new_player = Player.new()
-
-		# Tell player what type it is
-		new_player.set_type(new_tile_type_ordinal)
-		add_child(new_player)
-
-		queue_upcoming.append(new_player)
-
-	# Display queued pieces on top right
-	var x = slots_across - queue_length
-	for tile in queue_upcoming:
-		tile.set_player_position(Vector2(x,0))
-		x += 1
-
-
-func queue_next():
-	queue_wo_fill()
-	var next_piece = queue_upcoming.front()
-	if next_piece != null:
-		queue_upcoming.pop_front()
-	return next_piece
-
 # grok_level is not well designed in that it probably should *not* grok
 # values that are not used outside GameScene.
 # I happened to notice that `min_swipe_len` is not here, but works just
