@@ -70,12 +70,27 @@ func magnetism_called():
 			sprite.move_down_if_room()
 
 func more_players_exist_boolean():
-	return upcoming_tiles.size() > 0
+	return max_tiles_avail > 0
 
+####################################
+#
+# get_next_player_type is called by Game to decide what type of tile to display next
+#
+# This is where to put logic in case we want to semi-randomly define what tiles should be
+# but as it is, they are either random or exactly the same each time we play a level
 func get_next_player_type():
+	var new_tile_type_ordinal = 0
 	if self.more_players_exist_boolean():
-		new_tile_type_ordinal = upcoming_tiles.front()
-		upcoming_tiles.pop_front()
+		max_tiles_avail = max_tiles_avail - 1
+		# upcoming_tiles are the tile types specified by the level definition
+		if upcoming_tiles.size():
+			# use the type specified by the level definition
+			new_tile_type_ordinal = upcoming_tiles.front()
+			upcoming_tiles.pop_front()
+		# more_players_exist_boolean says we need more player types so just randomly choose
+		else:
+			# new player will be a random of four colors
+			new_tile_type_ordinal = TileDatabase.random_type()
 		return new_tile_type_ordinal
 
 func queue_wo_fill():
