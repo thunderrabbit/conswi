@@ -120,7 +120,7 @@ func continue_start_level():
 	if current_level.fill_level:
 		fill_game_board()
 	new_player()
-	HUD.update_visual_queue()		# poll Helpers.upcoming pieces and place Segments or NON-PHYSICS visual thing
+#　まだ DNE	HUD.update_visual_queue()		# poll Helpers.upcoming pieces and place Segments or NON-PHYSICS visual thing
 
 func fill_game_board():
 	# top corner is 0,0
