@@ -153,6 +153,7 @@ func _on_Segment_can_drag(event):
 		if event.pressed:
 			swipe_state = SwipeState.DRAG
 			self.gravity = GRAVITY_DRAGGING					# stop being affected by gravity
+			self.velocity.y = 0								# stop from continuing to fall
 			emit_signal("drag_started", self)
 		else: # not event.pressed:
 			#TODO #31 fix drag via physics
