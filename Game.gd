@@ -156,7 +156,11 @@ func new_player():
 		set_process(true)					# allows players to move
 		grok_input(true)					# now we can give keyboard input
 		start_gravity_timer()				# gravity needs to account for dragging somehow...
-
+		add_child(player)
+		print(player.my_slot_position)
+		
+	else:
+		_level_over_prep(G.LEVEL_NO_ROOM)
 
 #######################################################
 #
