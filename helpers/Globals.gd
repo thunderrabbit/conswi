@@ -23,8 +23,8 @@ extends Node
 
 const finger_swipe_duration = .3		# how many seconds finger shows how to swipe
 const splashscreen_timeout = .3		# how many seconds to wait on splash screen
-const max_spash_screens    = 2		# there are two splash screens
-var   current_screen = 1			# which screen to start
+const max_spash_screens    = 6		# there are several splash screens
+var   current_screen = 0			# which screen to start
 
 ##  http://www.gamefromscratch.com/post/2015/02/23/Godot-Engine-Tutorial-Part-6-Multiple-Scenes-and-Global-Variables.aspx
 const GLOBALtop_space = 0		# Might just move the Popup down instead   # EGAD non-zero breaks the Helpers slot_to_pixels calculation
