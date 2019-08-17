@@ -17,10 +17,6 @@ extends Node2D
 var gowhere
 
 func _ready():
-#	new_player.set_tile_type(G.TYPE_DOG)
-#	new_player.set_scale(Vector2(5,5))
-#	new_player.set_position(OS.get_window_size()/2)
-
 	$Timer.set_wait_time(G.splashscreen_timeout)
 	$Timer.start()
 
