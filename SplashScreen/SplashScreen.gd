@@ -32,7 +32,7 @@ func _on_SplashScreen_Timer_timeout():
 		G.current_screen = G.current_screen + 1
 		$Timer.start()
 	else:
-		gowhere = "res://LevelSelect/SplashScreenButton.tscn"
+		gowhere = "res://LevelSelect/LevelSelectScene.tscn"
 		SceneSwitcher.goto_scene(gowhere)
 
 	if G.current_screen > 0 and G.current_screen <= G.max_spash_screens:
