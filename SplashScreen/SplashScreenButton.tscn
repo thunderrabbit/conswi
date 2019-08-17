@@ -4,7 +4,7 @@
 [ext_resource path="res://SplashScreen/splashscreen.png" type="Texture" id=2]
 [ext_resource path="res://tiles/Segment.gd" type="Script" id=3]
 
-[node name="SplashScreen" type="Node2D"]
+[node name="SplashScreen" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]

@@ -26,7 +26,7 @@ func _ready():
 
 func _on_SplashScreen_Timer_timeout():
 	if G.current_screen < 2:
-		gowhere = "res://SplashScreen/SplashScreen2.tscn"
+		gowhere = "res://SplashScreen/SplashScreenButton.tscn"
 		G.current_screen = G.current_screen + 1
 	else:
 		gowhere = "res://LevelSelect/LevelSelectScene.tscn"
