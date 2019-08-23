@@ -32,8 +32,7 @@ func _on_SplashScreen_Timer_timeout():
 		G.current_screen = G.current_screen + 1
 		$Timer.start()
 	else:
-		gowhere = "res://LevelSelect/LevelSelectScene.tscn"
-		SceneSwitcher.goto_scene(gowhere)
+		$PawAgreeButton.visible = true
 
 	if G.current_screen > 0 and G.current_screen <= G.max_spash_screens:
 		$StoryOverlay.visible = true
@@ -50,3 +49,8 @@ func _on_SplashScreen_Timer_timeout():
 		$StoryOverlay.texture = splash_texture_5
 	elif G.current_screen == 6:
 		$StoryOverlay.texture = splash_texture_6
+
+
+func _on_PawAgree_button_up():
+		gowhere = "res://LevelSelect/LevelSelectScene.tscn"
+		SceneSwitcher.goto_scene(gowhere)
