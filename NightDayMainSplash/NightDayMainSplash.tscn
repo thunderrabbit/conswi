@@ -3,8 +3,7 @@
 [ext_resource path="res://images/Folder_3/splashscreen_day@3x.png" type="Texture" id=1]
 [ext_resource path="res://NightDayMainSplash/MainSplashWithGameName.gd" type="Script" id=2]
 
-
-[node name="Node" type="Node" index="0"]
+[node name="Node" type="Node"]
 
 [node name="MainSplashWithGameName" type="Sprite" parent="." index="0"]
 
