@@ -1,19 +1,19 @@
 extends CanvasLayer
 
-var cow_world_button = preload("res://images/Folder_4/cow world@3x.png")
-var dog_world_button = preload("res://images/Folder_4/dog world@3x.png")
-var lion_world_button = preload("res://images/Folder_4/lion world@3x.png")
-var monkey_world_button = preload("res://images/Folder_4/monkey world@3x.png")
-var panda_world_button = preload("res://images/Folder_4/panda_world@3x.png")
-var rabbit_world_button = preload("res://images/Folder_4/rabbit world@3x.png")
-var tiger_world_button = preload("res://images/Folder_4/tiger world@3x.png")
-var world_buttons = [cow_world_button
-					,dog_world_button
-					,lion_world_button
-					,monkey_world_button
-					,panda_world_button
-					,rabbit_world_button
-					,tiger_world_button
+var cow_texture = preload("res://images/Folder_4/cow world@3x.png")
+var dog_texture = preload("res://images/Folder_4/dog world@3x.png")
+var lion_texture = preload("res://images/Folder_4/lion world@3x.png")
+var monkey_texture = preload("res://images/Folder_4/monkey world@3x.png")
+var panda_texture = preload("res://images/Folder_4/panda_world@3x.png")
+var rabbit_texture = preload("res://images/Folder_4/rabbit world@3x.png")
+var tiger_texture = preload("res://images/Folder_4/tiger world@3x.png")
+var world_textures = [cow_texture
+					,dog_texture
+					,lion_texture
+					,monkey_texture
+					,panda_texture
+					,rabbit_texture
+					,tiger_texture
 					]
 
 func _ready():
@@ -21,7 +21,7 @@ func _ready():
 
 func add_world_buttons():
 	var button_width = get_button_width()
-	for i in world_buttons:
+	for i in world_textures:
 		var new_butt = TextureButton.new()
 		new_butt.anchor_left = 0.5
 		new_butt.anchor_right = 0.5
