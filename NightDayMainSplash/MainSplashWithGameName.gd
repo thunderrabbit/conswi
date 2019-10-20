@@ -1,7 +1,7 @@
 extends Sprite
 
-var day_texture = preload("res://images/Folder_3/splashscreen_day@3x.png")
-var night_texture = preload("res://images/Folder_3/splashscreen_night@3x.png")
+var day_texture = preload("res://images/Folder_4/universal_background_day@3x.png")
+var night_texture = preload("res://images/Folder_4/universal_background_night@3x.png")
 
 func _ready():
 	set_background()
