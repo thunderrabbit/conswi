@@ -7,13 +7,13 @@ var monkey_texture = preload("res://images/Folder_4/monkey world@3x.png")
 var panda_texture = preload("res://images/Folder_4/panda_world@3x.png")
 var rabbit_texture = preload("res://images/Folder_4/rabbit world@3x.png")
 var tiger_texture = preload("res://images/Folder_4/tiger world@3x.png")
-var world_textures = [cow_texture
-					,dog_texture
-					,lion_texture
-					,monkey_texture
-					,panda_texture
-					,rabbit_texture
-					,tiger_texture
+var world_textures = [["cow", cow_texture]
+					 ,["dog",dog_texture]
+					 ,["lion",lion_texture]
+					 ,["monkey",monkey_texture]
+					 ,["panda",panda_texture]
+					 ,["rabbit",rabbit_texture]
+					 ,["tiger",tiger_texture]
 					]
 
 func _ready():
@@ -21,7 +21,9 @@ func _ready():
 
 func add_world_buttons():
 	var button_width = get_button_width()
-	for texture in world_textures:
+	for named_texture in world_textures:
+		var texture_name = named_texture[0]
+		var texture = named_texture[1]
 		var new_butt = TextureButton.new()
 #		new_butt.anchor_left = 0.5
 #		new_butt.anchor_right = 0.5
@@ -35,7 +37,7 @@ func add_world_buttons():
 		new_butt.margin_top = -button_width / 2
 #		new_butt.margin_bottom = -button_width / 2    # not needed?
 
-		new_butt.connect("pressed", get_parent(), "world_button_clicked", [new_butt.get_normal_texture()])
+		new_butt.connect("pressed", get_parent(), "world_button_clicked", [texture_name])
 		add_child(new_butt)
 
 func get_button_width():
