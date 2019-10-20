@@ -17,13 +17,27 @@ var world_buttons = [cow_world_button
 					]
 
 func _ready():
-	print(world_buttons.size())
+	add_world_buttons()
+
+func add_world_buttons():
+	var button_width = get_button_width()
 	for i in world_buttons:
 		var new_butt = TextureButton.new()
+		new_butt.anchor_left = 0.5
+		new_butt.anchor_right = 0.5
+		new_butt.anchor_top = 0.5
+		new_butt.anchor_bottom = 0.5
 		new_butt.set_normal_texture(i)
+		var texture_size = i.get_size()
+		new_butt.margin_left = -texture_size.x / 2
+		new_butt.margin_right = -texture_size.x / 2
+		new_butt.margin_top = -texture_size.y / 2
+		new_butt.margin_bottom = -texture_size.y / 2
 		add_child(new_butt)
-		print(i.get_size())
-	pass
+		print()
+
+func get_button_width():
+	return OS.get_window_size().x * 0.9
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.
