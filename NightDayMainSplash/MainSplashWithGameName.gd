@@ -18,3 +18,6 @@ func set_background_for_hour(var hour):
 		texture = day_texture
 	else:
 		texture = night_texture
+
+func world_button_clicked():
+	print("clicked")

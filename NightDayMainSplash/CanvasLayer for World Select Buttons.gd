@@ -34,10 +34,13 @@ func add_world_buttons():
 #		new_butt.margin_right = -button_width / 2    # not needed?
 		new_butt.margin_top = -button_width / 2
 #		new_butt.margin_bottom = -button_width / 2    # not needed?
+
+		new_butt.connect("pressed", get_parent(), "world_button_clicked")
 		add_child(new_butt)
 
 func get_button_width():
 	return OS.get_window_size().x * 0.9
+
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.
