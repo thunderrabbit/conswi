@@ -35,7 +35,7 @@ func add_world_buttons():
 		new_butt.margin_top = -button_width / 2
 #		new_butt.margin_bottom = -button_width / 2    # not needed?
 
-		new_butt.connect("pressed", get_parent(), "world_button_clicked")
+		new_butt.connect("pressed", get_parent(), "world_button_clicked", [new_butt.get_normal_texture()])
 		add_child(new_butt)
 
 func get_button_width():
