@@ -29,10 +29,10 @@ func add_world_buttons():
 		new_butt.anchor_bottom = 0.5
 		new_butt.set_normal_texture(i)
 		var texture_size = i.get_size()
-		new_butt.margin_left = -texture_size.x / 2
-		new_butt.margin_right = -texture_size.x / 2
-		new_butt.margin_top = -texture_size.y / 2
-		new_butt.margin_bottom = -texture_size.y / 2
+		new_butt.margin_left = -button_width / 2
+		new_butt.margin_right = -button_width / 2
+		new_butt.margin_top = -button_width / 2
+		new_butt.margin_bottom = -button_width / 2
 		add_child(new_butt)
 		print()
 
