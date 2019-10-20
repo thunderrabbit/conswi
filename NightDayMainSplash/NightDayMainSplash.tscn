@@ -13,4 +13,12 @@ centered = false
 script = ExtResource( 2 )
 _sections_unfolded = [ "Offset", "Transform" ]
 
+[node name="CanvasLayer for World Select Buttons" type="CanvasLayer" parent="." index="1"]
+
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+
 
