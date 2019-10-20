@@ -18,6 +18,11 @@ var world_buttons = [cow_world_button
 
 func _ready():
 	print(world_buttons.size())
+	for i in world_buttons:
+		var new_butt = TextureButton.new()
+		new_butt.set_normal_texture(i)
+		add_child(new_butt)
+		print(i.get_size())
 	pass
 
 #func _process(delta):
