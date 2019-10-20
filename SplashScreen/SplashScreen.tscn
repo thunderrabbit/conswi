@@ -6,7 +6,7 @@
 [ext_resource path="res://images/Folder_2.5/hand1@3x.png" type="Texture" id=4]
 [ext_resource path="res://images/Folder_2.5/hand2@3x.png" type="Texture" id=5]
 
-[node name="SplashScreen" type="Node2D" index="0"]
+[node name="SplashScreen" type="Node2D"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
