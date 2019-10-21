@@ -72,4 +72,30 @@ func get_left_anchor(count):
 #	# Update game logic here.
 #	pass
 
+#	set_offset(Vector2(rand_range(10,100),0))
 
+signal swipe
+var swipe_start = null
+var minimum_drag = 100
+
+func _input(event):
+	# Mouse in viewport coordinates
+	if event is InputEventMouseButton:
+		if event.is_pressed():
+			swipe_start = event.position
+		else:
+			_calculate_swipe(event.position)
+	elif event is InputEventMouseMotion:
+		print("Mouse Motion at: ", event.position)
+
+func _calculate_swipe(swipe_end):
+	if swipe_start == null:
+		return
+	var swipe = swipe_end - swipe_start
+	if abs(swipe.x) > minimum_drag:
+		if swipe.x > 0:
+			set_offset(Vector2(rand_range(10,100),0))
+			emit_signal("swipe", "left")
+		else:
+			set_offset(Vector2(rand_range(10,100),0))
+			emit_signal("swipe", "left")
