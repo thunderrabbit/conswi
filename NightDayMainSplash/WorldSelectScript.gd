@@ -13,23 +13,16 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-extends Sprite
+extends Node
 
-var day_texture = preload("res://images/Folder_4/universal_background_day@3x.png")
-var night_texture = preload("res://images/Folder_4/universal_background_night@3x.png")
+# class member variables go here, for example:
+# var a = 2
+# var b = "textvar"
 
 func _ready():
-	set_background()
+	# Called when the node is added to the scene for the first time.
+	# Initialization here
+	pass
 
-# set_background keeps _ready() small
-func set_background():
-	var timeDict = OS.get_time();
-	var hour = timeDict.hour;
-	set_background_for_hour(hour)
-
-# set_background_for_hour keeps things testable
-func set_background_for_hour(var hour):
-	if 6 <= hour && hour < 18:
-		texture = day_texture
-	else:
-		texture = night_texture
+func world_button_clicked(butt_text):
+	print(butt_text)
