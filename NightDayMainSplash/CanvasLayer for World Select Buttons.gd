@@ -32,8 +32,10 @@ var world_textures = [["cow", cow_texture]
 					 ,["rabbit",rabbit_texture]
 					 ,["tiger",tiger_texture]
 					]
+var num_buttons = world_textures.size()
 
 func _ready():
+	connect("swipe", self, "scroll_canvas")
 	add_world_buttons()
 
 func add_world_buttons():
@@ -67,27 +69,51 @@ func get_left_anchor(count):
 	var push_right = count * button_width_percent_of_screen
 	return left_margin + push_right
 
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
-
-#	set_offset(Vector2(rand_range(10,100),0))
 
 signal swipe
 var swipe_start = null
 var minimum_drag = 100
+var swiping = false			# mouse down to slide buttons
+
+func canvas_follow_mouse(mouse_offset):
+	var min_left_movement = -1 * get_button_width() * num_buttons
+	var min_right_movement = 0
+	var new_offset_x = mouse_offset.x + get_offset().x
+	if new_offset_x < min_left_movement:
+		new_offset_x = min_left_movement
+	if new_offset_x > min_right_movement:
+		new_offset_x = min_right_movement
+	set_offset(Vector2(new_offset_x,0))
+
+func scroll_canvas_left():
+#	print(get_offset())
+	set_offset(Vector2(rand_range(10,100),0))
+
+func scroll_canvas_right():
+#	print(get_offset())
+	set_offset(Vector2(rand_range(10,100),0))
+
+func scroll_canvas(swipe_direction):
+	print(swipe_direction)
+	if swipe_direction == "left":
+		scroll_canvas_left()
+	if swipe_direction == "right":
+		scroll_canvas_right()
 
 func _input(event):
 	# Mouse in viewport coordinates
 	if event is InputEventMouseButton:
 		if event.is_pressed():
 			swipe_start = event.position
+			swiping = true
 		else:
 			_calculate_swipe(event.position)
+			swiping = false
+			swipe_start = null	# prepare for next swipe
 	elif event is InputEventMouseMotion:
-#		print("Mouse Motion at: ", event.position)
-		pass
+		if swiping:
+#			print(event.position)
+			canvas_follow_mouse(event.position - swipe_start)
 
 
 func _calculate_swipe(swipe_end):
@@ -96,8 +122,6 @@ func _calculate_swipe(swipe_end):
 	var swipe = swipe_end - swipe_start
 	if abs(swipe.x) > minimum_drag:
 		if swipe.x > 0:
-			set_offset(Vector2(rand_range(10,100),0))
-			emit_signal("swipe", "left")
+			emit_signal("swipe", "right")
 		else:
-			set_offset(Vector2(rand_range(10,100),0))
 			emit_signal("swipe", "left")
