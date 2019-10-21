@@ -15,6 +15,8 @@
 
 extends CanvasLayer
 
+const button_width_percent_of_screen = 0.7
+
 var cow_texture = preload("res://images/Folder_4/cow world@3x.png")
 var dog_texture = preload("res://images/Folder_4/dog world@3x.png")
 var lion_texture = preload("res://images/Folder_4/lion world@3x.png")
@@ -41,7 +43,7 @@ func add_world_buttons():
 		var texture_name = named_texture[0]
 		var texture = named_texture[1]
 		var new_butt = TextureButton.new()
-		new_butt.anchor_left = button_count * 0.9
+		new_butt.anchor_left = get_left_anchor(button_count)
 #		new_butt.anchor_right = 0.5
 		new_butt.anchor_top = 0.5
 #		new_butt.anchor_bottom = 0.5
@@ -56,11 +58,18 @@ func add_world_buttons():
 		new_butt.connect("pressed", get_parent(), "world_button_clicked", [texture_name])
 		add_child(new_butt)
 		button_count += 1
-func get_button_width():
-	return OS.get_window_size().x * 0.9
 
+func get_button_width():
+	return OS.get_window_size().x * button_width_percent_of_screen
+
+func get_left_anchor(count):
+	var left_margin = (1-button_width_percent_of_screen) / 2
+	var push_right = count * button_width_percent_of_screen
+	return left_margin + push_right
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.
 #	# Update game logic here.
 #	pass
+
+
