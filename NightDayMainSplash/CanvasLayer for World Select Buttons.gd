@@ -35,7 +35,6 @@ var world_textures = [["cow", cow_texture]
 var num_buttons = world_textures.size()
 
 func _ready():
-#	connect("swipe", self, "scroll_canvas")
 	add_world_buttons()
 
 func add_world_buttons():
@@ -93,13 +92,6 @@ func scroll_canvas_right():
 #	print(get_offset())
 	set_offset(Vector2(rand_range(10,100),0))
 
-#func scroll_canvas(swipe_direction):
-#	print(swipe_direction)
-#	if swipe_direction == "left":
-#		scroll_canvas_left()
-#	if swipe_direction == "right":
-#		scroll_canvas_right()
-
 func _input(event):
 	# Mouse in viewport coordinates
 	if event is InputEventMouseButton:
@@ -107,21 +99,9 @@ func _input(event):
 			swipe_start = event.position
 			swiping = true
 		else:
-#			_calculate_swipe(event.position)
 			swiping = false
 			swipe_start = null	# prepare for next swipe
 	elif event is InputEventMouseMotion:
 		if swiping:
 #			print(event.position)
 			canvas_follow_mouse(event.position - swipe_start)
-
-
-#func _calculate_swipe(swipe_end):
-#	if swipe_start == null:
-#		return
-#	var swipe = swipe_end - swipe_start
-#	if abs(swipe.x) > minimum_drag:
-#		if swipe.x > 0:
-#			emit_signal("swipe", "right")
-#		else:
-#			emit_signal("swipe", "left")
