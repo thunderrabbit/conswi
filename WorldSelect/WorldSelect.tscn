@@ -1,5 +1,19 @@
-[gd_scene format=2]
+[gd_scene load_steps=4 format=2]
 
-[node name="Node" type="Node"]
+[ext_resource path="res://WorldSelect/Folder_4/universal_background_day@3x.png" type="Texture" id=1]
+[ext_resource path="res://WorldSelect/Background.gd" type="Script" id=2]
+[ext_resource path="res://WorldSelect/WorldCircle.tscn" type="PackedScene" id=3]
+
+[node name="Node" type="Node" index="0"]
+
+[node name="Background" type="Sprite" parent="." index="0"]
+
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 1 )
+centered = false
+script = ExtResource( 2 )
+_sections_unfolded = [ "Offset", "Transform" ]
+
+[node name="WorldCircle" parent="." index="1" instance=ExtResource( 3 )]
 
 

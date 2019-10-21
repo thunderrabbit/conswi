@@ -52,5 +52,5 @@ func _on_SplashScreen_Timer_timeout():
 
 
 func _on_PawAgree_button_up():
-		gowhere = "res://WorldSelect/WorldSelect.tscn"
+		gowhere = "res://NightDayMainSplash/NightDayMainSplash.tscn"
 		SceneSwitcher.goto_scene(gowhere)
