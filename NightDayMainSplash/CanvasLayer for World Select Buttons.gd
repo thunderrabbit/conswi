@@ -86,7 +86,9 @@ func _input(event):
 		else:
 			_calculate_swipe(event.position)
 	elif event is InputEventMouseMotion:
-		print("Mouse Motion at: ", event.position)
+#		print("Mouse Motion at: ", event.position)
+		pass
+
 
 func _calculate_swipe(swipe_end):
 	if swipe_start == null:
