@@ -15,7 +15,7 @@
 
 extends CanvasLayer
 
-const button_width_percent_of_screen = 0.7
+const button_width_percent_of_screen = 0.70
 
 var cow_texture = preload("res://images/Folder_4/cow world@3x.png")
 var dog_texture = preload("res://images/Folder_4/dog world@3x.png")
@@ -44,17 +44,12 @@ func add_world_buttons():
 		var texture_name = named_texture[0]
 		var texture = named_texture[1]
 		var new_butt = TextureButton.new()
-		new_butt.anchor_left = get_left_anchor(button_count)
-#		new_butt.anchor_right = 0.5
+		new_butt.rect_position.x = get_left_anchor(button_count)
 		new_butt.anchor_top = 0.5
-#		new_butt.anchor_bottom = 0.5
 		new_butt.set_normal_texture(texture)
 		var texture_size = texture.get_size()
 		new_butt.set_scale(Vector2(button_width/texture_size.x,button_width/texture_size.y))
-#		new_butt.margin_left = -button_width / 2
-#		new_butt.margin_right = -button_width / 2    # not needed?
 		new_butt.margin_top = -button_width / 2
-#		new_butt.margin_bottom = -button_width / 2    # not needed?
 
 		new_butt.connect("pressed", get_parent(), "world_button_clicked", [texture_name])
 		add_child(new_butt)
@@ -64,8 +59,10 @@ func get_button_width():
 	return OS.get_window_size().x * button_width_percent_of_screen
 
 func get_left_anchor(count):
-	var left_margin = (1-button_width_percent_of_screen) / 2
-	var push_right = count * button_width_percent_of_screen
+#	var left_margin = (1-button_width_percent_of_screen) / 2  # this was for anchor_left
+#	var push_right = count * button_width_percent_of_screen   # this was for anchor_left
+	var left_margin = (OS.get_window_size().x - get_button_width()) / 2
+	var push_right = get_button_width() * count
 	return left_margin + push_right
 
 
@@ -75,7 +72,7 @@ var swipe_start = null
 var swiping = false			# mouse down to slide buttons
 
 func canvas_follow_mouse(mouse_offset):
-	var min_left_movement = -1 * get_button_width() * num_buttons
+	var min_left_movement = -1 * get_button_width() * (num_buttons - 1)
 	var min_right_movement = 0
 	var new_offset_x = mouse_offset.x + get_offset().x
 	if new_offset_x < min_left_movement:
