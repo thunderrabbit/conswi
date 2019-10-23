@@ -49,6 +49,11 @@ const TYPE_DOG			= 3
 const TYPE_COW			= 4
 const TYPE_CAT			= 5
 const TYPE_BEAR			= 6
+const TYPE_LION			= 7    # Right now, TYPE_LION and following do not exist in icons, but are on world select screen
+const TYPE_MONKEY		= 8
+const TYPE_PANDA		= 9
+const TYPE_RABBIT		= 10
+const TYPE_TIGER		= 11
 
 const STAR_DISPLAY_BONUS = 0
 const STAR_REDUCE_SWIPES = 1

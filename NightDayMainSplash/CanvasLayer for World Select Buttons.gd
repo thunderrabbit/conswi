@@ -24,13 +24,13 @@ var monkey_texture = preload("res://images/Folder_4/monkey world@3x.png")
 var panda_texture = preload("res://images/Folder_4/panda_world@3x.png")
 var rabbit_texture = preload("res://images/Folder_4/rabbit world@3x.png")
 var tiger_texture = preload("res://images/Folder_4/tiger world@3x.png")
-var world_textures = [["cow", cow_texture]
-					 ,["dog",dog_texture]
-					 ,["lion",lion_texture]
-					 ,["monkey",monkey_texture]
-					 ,["panda",panda_texture]
-					 ,["rabbit",rabbit_texture]
-					 ,["tiger",tiger_texture]
+var world_textures = [[G.TYPE_COW, cow_texture]
+					 ,[G.TYPE_DOG,dog_texture]
+					 ,[G.TYPE_LION,lion_texture]
+					 ,[G.TYPE_MONKEY,monkey_texture]
+					 ,[G.TYPE_PANDA,panda_texture]
+					 ,[G.TYPE_RABBIT,rabbit_texture]
+					 ,[G.TYPE_TIGER,tiger_texture]
 					]
 var num_buttons = world_textures.size()
 
