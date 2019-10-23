@@ -24,5 +24,5 @@ func _ready():
 	# Initialization here
 	pass
 
-func world_button_clicked(butt_text):
-	print(butt_text)
+func world_button_clicked(selected_world_type):
+	print(selected_world_type)
