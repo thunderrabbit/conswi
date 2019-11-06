@@ -37,6 +37,11 @@ var slots_across = 0
 var slots_down = 0
 var debug_level = 0
 
+# requested_world will be set by WorldSelectScript
+# WorldSelectScript should deal with world permissions
+# WorldSelectScript should deal with world DNE
+var requested_world = 0
+
 # Will be set by LevelSelection scene
 # LevelSelection scene will deal with level entry permissions
 # GameScene will deal with level DNE

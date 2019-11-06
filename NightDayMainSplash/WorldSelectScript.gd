@@ -25,5 +25,6 @@ func _ready():
 	pass
 
 func world_button_clicked(selected_world_type):
-	print(selected_world_type)
 	print(TileDatabase.tiles[selected_world_type]["ITEM_NAME"])
+	Helpers.requested_world = selected_world_type
+	get_node("/root/SceneSwitcher").goto_scene("res://LevelSelect/LevelSelectScene.tscn")

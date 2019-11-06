@@ -37,7 +37,8 @@ func _init():
 	add_buttons_to_scene(world_type)
 
 func get_world_type():
-	return G.TYPE_SHEEP		# eventually load from local memory
+	# Helpers.requested_world was set by WorldSelectScene
+	return Helpers.requested_world		# eventually load from local memory
 
 func add_buttons_to_scene(button_type):
 	var button_loc = Vector2(0,0)
