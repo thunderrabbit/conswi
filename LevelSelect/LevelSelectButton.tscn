@@ -12,6 +12,7 @@ anchor_bottom = 0.0
 margin_right = 95.0
 margin_bottom = 95.0
 rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 focus_mode = 2
 mouse_filter = 0
 mouse_default_cursor_shape = 0
@@ -31,20 +32,7 @@ texture = ExtResource( 2 )
 
 [node name="starbase" type="Sprite" parent="." index="1"]
 
-[node name="icon1" type="Sprite" parent="." index="2"]
-
-position = Vector2( 46.9202, 47.2627 )
-scale = Vector2( 1.22112, 1.20077 )
-_sections_unfolded = [ "Animation", "Region" ]
-
-[node name="icon2" type="Sprite" parent="." index="3"]
-
-position = Vector2( 47.9734, 46.8124 )
-scale = Vector2( 1.21603, 1.21577 )
-
-[node name="icon3" type="Sprite" parent="." index="4"]
-
-position = Vector2( 47.658, 46.5123 )
-scale = Vector2( 1.24656, 1.22578 )
+position = Vector2( 44, 36 )
+texture = ExtResource( 3 )
 
 
