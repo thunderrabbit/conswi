@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://LevelSelect/LevelSelectButton.gd" type="Script" id=1]
 [ext_resource path="res://images/levelselect/numberedplates/base01_1x.png" type="Texture" id=2]
+[ext_resource path="res://images/levelselect/numbers/01.png" type="Texture" id=3]
 
 [node name="LevelSelectButton" type="TextureButton" index="0"]
 
@@ -30,7 +31,7 @@ _sections_unfolded = [ "Textures" ]
 position = Vector2( 42.327, 57.3366 )
 texture = ExtResource( 2 )
 
-[node name="starbase" type="Sprite" parent="." index="1"]
+[node name="level_number" type="Sprite" parent="." index="1"]
 
 position = Vector2( 44, 36 )
 texture = ExtResource( 3 )
