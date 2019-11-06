@@ -36,8 +36,10 @@ func set_num_stars(num):
 
 # should be done before we set the type so we know which level to show
 func set_level(level):
+	# we do not need to remember the level because
+	# LevelSelectScene links the button press to the respective level select
 	var path_to_num = String("res://images/levelselect/numberedplates/base" + String(level).pad_zeros(2) + "_2x.png")
-	$background.set_texture(load(path_to_num))
+	$level_number.set_texture(load(path_to_num))
 
 func set_button_type(type = G.TYPE_DOG):
 	self.my_type = type
@@ -52,11 +54,11 @@ func _set_icon_active(icon_num):
 
 ##  I actually don't remember if this is being used to scale the images or just position them.
 func scale_to(scale):
-	$background.set_scale(scale)
-	$starbase.set_position($background.position)
 	$icon1.set_position($background.position)	# make sure icons line up with background
 	$icon2.set_position($background.position)	# make sure icons line up with background
 	$icon3.set_position($background.position)	# make sure icons line up with background
+	$level_number.set_scale(scale)
+	$starbase.set_position($level_number.position)
 	$starbase.set_scale(scale)
 	$icon1.set_scale(scale)
 	$icon2.set_scale(scale)
