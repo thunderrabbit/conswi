@@ -26,3 +26,4 @@ func _ready():
 
 func world_button_clicked(selected_world_type):
 	print(selected_world_type)
+	print(TileDatabase.tiles[selected_world_type]["ITEM_NAME"])

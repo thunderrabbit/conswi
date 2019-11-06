@@ -15,7 +15,8 @@
 
 extends Node
 
-# Tiles are referenced by constants defined in Globals.  e.g.  G.TYPE_PIG = 0, so Pig must be the zeroth item in array `tiles` below
+# Tiles are referenced by constants defined in Globals.  
+# e.g.  G.TYPE_PIG = 0, so Pig must be the zeroth item in array `tiles` below
 # A better solution might be to define
 #  tiles = [G.TYPE_PIG: { "ITEM_NAME": "Pig", "ITEM_COLOR": Color(1, 1, 0.5, 1) }, ... ]
 # but that syntax does not work
@@ -46,6 +47,22 @@ var tiles = [
 	},
 	{
 		"ITEM_NAME" : "bear",
+		"ITEM_COLOR" : Color(1.0, 0, 0.5, 1.0),
+	},
+	{
+		"ITEM_NAME" : "lion",
+		"ITEM_COLOR" : Color(1.0, 0, 0.5, 1.0),
+	},
+	{
+		"ITEM_NAME" : "monkey",
+		"ITEM_COLOR" : Color(1.0, 0, 0.5, 1.0),
+	},
+	{
+		"ITEM_NAME" : "rabbit",
+		"ITEM_COLOR" : Color(1.0, 0, 0.5, 1.0),
+	},
+	{
+		"ITEM_NAME" : "tiger",
 		"ITEM_COLOR" : Color(1.0, 0, 0.5, 1.0),
 	},
 ]
