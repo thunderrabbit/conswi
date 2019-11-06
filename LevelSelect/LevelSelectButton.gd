@@ -27,6 +27,12 @@ extends TextureButton
 
 var my_type = G.TYPE_BEAR
 var my_type_string = ""
+var num_stars = 0
+
+# must be done before we can set the button type
+# because each button type is split into images based on number of stars
+func set_num_stars(num):
+	num_stars = num
 
 func set_level(level):
 	var path_to_num = String("res://images/levelselect/numberedplates/base" + String(level).pad_zeros(2) + "_2x.png")
@@ -42,12 +48,6 @@ func _set_icon_active(icon_num):
 	var which_icon = icon_num	# -1 to account for zero-indexed array `icons`
 	var path_to_icon = String("res://images/levelselect/icons/" + self.my_type_string + String(which_icon) + "star_" + "2x.png")
 	get_node("icon"+String(icon_num)).set_texture(load(path_to_icon))
-
-func set_qty_active(qty = 3):
-	var icon = 1
-	while icon <= qty:
-		_set_icon_active(icon)
-		icon = icon + 1
 
 ##  I actually don't remember if this is being used to scale the images or just position them.
 func scale_to(scale):
