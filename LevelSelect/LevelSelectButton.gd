@@ -34,6 +34,7 @@ var num_stars = 0
 func set_num_stars(num):
 	num_stars = num
 
+# should be done before we set the type so we know which level to show
 func set_level(level):
 	var path_to_num = String("res://images/levelselect/numberedplates/base" + String(level).pad_zeros(2) + "_2x.png")
 	$background.set_texture(load(path_to_num))
