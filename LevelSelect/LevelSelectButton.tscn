@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://LevelSelect/LevelSelectButton.gd" type="Script" id=1]
-[ext_resource path="res://images/levelselect/numberedplates/base01_1x.png" type="Texture" id=2]
+[ext_resource path="res://images/folder_12/dog/dog_level_0star@3x.png" type="Texture" id=2]
 [ext_resource path="res://images/levelselect/numbers/01.png" type="Texture" id=3]
 
 [node name="LevelSelectButton" type="TextureButton" index="0"]
@@ -10,8 +10,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 95.0
-margin_bottom = 95.0
+margin_right = 52.0
+margin_bottom = 55.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -28,12 +28,14 @@ _sections_unfolded = [ "Textures" ]
 
 [node name="background" type="Sprite" parent="." index="0"]
 
-position = Vector2( 42.327, 57.3366 )
+position = Vector2( 26.9521, 33.0915 )
+scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="level_number" type="Sprite" parent="." index="1"]
 
-position = Vector2( 44, 36 )
+position = Vector2( 28.9207, 23.8775 )
 texture = ExtResource( 3 )
 
 
