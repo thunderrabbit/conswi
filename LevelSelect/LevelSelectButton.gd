@@ -44,7 +44,11 @@ func set_level(level):
 func set_button_type(type = G.TYPE_DOG):
 	self.my_type = type
 	self.my_type_string = TileDatabase.tiles[my_type]["ITEM_NAME"]
-	var background = String("res://images/levelselect/icons/" + self.my_type_string + "base_2x.png")
+	# background path example "res://images/folder_12/dog/dog_level_2star@3x.png"
+	var background = String("res://images/folder_12/" + 
+							self.my_type_string + "/" + 
+							self.my_type_string + "_level_" + 
+							String(num_stars) + "star@3x.png")
 	$background.set_texture(load(background))
 
 ##  I actually don't remember if this is being used to scale the images or just position them.
