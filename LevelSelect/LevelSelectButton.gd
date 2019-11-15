@@ -38,7 +38,7 @@ func set_num_stars(num):
 func set_level(level):
 	# we do not need to remember the level because
 	# LevelSelectScene links the button press to the respective level select
-	var path_to_num = String("res://images/levelselect/numberedplates/base" + String(level).pad_zeros(2) + "_2x.png")
+	var path_to_num = String("res://images/levelselect/numbers/" + String(level).pad_zeros(2) + ".png")
 	$level_number.set_texture(load(path_to_num))
 
 func set_button_type(type = G.TYPE_DOG):
