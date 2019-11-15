@@ -17,6 +17,10 @@ extends Node
 
 # See commit fe6c6bf99ac3c95e500c80c02d5506e4313bb366
 # For the original naming conventions
+# The first digit in each array is the width of the shape.
+# Subsequent digits are binary on/off
+# e.g. [2,1,1] is a horizontal bar width 2.   [1,1,1] is a vertical bar height 2.
+# The layout of the arrays below are ignored by computer, but hopefully useful for humans.
 var shapes = {
 	"bo3": [3,
 			1, 1, 1],
