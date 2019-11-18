@@ -100,5 +100,5 @@ func _input(event):
 			swipe_start = null	# prepare for next swipe
 	elif event is InputEventMouseMotion:
 		if swiping:
-#			print(event.position)
-			canvas_follow_mouse(event.position - swipe_start)
+#			print(event.position)get_viewport().get_mouse_position()
+			canvas_follow_mouse(get_viewport().get_mouse_position() - swipe_start)
