@@ -44,8 +44,8 @@ func set_level(level):
 func set_button_type(type = G.TYPE_DOG):
 	self.my_type = type
 	self.my_type_string = TileDatabase.tiles[my_type]["ITEM_NAME"]
-	# background path example "res://images/folder_12/dog/dog_level_2star@3x.png"
-	var background = String("res://images/folder_12/" + 
+	# background path example "res://images/world_skins/dog/dog_level_2star@3x.png"
+	var background = String("res://images/world_skins/" +
 							self.my_type_string + "/" + 
 							self.my_type_string + "_level_" + 
 							String(num_stars) + "star@3x.png")

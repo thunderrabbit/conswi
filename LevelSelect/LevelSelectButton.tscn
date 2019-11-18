@@ -1,8 +1,10 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://LevelSelect/LevelSelectButton.gd" type="Script" id=1]
-[ext_resource path="res://images/folder_12/dog/dog_level_0star@3x.png" type="Texture" id=2]
+[ext_resource path="res://images/world_skins/dog/dog_level_0star@3x.png" type="Texture" id=2]
 [ext_resource path="res://images/levelselect/numbers/01.png" type="Texture" id=3]
+
+
 
 [node name="LevelSelectButton" type="TextureButton"]
 

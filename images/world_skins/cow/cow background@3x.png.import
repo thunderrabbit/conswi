@@ -1,0 +1,29 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/cow background@3x.png-74e6797528deb1dffbd652e5ce1d71f3.stex"
+
+[deps]
+
+source_file="res://images/world_skins/cow/cow background@3x.png"
+dest_files=[ "res://.import/cow background@3x.png-74e6797528deb1dffbd652e5ce1d71f3.stex" ]
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=true
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+stream=false
+size_limit=0
+detect_3d=true
+svg/scale=1.0
