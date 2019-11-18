@@ -2,9 +2,9 @@
 
 [ext_resource path="res://images/background@2x.png" type="Texture" id=1]
 
-[node name="Background" type="Node"]
+[node name="BackgroundNode" type="Node" index="0"]
 
-[node name="Sprite" type="Sprite" parent="." index="0"]
+[node name="BackgroundSprite" type="Sprite" parent="." index="0"]
 
 scale = Vector2( 0.853355, 0.788124 )
 z_index = -7
