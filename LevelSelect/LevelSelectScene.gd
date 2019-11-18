@@ -45,6 +45,7 @@ func get_world_type():
 func set_world_background(world_type):
 	world_name = TileDatabase.tiles[world_type]["ITEM_NAME"]
 	print("Starting world " + world_name)
+	Background.set_background(world_type)
 	pass
 
 func add_buttons_to_scene(button_type):
