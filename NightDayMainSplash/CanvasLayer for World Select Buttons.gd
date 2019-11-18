@@ -15,6 +15,8 @@
 
 extends CanvasLayer
 
+# How wide should each world select button be?
+# Not 100% so the next one can be seen (so user knows to swipe)
 const button_width_percent_of_screen = 0.70
 
 var cow_texture = preload("res://images/Folder_4/cow world@3x.png")
@@ -24,6 +26,7 @@ var monkey_texture = preload("res://images/Folder_4/monkey world@3x.png")
 var panda_texture = preload("res://images/Folder_4/panda_world@3x.png")
 var rabbit_texture = preload("res://images/Folder_4/rabbit world@3x.png")
 var tiger_texture = preload("res://images/Folder_4/tiger world@3x.png")
+# The order here is the left-to-right ordering of worlds on the side-swipe thing
 var world_textures = [[G.TYPE_DOG,dog_texture]
 					 ,[G.TYPE_COW, cow_texture]
 					 ,[G.TYPE_LION,lion_texture]
@@ -92,4 +95,6 @@ func _input(event):
 			swipe_start = null	# prepare for next swipe
 	elif event is InputEventMouseMotion:
 		if swiping:
+			# let world select images follow mouse cursor.
+			# not sure how to deal with touch
 			canvas_follow_mouse(get_viewport().get_mouse_position() - swipe_start)
