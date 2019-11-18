@@ -29,16 +29,23 @@ var slot_gap_h        = slot_gap
 var slot_gap_v        = slot_gap * 2
 var buttons_across    = 3
 var num_buttons       = 12
+var world_name        = 0
 
 const LevelSelectButton = preload("LevelSelectButton.tscn")
 
 func _init():
 	var world_type = get_world_type()
+	set_world_background(world_type)
 	add_buttons_to_scene(world_type)
 
 func get_world_type():
 	# Helpers.requested_world was set by WorldSelectScene
 	return Helpers.requested_world		# eventually load from local memory
+
+func set_world_background(world_type):
+	world_name = TileDatabase.tiles[world_type]["ITEM_NAME"]
+	print("Starting world " + world_name)
+	pass
 
 func add_buttons_to_scene(button_type):
 	var button_loc = Vector2(0,0)
