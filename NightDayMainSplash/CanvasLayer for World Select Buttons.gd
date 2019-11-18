@@ -59,8 +59,6 @@ func get_button_width():
 	return OS.get_window_size().x * button_width_percent_of_screen
 
 func get_left_anchor(count):
-#	var left_margin = (1-button_width_percent_of_screen) / 2  # this was for anchor_left
-#	var push_right = count * button_width_percent_of_screen   # this was for anchor_left
 	var left_margin = (OS.get_window_size().x - get_button_width()) / 2
 	var push_right = get_button_width() * count
 	return left_margin + push_right
@@ -81,14 +79,6 @@ func canvas_follow_mouse(mouse_offset):
 		new_offset_x = min_right_movement
 	set_offset(Vector2(new_offset_x,0))
 
-func scroll_canvas_left():
-#	print(get_offset())
-	set_offset(Vector2(rand_range(10,100),0))
-
-func scroll_canvas_right():
-#	print(get_offset())
-	set_offset(Vector2(rand_range(10,100),0))
-
 func _input(event):
 	# Mouse in viewport coordinates
 	if event is InputEventMouseButton:
@@ -102,5 +92,4 @@ func _input(event):
 			swipe_start = null	# prepare for next swipe
 	elif event is InputEventMouseMotion:
 		if swiping:
-#			print(event.position)get_viewport().get_mouse_position()
 			canvas_follow_mouse(get_viewport().get_mouse_position() - swipe_start)
