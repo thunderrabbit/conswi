@@ -93,7 +93,9 @@ func _input(event):
 	# Mouse in viewport coordinates
 	if event is InputEventMouseButton:
 		if event.is_pressed():
-			swipe_start = event.position - get_offset()  # get offset is a built-in function for (swiped) distance of sliding world select images
+			# get offset() is a built-in function for realtime
+			# (swiped) distance of sliding world select images
+			swipe_start = event.position - get_offset()
 			swiping = true
 		else:
 			swiping = false
