@@ -74,7 +74,7 @@ var swiping = false			# mouse down to slide buttons
 func canvas_follow_mouse(mouse_offset):
 	var min_left_movement = -1 * get_button_width() * (num_buttons - 1)
 	var min_right_movement = 0
-	var new_offset_x = mouse_offset.x + get_offset().x
+	var new_offset_x = mouse_offset.x
 	if new_offset_x < min_left_movement:
 		new_offset_x = min_left_movement
 	if new_offset_x > min_right_movement:
