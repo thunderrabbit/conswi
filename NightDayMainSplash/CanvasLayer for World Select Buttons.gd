@@ -1,3 +1,5 @@
+#    Allows sideways scrolling of world buttons on WorldSelect.tscn
+#
 #    Copyright (C) 2019  Rob Nugen
 #
 #    This program is free software: you can redistribute it and/or modify

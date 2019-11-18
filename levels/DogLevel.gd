@@ -1,3 +1,5 @@
+#    Sends dog tiles to any level that extends (inherits) this class
+#
 #    Copyright (C) 2018  Rob Nugen
 #
 #    This program is free software: you can redistribute it and/or modify

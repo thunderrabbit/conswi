@@ -1,3 +1,5 @@
+#    Display a finger image to instruct user to do swipes
+#
 #    Copyright (C) 2018  Rob Nugen
 #
 #    This program is free software: you can redistribute it and/or modify
