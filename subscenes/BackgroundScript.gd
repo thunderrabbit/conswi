@@ -28,4 +28,16 @@ func set_background(bg_num = G.TYPE_DOG):
 							my_type_string + "/" + 
 							my_type_string + " background@3x.png")
 	$BackgroundSprite.set_texture(load(background))
-	$BackgroundSprite.apply_scale(Vector2(0.5,0.5))
+	_set_bg_scale()
+
+func _set_bg_scale():
+	var viewportWidth = get_viewport().size.x
+	var viewportHeight = get_viewport().size.y
+
+	var wscale = viewportWidth / $BackgroundSprite.texture.get_size().x
+	var hscale = viewportHeight / $BackgroundSprite.texture.get_size().y
+	
+	# Set same scale value horizontally/vertically to maintain aspect ratio
+	# If however you don't want to maintain aspect ratio, simply set different
+	# scale along x and y
+	$BackgroundSprite.set_scale(Vector2(wscale, hscale))
