@@ -1,9 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://PausedPopup.gd" type="Script" id=1]
 [ext_resource path="res://subscenes/SpinnerLabel.tscn" type="PackedScene" id=2]
+[ext_resource path="res://HUDBottomButtons.gd" type="Script" id=3]
+[ext_resource path="res://images/hud_buttons/back@3x.png" type="Texture" id=4]
 
-[node name="HUD" type="Node2D" index="0"]
+[node name="HUD" type="Node2D"]
+
+_sections_unfolded = [ "Transform" ]
 
 [node name="Button" type="Button" parent="." index="0"]
 
@@ -16,6 +20,7 @@ margin_top = 19.0
 margin_right = 579.0
 margin_bottom = 70.0
 rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 focus_mode = 2
 mouse_filter = 0
 mouse_default_cursor_shape = 0
@@ -42,6 +47,7 @@ margin_top = 17.0
 margin_right = 544.0
 margin_bottom = 580.0
 rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
@@ -61,6 +67,7 @@ margin_top = 67.0
 margin_right = 426.0
 margin_bottom = 485.0
 rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
@@ -82,6 +89,7 @@ margin_top = 365.0
 margin_right = 285.0
 margin_bottom = 408.0
 rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 focus_mode = 2
 mouse_filter = 0
 mouse_default_cursor_shape = 0
@@ -101,11 +109,93 @@ margin_left = 464.0
 margin_top = 863.0
 margin_right = 575.0
 margin_bottom = 948.0
+rect_clip_content = false
 align = 2
 clip_text = true
+
+[node name="BottomButtons" type="Container" parent="." index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 651.0
+margin_bottom = 1284.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+script = ExtResource( 3 )
+
+[node name="BackButton" type="TextureButton" parent="BottomButtons" index="0"]
+
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+margin_top = -255.0
+margin_right = 258.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+texture_normal = ExtResource( 4 )
+_sections_unfolded = [ "Textures" ]
+
+[node name="TextureButton2" type="TextureButton" parent="BottomButtons" index="1"]
+
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -20.0
+margin_top = -40.0
+margin_right = 20.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+
+[node name="TextureButton3" type="TextureButton" parent="BottomButtons" index="2"]
+
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -40.0
+margin_top = -40.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
 
 [connection signal="pressed" from="Button" to="PausedPopup" method="_on_PauseButton_pressed"]
 
 [connection signal="pressed" from="PausedPopup/Button" to="PausedPopup" method="_on_UnpauseButton_pressed"]
+
+[connection signal="pressed" from="BottomButtons/BackButton" to="BottomButtons" method="_on_BackButton_pressed"]
 
 
