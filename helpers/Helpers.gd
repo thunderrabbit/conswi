@@ -41,7 +41,7 @@ var debug_level = 0
 # WorldSelectScript should deal with world permissions
 # WorldSelectScript should deal with world DNE
 var requested_world = 0
-
+var world_slide_position = 0 # to allow same position on return
 # Will be set by LevelSelection scene
 # LevelSelection scene will deal with level entry permissions
 # GameScene will deal with level DNE

@@ -41,6 +41,8 @@ var num_buttons = world_textures.size()
 
 func _ready():
 	add_world_buttons()
+	# won't do anything visibly the first time, but will restore slide when we return
+	_slide_canvas_to_location(Helpers.world_slide_position)
 
 func add_world_buttons():
 	var button_width = get_button_width()
@@ -82,7 +84,12 @@ func canvas_follow_mouse(mouse_offset):
 		new_offset_x = min_left_movement
 	if new_offset_x > min_right_movement:
 		new_offset_x = min_right_movement
-	set_offset(Vector2(new_offset_x,0))
+	Helpers.world_slide_position = new_offset_x
+	set_offset(Vector2(Helpers.world_slide_position,0))
+
+# This is used when we come back to this scene
+func _slide_canvas_to_location(slide_to_location):
+	set_offset(Vector2(slide_to_location,0))
 
 func _input(event):
 	# Mouse in viewport coordinates
