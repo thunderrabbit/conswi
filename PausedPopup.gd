@@ -1,3 +1,5 @@
+#    Script to handle Pause Popup over game
+#
 #    Copyright (C) 2018  Rob Nugen
 #
 #    This program is free software: you can redistribute it and/or modify
