@@ -142,7 +142,10 @@ func new_player():
 	player_position = Vector2(Helpers.slots_across/2, 0)
 	# check game over
 	if Helpers.board[Vector2(player_position.x, player_position.y)] != null:
-		_level_over_prep(G.LEVEL_NO_ROOM)
+		_level_over_prep()
+		_gray_out_tiles()
+		_show_stuff_after_level(G.LEVEL_NO_ROOM)
+
 		return
 
 	player = Helpers.instantiatePlayer(player_position)
