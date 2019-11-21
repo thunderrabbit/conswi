@@ -159,26 +159,40 @@ func new_player():
 #######################################################
 #
 #  Level is over, so we need to turn everything off
-#  Then show the player the results (asynchronously)
-func _level_over_prep(reason):
-	self.level_over_reason = reason
+#
+func _level_over_prep():
 	grok_input(false)	# buttons.level_ended will turn on buttons again
 
 	stop_magnetism()
 	stop_gravity_timer()
 	stop_level_timer()
 
+#######################################################
+#
+#   This is used when the level ended due to winning or losing, not cancelling
+#
+func _gray_out_tiles():
 	# gray out block sprites if existing
 	var existing_players = get_tree().get_nodes_in_group("players")
 	for player in existing_players:
 		player.level_ended()
-	self._show_stuff_after_level(self.level_over_reason)
+
+#######################################################
+#
+#   This is used when the level cancelled by user
+#   Could be used other times if you like to remove all the tiles from game
+#
+func _remove_all_tiles():
+	var existing_players = get_tree().get_nodes_in_group("players")
+	for player in existing_players:
+		player.queue_free()
 
 #######################################################
 #
 #    Need to collect all data to determine number of stars
 #    Then send that info to be displayed asynchronously
 func _show_stuff_after_level(reason):
+	self.level_over_reason = reason		# not sure we need to remember this
 	var collect_info_for_stars = {'reason':reason,
 									'level':self.level_num,
 									'num_tiles':game_hud.level_reqs.num_tiles_required,
@@ -316,10 +330,16 @@ func piece_done_dragged(position):
 	player_position = position
 	start_gravity_timer()		# level timer still going
 
-
+func _exit_tree():
+	_level_over_prep()
+	_remove_all_tiles()		# so they won't linger on screen
 
 func _on_LevelWon():
-	_level_over_prep(G.LEVEL_WIN)
+	_level_over_prep()
+	_gray_out_tiles()
+	_show_stuff_after_level(G.LEVEL_WIN)
 
 func _on_LevelTimer_timeout():
-	_level_over_prep(G.LEVEL_NO_TIME)
+	_level_over_prep()
+	_gray_out_tiles()
+	_show_stuff_after_level(G.LEVEL_NO_TIME)
