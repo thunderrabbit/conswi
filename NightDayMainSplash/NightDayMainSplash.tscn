@@ -5,7 +5,7 @@
 [ext_resource path="res://NightDayMainSplash/MainSplashWithGameName.gd" type="Script" id=3]
 [ext_resource path="res://NightDayMainSplash/CanvasLayer for World Select Buttons.gd" type="Script" id=4]
 
-[node name="WorldSelectScene" type="Node" index="0"]
+[node name="WorldSelectScene" type="Node"]
 
 script = ExtResource( 1 )
 
