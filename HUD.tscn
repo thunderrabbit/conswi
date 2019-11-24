@@ -125,11 +125,12 @@ margin_right = 651.0
 margin_bottom = 1284.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 0
+mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 4 )
+_sections_unfolded = [ "Mouse" ]
 
 [node name="BackButton" type="TextureButton" parent="LSBottomButtons" index="0"]
 
