@@ -21,8 +21,8 @@ func _ready():
 	pass
 
 func showBottomButtons():
-	$BottomButtons.show()
+	$LSBottomButtons.show()
 
 func hideBottomButtons():
-	$BottomButtons.hide()
+	$LSBottomButtons.hide()
 
