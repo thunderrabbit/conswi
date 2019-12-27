@@ -23,7 +23,7 @@
 #   into an array and randomize the array.
 #
 #####################################################################################
-extends "NormalLevel.gd"
+extends "../NormalLevel.gd"
 
 func _init():
 	tiles = [G.TYPE_DOG,G.TYPE_DOG,G.TYPE_DOG,G.TYPE_DOG,G.TYPE_DOG,G.TYPE_DOG,G.TYPE_DOG,G.TYPE_DOG,G.TYPE_DOG,G.TYPE_DOG,G.TYPE_DOG,
