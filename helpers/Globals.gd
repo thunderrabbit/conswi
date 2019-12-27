@@ -40,6 +40,7 @@ const LEVEL_WIN 		= 1
 const LEVEL_NO_ROOM		= 2
 const LEVEL_NO_TIME		= 3
 const LEVEL_NO_TILES	= 4
+const LEVEL_CANCELLED   = 5
 
 # The order of these types must match icon.png
 const TYPE_PIG			= 0
