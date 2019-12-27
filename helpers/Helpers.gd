@@ -79,7 +79,7 @@ func queue_wo_fill():
 			max_tiles_avail > 0:
 		max_tiles_avail = max_tiles_avail - 1
 		# new player will be a random of four colors
-		var new_tile_type_ordinal = TileDatabase.random_type()	
+		var new_tile_type_ordinal = TileDatabase.random_type()
 
 		if upcoming_tiles.size() > 1:
 			new_tile_type_ordinal = upcoming_tiles.front()
@@ -165,6 +165,5 @@ func offset_bottom_center_slot(offset):
 	return Vector2((slots_across-1) / 2, slots_down-1)-offset
 
 func steering_pad_pixels():
-	return Vector2(G.GLOBALleft_space+(G.SLOT_SIZE + G.GLOBALslot_gap_h)*(slots_across / 2), 
+	return Vector2(G.GLOBALleft_space+(G.SLOT_SIZE + G.GLOBALslot_gap_h)*(slots_across / 2),
 				    G.GLOBALtop_space+(G.SLOT_SIZE + G.GLOBALslot_gap_v)*(slots_down))
-
