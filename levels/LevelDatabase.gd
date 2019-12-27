@@ -17,6 +17,23 @@ extends Node
 
 const level_format = "res://levels/%s_%s_%02d.gd"		# normal_welcome_01
 
+var world_names = {}
+
+func _ready():
+    if world_names.empty():
+        # these e.g. G.TYPE_BEAR are defined in helpers/Globals.gd
+        world_names[G.TYPE_PIG] = "pig_world"       # "pig_world" とか filenames do not exist yet
+        world_names[G.TYPE_SHEEP] = "sheep_world"   #                  in the /levels directory
+        world_names[G.TYPE_PANDA] = "panda_world"
+        world_names[G.TYPE_DOG] = "welcome"         # "welcome" is filename in /levels directory
+        world_names[G.TYPE_COW] = "cow_world"
+        world_names[G.TYPE_CAT] = "cat_world"
+        world_names[G.TYPE_BEAR] = "bear_world"
+        world_names[G.TYPE_LION] = "lion_world"
+        world_names[G.TYPE_MONKEY] = "monkey_world"
+        world_names[G.TYPE_RABBIT] = "rabbit_world"
+        world_names[G.TYPE_TIGER] = "tiger_world"
+
 # If a too-large level_num is sent, this will
 # spin down through smaller numbers to find one.
 # Define levels in `levels/` directory
@@ -24,7 +41,7 @@ const level_format = "res://levels/%s_%s_%02d.gd"		# normal_welcome_01
 func getExistingLevelGDScript(which_world_id = TYPE_DOG, level_num = 1):
 	var level_difficulty = "normal"   # TODO add Settings (same as Helpers.gd) and put "normal" into it
                                     #     then Scene > Project Settings > Autoload "Settings"
-	var world_name = "welcome"
+	var world_name = world_names[which_world_id]
 	var level_name = ""
 
 	var levelGDScript = null
