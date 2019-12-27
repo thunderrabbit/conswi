@@ -21,7 +21,7 @@ const level_format = "res://levels/%s_%s_%02d.gd"		# normal_welcome_01
 # spin down through smaller numbers to find one.
 # Define levels in `levels/` directory
 # This is never called without params, but I am hinting to future me what must be sent here
-func getExistingLevelGDScript(level_num):
+func getExistingLevelGDScript(which_world_id = TYPE_DOG, level_num = 1):
 	var level_difficulty = "normal"		# TODO add Settings (same as Helpers.gd) and put "normal" and "welcome" into it
 	var level_group = "welcome"			#      Scene > Project Settings > Autoload
 	var level_name = ""
