@@ -42,16 +42,16 @@ const LEVEL_NO_TIME		= 3
 const LEVEL_NO_TILES	= 4
 const LEVEL_CANCELLED   = 5
 
-# The order of these types must match icon.png
-const TYPE_PIG			= 0
-const TYPE_SHEEP		= 1
-const TYPE_PANDA		= 2
+# The order of these types must match items.png
+const TYPE_PANDA		= 0
+const TYPE_BEAR			= 1
+const TYPE_COW			= 2
 const TYPE_DOG			= 3
-const TYPE_COW			= 4
+const TYPE_MONKEY		= 4
+const TYPE_SHEEP		= 5
+const TYPE_PIG			= 6
 const TYPE_CAT			= 5
-const TYPE_BEAR			= 6
-const TYPE_LION			= 7    # Right now, TYPE_LION and following do not exist in icons, but are on world select screen
-const TYPE_MONKEY		= 8
+const TYPE_LION			= 7    # Right now, TYPE_LION and following do not exist in items, but are on world select screen
 const TYPE_RABBIT		= 9
 const TYPE_TIGER		= 10
 
