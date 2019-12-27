@@ -15,7 +15,7 @@
 
 extends Node
 
-const level_format = "res://levels/%s_%s_%02d.gd"		# normal_welcome_01
+const level_format = "res://levels/%s/%s_%02d.gd"		# DogWorld/normal_01.gd
 
 var world_names = {}
 
@@ -25,8 +25,8 @@ func _ready():
         world_names[G.TYPE_PIG] = "pig_world"       # "pig_world" とか filenames do not exist yet
         world_names[G.TYPE_SHEEP] = "sheep_world"   #                  in the /levels directory
         world_names[G.TYPE_PANDA] = "panda_world"
-        world_names[G.TYPE_DOG] = "welcome"         # "welcome" is filename in /levels directory
-        world_names[G.TYPE_COW] = "cow_world"
+        world_names[G.TYPE_DOG] = "DogWorld"    # "DogWorld" is directory in /levels directory
+        world_names[G.TYPE_COW] = "CowWorld"    # directory inside /levels directory
         world_names[G.TYPE_CAT] = "cat_world"
         world_names[G.TYPE_BEAR] = "bear_world"
         world_names[G.TYPE_LION] = "lion_world"
@@ -45,9 +45,9 @@ func getExistingLevelGDScript(which_world_id = TYPE_DOG, level_num = 1):
 	var level_name = ""
 
 	var levelGDScript = null
-	var sanityCheck = 100
+	var sanityCheck = 20
 	while levelGDScript == null:
-		level_name = level_format % [level_difficulty, world_name, level_num]
+		level_name = level_format % [world_name, level_difficulty, level_num]
 		levelGDScript = load(level_name)
 		level_num = level_num - 1
 		sanityCheck = sanityCheck - 1
