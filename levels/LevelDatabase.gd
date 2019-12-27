@@ -24,13 +24,13 @@ const level_format = "res://levels/%s_%s_%02d.gd"		# normal_welcome_01
 func getExistingLevelGDScript(which_world_id = TYPE_DOG, level_num = 1):
 	var level_difficulty = "normal"   # TODO add Settings (same as Helpers.gd) and put "normal" into it
                                     #     then Scene > Project Settings > Autoload "Settings"
-	var level_group = "welcome"
+	var world_name = "welcome"
 	var level_name = ""
 
 	var levelGDScript = null
 	var sanityCheck = 100
 	while levelGDScript == null:
-		level_name = level_format % [level_difficulty, level_group, level_num]
+		level_name = level_format % [level_difficulty, world_name, level_num]
 		levelGDScript = load(level_name)
 		level_num = level_num - 1
 		sanityCheck = sanityCheck - 1
