@@ -32,29 +32,29 @@ var num_stars = 0
 # must be done before we can set the button type
 # because each button type is split into images based on number of stars
 func set_num_stars(num):
-	num_stars = num
+    num_stars = num
 
 # should be done before we set the type so we know which level to show
 func set_level(level):
-	# we do not need to remember the level because
-	# LevelSelectScene links the button press to the respective level select
-	var path_to_num = String("res://images/levelselect/numbers/" + String(level).pad_zeros(2) + ".png")
-	$level_number.set_texture(load(path_to_num))
+    # we do not need to remember the level because
+    # LevelSelectScene links the button press to the respective level select
+    var path_to_num = String("res://images/levelselect/numbers/" + String(level).pad_zeros(2) + ".png")
+    $level_number.set_texture(load(path_to_num))
 
 func set_button_type(type = G.TYPE_DOG):
-	self.my_type = type
-	self.my_type_string = TileDatabase.tiles[my_type]["ITEM_NAME"]
-	# background path example "res://images/world_skins/dog/dog_level_2star@3x.png"
-	var background = String("res://images/world_skins/" +
-							self.my_type_string + "/" + 
-							self.my_type_string + "_level_" + 
-							String(num_stars) + "star@3x.png")
-	$background.set_texture(load(background))
+    self.my_type = type
+    self.my_type_string = TileDatabase.tiles[my_type]["ITEM_NAME"]
+    # background path example "res://images/world_skins/dog/dog_level_2star@3x.png"
+    var background = String("res://images/world_skins/" +
+                            self.my_type_string + "/" + 
+                            self.my_type_string + "_level_" +
+                            String(num_stars) + "star@3x.png")
+    $background.set_texture(load(background))
 
 ##  I actually don't remember if this is being used to scale the images or just position them.
 func scale_to(scale):
-	$level_number.set_scale(scale * 5)
+    $level_number.set_scale(scale * 5)
 #	print("size is always zero so not sure what is (not) working")
 #	print($background.region_rect.size)
-	$background.set_position($level_number.position + Vector2(0,50+$background.region_rect.size.x))
-	$background.set_scale(scale)
+    $background.set_position($level_number.position + Vector2(0,50+$background.region_rect.size.x))
+    $background.set_scale(scale)

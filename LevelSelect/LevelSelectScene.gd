@@ -34,41 +34,41 @@ var world_name        = 0
 const LevelSelectButton = preload("LevelSelectButton.tscn")
 
 func _init():
-	var world_type = get_world_type()
-	set_world_background(world_type)
-	add_buttons_to_scene(world_type)
+    var world_type = get_world_type()
+    set_world_background(world_type)
+    add_buttons_to_scene(world_type)
 
 func get_world_type():
-	# Helpers.requested_world was set by WorldSelectScene
-	return Helpers.requested_world		# eventually load from local memory
+    # Helpers.requested_world was set by WorldSelectScene
+    return Helpers.requested_world		# eventually load from local memory
 
 func set_world_background(world_type):
-	world_name = TileDatabase.tiles[world_type]["ITEM_NAME"]
-	print("Starting world " + world_name)
-	Background.set_background(world_type)
-	pass
+    world_name = TileDatabase.tiles[world_type]["ITEM_NAME"]
+    print("Starting world " + world_name)
+    Background.set_background(world_type)
+    pass
 
 func add_buttons_to_scene(button_type):
-	var button_loc = Vector2(0,0)
-	for level in range(1,num_buttons+1):
-		button_loc = level_to_pixels(level)
-		var level_but = LevelSelectButton.instance()
-		level_but.set_position(button_loc)
-		level_but.set_level(level)
-		level_but.set_size(Vector2(SLOT_SIZE,SLOT_SIZE))
-		level_but.set_num_stars(Savior.read_num_stars(self.get_world_type(),level))
-		level_but.set_button_type(button_type)
-		level_but.scale_to(Vector2(0.5,0.5))
-		level_but.connect("pressed",self,"_on_Button_pressed",[level])
-		add_child(level_but)
+    var button_loc = Vector2(0,0)
+    for level in range(1,num_buttons+1):
+        button_loc = level_to_pixels(level)
+        var level_but = LevelSelectButton.instance()
+        level_but.set_position(button_loc)
+        level_but.set_level(level)
+        level_but.set_size(Vector2(SLOT_SIZE,SLOT_SIZE))
+        level_but.set_num_stars(Savior.read_num_stars(self.get_world_type(),level))
+        level_but.set_button_type(button_type)
+        level_but.scale_to(Vector2(0.5,0.5))
+        level_but.connect("pressed",self,"_on_Button_pressed",[level])
+        add_child(level_but)
 
 func level_to_pixels(level):
-	# level-1 because we start with 1 above.  Otherwise gap appears in top left corner
-	level = level - 1
-	var slot = Vector2(level % buttons_across, level / buttons_across)
-	return Vector2(left_space+(SLOT_SIZE + slot_gap_h)*(slot.x),
-	                top_space+(SLOT_SIZE + slot_gap_v)*(slot.y))
+    # level-1 because we start with 1 above.  Otherwise gap appears in top left corner
+    level = level - 1
+    var slot = Vector2(level % buttons_across, level / buttons_across)
+    return Vector2(left_space+(SLOT_SIZE + slot_gap_h)*(slot.x),
+                    top_space+(SLOT_SIZE + slot_gap_v)*(slot.y))
 
 func _on_Button_pressed(level):
-	Helpers.requested_level = level
-	get_node("/root/SceneSwitcher").goto_scene("res://Game.tscn")
+    Helpers.requested_level = level
+    get_node("/root/SceneSwitcher").goto_scene("res://Game.tscn")
