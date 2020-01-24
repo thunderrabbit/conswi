@@ -47,8 +47,6 @@ func _on_SplashScreen_Timer_timeout():
 		$StoryOverlay.texture = splash_texture_4
 	elif G.current_screen == 5:
 		$StoryOverlay.texture = splash_texture_5
-	elif G.current_screen == 6:
-		$StoryOverlay.texture = splash_texture_6
 
 
 func _on_PawAgree_button_up():
