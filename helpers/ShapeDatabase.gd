@@ -22,6 +22,14 @@ extends Node
 # e.g. [2,1,1] is a horizontal bar width 2.   [1,1,1] is a vertical bar height 2.
 # The layout of the arrays below are ignored by computer, but hopefully useful for humans.
 var shapes = {
+    "pink_floyd": [7,
+            1,1,1,1,1,1,1,
+            1,1,1,1,1,1,1,
+            1,1,1,1,1,1,1,
+            1,1,1,0,1,1,1,
+            1,1,1,1,1,1,1,
+            1,1,1,1,1,1,1,
+            1,1,1,1,1,1,1],
 	"bo3": [3,
 			1, 1, 1],
 	"bo4": [4,
