@@ -75,9 +75,37 @@ func _ready():
     create_name_to_id()
     randomize()
 
-func random_type():
-    # returns values from 0 to tiles.size() - 1
-    return randi() % 7 # tiles.size()   items.png has only 7 tiles so we cannot go to tiger yet
+# Get the total number of all allowed tiles.
+# e.g. {"dog":3,"cat":2,"mouse":1}  will return 6
+# So we can choose a number from 1 to 6
+# and get a tile randomly by ratios.
+# i.e. Choose "dog" half the time in example above.
+func ratio_total(tile_ratios):
+    var total = 0
+    for tilename in tile_ratios:
+        total = total + tile_ratios[tilename]
+    return total
+
+# returns a named tile type based on a random number between 1 and ratio_total
+func which_type(tile_ratios, random_numerator):
+    var total = 0
+    var return_type = ""
+    for tilename in tile_ratios:
+        total = total + tile_ratios[tilename]
+        if random_numerator <= total:
+            return_type = tilename
+            break
+    # print("random_numerator is ", random_numerator)
+    # print("which_type returns ", return_type)
+    return return_type
+   
+func random_type(tile_ratios):
+    var denominator = ratio_total(tile_ratios)
+    # calculate values from 1 to denominator
+    var random_numerator = 1 + (randi() % denominator)
+    var type_name = which_type(tile_ratios,random_numerator)
+    # return a numeric type based on the levels ratios of types
+    return(idsOfNames[type_name])
 
 func create_name_to_id():
     # fill in idsOfNames so we can look up the name of a swipe given its coordinates
