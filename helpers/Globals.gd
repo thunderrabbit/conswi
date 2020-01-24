@@ -50,10 +50,10 @@ const TYPE_DOG			= 3
 const TYPE_MONKEY		= 4
 const TYPE_SHEEP		= 5
 const TYPE_PIG			= 6
-const TYPE_CAT			= 5
-const TYPE_LION			= 7    # Right now, TYPE_LION and following do not exist in items, but are on world select screen
-const TYPE_RABBIT		= 9
-const TYPE_TIGER		= 10
+const TYPE_CAT			= 0    # CAT is not in items.png or world select screen
+const TYPE_LION			= 0    # Right now, LION and following do not exist in items, but are on world select screen
+const TYPE_RABBIT		= 0
+const TYPE_TIGER		= 0
 
 const STAR_DISPLAY_BONUS = 0
 const STAR_REDUCE_SWIPES = 1
