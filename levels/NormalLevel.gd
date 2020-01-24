@@ -26,6 +26,7 @@ var debug_level = 0			# boolean for now
 var show_finger = false		# will show finger on early levels (only with straight swipes because I do not know how otherwise)
 
 var queue_len = 3			# queue is upcoming tiles
-var tiles = []				# fill this to define tiles
+var tiles = {"dog": 1,
+             "cow": 1}		# fill this to define tile percentages via ratios
 
 var level_requirements = { "bo3":1 }	# should not be empty so levels do not insta-win
