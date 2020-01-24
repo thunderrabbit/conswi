@@ -78,12 +78,8 @@ func queue_wo_fill():
     while queue_upcoming.size() < queue_length and \
             max_tiles_avail > 0:
         max_tiles_avail = max_tiles_avail - 1
-        # new player will be a random of four colors
-        var new_tile_type_ordinal = TileDatabase.random_type()
-
-        if upcoming_tiles.size() > 1:
-            new_tile_type_ordinal = upcoming_tiles.front()
-            upcoming_tiles.pop_front()
+        # new player will be a random of available tile types
+        var new_tile_type_ordinal = TileDatabase.random_type(upcoming_tiles)
 
         # debug overwrites everything and just give same tile
         if self.debug_level == 1:
