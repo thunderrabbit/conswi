@@ -1,5 +1,7 @@
 #    Copyright (C) 2018  Rob Nugen
 #
+#    Converts swipes to names of swipes
+#
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
 #    the Free Software Foundation, either version 3 of the License, or
