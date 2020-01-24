@@ -39,21 +39,21 @@ func _ready():
 # Define levels in `levels/` directory
 # This is never called without params, but I am hinting to future me what must be sent here
 func getExistingLevelGDScript(which_world_id = TYPE_DOG, level_num = 1):
-	var level_difficulty = "normal"   # TODO add Settings (same as Helpers.gd) and put "normal" into it
+    var level_difficulty = "normal"   # TODO add Settings (same as Helpers.gd) and put "normal" into it
                                     #     then Scene > Project Settings > Autoload "Settings"
-	var world_name = world_names[which_world_id]
-	var level_name = ""
+    var world_name = world_names[which_world_id]
+    var level_name = ""
 
-	var levelGDScript = null
-	var sanityCheck = 20
-	while levelGDScript == null:
-		level_name = level_format % [world_name, level_difficulty, level_num]
-		levelGDScript = load(level_name)
-		level_num = level_num - 1
-		sanityCheck = sanityCheck - 1
-		if sanityCheck == 0:
-			level_num = 1
-		if sanityCheck < 0:
-			print("This level name format isn't working ", level_name)
-	print("starting Level ", level_name)
-	return levelGDScript
+    var levelGDScript = null
+    var sanityCheck = 20
+    while levelGDScript == null:
+        level_name = level_format % [world_name, level_difficulty, level_num]
+        levelGDScript = load(level_name)
+        level_num = level_num - 1
+        sanityCheck = sanityCheck - 1
+        if sanityCheck == 0:
+            level_num = 1
+        if sanityCheck < 0:
+            print("This level name format isn't working ", level_name)
+    print("starting Level ", level_name)
+    return levelGDScript

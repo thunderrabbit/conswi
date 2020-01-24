@@ -24,31 +24,31 @@ var splash_texture_5 = preload("res://images/Folder_2.5/05animal suffering@3x.pn
 var splash_texture_6 = preload("res://images/Folder_2.5/06_wide view@3x.png")
 
 func _ready():
-	$Timer.set_wait_time(G.splashscreen_timeout)
-	$Timer.start()
+    $Timer.set_wait_time(G.splashscreen_timeout)
+    $Timer.start()
 
 func _on_SplashScreen_Timer_timeout():
-	if G.current_screen < G.max_spash_screens:
-		G.current_screen = G.current_screen + 1
-		$Timer.start()
-	else:
-		$PawAgreeButton.visible = true
+    if G.current_screen < G.max_spash_screens:
+        G.current_screen = G.current_screen + 1
+        $Timer.start()
+    else:
+        $PawAgreeButton.visible = true
 
-	if G.current_screen > 0 and G.current_screen <= G.max_spash_screens:
-		$StoryOverlay.visible = true
+    if G.current_screen > 0 and G.current_screen <= G.max_spash_screens:
+        $StoryOverlay.visible = true
 
-	if G.current_screen == 1:
-		$StoryOverlay.texture = splash_texture_1
-	elif G.current_screen == 2:
-		$StoryOverlay.texture = splash_texture_2
-	elif G.current_screen == 3:
-		$StoryOverlay.texture = splash_texture_3
-	elif G.current_screen == 4:
-		$StoryOverlay.texture = splash_texture_4
-	elif G.current_screen == 5:
-		$StoryOverlay.texture = splash_texture_5
+    if G.current_screen == 1:
+        $StoryOverlay.texture = splash_texture_1
+    elif G.current_screen == 2:
+        $StoryOverlay.texture = splash_texture_2
+    elif G.current_screen == 3:
+        $StoryOverlay.texture = splash_texture_3
+    elif G.current_screen == 4:
+        $StoryOverlay.texture = splash_texture_4
+    elif G.current_screen == 5:
+        $StoryOverlay.texture = splash_texture_5
 
 
 func _on_PawAgree_button_up():
-		gowhere = "res://NightDayMainSplash/NightDayMainSplash.tscn"
-		SceneSwitcher.goto_scene(gowhere)
+        gowhere = "res://NightDayMainSplash/NightDayMainSplash.tscn"
+        SceneSwitcher.goto_scene(gowhere)

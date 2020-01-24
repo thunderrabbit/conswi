@@ -20,11 +20,11 @@ extends Node
 # var b = "textvar"
 
 func _ready():
-	# Called when the node is added to the scene for the first time.
-	# Initialization here
-	pass
+    # Called when the node is added to the scene for the first time.
+    # Initialization here
+    pass
 
 func world_button_clicked(selected_world_type):
-	print(TileDatabase.tiles[selected_world_type]["ITEM_NAME"])
-	Helpers.requested_world = selected_world_type
-	get_node("/root/SceneSwitcher").goto_scene("res://LevelSelect/LevelSelectScene.tscn")
+    print(TileDatabase.tiles[selected_world_type]["ITEM_NAME"])
+    Helpers.requested_world = selected_world_type
+    get_node("/root/SceneSwitcher").goto_scene("res://LevelSelect/LevelSelectScene.tscn")

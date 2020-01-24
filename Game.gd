@@ -53,135 +53,135 @@ var game_hud
 
 
 func _ready():
-	self.game_hud = GameHUD.new()			# Buttons pre/post level
-	# game_hud is kinda like a HUD but for game, not app
-	self.game_hud.addHUDtoGame(self)
-	add_child(self.game_hud)
+    self.game_hud = GameHUD.new()			# Buttons pre/post level
+    # game_hud is kinda like a HUD but for game, not app
+    self.game_hud.addHUDtoGame(self)
+    add_child(self.game_hud)
 
-	$GameSwipeDetector.Game = self
+    $GameSwipeDetector.Game = self
 
-	Helpers.game_scene = self		# so Players know where to appear
-	time_label = get_node("LevelTimer/LevelTimerLabel")
-	stop_level_timer()
+    Helpers.game_scene = self		# so Players know where to appear
+    time_label = get_node("LevelTimer/LevelTimerLabel")
+    stop_level_timer()
 
-	# tell the Magnetism timer to call Helpers.magnetism_called (every MAGNETISM_TIME seconds)
-	get_node("Magnetism").connect("timeout", get_node("/root/Helpers"), "magnetism_called", [])
+    # tell the Magnetism timer to call Helpers.magnetism_called (every MAGNETISM_TIME seconds)
+    get_node("Magnetism").connect("timeout", get_node("/root/Helpers"), "magnetism_called", [])
 
 
 
-	# TODO: add START button overlay
-	# which will trigger this call:
-	requested_play_level(Helpers.requested_level)
+    # TODO: add START button overlay
+    # which will trigger this call:
+    requested_play_level(Helpers.requested_level)
 
 func requested_replay_level():
-	requested_play_level(Helpers.requested_level)
+    requested_play_level(Helpers.requested_level)
 
 func requested_next_level():
-	Helpers.requested_level = Helpers.requested_level + 1
-	requested_play_level(Helpers.requested_level)
+    Helpers.requested_level = Helpers.requested_level + 1
+    requested_play_level(Helpers.requested_level)
 
 func requested_play_level(level):
-	Helpers.clear_game_board()
-	start_level(level)
+    Helpers.clear_game_board()
+    start_level(level)
 
 func start_level(level_num):
-	set_process(false)		# not sure that this actually helps
-	grok_input(false)		# don't allow keyboard input during display of requirements
-	self.level_num = level_num
-	if always_play_level_zero:
-		self.level_num = 0
+    set_process(false)		# not sure that this actually helps
+    grok_input(false)		# don't allow keyboard input during display of requirements
+    self.level_num = level_num
+    if always_play_level_zero:
+        self.level_num = 0
 
-	### We send world through here but it is not DI into function start_level
-	##  It should at least be sent through like in _ready()
-	#   requested_play_level(Helpers.requested_level)
-	var levelGDScript = LevelDatabase.getExistingLevelGDScript(Helpers.requested_world, self.level_num)
-	current_level = levelGDScript.new()		# load() gets a GDScript and new() instantiates it
-	# now that we have loaded the level, we can tell the game how it wants us to run
-	if self.allow_easy_win:
-		current_level.debug_level = 1
-		current_level.fill_level = true
-	Helpers.grok_level(current_level)	# so we have level info available everywhere
-	GRAVITY_TIMEOUT = current_level.gravity_timeout * self.GRAVITY_FACTOR
+    ### We send world through here but it is not DI into function start_level
+    ##  It should at least be sent through like in _ready()
+    #   requested_play_level(Helpers.requested_level)
+    var levelGDScript = LevelDatabase.getExistingLevelGDScript(Helpers.requested_world, self.level_num)
+    current_level = levelGDScript.new()		# load() gets a GDScript and new() instantiates it
+    # now that we have loaded the level, we can tell the game how it wants us to run
+    if self.allow_easy_win:
+        current_level.debug_level = 1
+        current_level.fill_level = true
+    Helpers.grok_level(current_level)	# so we have level info available everywhere
+    GRAVITY_TIMEOUT = current_level.gravity_timeout * self.GRAVITY_FACTOR
 
-	# turn on buttons and show requirements for level
-	game_hud.startLevel(current_level)
-	$GameSwipeDetector.startLevel()
+    # turn on buttons and show requirements for level
+    game_hud.startLevel(current_level)
+    $GameSwipeDetector.startLevel()
 
 # turn input off for all children while display requirements / show cut scenes and the like
 func grok_input(boolean):
-	game_hud.buttons.grok_input(boolean)
+    game_hud.buttons.grok_input(boolean)
 
 func continue_start_level():
-	# magnetism makes the nailed pieces fall (all pieces in board{})
-	start_magnetism()
+    # magnetism makes the nailed pieces fall (all pieces in board{})
+    start_magnetism()
 
-	# if level timer runs out the level is lost
-	start_level_timer()
+    # if level timer runs out the level is lost
+    start_level_timer()
 
-	# Fill the level halfway, if max_tiles_avail allows it
-	if current_level.fill_level:
-		fill_game_board()
-	new_player()
+    # Fill the level halfway, if max_tiles_avail allows it
+    if current_level.fill_level:
+        fill_game_board()
+    new_player()
 
 func fill_game_board():
-	# top corner is 0,0
-	for across in range(Helpers.slots_across):
-		for down in range(Helpers.slots_down/2, Helpers.slots_down):
-			player_position = Vector2(across, down)
+    # top corner is 0,0
+    for across in range(Helpers.slots_across):
+        for down in range(Helpers.slots_down/2, Helpers.slots_down):
+            player_position = Vector2(across, down)
 
-			player = Helpers.instantiatePlayer(player_position)
-			if player != null:
-				# lock player into position on Helpers.board{}
-				nail_player()
-			else:
-				print("no more tiles available to fill game board!")
+            player = Helpers.instantiatePlayer(player_position)
+            if player != null:
+                # lock player into position on Helpers.board{}
+                nail_player()
+            else:
+                print("no more tiles available to fill game board!")
 
 func new_player():
-	# turn off drop mode
-	drop_mode = false
-	stop_moving()
+    # turn off drop mode
+    drop_mode = false
+    stop_moving()
 
-	# select top center position
-	player_position = Vector2(Helpers.slots_across/2, 0)
-	# check game over
-	if Helpers.board[Vector2(player_position.x, player_position.y)] != null:
-		_level_over_prep()
-		_gray_out_tiles()
-		_show_stuff_after_level(G.LEVEL_NO_ROOM)
+    # select top center position
+    player_position = Vector2(Helpers.slots_across/2, 0)
+    # check game over
+    if Helpers.board[Vector2(player_position.x, player_position.y)] != null:
+        _level_over_prep()
+        _gray_out_tiles()
+        _show_stuff_after_level(G.LEVEL_NO_ROOM)
 
-		return
+        return
 
-	player = Helpers.instantiatePlayer(player_position)
-	if player != null:
-		# Now the player is movable by dragging or by gravity
-		player.set_show_shadow(true)		# The shadow is at bottom, showing where tile will land
-		player.set_draggable(true)			# now that the player is movable, we can drag it
-		set_process(true)					# allows players to move
-		grok_input(true)					# now we can give keyboard input
-		start_gravity_timer()				# gravity needs to account for dragging somehow...
-	else:
-		print("no more tiles available to play game!")
+    player = Helpers.instantiatePlayer(player_position)
+    if player != null:
+        # Now the player is movable by dragging or by gravity
+        player.set_show_shadow(true)		# The shadow is at bottom, showing where tile will land
+        player.set_draggable(true)			# now that the player is movable, we can drag it
+        set_process(true)					# allows players to move
+        grok_input(true)					# now we can give keyboard input
+        start_gravity_timer()				# gravity needs to account for dragging somehow...
+    else:
+        print("no more tiles available to play game!")
 
 #######################################################
 #
 #  Level is over, so we need to turn everything off
 #
 func _level_over_prep():
-	grok_input(false)	# buttons.level_ended will turn on buttons again
+    grok_input(false)	# buttons.level_ended will turn on buttons again
 
-	stop_magnetism()
-	stop_gravity_timer()
-	stop_level_timer()
+    stop_magnetism()
+    stop_gravity_timer()
+    stop_level_timer()
 
 #######################################################
 #
 #   This is used when the level ended due to winning or losing, not cancelling
 #
 func _gray_out_tiles():
-	# gray out block sprites if existing
-	var existing_players = get_tree().get_nodes_in_group("players")
-	for player in existing_players:
-		player.level_ended()
+    # gray out block sprites if existing
+    var existing_players = get_tree().get_nodes_in_group("players")
+    for player in existing_players:
+        player.level_ended()
 
 #######################################################
 #
@@ -189,163 +189,163 @@ func _gray_out_tiles():
 #   Could be used other times if you like to remove all the tiles from game
 #
 func _remove_all_tiles():
-	var existing_players = get_tree().get_nodes_in_group("players")
-	for player in existing_players:
-		player.queue_free()
+    var existing_players = get_tree().get_nodes_in_group("players")
+    for player in existing_players:
+        player.queue_free()
 
 #######################################################
 #
 #    Need to collect all data to determine number of stars
 #    Then send that info to be displayed asynchronously
 func _show_stuff_after_level(reason):
-	self.level_over_reason = reason		# not sure we need to remember this
-	var collect_info_for_stars = {'reason':reason,
-									'level':self.level_num,
-									'num_tiles':game_hud.level_reqs.num_tiles_required,
-									'waste_swipes':$GameSwipeDetector.wasted_swipes
-								}
-	game_hud.stars_after_level.show_stuff_after_level(collect_info_for_stars)
+    self.level_over_reason = reason		# not sure we need to remember this
+    var collect_info_for_stars = {'reason':reason,
+                                    'level':self.level_num,
+                                    'num_tiles':game_hud.level_reqs.num_tiles_required,
+                                    'waste_swipes':$GameSwipeDetector.wasted_swipes
+                                }
+    game_hud.stars_after_level.show_stuff_after_level(collect_info_for_stars)
 
 #######################################################
 #
 #  	signal catcher
 func _on_level_over_stars_displayed():
-	self.level_over_stars_were_displayed()
+    self.level_over_stars_were_displayed()
 
 func level_over_stars_were_displayed():
-	self._level_over_display_buttons(self.level_over_reason)
+    self._level_over_display_buttons(self.level_over_reason)
 
 func _level_over_display_buttons(reason):
-	game_hud.buttons.level_ended(reason)
+    game_hud.buttons.level_ended(reason)
 
 
 func _process(delta):
 
-	if gravity_called:
-		input_y_direction = 1
+    if gravity_called:
+        input_y_direction = 1
 
-	time_label.set_text(str(int(get_node("LevelTimer").get_time_left())))
+    time_label.set_text(str(int(get_node("LevelTimer").get_time_left())))
 
-	# if it has not been long enough, get out of here
-	if (not drop_mode and elapsed_time < MIN_TIME) or (drop_mode and elapsed_time < MIN_DROP_MODE_TIME):
-		elapsed_time += delta
-		return
+    # if it has not been long enough, get out of here
+    if (not drop_mode and elapsed_time < MIN_TIME) or (drop_mode and elapsed_time < MIN_DROP_MODE_TIME):
+        elapsed_time += delta
+        return
 
-	# it has been long enough, so reset the timer before processing
-	elapsed_time = 0
+    # it has been long enough, so reset the timer before processing
+    elapsed_time = 0
 
-	if drop_mode:
-		# turn on drop mode
-		input_y_direction = 1
+    if drop_mode:
+        # turn on drop mode
+        input_y_direction = 1
 
-	# if we can move, move
-	if check_movable(input_x_direction, 0):
-		move_player(input_x_direction, 0)
-	elif check_movable(0, input_y_direction):
-		move_player(0, input_y_direction)
-	else:
-		if input_y_direction > 0:
-			nail_player()
-			new_player()
+    # if we can move, move
+    if check_movable(input_x_direction, 0):
+        move_player(input_x_direction, 0)
+    elif check_movable(0, input_y_direction):
+        move_player(0, input_y_direction)
+    else:
+        if input_y_direction > 0:
+            nail_player()
+            new_player()
 
-	# now that gravity has done its job, we can turn it off
-	if gravity_called:
-		input_y_direction = 0
-		gravity_called = false
+    # now that gravity has done its job, we can turn it off
+    if gravity_called:
+        input_y_direction = 0
+        gravity_called = false
 
 func check_movable(x, y):
-	# x is side to side motion.  -1 = left   1 = right
-	if x == -1 or x == 1:
-		# check border
-		if player_position.x + x >= Helpers.slots_across or player_position.x + x < 0:
-			return false
-		# check collision
-		if Helpers.board[Vector2(player_position.x+x, player_position.y)] != null:
-			return false
-		return true
-	# y is up down motion.  1 = down     -1 = up, but key is not connected
-	if y == -1 or y == 1:
-		# check border
-		if player_position.y + y >= Helpers.slots_down or player_position.y + y < 0:
-			return false
-		if Helpers.board[Vector2(player_position.x, player_position.y+1)] != null:
-			return false
-		return true
+    # x is side to side motion.  -1 = left   1 = right
+    if x == -1 or x == 1:
+        # check border
+        if player_position.x + x >= Helpers.slots_across or player_position.x + x < 0:
+            return false
+        # check collision
+        if Helpers.board[Vector2(player_position.x+x, player_position.y)] != null:
+            return false
+        return true
+    # y is up down motion.  1 = down     -1 = up, but key is not connected
+    if y == -1 or y == 1:
+        # check border
+        if player_position.y + y >= Helpers.slots_down or player_position.y + y < 0:
+            return false
+        if Helpers.board[Vector2(player_position.x, player_position.y+1)] != null:
+            return false
+        return true
 
 func stop_moving():
-	input_x_direction = 0
-	input_y_direction = 0
+    input_x_direction = 0
+    input_y_direction = 0
 
 func _gravity_says_its_time():
-	gravity_called = true
+    gravity_called = true
 
 func start_gravity_timer():
-	var le_timer = get_node("GravityTimer")
-	le_timer.set_wait_time(GRAVITY_TIMEOUT)
-	le_timer.start()
+    var le_timer = get_node("GravityTimer")
+    le_timer.set_wait_time(GRAVITY_TIMEOUT)
+    le_timer.start()
 
 func stop_gravity_timer():
-	var le_timer = get_node("GravityTimer")
-	le_timer.stop()
+    var le_timer = get_node("GravityTimer")
+    le_timer.stop()
 
 func start_level_timer():
-	var le_timer = get_node("LevelTimer")
-	le_timer.set_wait_time(current_level.time_limit_in_sec)
-	le_timer.start()
+    var le_timer = get_node("LevelTimer")
+    le_timer.set_wait_time(current_level.time_limit_in_sec)
+    le_timer.start()
 
 func stop_level_timer():
-	var le_timer = get_node("LevelTimer")
-	le_timer.stop()
+    var le_timer = get_node("LevelTimer")
+    le_timer.stop()
 
 func start_magnetism():
-	var magneto = get_node("Magnetism")
-	magneto.set_wait_time(MAGNETISM_TIME)
-	magneto.start()
+    var magneto = get_node("Magnetism")
+    magneto.set_wait_time(MAGNETISM_TIME)
+    magneto.start()
 
 func stop_magnetism():
-	var magneto = get_node("Magnetism")
-	magneto.stop()
+    var magneto = get_node("Magnetism")
+    magneto.stop()
 
 # move player
 func move_player(x, y):
-	player_position.x += x
-	player_position.y += y
-	player.set_player_position(player_position)
+    player_position.x += x
+    player_position.y += y
+    player.set_player_position(player_position)
 
 # nail player to board
 func nail_player():
-	set_process(false)			# disable motion until next player is created
-	set_process_input(false)	# ignore touches until next player is created
-	stop_gravity_timer()
-	player.nail_player()		# let player do what it needs when it's nailed
+    set_process(false)			# disable motion until next player is created
+    set_process_input(false)	# ignore touches until next player is created
+    stop_gravity_timer()
+    player.nail_player()		# let player do what it needs when it's nailed
 
-	# tell board{} where the player is
-	Helpers.board[Vector2(player_position.x, player_position.y)] = player		## this is the piece so we can find it later
+    # tell board{} where the player is
+    Helpers.board[Vector2(player_position.x, player_position.y)] = player		## this is the piece so we can find it later
 
 ######################################
 #
 #  Called when user starts dragging a piece.
 #  param piece is not needed except for function signature required by .connect function Fixes #26
 func piece_being_dragged(piece):
-	stop_gravity_timer()		# level timer still going
+    stop_gravity_timer()		# level timer still going
 
 ######################################
 #
 #  Called when user stops dragging a piece.
 func piece_done_dragged(position):
-	player_position = position
-	start_gravity_timer()		# level timer still going
+    player_position = position
+    start_gravity_timer()		# level timer still going
 
 func _exit_tree():
-	_level_over_prep()
-	_remove_all_tiles()		# so they won't linger on screen
+    _level_over_prep()
+    _remove_all_tiles()		# so they won't linger on screen
 
 func _on_LevelWon():
-	_level_over_prep()
-	_gray_out_tiles()
-	_show_stuff_after_level(G.LEVEL_WIN)
+    _level_over_prep()
+    _gray_out_tiles()
+    _show_stuff_after_level(G.LEVEL_WIN)
 
 func _on_LevelTimer_timeout():
-	_level_over_prep()
-	_gray_out_tiles()
-	_show_stuff_after_level(G.LEVEL_NO_TIME)
+    _level_over_prep()
+    _gray_out_tiles()
+    _show_stuff_after_level(G.LEVEL_NO_TIME)
