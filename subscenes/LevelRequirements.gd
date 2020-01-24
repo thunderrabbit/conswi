@@ -85,7 +85,12 @@ func display_next_requirement():
         required_shapes_hud[currently_showing_name] = currently_showing_shape
         # after shape has been displayed (and number counted down) we will shrink the shape
         currently_showing_shape.connect("displayed_shape",self,"shape_has_been_displayed")
-        var count_tiles_this_shape = currently_showing_shape.set_shape(ShapeShifter.getBitmapOfSwipeName(currently_showing_name),G.TYPE_DOG)
+        # note we are using ShapeShifter and Helpers here
+        # but not sending them in because I do not know how to send them in via connect().
+        # Godot makes it simple to not worry about this, so Globals it is.
+        # if you want to worry about it, look at shape_has_been_displayed()
+        # and retool how this function is called
+        var count_tiles_this_shape = currently_showing_shape.set_shape(ShapeShifter.getBitmapOfSwipeName(currently_showing_name),Helpers.requested_world)
         var swipe_dimensions = currently_showing_shape.dimensions
         self.num_tiles_required = self.num_tiles_required + count_tiles_this_shape * reqd_qty
         currently_showing_shape.set_position(Helpers.offset_bottom_center_slot_in_pixels(swipe_dimensions))

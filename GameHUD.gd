@@ -40,7 +40,7 @@ func addHUDtoGame(game):
     self.stars_after_level.set_game_scene(self.game)
     add_child(self.stars_after_level)
 
-func startLevel(current_level,current_world):
+func startLevel(current_level):
     self.buttons.prepare_to_play_level()
 
     # These show level requirements, which takes time
