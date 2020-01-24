@@ -22,17 +22,17 @@ var world_names = {}
 func _ready():
     if world_names.empty():
         # these e.g. G.TYPE_BEAR are defined in helpers/Globals.gd
-        world_names[G.TYPE_PANDA] = "panda_world"
-        world_names[G.TYPE_BEAR] = "bear_world"
+        world_names[G.TYPE_PANDA] = "PandaWorld"
+        world_names[G.TYPE_BEAR] = "BearWorld"
         world_names[G.TYPE_COW] = "CowWorld"    # directory inside /levels directory
         world_names[G.TYPE_DOG] = "DogWorld"    # "DogWorld" is directory in /levels directory
-        world_names[G.TYPE_MONKEY] = "monkey_world"
-        world_names[G.TYPE_SHEEP] = "sheep_world"   #                  in the /levels directory
-        world_names[G.TYPE_PIG] = "pig_world"       # "pig_world" とか filenames do not exist yet
-        world_names[G.TYPE_CAT] = "cat_world"
-        world_names[G.TYPE_LION] = "lion_world"
-        world_names[G.TYPE_RABBIT] = "rabbit_world"
-        world_names[G.TYPE_TIGER] = "tiger_world"
+        world_names[G.TYPE_MONKEY] = "MonkeyWorld"
+        world_names[G.TYPE_SHEEP] = "SheepWorld"
+        world_names[G.TYPE_PIG] = "PigWorld"
+        world_names[G.TYPE_CAT] = "CatWorld"    # CatWorld and below do not exist yet
+        world_names[G.TYPE_LION] = "LionWorld"
+        world_names[G.TYPE_RABBIT] = "RabbitWorld"
+        world_names[G.TYPE_TIGER] = "TigerWorld"
 
 # If a too-large level_num is sent, this will
 # spin down through smaller numbers to find one.
