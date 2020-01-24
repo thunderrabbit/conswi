@@ -25,29 +25,29 @@ var level_reqs				# HUD showing level requirements
 var stars_after_level		# Show stars after level is over
 
 func addHUDtoGame(game):
-	self.game = game
+    self.game = game
 
-	# buttons are kinda like a HUD but for input, not output
-	self.buttons = Buttons.new()			# Buttons pre/post level
-	self.buttons.set_game_scene(self.game)
-	add_child(self.buttons)
+    # buttons are kinda like a HUD but for input, not output
+    self.buttons = Buttons.new()			# Buttons pre/post level
+    self.buttons.set_game_scene(self.game)
+    add_child(self.buttons)
 
-	level_reqs = LevelRequirements.instance()
-	level_reqs.set_game_scene(self.game)
-	add_child(level_reqs)
+    level_reqs = LevelRequirements.instance()
+    level_reqs.set_game_scene(self.game)
+    add_child(level_reqs)
 
-	self.stars_after_level = StarsAfterLevel.instance()
-	self.stars_after_level.set_game_scene(self.game)
-	add_child(self.stars_after_level)
+    self.stars_after_level = StarsAfterLevel.instance()
+    self.stars_after_level.set_game_scene(self.game)
+    add_child(self.stars_after_level)
 
-func startLevel(current_level):
-	self.buttons.prepare_to_play_level()
+func startLevel(current_level,current_world):
+    self.buttons.prepare_to_play_level()
 
-	# These show level requirements, which takes time
-	# after these animations complete, continue_start_level()
-	# is called via signal `requirements_shown` by LevelRequirements.gd
-	self.level_reqs.show_finger_ka(current_level.show_finger)
-	self.level_reqs.level_requires(current_level.level_requirements)
+    # These show level requirements, which takes time
+    # after these animations complete, continue_start_level()
+    # is called via signal `requirements_shown` by LevelRequirements.gd
+    self.level_reqs.show_finger_ka(current_level.show_finger)
+    self.level_reqs.level_requires(current_level.level_requirements)
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.
