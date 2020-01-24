@@ -76,7 +76,8 @@ func _ready():
     randomize()
 
 func random_type():
-    return randi() % tiles.size()
+    # returns values from 0 to tiles.size() - 1
+    return randi() % 7 # tiles.size()   items.png has only 7 tiles so we cannot go to tiger yet
 
 func create_name_to_id():
     # fill in idsOfNames so we can look up the name of a swipe given its coordinates
