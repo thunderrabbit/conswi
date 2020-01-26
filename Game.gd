@@ -199,6 +199,9 @@ func _remove_all_tiles():
 #    Then send that info to be displayed asynchronously
 func _show_stuff_after_level(reason):
     self.level_over_reason = reason		# not sure we need to remember this
+    # Will only change background if they lost
+    # Because winning brings a happy popup
+    Background.set_background_after_level(reason)
     var collect_info_for_stars = {'reason':reason,
                                     'level':self.level_num,
                                     'num_tiles':game_hud.level_reqs.num_tiles_required,

@@ -19,25 +19,33 @@ extends Node
 var default_texture = preload("res://images/background@2x.png")
 
 func _ready():
-	$BackgroundSprite.texture = default_texture
+    $BackgroundSprite.texture = default_texture
 
 func set_game_background(bg_num = G.TYPE_DOG):
-	var my_type_string = TileDatabase.tiles[bg_num]["ITEM_NAME"]
-	# background path example "res://images/world_skins/cow/cow background@3x.png"
-	var background = String("res://images/world_skins/" +
-							my_type_string + "/" + 
-							my_type_string + " background@3x.png")
-	$BackgroundSprite.set_texture(load(background))
-	_set_bg_scale()
+    var my_type_string = TileDatabase.tiles[bg_num]["ITEM_NAME"]
+    # background path example "res://images/world_skins/cow/cow background@3x.png"
+    var background = String("res://images/world_skins/" +
+                            my_type_string + "/" + 
+                            my_type_string + " background@3x.png")
+    $BackgroundSprite.set_texture(load(background))
+    _set_bg_scale()
+
+func set_background_after_level(reason):
+    var fail_background = String("res://images/level_over/failedillustration@3x.png")
+    if reason != G.LEVEL_WIN:
+        $BackgroundSprite.set_texture(load(fail_background))
+    else:
+        # The HUD will pop up a happy image but do not change background
+        pass
 
 func _set_bg_scale():
-	var viewportWidth = get_viewport().size.x
-	var viewportHeight = get_viewport().size.y
+    var viewportWidth = get_viewport().size.x
+    var viewportHeight = get_viewport().size.y
 
-	var wscale = viewportWidth / $BackgroundSprite.texture.get_size().x
-	var hscale = viewportHeight / $BackgroundSprite.texture.get_size().y
-	
-	# Set same scale value horizontally/vertically to maintain aspect ratio
-	# If however you don't want to maintain aspect ratio, simply set different
-	# scale along x and y
-	$BackgroundSprite.set_scale(Vector2(wscale, hscale))
+    var wscale = viewportWidth / $BackgroundSprite.texture.get_size().x
+    var hscale = viewportHeight / $BackgroundSprite.texture.get_size().y
+    
+    # Set same scale value horizontally/vertically to maintain aspect ratio
+    # If however you don't want to maintain aspect ratio, simply set different
+    # scale along x and y
+    $BackgroundSprite.set_scale(Vector2(wscale, hscale))
