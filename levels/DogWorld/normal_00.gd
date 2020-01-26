@@ -19,14 +19,5 @@ func _init():
     fill_level = true
     gravity_timeout = 1000
     debug_level = 0
-    tiles = [G.TYPE_DOG,
-            G.TYPE_DOG,
-            G.TYPE_DOG,
-            G.TYPE_CAT,
-            G.TYPE_CAT,
-            G.TYPE_CAT,
-            G.TYPE_CAT,
-            G.TYPE_DOG,
-            G.TYPE_CAT,
-            G.TYPE_DOG]
+    tiles = {"dog":3,"cow":1,"bear":1}
     max_tiles_avail = 1330

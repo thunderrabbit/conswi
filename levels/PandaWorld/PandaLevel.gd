@@ -26,4 +26,4 @@
 extends "../NormalLevel.gd"
 
 func _init():
-     tiles = {"panda":1}
+     tiles = {"panda":1,"dog":3,"cow":1,"bear":1}
