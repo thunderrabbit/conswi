@@ -68,6 +68,11 @@ func start_swipe_effect():
 #	effect.start()
     hide()
 
+# Used when game is over, prevents mouse interaction
+# Once on device, probably need to prevent other (touch?) interactions.
+func ignore_touches():
+    self.swipe_options = SwipeOptions.CANNOT
+
 # only the Player tiles will be set draggable (not the shadows)
 func set_draggable(candrag):
     if candrag:
@@ -144,4 +149,3 @@ func _on_Segment_mouse_exited():
         print("but not swipeable")
         return
     emit_signal("exited", Helpers.pixels_to_slot(get_position()), self.tile_type)
-

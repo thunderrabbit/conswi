@@ -107,6 +107,7 @@ func level_ended():
         mytouchzone.set_process_input(false)
         mytouchzone.set_pickable(false)
     darken()
+    mytile.ignore_touches()
 
 func remove_yourself():
     remove_from_group("players")
