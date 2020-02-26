@@ -119,7 +119,6 @@ func _on_Segment_can_drag(event):
             swipe_state = SwipeState.IDLE
 
 func _on_Segment_can_swipe(event):
-    print("swipe seg clicked or unclicked")
     if swipe_options != SwipeOptions.CAN_SWIPE:
         print("but not swipable (wtf how did we get past gateway func)")
         return
