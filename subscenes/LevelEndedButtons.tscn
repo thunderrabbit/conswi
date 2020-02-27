@@ -1,13 +1,14 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://subscenes/LevelEndedButtons.gd" type="Script" id=1]
-[ext_resource path="res://images/buttons/you_win.png" type="Texture" id=2]
+[ext_resource path="res://images/level_over/winningillustration@3x.png" type="Texture" id=2]
 [ext_resource path="res://images/buttons/try_again.png" type="Texture" id=3]
 [ext_resource path="res://images/buttons/main_menu.png" type="Texture" id=4]
 [ext_resource path="res://images/buttons/next_level.png" type="Texture" id=5]
 
 [sub_resource type="DynamicFontData" id=1]
 
+hinting = 2
 font_path = ""
 
 [sub_resource type="DynamicFont" id=2]
@@ -24,9 +25,10 @@ script = ExtResource( 1 )
 
 [node name="LevelOverTitle" type="Sprite" parent="." index="0"]
 
-position = Vector2( 320.768, 152.813 )
-scale = Vector2( 2.09385, 2.05092 )
+position = Vector2( 324.984, 633.879 )
+scale = Vector2( 0.516122, 0.546336 )
 texture = ExtResource( 2 )
+_sections_unfolded = [ "Animation", "Offset", "Region", "Transform", "Z Index" ]
 
 [node name="TryAgain" type="Button" parent="." index="1"]
 
