@@ -32,22 +32,29 @@ func level_over_reason(reason):
     if reason == G.LEVEL_WIN:
         get_node("LevelOverTitle").hide()   # it is already hidden in the 2D scene just reiterate here
         get_node("LevelOverOverlay").set_texture(preload("res://images/level_over/winningillustration@3x.png"))
+        get_node("LevelOverOverlay").show() #  the lose background was in BackgroundScript.gd but might move it here
     if reason == G.LEVEL_NO_ROOM:
-        get_node("LevelOverTitle").show()   # it is hidden in the 2D scene because win title is baked in
-        get_node("LevelOverTitle").set_texture(preload("res://images/buttons/no_room.png"))
+        get_node("LevelOverTitle").hide()   # switch to show in case we add lose titles
+        get_node("LevelOverOverlay").set_texture(preload("res://images/level_over/failedillustration@3x.png")) #  the lose background was in BackgroundScript.gd but might move it here
+        get_node("LevelOverOverlay").show() #  the lose background was in BackgroundScript.gd but might move it here
     if reason == G.LEVEL_NO_TIME:
-        get_node("LevelOverTitle").show()   # it is hidden in the 2D scene because win title is baked in
-        get_node("LevelOverTitle").set_texture(preload("res://images/buttons/time_up.png"))
+        get_node("LevelOverTitle").hide()   # switch to show in case we add lose titles
+        get_node("LevelOverOverlay").set_texture(preload("res://images/level_over/failedillustration@3x.png")) #  the lose background was in BackgroundScript.gd but might move it here
+        get_node("LevelOverOverlay").show() #  the lose background was in BackgroundScript.gd but might move it here
     if reason == G.LEVEL_NO_TILES:
-        get_node("LevelOverTitle").show()   # it is hidden in the 2D scene because win title is baked in
-        get_node("LevelOverTitle").set_texture(preload("res://images/buttons/no_tiles.png"))
+        get_node("LevelOverTitle").hide()   # switch to show in case we add lose titles
+        get_node("LevelOverOverlay").set_texture(preload("res://images/level_over/failedillustration@3x.png")) #  the lose background was in BackgroundScript.gd but might move it here
+        get_node("LevelOverOverlay").show() #  the lose background was in BackgroundScript.gd but might move it here
 
 func _on_TryAgain_pressed():
+    get_node("LevelOverOverlay").hide() #  the lose background was in BackgroundScript.gd but might move it here
     game_scene.requested_replay_level()
 
 func _on_MainMenu_pressed():
     Helpers.clear_game_board() # so no tiles appear behind the main menu buttons
+    get_node("LevelOverOverlay").hide() #  the lose background was in BackgroundScript.gd but might move it here
     get_node("/root/SceneSwitcher").goto_scene("res://LevelSelect/LevelSelectScene.tscn")
 
 func _on_NextLevel_pressed():
+    get_node("LevelOverOverlay").hide() #  the lose background was in BackgroundScript.gd but might move it here
     game_scene.requested_next_level()
