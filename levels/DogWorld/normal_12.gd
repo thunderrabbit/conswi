@@ -13,12 +13,10 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-extends "NormalLevel.gd"
+extends "DogLevel.gd"
 
 func _init():
-    fill_level = 0
-    gravity_timeout = 10000
-    debug_level = 0
-    tiles = {"dog":3,"cow":1,"bear":1}
-    queue_len = 1
-    max_tiles_avail = 25
+    tiles = {"dog":9,"cow":1,"bear":1,"panda":1}
+    max_tiles_avail = 8150
+    time_limit_in_sec = 8390
+    level_requirements = { "pink_floyd":1 }
