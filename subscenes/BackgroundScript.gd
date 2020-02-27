@@ -28,11 +28,3 @@ func set_game_background(bg_num = G.TYPE_DOG):
                             my_type_string + "/" + 
                             my_type_string + " background@3x.png")
     $BackgroundSprite.set_texture(load(background))
-
-func set_background_after_level(reason):
-    var fail_background = String("res://images/level_over/failedillustration@3x.png")
-    if reason != G.LEVEL_WIN:
-        $BackgroundSprite.set_texture(load(fail_background))
-    else:
-        # The HUD will pop up a happy image but do not change background
-        pass
