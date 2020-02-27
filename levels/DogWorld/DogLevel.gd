@@ -27,3 +27,4 @@ extends "../NormalLevel.gd"
 
 func _init():
     tiles = {"dog":3,"cow":0,"bear":0,"panda":0}
+    fill_level = true    # make it easy to test etc
