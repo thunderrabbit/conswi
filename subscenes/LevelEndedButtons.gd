@@ -27,13 +27,19 @@ func _ready():
 
 func level_over_reason(reason):
     print(reason)
+    # Feb 2020 turn detailed failure to just have win or lose.
+    # This is effed because the images are full BG images, but the node is "LevelOverTitle"
     if reason == G.LEVEL_WIN:
-        get_node("LevelOverTitle").set_texture(preload("res://images/buttons/you_win.png"))
+        get_node("LevelOverTitle").hide()   # it is already hidden in the 2D scene just reiterate here
+        get_node("LevelOverOverlay").set_texture(preload("res://images/level_over/winningillustration@3x.png"))
     if reason == G.LEVEL_NO_ROOM:
+        get_node("LevelOverTitle").show()   # it is hidden in the 2D scene because win title is baked in
         get_node("LevelOverTitle").set_texture(preload("res://images/buttons/no_room.png"))
     if reason == G.LEVEL_NO_TIME:
+        get_node("LevelOverTitle").show()   # it is hidden in the 2D scene because win title is baked in
         get_node("LevelOverTitle").set_texture(preload("res://images/buttons/time_up.png"))
     if reason == G.LEVEL_NO_TILES:
+        get_node("LevelOverTitle").show()   # it is hidden in the 2D scene because win title is baked in
         get_node("LevelOverTitle").set_texture(preload("res://images/buttons/no_tiles.png"))
 
 func _on_TryAgain_pressed():
