@@ -28,13 +28,13 @@ func _ready():
     $Timer.start()
 
 func _on_SplashScreen_Timer_timeout():
-    if G.current_screen < G.max_spash_screens:
+    if G.current_screen < G.max_splash_screens:
         G.current_screen = G.current_screen + 1
         $Timer.start()
     else:
         $PawAgreeButton.visible = true
 
-    if G.current_screen > 0 and G.current_screen <= G.max_spash_screens:
+    if G.current_screen > 0 and G.current_screen <= G.max_splash_screens:
         $StoryOverlay.visible = true
 
     if G.current_screen == 1:
