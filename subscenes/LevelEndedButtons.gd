@@ -34,7 +34,7 @@ func show_lose_buttons_on_bottom():
 func show_win_buttons_on_bottom():
     $TryAgain.hide()
     $NextLevel.show()
-    $WorldMenu.show()
+    $WorldMenu.hide()
     $LevelSelect.show()
 
 func level_over_reason(reason):
