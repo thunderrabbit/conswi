@@ -28,13 +28,13 @@ func _ready():
 func show_lose_buttons_on_bottom():
     $TryAgain.show()
     $NextLevel.hide()
-    $MainMenu.show()
+    $WorldMenu.show()
     $LevelSelect.show()
 
 func show_win_buttons_on_bottom():
     $TryAgain.hide()
     $NextLevel.show()
-    $MainMenu.show()
+    $WorldMenu.show()
     $LevelSelect.show()
 
 func level_over_reason(reason):
@@ -70,6 +70,11 @@ func _on_MainMenu_pressed():
     Helpers.clear_game_board() # so no tiles appear behind the main menu buttons
     get_node("LevelOverOverlay").hide() #  the lose background was in BackgroundScript.gd but might move it here
     get_node("/root/SceneSwitcher").goto_scene("res://LevelSelect/LevelSelectScene.tscn")
+
+func _on_WorldMenu_pressed():
+    Helpers.clear_game_board() # so no tiles appear behind the main menu buttons
+    get_node("LevelOverOverlay").hide() #  the lose background was in BackgroundScript.gd but might move it here
+    get_node("/root/SceneSwitcher").goto_scene("res://NightDayMainSplash/NightDayMainSplash.tscn")
 
 func _on_NextLevel_pressed():
     get_node("LevelOverOverlay").hide() #  the lose background was in BackgroundScript.gd but might move it here
