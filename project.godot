@@ -31,8 +31,8 @@ Background="*res://subscenes/Background.tscn"
 
 [display]
 
-window/size/width=640
-window/size/height=1280
+window/size/width=1242
+window/size/height=2688
 window/handheld/orientation="portrait"
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
