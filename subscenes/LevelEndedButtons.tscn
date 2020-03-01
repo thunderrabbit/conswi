@@ -1,11 +1,12 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://subscenes/LevelEndedButtons.gd" type="Script" id=1]
 [ext_resource path="res://images/buttons/you_win.png" type="Texture" id=2]
 [ext_resource path="res://images/level_over/winningillustration@3x.png" type="Texture" id=3]
-[ext_resource path="res://images/buttons/try_again.png" type="Texture" id=4]
-[ext_resource path="res://images/buttons/main_menu.png" type="Texture" id=5]
-[ext_resource path="res://images/buttons/next_level.png" type="Texture" id=6]
+[ext_resource path="res://images/buttons/lose_retry@3x.png" type="Texture" id=4]
+[ext_resource path="res://images/buttons/win_back@3x.png" type="Texture" id=5]
+[ext_resource path="res://images/buttons/win_home@3x.png" type="Texture" id=6]
+[ext_resource path="res://images/buttons/win_next@3x.png" type="Texture" id=7]
 
 [sub_resource type="DynamicFontData" id=1]
 
@@ -45,10 +46,11 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 148.0
-margin_top = 314.0
-margin_right = 463.0
-margin_bottom = 465.0
+margin_left = 486.0
+margin_top = 1080.0
+margin_right = 753.0
+margin_bottom = 1341.0
+rect_scale = Vector2( 0.5, 0.5 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -63,18 +65,19 @@ group = null
 icon = ExtResource( 4 )
 flat = false
 align = 1
-_sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Margin", "Mouse", "Size Flags" ]
+_sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Margin", "Mouse", "Rect", "Size Flags" ]
 
-[node name="MainMenu" type="Button" parent="." index="3"]
+[node name="LevelSelect" type="Button" parent="." index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 145.0
-margin_top = 571.0
-margin_right = 460.0
-margin_bottom = 722.0
+margin_left = 31.0
+margin_top = 1088.0
+margin_right = 346.0
+margin_bottom = 1349.0
+rect_scale = Vector2( 0.5, 0.5 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -89,17 +92,19 @@ group = null
 icon = ExtResource( 5 )
 flat = false
 align = 1
+_sections_unfolded = [ "Rect" ]
 
-[node name="NextLevel" type="Button" parent="." index="4"]
+[node name="MainMenu" type="Button" parent="." index="4"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 147.0
-margin_top = 822.0
-margin_right = 462.0
-margin_bottom = 973.0
+margin_left = 250.0
+margin_top = 1083.0
+margin_right = 601.0
+margin_bottom = 1362.0
+rect_scale = Vector2( 0.5, 0.5 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -114,9 +119,37 @@ group = null
 icon = ExtResource( 6 )
 flat = false
 align = 1
-_sections_unfolded = [ "Anchor" ]
+_sections_unfolded = [ "Rect" ]
 
-[node name="RichTextLabel" type="RichTextLabel" parent="." index="5"]
+[node name="NextLevel" type="Button" parent="." index="5"]
+
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 476.0
+margin_top = 1076.0
+margin_right = 791.0
+margin_bottom = 1409.0
+rect_scale = Vector2( 0.5, 0.5 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+icon = ExtResource( 7 )
+flat = false
+align = 1
+_sections_unfolded = [ "Anchor", "Rect" ]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." index="6"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -147,6 +180,8 @@ override_selected_font_color = false
 _sections_unfolded = [ "Size Flags", "Theme", "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
 
 [connection signal="pressed" from="TryAgain" to="." method="_on_TryAgain_pressed"]
+
+[connection signal="pressed" from="LevelSelect" to="." method="_on_MainMenu_pressed"]
 
 [connection signal="pressed" from="MainMenu" to="." method="_on_MainMenu_pressed"]
 
