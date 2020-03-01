@@ -25,23 +25,57 @@ func _ready():
     # Initialization here
     pass
 
+func show_lose_buttons_on_bottom():
+    $TryAgain.show()
+    $NextLevel.hide()
+    $WorldMenu.show()
+    $LevelSelect.show()
+
+func show_win_buttons_on_bottom():
+    $TryAgain.hide()
+    $NextLevel.show()
+    $WorldMenu.hide()
+    $LevelSelect.show()
+
 func level_over_reason(reason):
     print(reason)
+    # Feb 2020 turn detailed failure to just have win or lose.
+    # This is effed because the images are full BG images, but the node is "LevelOverTitle"
     if reason == G.LEVEL_WIN:
-        get_node("LevelOverTitle").set_texture(preload("res://images/buttons/you_win.png"))
+        show_win_buttons_on_bottom()
+        get_node("LevelOverTitle").hide()   # it is already hidden in the 2D scene just reiterate here
+        get_node("LevelOverOverlay").set_texture(preload("res://images/level_over/winningillustration@3x.png"))
+        get_node("LevelOverOverlay").show() #  the lose background was in BackgroundScript.gd but might move it here
     if reason == G.LEVEL_NO_ROOM:
-        get_node("LevelOverTitle").set_texture(preload("res://images/buttons/no_room.png"))
+        show_lose_buttons_on_bottom()
+        get_node("LevelOverTitle").hide()   # switch to show in case we add lose titles
+        get_node("LevelOverOverlay").set_texture(preload("res://images/level_over/failedillustration@3x.png")) #  the lose background was in BackgroundScript.gd but might move it here
+        get_node("LevelOverOverlay").show() #  the lose background was in BackgroundScript.gd but might move it here
     if reason == G.LEVEL_NO_TIME:
-        get_node("LevelOverTitle").set_texture(preload("res://images/buttons/time_up.png"))
+        show_lose_buttons_on_bottom()
+        get_node("LevelOverTitle").hide()   # switch to show in case we add lose titles
+        get_node("LevelOverOverlay").set_texture(preload("res://images/level_over/failedillustration@3x.png")) #  the lose background was in BackgroundScript.gd but might move it here
+        get_node("LevelOverOverlay").show() #  the lose background was in BackgroundScript.gd but might move it here
     if reason == G.LEVEL_NO_TILES:
-        get_node("LevelOverTitle").set_texture(preload("res://images/buttons/no_tiles.png"))
+        show_lose_buttons_on_bottom()
+        get_node("LevelOverTitle").hide()   # switch to show in case we add lose titles
+        get_node("LevelOverOverlay").set_texture(preload("res://images/level_over/failedillustration@3x.png")) #  the lose background was in BackgroundScript.gd but might move it here
+        get_node("LevelOverOverlay").show() #  the lose background was in BackgroundScript.gd but might move it here
 
 func _on_TryAgain_pressed():
+    get_node("LevelOverOverlay").hide() #  the lose background was in BackgroundScript.gd but might move it here
     game_scene.requested_replay_level()
 
 func _on_MainMenu_pressed():
     Helpers.clear_game_board() # so no tiles appear behind the main menu buttons
+    get_node("LevelOverOverlay").hide() #  the lose background was in BackgroundScript.gd but might move it here
     get_node("/root/SceneSwitcher").goto_scene("res://LevelSelect/LevelSelectScene.tscn")
 
+func _on_WorldMenu_pressed():
+    Helpers.clear_game_board() # so no tiles appear behind the main menu buttons
+    get_node("LevelOverOverlay").hide() #  the lose background was in BackgroundScript.gd but might move it here
+    get_node("/root/SceneSwitcher").goto_scene("res://NightDayMainSplash/NightDayMainSplash.tscn")
+
 func _on_NextLevel_pressed():
+    get_node("LevelOverOverlay").hide() #  the lose background was in BackgroundScript.gd but might move it here
     game_scene.requested_next_level()
