@@ -20,6 +20,7 @@ extends CanvasLayer
 # How wide should each world select button be?
 # Not 100% so the next one can be seen (so user knows to swipe)
 const button_width_percent_of_screen = 0.70
+const button_gap_percent_of_button_width = 0.15    # this puts a gap between the world select circles
 
 var cow_texture = preload("res://images/Folder_4/cow world@3x.png")
 var dog_texture = preload("res://images/Folder_4/dog world@3x.png")
@@ -67,7 +68,7 @@ func get_button_width():
 
 func get_left_anchor(count):
     var left_margin = (OS.get_window_size().x - get_button_width()) / 2
-    var push_right = get_button_width() * count
+    var push_right = get_button_width() * (1 + button_gap_percent_of_button_width) * count
     return left_margin + push_right
 
 
@@ -77,7 +78,7 @@ var swipe_start = null
 var swiping = false			# mouse down to slide buttons
 
 func canvas_follow_mouse(mouse_offset):
-    var min_left_movement = -1 * get_button_width() * (num_buttons - 1)
+    var min_left_movement = -1 * get_button_width() * (1 + button_gap_percent_of_button_width) * (num_buttons - 1)
     var min_right_movement = 0
     var new_offset_x = mouse_offset.x
     if new_offset_x < min_left_movement:
