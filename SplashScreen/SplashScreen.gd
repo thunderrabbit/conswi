@@ -28,6 +28,12 @@ func _ready():
     $Timer.start()
 
 func _on_SplashScreen_Timer_timeout():
+    var viewportHeight = OS.get_window_size().y
+    var viewportWidth = OS.get_window_size().x
+
+ #   print(viewportWidth)
+    print(")",viewportWidth, ", ", viewportHeight,"(")
+    var scale = 0
     if G.current_screen < G.max_splash_screens:
         G.current_screen = G.current_screen + 1
         $Timer.start()
@@ -47,6 +53,24 @@ func _on_SplashScreen_Timer_timeout():
         $StoryOverlay.texture = splash_texture_4
     elif G.current_screen == 5:
         $StoryOverlay.texture = splash_texture_5
+
+    print(OS.get_window_size())
+
+    print("this is texture size ", $StoryOverlay.texture.get_size())
+    scale = viewportWidth / $StoryOverlay.texture.get_size().x
+#    print("scale W", scale)
+    scale = viewportHeight / $StoryOverlay.texture.get_size().y
+#    print("scale H", scale)
+    scale = 1
+    # Optional: Center the sprite, required only if the sprite's Offset>Centered checkbox is set
+    $StoryOverlay.set_position(Vector2($StoryOverlay.texture.get_size().x/2, $StoryOverlay.texture.get_size().y/2))
+#    print(Vector2(viewportWidth/2, viewportHeight/2))
+#    print("leafy lefou rainforest")
+
+    # $StoryOverlay.set_position(Vector2(0,0))
+
+    # Set same scale value horizontally/vertically to maintain aspect ratio
+    $StoryOverlay.set_scale(Vector2(scale, scale))
 
 
 func _on_PawAgree_button_up():
