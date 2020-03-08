@@ -21,7 +21,7 @@ var splash_texture_2 = preload("res://images/Folder_2.5/02planet@3x_.png")
 var splash_texture_3 = preload("res://images/Folder_2.5/03animal living happily@3x.png")
 var splash_texture_4 = preload("res://images/Folder_2.5/04planet disaster@3x.png")
 var splash_texture_5 = preload("res://images/Folder_2.5/05animal suffering@3x.png")
-var splash_texture_6 = preload("res://images/Folder_2.5/06_wide view@3x.png")
+# deemed to not make sense var splash_texture_6 = preload("res://images/Folder_2.5/06_wide view@3x.png")
 
 func _ready():
     $Timer.set_wait_time(G.splashscreen_timeout)
