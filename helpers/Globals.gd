@@ -23,7 +23,7 @@ extends Node
 
 const finger_swipe_duration = .3		# how many seconds finger shows how to swipe
 const splashscreen_timeout = 2.3		# how many seconds to wait on splash screen
-const max_splash_screens    = 6		# there are several splash screens
+const max_splash_screens    = 5		# there are several splash screens
 var   current_screen = 0			# which screen to start
 
 ##  http://www.gamefromscratch.com/post/2015/02/23/Godot-Engine-Tutorial-Part-6-Multiple-Scenes-and-Global-Variables.aspx
