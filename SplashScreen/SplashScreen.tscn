@@ -6,7 +6,7 @@
 [ext_resource path="res://images/Folder_2.5/hand1@3x.png" type="Texture" id=4]
 [ext_resource path="res://images/Folder_2.5/hand2@3x.png" type="Texture" id=5]
 
-[node name="SplashScreen" type="Node2D" index="0"]
+[node name="SplashScreen" type="Node2D"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
@@ -27,11 +27,9 @@ autostart = true
 
 [node name="StoryOverlay" type="Sprite" parent="." index="2"]
 
-visible = false
-position = Vector2( 324.095, 645.294 )
-scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
-_sections_unfolded = [ "Transform" ]
+centered = false
+_sections_unfolded = [ "Animation", "Material", "Offset", "Pause", "Region", "Transform", "Visibility", "Z Index" ]
 
 [node name="PawAgreeButton" type="TextureButton" parent="." index="3"]
 
@@ -58,7 +56,7 @@ shortcut = null
 group = null
 texture_normal = ExtResource( 4 )
 texture_pressed = ExtResource( 5 )
-_sections_unfolded = [ "Anchor", "Focus", "Hint", "Mouse", "Rect", "Size Flags" ]
+_sections_unfolded = [ "Anchor", "Focus", "Hint", "Mouse", "Rect", "Size Flags", "Textures" ]
 
 [connection signal="timeout" from="Timer" to="." method="_on_SplashScreen_Timer_timeout"]
 
