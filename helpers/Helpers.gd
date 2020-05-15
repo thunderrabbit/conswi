@@ -133,24 +133,13 @@ func instantiatePlayer(player_position):
         return null	# no more tiles available
 
 func pixels_to_slot(pixels, debug=false):
-    if debug:
-        print("pixels ", pixels)
-        print(G.GLOBALleft_space, " ", G.GLOBALtop_space, " ", G.SLOT_SIZE, " ", G.GLOBALslot_gap_v, " ", G.GLOBALslot_gap_h)
-        print(".x - left ", (pixels.x - G.GLOBALleft_space), " / ", (G.SLOT_SIZE + G.GLOBALslot_gap_h), "\t((( ", (pixels.x - G.GLOBALleft_space) / (G.SLOT_SIZE + G.GLOBALslot_gap_h))
-        print(".y - top ", (pixels.y - G.GLOBALtop_space), " / ", (G.SLOT_SIZE + G.GLOBALslot_gap_v), "\t\t,", (pixels.y - G.GLOBALtop_space) / (G.SLOT_SIZE + G.GLOBALslot_gap_v), " )))")
+    # do reverse thing as 3141d61c7e60ff18cfbf573b5879fa1e577edbfc
     return Vector2(floor((pixels.x - G.GLOBALleft_space) / (G.SLOT_SIZE + G.GLOBALslot_gap_h)),
                     floor((pixels.y - G.GLOBALtop_space) / (G.SLOT_SIZE + G.GLOBALslot_gap_v)))
 
 # below, xfactor is used to push required swipes to the right so they can be seen
 func slot_to_pixels(slot, xfactor=1, debug=false):
-    if debug:
-        print("slot ", slot)
-#		print(G.GLOBALleft_space, " + ", (G.SLOT_SIZE + G.GLOBALslot_gap_h), " * ", (slot.x), "\t",
-#			G.GLOBALleft_space, " + ", (G.SLOT_SIZE + G.GLOBALslot_gap_h) * (slot.x), "\t",
-#			G.GLOBALleft_space + (G.SLOT_SIZE + G.GLOBALslot_gap_h) * (slot.x), "\t")
-#		print(G.GLOBALtop_space, " + ", (G.SLOT_SIZE + G.GLOBALslot_gap_v), " * ", (slot.y), "\t",
-#			G.GLOBALtop_space, " + ", (G.SLOT_SIZE + G.GLOBALslot_gap_v) * (slot.y), "\t",
-#			G.GLOBALtop_space + (G.SLOT_SIZE + G.GLOBALslot_gap_v) * (slot.y), "\t")
+    # do same thing as 3141d61c7e60ff18cfbf573b5879fa1e577edbfc
     return Vector2(G.GLOBALleft_space+((G.SLOT_SIZE + G.GLOBALslot_gap_h)*(slot.x)*xfactor),
                     G.GLOBALtop_space+((G.SLOT_SIZE + G.GLOBALslot_gap_v)*(slot.y)))
 
