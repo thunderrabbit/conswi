@@ -56,5 +56,5 @@ func scale_to(scale):
     $level_number.set_scale(scale * 5)
 #	print("size is always zero so not sure what is (not) working")
 #	print($background.region_rect.size)
-    $background.set_position($level_number.position + Vector2(0,50+$background.region_rect.size.x))
+    $background.set_position($level_number.position + Vector2(0,$background.region_rect.size.x))
     $background.set_scale(scale)
