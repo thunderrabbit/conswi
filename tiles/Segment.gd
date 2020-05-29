@@ -59,7 +59,7 @@ func set_tile_type(my_tile_type):
     set_texture(preload("res://images/items.png"))		# res://images/items.png is a spritesheet
     set_region(true)									# we want a small part of it
     set_region_rect(sprite_loc[self.tile_type])					# this is the part we want
-    set_scale(Vector2(G.SLOT_SIZE/wd,G.SLOT_SIZE/ht))
+    set_scale(Vector2(G.GameGridSlotSize()/wd,G.GameGridSlotSize()/ht))
 
 # This will be called by GameScene
 func start_swipe_effect():

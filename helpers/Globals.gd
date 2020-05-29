@@ -22,16 +22,26 @@
 extends Node
 
 const finger_swipe_duration = .3		# how many seconds finger shows how to swipe
-const splashscreen_timeout = 2.3		# how many seconds to wait on splash screen
+const splashscreen_timeout = .03		# how many seconds to wait on splash screen
 const max_splash_screens    = 5		# there are several splash screens
 var   current_screen = 0			# which screen to start
 
 ##  http://www.gamefromscratch.com/post/2015/02/23/Godot-Engine-Tutorial-Part-6-Multiple-Scenes-and-Global-Variables.aspx
-const GLOBALtop_space = 0		# Might just move the Popup down instead   # EGAD non-zero breaks the Helpers slot_to_pixels calculation
-const GLOBALleft_space = 20		# Space on the left  # non-zero messed up calculation, I thought, but now seems okay.  Maybe if both are non-zero it messes it up.
-const GLOBALslot_gap_v = 5
-const GLOBALslot_gap_h = 5
-const SLOT_SIZE = 57
+
+func LeftSpace():
+    return 20
+
+func TopSpace():
+    return 0
+
+func SlotGapH():
+    return 5
+
+func SlotGapV():
+    return 5
+
+func GameGridSlotSize():
+    return 57
 
 const MAX_STARS = 3				# per level, shown on level select screen; used by high score saver, Savior.gd
 
