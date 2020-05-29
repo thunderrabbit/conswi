@@ -65,6 +65,8 @@ func add_buttons_to_scene(button_type):
         level_but.set_button_type(button_type)
         level_but.scale_to(Vector2(1,1))
         level_but.connect("pressed",self,"_on_Button_pressed",[level])
+        level_but.connect("mouse_entered",self,"_mouse_entered",[level])
+        level_but.connect("mouse_exited",self,"_mouse_exited",[level])
         add_child(level_but)
 
 func level_to_pixels(level):
@@ -77,3 +79,10 @@ func level_to_pixels(level):
 func _on_Button_pressed(level):
     Helpers.requested_level = level
     get_node("/root/SceneSwitcher").goto_scene("res://Game.tscn")
+
+func _mouse_entered(level):
+    print("hover ", level)
+
+
+func _mouse_exited(level):
+    print("out ", level)
