@@ -41,7 +41,22 @@ func SlotGapV():
     return 5
 
 func GameGridSlotSize():
-    return 57
+    var os_window_width = OS.get_window_size().x
+    var one_slot_of_screen = os_window_width / Game_tiles_across()
+    return one_slot_of_screen
+
+func Game_tiles_across():
+    return 7
+
+func Game_slot_size():
+    return GameGridSlotSize()
+
+func Game_left_space():
+    return Game_slot_size() / 2
+
+func Game_top_space():
+    return Game_slot_size()
+
 
 const MAX_STARS = 3				# per level, shown on level select screen; used by high score saver, Savior.gd
 

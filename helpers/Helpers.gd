@@ -134,14 +134,14 @@ func instantiatePlayer(player_position):
 
 func pixels_to_slot(pixels, debug=false):
     # do reverse thing as 3141d61c7e60ff18cfbf573b5879fa1e577edbfc
-    return Vector2(floor((pixels.x - G.LeftSpace()) / (G.GameGridSlotSize() + G.SlotGapH())),
-                    floor((pixels.y - G.TopSpace()) / (G.GameGridSlotSize() + G.SlotGapV())))
+    return Vector2(floor((pixels.x - G.Game_left_space()) / (G.Game_slot_size())),
+                    floor((pixels.y - G.Game_top_space()) / (G.Game_slot_size())))
 
 # below, xfactor is used to push required swipes to the right so they can be seen
 func slot_to_pixels(slot, xfactor=1, debug=false):
     # do same thing as 3141d61c7e60ff18cfbf573b5879fa1e577edbfc
-    return Vector2(G.LeftSpace()+((G.GameGridSlotSize() + G.SlotGapH())*(slot.x)*xfactor),
-                    G.TopSpace()+((G.GameGridSlotSize() + G.SlotGapV())*(slot.y)))
+    return Vector2(G.Game_left_space()+G.Game_slot_size()*(slot.x),
+                    G.Game_top_space()+G.Game_slot_size()*(slot.y))
 
 func offset_bottom_center_slot_in_pixels(offset):
     return slot_to_pixels(Vector2((slots_across-1) / 2, slots_down-1)-offset)
