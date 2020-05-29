@@ -16,7 +16,7 @@
 extends Node
 
 var width = 7				# Game tiles across
-var height = 20				# Game tiles tall
+var height = 12				# Game tiles tall
 var fill_level = false		# true half fills level with tiles
 var gravity_timeout = 1		# seconds, tile moves down
 var min_swipe_len = 3		# higher is harder
