@@ -16,7 +16,7 @@
 extends "DogLevel.gd"
 
 func _init():
-    max_tiles_avail = 30
-    time_limit_in_sec = 30
+    max_tiles_avail = 3000
+    time_limit_in_sec = 3000
     level_requirements = { "ta3":1 }
     show_finger = true			# On early levels, only with straight swipes
