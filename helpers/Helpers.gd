@@ -144,7 +144,7 @@ func slot_to_pixels(slot, xfactor=1, debug=false):
                     floor(G.Game_top_space()+G.Game_slot_size()*(slot.y)))
     # make sure we know what tiles are being clicked
     var double_check = pixels_to_slot(stpv2)
-    assert(slot == double_check)
+    assert(slot == double_check)   # if this fails, then pixels_to_slot will misidentify which tile has been clicked
     return stpv2
 
 # Used for starting position when showing level requirements
