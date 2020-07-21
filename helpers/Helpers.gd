@@ -143,6 +143,7 @@ func slot_to_pixels(slot, xfactor=1, debug=false):
     return Vector2(G.Game_left_space()+G.Game_slot_size()*(slot.x),
                     G.Game_top_space()+G.Game_slot_size()*(slot.y))
 
+# Used for starting position when showing level requirements
 func offset_bottom_center_slot_in_pixels(offset):
     return slot_to_pixels(Vector2((slots_across-1) / 2, slots_down-1)-offset)
 
