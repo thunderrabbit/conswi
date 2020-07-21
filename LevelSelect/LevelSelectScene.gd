@@ -38,7 +38,7 @@ func _slot_size():
     return one_third_of_screen
 
 func _left_space():
-    return _slot_size() / 2
+    return _slot_size() / 12    # 12 seems to work for the circles (but not the numbers yet)
 
 func _top_space():
     return _slot_size()
