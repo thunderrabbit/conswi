@@ -21,9 +21,20 @@ use_filter = false
 font_data = SubResource( 1 )
 _sections_unfolded = [ "Font", "Font/fallback", "Settings" ]
 
-[node name="Node2D" type="Node2D" index="0"]
+[node name="MarginContainer" type="MarginContainer" index="0"]
 
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 script = ExtResource( 1 )
+_sections_unfolded = [ "Anchor", "Material", "Transform", "Visibility", "Z Index" ]
 
 [node name="LevelOverTitle" type="Sprite" parent="." index="0"]
 
@@ -35,130 +46,19 @@ _sections_unfolded = [ "Animation", "Offset", "Region", "Transform", "Z Index" ]
 
 [node name="LevelOverOverlay" type="Sprite" parent="." index="1"]
 
-position = Vector2( 324.984, 633.879 )
-scale = Vector2( 0.516122, 0.546336 )
 texture = ExtResource( 3 )
+centered = false
 _sections_unfolded = [ "Animation", "Offset", "Region", "Transform", "Z Index" ]
 
-[node name="TryAgain" type="Button" parent="." index="2"]
+[node name="RichTextLabel" type="RichTextLabel" parent="." index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 486.0
-margin_top = 1080.0
-margin_right = 753.0
-margin_bottom = 1341.0
-rect_scale = Vector2( 0.5, 0.5 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-icon = ExtResource( 4 )
-flat = false
-align = 1
-_sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Margin", "Mouse", "Rect", "Size Flags" ]
-
-[node name="LevelSelect" type="Button" parent="." index="3"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 31.0
-margin_top = 1088.0
-margin_right = 346.0
-margin_bottom = 1349.0
-rect_scale = Vector2( 0.5, 0.5 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-icon = ExtResource( 5 )
-flat = false
-align = 1
-_sections_unfolded = [ "Rect" ]
-
-[node name="WorldMenu" type="Button" parent="." index="4"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 250.0
-margin_top = 1083.0
-margin_right = 601.0
-margin_bottom = 1362.0
-rect_scale = Vector2( 0.5, 0.5 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-icon = ExtResource( 6 )
-flat = false
-align = 1
-_sections_unfolded = [ "Rect" ]
-
-[node name="NextLevel" type="Button" parent="." index="5"]
-
-visible = false
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 476.0
-margin_top = 1076.0
-margin_right = 791.0
-margin_bottom = 1409.0
-rect_scale = Vector2( 0.5, 0.5 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-icon = ExtResource( 7 )
-flat = false
-align = 1
-_sections_unfolded = [ "Anchor", "Rect" ]
-
-[node name="RichTextLabel" type="RichTextLabel" parent="." index="6"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 36.0
-margin_top = 13.0
-margin_right = 443.0
-margin_bottom = 168.0
+margin_left = 8.0
+margin_right = 1242.0
+margin_bottom = 2688.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = true
 mouse_filter = 0
@@ -179,12 +79,120 @@ selection_enabled = false
 override_selected_font_color = false
 _sections_unfolded = [ "Size Flags", "Theme", "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
 
-[connection signal="pressed" from="TryAgain" to="." method="_on_TryAgain_pressed"]
+[node name="LevelEndedButtonsContainer" type="MarginContainer" parent="." index="3"]
 
-[connection signal="pressed" from="LevelSelect" to="." method="_on_MainMenu_pressed"]
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -333.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+_sections_unfolded = [ "Grow Direction", "Hint", "Margin", "Rect", "Size Flags" ]
 
-[connection signal="pressed" from="WorldMenu" to="." method="_on_WorldMenu_pressed"]
+[node name="TryAgain" type="Button" parent="LevelEndedButtonsContainer" index="0"]
 
-[connection signal="pressed" from="NextLevel" to="." method="_on_NextLevel_pressed"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -267.0
+margin_top = -130.5
+margin_bottom = 130.5
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+icon = ExtResource( 4 )
+flat = false
+align = 1
+_sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Margin", "Mouse", "Rect", "Size Flags" ]
+
+[node name="LevelSelect" type="Button" parent="LevelEndedButtonsContainer" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.5
+anchor_right = 0.0
+anchor_bottom = 0.5
+margin_top = -130.5
+margin_right = 294.0
+margin_bottom = 130.5
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+icon = ExtResource( 5 )
+flat = false
+align = 1
+_sections_unfolded = [ "Rect", "Size Flags" ]
+
+[node name="WorldMenu" type="Button" parent="LevelEndedButtonsContainer" index="2"]
+
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -175.5
+margin_top = -139.5
+margin_right = 175.5
+margin_bottom = 139.5
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+icon = ExtResource( 6 )
+flat = false
+align = 1
+_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Rect" ]
+
+[node name="NextLevel" type="Button" parent="LevelEndedButtonsContainer" index="3"]
+
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -297.0
+margin_top = -166.5
+margin_bottom = 166.5
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+icon = ExtResource( 7 )
+flat = false
+align = 1
+_sections_unfolded = [ "Anchor", "Rect" ]
 
 

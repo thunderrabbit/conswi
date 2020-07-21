@@ -13,9 +13,10 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-extends Node2D
+extends MarginContainer
 
 var game_scene
+var _buttons_across = 3
 
 func set_game_scene(my_game_scene):
     game_scene = my_game_scene
@@ -25,17 +26,43 @@ func _ready():
     # Initialization here
     pass
 
+func percent_of_1_third_screen_width(percent):
+    return G.OneNthOfScreenWidth(3) * percent
+
+## button is any container?
+## percent 0.9 -->  0.9 * 1/3 of screen width (gives a bit of a gap)
+func scale_button_almost_1_third_screen(button, fraction):
+    var button_actual_width = button.get_size().x
+    print(button_actual_width) # hope to be 260 or so
+    var desired_width = percent_of_1_third_screen_width(fraction)
+    print("desired_width = " , desired_width)
+    var scale = desired_width / button_actual_width
+    print(scale)
+    button.set_scale(Vector2(scale, scale))
+    
+func anchor_bottom_left(button):
+    button.anchr = 1
+#    button.anchor_left = 0
+    
+
 func show_lose_buttons_on_bottom():
-    $TryAgain.show()
-    $NextLevel.hide()
-    $WorldMenu.show()
-    $LevelSelect.show()
+#    var fill_this_fraction_of_third_of_screen = 0.85
+    $LevelEndedButtonsContainer/NextLevel.hide()
+ #   scale_button_almost_1_third_screen($LevelSelect, fill_this_fraction_of_third_of_screen)
+  #  anchor_bottom_left($LevelSelect)
+    $LevelEndedButtonsContainer/LevelSelect.show()
+ #   scale_button_almost_1_third_screen($TryAgain, fill_this_fraction_of_third_of_screen)
+ #   anchor_bottom_left($TryAgain)
+    $LevelEndedButtonsContainer/TryAgain.show()
+#    scale_button_almost_1_third_screen($WorldMenu, fill_this_fraction_of_third_of_screen)
+ #   anchor_bottom_left($WorldMenu)
+    $LevelEndedButtonsContainer/WorldMenu.show()
 
 func show_win_buttons_on_bottom():
-    $TryAgain.hide()
-    $NextLevel.show()
-    $WorldMenu.hide()
-    $LevelSelect.show()
+    $LevelEndedButtonsContainer/TryAgain.hide()
+    $LevelEndedButtonsContainer/NextLevel.show()
+    $LevelEndedButtonsContainer/WorldMenu.hide()
+    $LevelEndedButtonsContainer/LevelSelect.show()
 
 func level_over_reason(reason):
     print(reason)
