@@ -41,9 +41,12 @@ func SlotGapV():
     return 5
 
 func GameGridSlotSize():
+    return OneNthOfScreenWidth(Helpers.slots_across)
+
+func OneNthOfScreenWidth(N):
     var os_window_width = OS.get_window_size().x
-    var one_slot_of_screen = os_window_width / Helpers.slots_across
-    return one_slot_of_screen
+    var one_nth_of_screen = os_window_width / N
+    return one_nth_of_screen
 
 func Game_slot_size():
     return GameGridSlotSize()
