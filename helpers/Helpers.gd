@@ -134,14 +134,18 @@ func instantiatePlayer(player_position):
 
 func pixels_to_slot(pixels, debug=false):
     # do reverse thing as 3141d61c7e60ff18cfbf573b5879fa1e577edbfc
-    return Vector2(floor((pixels.x - G.Game_left_space()) / (G.Game_slot_size())),
-                    floor((pixels.y - G.Game_top_space()) / (G.Game_slot_size())))
+    return Vector2(ceil((pixels.x - G.Game_left_space()) / (G.Game_slot_size())),
+                    ceil((pixels.y - G.Game_top_space()) / (G.Game_slot_size())))
 
 # below, xfactor is used to push required swipes to the right so they can be seen
 func slot_to_pixels(slot, xfactor=1, debug=false):
     # do same thing as 3141d61c7e60ff18cfbf573b5879fa1e577edbfc
-    return Vector2(G.Game_left_space()+G.Game_slot_size()*(slot.x),
-                    G.Game_top_space()+G.Game_slot_size()*(slot.y))
+    var stpv2 = Vector2(floor(G.Game_left_space()+G.Game_slot_size()*(slot.x)),
+                    floor(G.Game_top_space()+G.Game_slot_size()*(slot.y)))
+    # make sure we know what tiles are being clicked
+    var double_check = pixels_to_slot(stpv2)
+    assert(slot == double_check)
+    return stpv2
 
 # Used for starting position when showing level requirements
 func offset_bottom_center_slot_in_pixels(offset):
