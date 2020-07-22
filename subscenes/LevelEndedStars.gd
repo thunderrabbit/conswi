@@ -109,7 +109,7 @@ func _display_bonus():
     var bonus_target = self._info_for_star_calc['num_tiles'] * self.points_per_tile
     points.set_target(bonus_target)	# tell spinner where to stop
     points.set_increment(floor(bonus_target * 0.05))	# take twenty steps to count
-    points.start_tick_from(1)		# calls back to _displayed_quantity when finished
+    points.start_tick_from(0)		# Start from 0 so null requirements level can be won.  Calls back to _displayed_quantity when finished 
 
 func _reduce_swipes():
     print("Reduce Swipes")
