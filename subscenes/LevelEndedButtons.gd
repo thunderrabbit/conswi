@@ -50,6 +50,7 @@ func show_lose_buttons_on_bottom():
     $LevelEndedButtonsContainer/NextLevel.hide()
  #   scale_button_almost_1_third_screen($LevelSelect, fill_this_fraction_of_third_of_screen)
   #  anchor_bottom_left($LevelSelect)
+    $LevelEndedButtonsContainer/LevelSelect.set_button_icon(preload("res://images/buttons/lose_back@3x.png")) #  the lose background was in BackgroundScript.gd but might move it here
     $LevelEndedButtonsContainer/LevelSelect.show()
  #   scale_button_almost_1_third_screen($TryAgain, fill_this_fraction_of_third_of_screen)
  #   anchor_bottom_left($TryAgain)
