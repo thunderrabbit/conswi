@@ -13,7 +13,7 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-extends Node2D
+extends MarginContainer
 var gowhere
 
 var splash_texture_1 = preload("res://images/Folder_2.5/01_space@3x.png")
@@ -53,3 +53,4 @@ func _on_SplashScreen_Timer_timeout():
 func _on_PawAgree_button_up():
         gowhere = "res://NightDayMainSplash/NightDayMainSplash.tscn"
         SceneSwitcher.goto_scene(gowhere)
+
