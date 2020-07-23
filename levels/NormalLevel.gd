@@ -15,8 +15,11 @@
 
 extends Node
 
+## width and height are not yet able to handle all screen sizes
+## e.g. if the screen is square, width and height should be the same
+## on a square screen if height is larger, the game board would go off the bottom of the screen
 var width = 7				# Game tiles across
-var height = 20				# Game tiles tall
+var height = 12				# Game tiles tall
 var fill_level = false		# true half fills level with tiles
 var gravity_timeout = 1		# seconds, tile moves down
 var min_swipe_len = 3		# higher is harder

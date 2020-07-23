@@ -4,7 +4,7 @@
 [ext_resource path="res://images/world_skins/dog/dog_level_0star@3x.png" type="Texture" id=2]
 [ext_resource path="res://images/levelselect/numbers/01.png" type="Texture" id=3]
 
-[node name="LevelSelectButton" type="TextureButton"]
+[node name="LevelSelectButton" type="TextureButton" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -28,14 +28,18 @@ _sections_unfolded = [ "Textures" ]
 
 [node name="background" type="Sprite" parent="." index="0"]
 
-position = Vector2( 26.9521, 33.0915 )
+position = Vector2( 0.938456, 1.29703 )
 scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 2 )
+centered = false
 _sections_unfolded = [ "Transform" ]
 
 [node name="level_number" type="Sprite" parent="." index="1"]
 
-position = Vector2( 28.9207, 23.8775 )
+position = Vector2( 2.90705, -7.91696 )
+scale = Vector2( 1, 1 )
 texture = ExtResource( 3 )
+centered = false
+_sections_unfolded = [ "Offset" ]
 
 
