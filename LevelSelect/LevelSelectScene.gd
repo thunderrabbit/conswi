@@ -1,4 +1,4 @@
-#    Copyright (C) 2018  Rob Nugen
+#    Copyright (C) 2020  Rob Nugen
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -63,7 +63,6 @@ func add_buttons_to_scene(button_type):
         level_but.set_size(Vector2(_slot_size(),_slot_size()))
         level_but.set_num_stars(Savior.read_num_stars(self.get_world_type(),level))
         level_but.set_button_type(button_type)
-        level_but.scale_to(Vector2(1,1))
         level_but.connect("pressed",self,"_on_Button_pressed",[level])
         level_but.connect("mouse_entered",self,"_mouse_entered",[level])
         level_but.connect("mouse_exited",self,"_mouse_exited",[level])

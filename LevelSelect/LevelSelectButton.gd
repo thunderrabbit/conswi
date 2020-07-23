@@ -1,4 +1,4 @@
-#    Copyright (C) 2018  Rob Nugen
+#    Copyright (C) 2020  Rob Nugen
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -49,12 +49,5 @@ func set_button_type(type = G.TYPE_DOG):
                             self.my_type_string + "/" +
                             self.my_type_string + "_level_" +
                             String(num_stars) + "star@3x.png")
-    $background.set_texture(load(background))
+    set_normal_texture(load(background))
 
-##  I actually don't remember if this is being used to scale the images or just position them.
-func scale_to(scale):
-    $level_number.set_scale(scale * 5)
-#	print("size is always zero so not sure what is (not) working")
-#	print($background.region_rect.size)
-    $background.set_position($level_number.position + Vector2(0,$background.region_rect.size.x))
-    $background.set_scale(scale)
