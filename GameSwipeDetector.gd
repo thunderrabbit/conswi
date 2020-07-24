@@ -34,7 +34,7 @@ func _ready():
 
 func startLevel():
     self.wasted_swipes = 0	# wasted swipes will count against bonus
-    Game.game_hud.level_reqs.clarify_requirements()   #  allow win if there are no requirements
+    Game.game_hud.star_reqs.clarify_requirements()   #  allow win if there are no requirements (maybe not needed once number of tiles are the actual requirements)
 
 # this handles dragging pieces and orphaned swipes
 func _on_GameSwipeDetector_input_event( viewport, event, shape_idx ):
@@ -84,7 +84,7 @@ func piece_unclicked():
 
         var dimensions = ShapeShifter.getSwipeDimensions(swipe_array)
         # figure out if the swipe is required
-        var swipe_was_required = Game.game_hud.level_reqs.swiped_piece(swipe_name)
+        var swipe_was_required = Game.game_hud.star_reqs.swiped_piece(swipe_name)
 
         swipe_shape = SwipeShape.instance()
         swipe_shape.set_shape(ShapeShifter.getBitmapOfSwipeCoordinates(swipe_array),clicked_this_piece_type)
@@ -93,7 +93,7 @@ func piece_unclicked():
         if swipe_was_required:
             swipe_shape.connect("shrunk_shape",self,"shrank_required_shape")
             # after swipe, move shape to correct/required shape location
-            swipe_shape.shrink_shape(Game.game_hud.level_reqs.required_swipe_location(swipe_name))
+            swipe_shape.shrink_shape(Game.game_hud.star_reqs.required_swipe_location(swipe_name))
         else:
             swipe_shape.connect("flew_away", self, "inc_wasted_swipe_counter")
             swipe_shape.fly_away_randomly()
@@ -163,4 +163,4 @@ func piece_exited(position, piece_type):
 
 func shrank_required_shape():
     swipe_shape.queue_free()
-    Game.game_hud.level_reqs.clarify_requirements()
+    Game.game_hud.star_reqs.clarify_requirements()

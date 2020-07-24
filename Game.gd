@@ -202,7 +202,7 @@ func _show_stuff_after_level(reason):
     self.level_over_reason = reason		# not sure we need to remember this
     var collect_info_for_stars = {'reason':reason,
                                     'level':self.level_num,
-                                    'num_tiles':game_hud.level_reqs.num_tiles_required,
+                                    'num_tiles':game_hud.star_reqs.num_tiles_required,
                                     'waste_swipes':$GameSwipeDetector.wasted_swipes
                                 }
     game_hud.stars_after_level.show_stuff_after_level(collect_info_for_stars)

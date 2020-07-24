@@ -21,7 +21,7 @@ const StarsAfterLevel = preload("res://subscenes/LevelEndedStars.tscn")
 
 var game
 var buttons					# Steering Pad / Start buttons
-var level_reqs				# HUD showing level requirements
+var star_reqs				# HUD showing star requirements
 var stars_after_level		# Show stars after level is over
 
 func addHUDtoGame(game):
@@ -32,9 +32,9 @@ func addHUDtoGame(game):
     self.buttons.set_game_scene(self.game)
     add_child(self.buttons)
 
-    level_reqs = LevelRequirements.instance()
-    level_reqs.set_game_scene(self.game)
-    add_child(level_reqs)
+    star_reqs = LevelRequirements.instance()
+    star_reqs.set_game_scene(self.game)
+    add_child(star_reqs)
 
     self.stars_after_level = StarsAfterLevel.instance()
     self.stars_after_level.set_game_scene(self.game)
@@ -46,8 +46,8 @@ func startLevel(current_level):
     # These show level requirements, which takes time
     # after these animations complete, continue_start_level()
     # is called via signal `requirements_shown` by LevelRequirements.gd
-    self.level_reqs.show_finger_ka(current_level.show_finger)
-    self.level_reqs.show_star_requirements(current_level.star_requirements)
+    self.star_reqs.show_finger_ka(current_level.show_finger)
+    self.star_reqs.show_star_requirements(current_level.star_requirements)
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.
