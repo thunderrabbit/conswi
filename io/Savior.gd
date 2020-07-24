@@ -98,7 +98,7 @@ func _write_if_larger(field, value):
 #   "high" level function saves high score
 #    This should be used within rest of game
 func save_high_score(world,level, score):
-    var world_string = "fix_in_Savior" #  Need to create based on TileDatabase:  WorldDatabase.tiles[my_type]["ITEM_NAME"]
+    var world_string = self._world_string(world)
     self._write_if_larger(world_string + String(level) + "score",score)
 
 ####################################################
@@ -106,7 +106,7 @@ func save_high_score(world,level, score):
 #   "high" level function saves num_stars
 #    This should be used within rest of game
 func save_num_stars(world,level, stars = 0):
-    var world_string = "fix_in_Savior" #  Need to create based on TileDatabase:  WorldDatabase.tiles[my_type]["ITEM_NAME"]
+    var world_string = self._world_string(world)
     if stars < 0:
         stars = 0
     if stars > G.MAX_STARS:
@@ -118,7 +118,7 @@ func save_num_stars(world,level, stars = 0):
 #   "high" level function reads high score
 #    This should be used within rest of game
 func read_high_score(world,level):
-    var world_string = "fix_in_Savior" #  Need to create based on TileDatabase:  WorldDatabase.tiles[my_type]["ITEM_NAME"]
+    var world_string = self._world_string(world)
     return self._read_value(world_string + String(level) + "score")
 
 ####################################################
@@ -126,7 +126,7 @@ func read_high_score(world,level):
 #   "high" level function reads num_stars
 #    This should be used within rest of game
 func read_num_stars(world,level):
-    var world_string = "fix_in_Savior" #  Need to create based on TileDatabase:  WorldDatabase.tiles[my_type]["ITEM_NAME"]
+    var world_string = self._world_string(world)
     return self._read_value(world_string + String(level) + "stars")
 
 ####################################################
@@ -144,3 +144,11 @@ func read_savegame():
 func _initialize_data():
     self.save_dict["current_world"] = 0;
     self.save_dict["allowed_world"] = 0;
+
+####################################################
+#
+#   convert world into a string
+#   I have no idea what this was about: #  Need to create based on TileDatabase:  WorldDatabase.tiles[my_type]["ITEM_NAME"]
+#
+func _world_string(world):
+    return "world" + String(world) + "_"
