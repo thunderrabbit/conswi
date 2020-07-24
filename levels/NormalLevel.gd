@@ -33,11 +33,24 @@ var tiles = {"dog": 1,
              "cow": 1}		# fill this to define tile percentages via ratios
 
 var star_requirements = { "bo3":1 }	# swipe these shapes to get 3 stars
+var required_tiles = { "default":1 }  # use same format as tiles to require more things
+
+###########################################
+#
+#   So the same level definition can get harder if it was used for higher world / level
+#
+func inject_world_and_level(world_num, level):
+    var world_name = TileDatabase.tiles[world_num]["ITEM_NAME"]
+    print("inside inject_world_and_level world ", world_name, " level ", level)
+    if self.required_tiles["default"] == 1:
+        self.required_tiles.erase("default")
+        self.required_tiles[world_name] = 3 * level * level
 
 func pretty_print_level():
     print("I am a level")
     print("width x height ", width, " x ", height)
     print("requirements:")
     print(star_requirements)
+    print(required_tiles)
     print("End level pretty-print")
 

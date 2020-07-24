@@ -96,6 +96,7 @@ func start_level(level_num):
     #   requested_play_level(Helpers.requested_level)
     var levelGDScript = LevelDatabase.getExistingLevelGDScript(Helpers.requested_world, self.level_num)
     current_level = levelGDScript.new()		# load() gets a GDScript and new() instantiates it
+    current_level.inject_world_and_level(Helpers.requested_world, self.level_num)   # determines number of tiles required to pass level
     current_level.pretty_print_level()    # defined in levels/NormalLevel.gd
     # now that we have loaded the level, we can tell the game how it wants us to run
     if self.allow_easy_win:
