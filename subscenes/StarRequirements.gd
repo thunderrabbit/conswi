@@ -20,7 +20,7 @@ const SwipeShape = preload("res://subscenes/FingerSwipeShape.tscn")
 signal levelwon
 signal requirements_shown
 
-var requirements = {}				# actual dictionary of requirements may not need to keep
+var star_requirements = {}				# actual dictionary of star_requirements may not need to keep
 var array_of_required_names = []	# so we can loop through (need to keep so we can keep track of which one to display next)
 var location_of_required_shape = {}	# so we know where to display shape
 var required_shapes_hud = {}		# so we can update the shapes as swipes happen
@@ -40,8 +40,8 @@ func show_finger_ka(show_finger):
 # and display each required shape
 func show_star_requirements(star_requirements):
     reset_everything()
-    requirements = star_requirements
-    for reqd_name in requirements:
+    self.star_requirements = star_requirements
+    for reqd_name in self.star_requirements:
         var num_required = location_of_required_shape.size()	# will determine where shape should be shown
         array_of_required_names.append(reqd_name)
         location_of_required_shape[reqd_name] = Helpers.slot_to_pixels(Vector2(num_required,1),G.REQ_SHAPE_SHRINK_LOCATION)
@@ -55,7 +55,7 @@ func required_swipe_location(swipe_name):
 func reset_everything():
     remove_old_requirements()
     self.num_tiles_required = 0
-    requirements = {}
+    self.star_requirements = {}
     array_of_required_names = []
     location_of_required_shape = {}
     required_shapes_hud = {}
@@ -66,9 +66,9 @@ func remove_old_requirements():
 
 # will start the next requirement to display itself and wait for callback
 func display_next_requirement():
-    # if no requirements, call back to GameScene to start playing
+    # if no star_requirements, call back to GameScene to start playing
     if array_of_required_names.size() == 0:
-        print("did not find any more requirements")
+        print("did not find any more star_requirements")
         print("Total tiles required = ", self.num_tiles_required)
         emit_signal("requirements_shown")
     else:
@@ -77,7 +77,7 @@ func display_next_requirement():
         # wipe it from array so we don't show it again
         array_of_required_names.pop_front()
         # look up how many are required
-        var reqd_qty = requirements[currently_showing_name]
+        var reqd_qty = self.star_requirements[currently_showing_name]
 
         currently_showing_shape = SwipeShape.instance()
         currently_showing_shape.show_finger = self.show_finger
@@ -104,22 +104,22 @@ func shape_has_been_displayed():
 
 func swiped_piece(piece_name):
     var num_required = 0
-    if requirements.has(piece_name):
-        num_required = requirements[piece_name]
+    if self.star_requirements.has(piece_name):
+        num_required = self.star_requirements[piece_name]
     print("%d %s required" %[num_required, piece_name])
     if num_required > 0:
-        requirements[piece_name] = num_required - 1
+        self.star_requirements[piece_name] = num_required - 1
     return (num_required > 0)		# return true if piece was required
 
 # See if we won
 func clarify_requirements():
-    for name in requirements:
+    for name in self.star_requirements:
         var required = required_shapes_hud[name]
-        required.spinner.set_value(requirements[name])
-        if requirements[name] == 0:
-            requirements.erase(name)	# eventually make requirements empty (so we can win)
+        required.spinner.set_value(self.star_requirements[name])
+        if self.star_requirements[name] == 0:
+            self.star_requirements.erase(name)	# eventually make self.star_requirements empty (so we can win)
             required_shapes_hud.erase(name)		# so we won't try to hide Deleted nodes in remove_old_requirements()
             required.hide()				# remove piece from screen
             required.queue_free()
-    if requirements.empty():
+    if self.star_requirements.empty():
         emit_signal("levelwon")
