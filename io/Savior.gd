@@ -99,7 +99,8 @@ func _write_if_larger(field, value):
 #    This should be used within rest of game
 func save_high_score(world,level, score):
     var world_string = self._world_string(world)
-    self._write_if_larger(world_string + String(level) + "score",score)
+    var level_string = self._level_string(level)
+    self._write_if_larger(world_string + level_string + "score",score)
 
 ####################################################
 #
@@ -107,11 +108,12 @@ func save_high_score(world,level, score):
 #    This should be used within rest of game
 func save_num_stars(world,level, stars):
     var world_string = self._world_string(world)
+    var level_string = self._level_string(level)
     if stars < 0:
         stars = 0
     if stars > G.MAX_STARS:
         stars = G.MAX_STARS
-    self._write_if_larger(world_string + String(level) + "stars",stars)
+    self._write_if_larger(world_string + level_string + "stars",stars)
 
 ####################################################
 #
@@ -119,7 +121,8 @@ func save_num_stars(world,level, stars):
 #    This should be used within rest of game
 func read_high_score(world,level):
     var world_string = self._world_string(world)
-    return self._read_value(world_string + String(level) + "score")
+    var level_string = self._level_string(level)
+    return self._read_value(world_string + level_string + "score")
 
 ####################################################
 #
@@ -127,7 +130,8 @@ func read_high_score(world,level):
 #    This should be used within rest of game
 func read_num_stars(world,level):
     var world_string = self._world_string(world)
-    return self._read_value(world_string + String(level) + "stars")
+    var level_string = self._level_string(level)
+    return self._read_value(world_string + level_string + "stars")
 
 ####################################################
 #
@@ -147,8 +151,16 @@ func _initialize_data():
 
 ####################################################
 #
-#   convert world into a string
-#   I have no idea what this was about: #  Need to create based on TileDatabase:  WorldDatabase.tiles[my_type]["ITEM_NAME"]
+#   convert world into a string which will act as part of the key-value key for a score
+#   CHANGING THIS STRING WILL RESET ALL STARS to zero (or bring old values back from the dead)!
 #
 func _world_string(world):
     return "world" + String(world) + "_"
+
+####################################################
+#
+#   convert level into a string which will act as part of the key-value key for a score
+#   CHANGING THIS STRING WILL RESET ALL STARS to zero (or bring old values back from the dead)!
+#
+func _level_string(level):
+    return "level" + String(level) + "_"
