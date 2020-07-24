@@ -105,7 +105,7 @@ func save_high_score(world,level, score):
 #
 #   "high" level function saves num_stars
 #    This should be used within rest of game
-func save_num_stars(world,level, stars = 0):
+func save_num_stars(world,level, stars):
     var world_string = self._world_string(world)
     if stars < 0:
         stars = 0
