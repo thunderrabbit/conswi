@@ -47,7 +47,7 @@ func startLevel(current_level):
     # after these animations complete, continue_start_level()
     # is called via signal `requirements_shown` by LevelRequirements.gd
     self.level_reqs.show_finger_ka(current_level.show_finger)
-    self.level_reqs.level_requires(current_level.level_requirements)
+    self.level_reqs.show_star_requirements(current_level.star_requirements)
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.

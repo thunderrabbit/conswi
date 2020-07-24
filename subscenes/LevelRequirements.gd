@@ -38,9 +38,9 @@ func show_finger_ka(show_finger):
 
 # first, just get an array of names that we can slowly loop through
 # and display each required shape
-func level_requires(level_requirements):
+func show_star_requirements(star_requirements):
     reset_everything()
-    requirements = level_requirements
+    requirements = star_requirements
     for reqd_name in requirements:
         var num_required = location_of_required_shape.size()	# will determine where shape should be shown
         array_of_required_names.append(reqd_name)
