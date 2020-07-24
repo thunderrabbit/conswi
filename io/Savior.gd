@@ -1,4 +1,4 @@
-#    Copyright (C) 2018  Rob Nugen
+#    Copyright (C) 2020  Rob Nugen
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -88,7 +88,7 @@ func _read_value(field):
 ####################################################
 #
 #   "mid" level function writes value if it is larger
-#    than previously saved value 
+#    than previously saved value
 func _write_if_larger(field, value):
     if(value > int(self._read_value(field))):
         _write_value(field, value)
