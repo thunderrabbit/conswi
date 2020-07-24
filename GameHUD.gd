@@ -16,7 +16,7 @@
 extends Node
 
 const Buttons = preload("res://subscenes/Buttons.gd")
-const LevelRequirements = preload("res://subscenes/LevelRequirements.tscn")
+const StarRequirements = preload("res://subscenes/StarRequirements.tscn")
 const StarsAfterLevel = preload("res://subscenes/LevelEndedStars.tscn")
 
 var game
@@ -32,7 +32,7 @@ func addHUDtoGame(game):
     self.buttons.set_game_scene(self.game)
     add_child(self.buttons)
 
-    star_reqs = LevelRequirements.instance()
+    star_reqs = StarRequirements.instance()
     star_reqs.set_game_scene(self.game)
     add_child(star_reqs)
 
@@ -45,7 +45,7 @@ func startLevel(current_level):
 
     # These show level requirements, which takes time
     # after these animations complete, continue_start_level()
-    # is called via signal `requirements_shown` by LevelRequirements.gd
+    # is called via signal `requirements_shown` by StarRequirements.gd
     self.star_reqs.show_finger_ka(current_level.show_finger)
     self.star_reqs.show_star_requirements(current_level.star_requirements)
 

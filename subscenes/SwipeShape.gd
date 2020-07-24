@@ -116,7 +116,7 @@ func flew_away(obj, key):
 
 # After shape has been shrunk
 func shrunk_shape(obj, key):
-    # call back to LevelRequirements
+    # call back to StarRequirements
     if key == ':scale':	# (callback only once per tween)
         emit_signal("shrunk_shape")
 
@@ -133,7 +133,7 @@ func display_quantity(quantity):
     spinner.set_target(quantity)	# tell spinner where to stop
     spinner.start_tick_from(1)		# calls back to _displayed_quantity when finished
 
-# call back to LevelRequirements that this particular shape 
+# call back to StarRequirements that this particular shape 
 # has finished displaying its number (and now can be shrunk
 # out of the way for game play
 func _displayed_quantity():
