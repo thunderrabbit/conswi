@@ -19,5 +19,4 @@ func _init():
     fill_level = false
     max_tiles_avail = 150
     time_limit_in_sec = 3
-    star_requirements = { }   # null requirements allows instant win
     queue_len = 5

@@ -32,7 +32,7 @@ var queue_len = 3			# queue is upcoming tiles
 var tiles = {"dog": 1,
              "cow": 1}		# fill this to define tile percentages via ratios
 
-var star_requirements = { "bo3":1 }	# should not be empty so levels do not insta-win
+var star_requirements = { "bo3":1 }	# swipe these shapes to get 3 stars
 
 func pretty_print_level():
     print("I am a level")
