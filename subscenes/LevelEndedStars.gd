@@ -1,4 +1,4 @@
-#    Copyright (C) 2018  Rob Nugen
+#    Copyright (C) 2020  Rob Nugen
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -159,7 +159,9 @@ func _display_stars():
 #######################################################
 #
 #  	This will be private to the GD star_display.gd
+#   Swiping level-specific shapes will determine the number of stars.
 func _calculate_stars_for_level():
+    print(self._info_for_star_calc)
     var existing_sprites = get_tree().get_nodes_in_group("players")
     var num_stars = randi()%3+1
     print("remaining pieces: ", existing_sprites.size())
