@@ -26,7 +26,6 @@ var location_of_required_shape = {}	# so we know where to display shape
 var required_shapes_hud = {}		# so we can update the shapes as swipes happen
 var currently_showing_shape = null	# so we can come back and know what shape to shrink
 var currently_showing_name = null	# so we can look up where to show it
-var num_tiles_required = 0			# so LevelEndedStars knows how big bonus should be
 var show_finger = false				# usually do not show swiping finger (just on first couple levels)
 
 func set_game_scene(gameScene):
@@ -53,7 +52,6 @@ func required_swipe_location(swipe_name):
 
 func reset_everything():
     remove_old_requirements()
-    self.num_tiles_required = 0
     self.star_requirements = {}
     array_of_required_names = []
     location_of_required_shape = {}
@@ -68,7 +66,6 @@ func display_next_requirement():
     # if no star_requirements, call back to GameScene to start playing
     if array_of_required_names.size() == 0:
         print("did not find any more star_requirements")
-        print("Total tiles required = ", self.num_tiles_required)
         emit_signal("requirements_shown")
     else:
         # get first requirement in array
@@ -91,7 +88,6 @@ func display_next_requirement():
         # and retool how this function is called
         var count_tiles_this_shape = currently_showing_shape.set_shape(ShapeShifter.getBitmapOfSwipeName(currently_showing_name),Helpers.requested_world)
         var swipe_dimensions = currently_showing_shape.dimensions
-        self.num_tiles_required = self.num_tiles_required + count_tiles_this_shape * reqd_qty
         currently_showing_shape.set_position(Helpers.offset_bottom_center_slot_in_pixels(swipe_dimensions))
         add_child(currently_showing_shape)
         currently_showing_shape.display_quantity(reqd_qty)
