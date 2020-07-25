@@ -121,7 +121,7 @@ func piece_done_dragged(slot):
 func inc_saved_tile_counter():
     print("saved this many tiles: ", self.saved_tiles)		# should be displayed on screen
     print("Add a counter for that number on the screen")
-    HUD.get_node('WastedSwipeCount').set_value(self.saved_tiles)
+    HUD.get_node('SavedTileCount').set_value(self.saved_tiles)
 
 func piece_entered(position, piece_type):
     if swipe_state != SwipeState.SWIPE:

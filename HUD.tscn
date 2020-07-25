@@ -105,7 +105,7 @@ text = "GO"
 flat = false
 align = 1
 
-[node name="WastedSwipeCount" parent="." index="2" instance=ExtResource( 3 )]
+[node name="SavedTileCount" parent="." index="2" instance=ExtResource( 3 )]
 
 margin_left = 464.0
 margin_top = 863.0
