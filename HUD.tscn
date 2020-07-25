@@ -109,9 +109,8 @@ align = 1
 
 margin_left = 464.0
 margin_top = 863.0
-margin_right = 575.0
-margin_bottom = 948.0
-rect_clip_content = false
+margin_right = 832.0
+margin_bottom = 1087.0
 align = 2
 clip_text = true
 
@@ -121,8 +120,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 651.0
-margin_bottom = 1284.0
+margin_right = 1242.0
+margin_bottom = 2688.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
