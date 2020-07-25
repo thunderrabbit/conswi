@@ -120,11 +120,11 @@ func _reduce_swipes():
     points.set_target_decrease(bonus_reduction)
     points.set_increment(self.lose_points_per_swipe)
 
-    var wasted = HUD.get_node('WastedSwipeCount')
-    wasted.set_delay(self.swipe_lose_delay)
-    wasted.set_target(0)
-    wasted.set_increment(1)
-    wasted.start_tick()
+    var tiles_saved = HUD.get_node('WastedSwipeCount')
+    tiles_saved.set_delay(self.swipe_lose_delay)
+    tiles_saved.set_target(0)
+    tiles_saved.set_increment(1)
+    tiles_saved.start_tick()
     points.start_tick()
 
 #####################################################

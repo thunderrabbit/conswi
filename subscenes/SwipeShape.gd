@@ -26,7 +26,7 @@ const numberic_offset_pixels = Vector2(-90,-90)			# maybe make into a var and ca
 
 signal displayed_shape			# after shape has been displayed+paused
 signal shrunk_shape				# after shape has finished shrinking
-signal flew_away				# after the wasted swipe has vanished
+signal flew_away				# after the saved_tiles have been counted
 
 # add sprites to this object in the shape they are meant to represent
 # shape_array for bo3 is [3,1,1,1] which comes from ShapeDatabase
@@ -91,7 +91,7 @@ func fly_away_randomly(duration = 0.9):
 
 ##################################################
 #
-#   The idea here is the wasted swipes can be collected somewhere and then count against the user.
+#   The idea here is the saved tiles can be collected somewhere and then help user win level.
 #   Maybe I can just log a number instead of showing the swipes on the side
 #
 func come_back_to_location(obj, key):
@@ -133,7 +133,7 @@ func display_quantity(quantity):
     spinner.set_target(quantity)	# tell spinner where to stop
     spinner.start_tick_from(1)		# calls back to _displayed_quantity when finished
 
-# call back to StarRequirements that this particular shape 
+# call back to StarRequirements that this particular shape
 # has finished displaying its number (and now can be shrunk
 # out of the way for game play
 func _displayed_quantity():

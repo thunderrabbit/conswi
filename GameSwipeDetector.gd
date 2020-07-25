@@ -33,7 +33,7 @@ func _ready():
     pass
 
 func startLevel():
-    self.saved_tiles = 0	# wasted swipes will count against bonus
+    self.saved_tiles = 0	# increase saved_tiles to beat level
 
 # this handles dragging pieces and orphaned swipes
 func _on_GameSwipeDetector_input_event( viewport, event, shape_idx ):
@@ -94,7 +94,7 @@ func piece_unclicked():
             # after swipe, move shape to correct/required shape location
             swipe_shape.shrink_shape(Game.game_hud.star_reqs.required_swipe_location(swipe_name))
         else:
-            swipe_shape.connect("flew_away", self, "inc_wasted_swipe_counter")
+            swipe_shape.connect("flew_away", self, "inc_saved_tile_counter")
             swipe_shape.fly_away_randomly()
             self.saved_tiles = self.saved_tiles + swipe_array.size()
         # TODO add animation swipe_shape.animate()
@@ -118,8 +118,8 @@ func piece_done_dragged(slot):
     swipe_state = SwipeState.IDLE
     dragging_piece = null
 
-func inc_wasted_swipe_counter():
-    print("wasted this many swipes: ", self.saved_tiles)		# should be displayed on screen
+func inc_saved_tile_counter():
+    print("saved this many tiles: ", self.saved_tiles)		# should be displayed on screen
     print("Add a counter for that number on the screen")
     HUD.get_node('WastedSwipeCount').set_value(self.saved_tiles)
 
