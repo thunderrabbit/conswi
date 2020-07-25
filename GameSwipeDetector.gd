@@ -96,7 +96,7 @@ func piece_unclicked():
         else:
             swipe_shape.connect("flew_away", self, "inc_wasted_swipe_counter")
             swipe_shape.fly_away_randomly()
-            self.wasted_swipes = self.wasted_swipes + 1
+            self.wasted_swipes = self.wasted_swipes + swipe_array.size()
         # TODO add animation swipe_shape.animate()
         for pos in swipe_array:
             if Helpers.board[pos] != null:
