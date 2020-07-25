@@ -1,6 +1,6 @@
 #    Script for HUD to turn on or off certain sections
 #
-#    Copyright (C) 2019  Rob Nugen
+#    Copyright (C) 2020  Rob Nugen
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -18,11 +18,11 @@
 extends Node2D
 
 func _ready():
-	pass
+    pass
 
 func showBottomButtons():
-	$LSBottomButtons.show()
+    $LSBottomButtons.show()
 
 func hideBottomButtons():
-	$LSBottomButtons.hide()
+    $LSBottomButtons.hide()
 

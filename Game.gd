@@ -1,4 +1,4 @@
-#    Copyright (C) 2018  Rob Nugen
+#    Copyright (C) 2020  Rob Nugen
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -91,21 +91,24 @@ func start_level(level_num):
     if always_play_level_zero:
         self.level_num = 0
 
-    ### We send world through here but it is not DI into function start_level
+    ### We send world through here but it is not sent into function start_level
     ##  It should at least be sent through like in _ready()
     #   requested_play_level(Helpers.requested_level)
     var levelGDScript = LevelDatabase.getExistingLevelGDScript(Helpers.requested_world, self.level_num)
     current_level = levelGDScript.new()		# load() gets a GDScript and new() instantiates it
+    current_level.inject_world_and_level(Helpers.requested_world, self.level_num)   # determines number of tiles required to pass level
+    current_level.pretty_print_level()    # defined in levels/NormalLevel.gd
     # now that we have loaded the level, we can tell the game how it wants us to run
     if self.allow_easy_win:
         current_level.debug_level = 1
         current_level.fill_level = true
     Helpers.grok_level(current_level)	# so we have level info available everywhere
+
     GRAVITY_TIMEOUT = current_level.gravity_timeout * self.GRAVITY_FACTOR
 
     # turn on buttons and show requirements for level
     game_hud.startLevel(current_level)
-    $GameSwipeDetector.startLevel()
+    $GameSwipeDetector.startLevel(current_level)
 
 # turn input off for all children while display requirements / show cut scenes and the like
 func grok_input(boolean):
@@ -201,8 +204,8 @@ func _show_stuff_after_level(reason):
     self.level_over_reason = reason		# not sure we need to remember this
     var collect_info_for_stars = {'reason':reason,
                                     'level':self.level_num,
-                                    'num_tiles':game_hud.level_reqs.num_tiles_required,
-                                    'waste_swipes':$GameSwipeDetector.wasted_swipes
+                                    'num_tiles':$GameSwipeDetector.saved_tile_counter.num_tiles_all_types(),
+                                    'safe_tiles':$GameSwipeDetector.saved_tiles
                                 }
     game_hud.stars_after_level.show_stuff_after_level(collect_info_for_stars)
 
@@ -220,7 +223,6 @@ func _level_over_display_buttons(reason):
 
 
 func _process(delta):
-
     if gravity_called:
         input_y_direction = 1
 

@@ -87,6 +87,9 @@ const STAR_ADD_TIME_REMAIN = 3
 const STAR_DISPLAY_STARS = 4
 const STAR_REMOVE_PANEL = 5
 
+const Saved_Tiles_Anchor_Left = 0.9
+const Saved_Tiles_Anchor_Top = 0.5
+
 # Before each level, the required pieces are shown and then shrink as they move up to upper left.
 # If the shrink location is 1, they will each take a single square worth of space
 # At a shrink factor of 0.2, they fit within one space, but are too small for the player to see

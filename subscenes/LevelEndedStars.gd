@@ -1,4 +1,4 @@
-#    Copyright (C) 2018  Rob Nugen
+#    Copyright (C) 2020  Rob Nugen
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -18,8 +18,8 @@ extends Node2D
 var game_scene
 var _todo_after_level
 var _info_for_star_calc
-export var swipe_lose_delay = 0.5
-export var lose_points_per_swipe = 5
+export var swipe_lose_delay = 0.05
+export var gain_points_per_swipe = 1
 export var points_per_tile = 25
 
 #######################################################
@@ -109,22 +109,22 @@ func _display_bonus():
     var bonus_target = self._info_for_star_calc['num_tiles'] * self.points_per_tile
     points.set_target(bonus_target)	# tell spinner where to stop
     points.set_increment(floor(bonus_target * 0.05))	# take twenty steps to count
-    points.start_tick_from(0)		# Start from 0 so null requirements level can be won.  Calls back to _displayed_quantity when finished 
+    points.start_tick_from(0)		# Start from 0 so null requirements level can be won.  Calls back to _displayed_quantity when finished
 
 func _reduce_swipes():
     print("Reduce Swipes")
     var points = get_node("BonusPanel/BonusPoints")
-    var bonus_reduction = self._info_for_star_calc['waste_swipes'] * self.lose_points_per_swipe
-    print("lose ", bonus_reduction, " points")
+    var bonus_reduction = self._info_for_star_calc['safe_tiles'] * self.gain_points_per_swipe
+    print("win ", bonus_reduction, " points")
     points.set_delay(self.swipe_lose_delay)
-    points.set_target_decrease(bonus_reduction)
-    points.set_increment(self.lose_points_per_swipe)
+    points.set_target_increase(bonus_reduction)
+    points.set_increment(self.gain_points_per_swipe)
 
-    var wasted = HUD.get_node('WastedSwipeCount')
-    wasted.set_delay(self.swipe_lose_delay)
-    wasted.set_target(0)
-    wasted.set_increment(1)
-    wasted.start_tick()
+    var tiles_saved = game_scene.game_hud.saved_tiles
+    tiles_saved.set_delay(self.swipe_lose_delay)
+    tiles_saved.set_target(0)
+    tiles_saved.set_increment(1)
+    tiles_saved.start_tick()
     points.start_tick()
 
 #####################################################
@@ -159,7 +159,9 @@ func _display_stars():
 #######################################################
 #
 #  	This will be private to the GD star_display.gd
+#   Swiping level-specific shapes will determine the number of stars.
 func _calculate_stars_for_level():
+    print(self._info_for_star_calc)
     var existing_sprites = get_tree().get_nodes_in_group("players")
     var num_stars = randi()%3+1
     print("remaining pieces: ", existing_sprites.size())

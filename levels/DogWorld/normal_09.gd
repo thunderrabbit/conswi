@@ -19,5 +19,5 @@ func _init():
     fill_level = false
     max_tiles_avail = 150
     time_limit_in_sec = 0.3
-    level_requirements = { "vertical8":1 }
+    star_requirements = { "vertical8":1 }
     queue_len = 5

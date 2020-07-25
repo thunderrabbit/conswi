@@ -1,4 +1,4 @@
-#    Copyright (C) 2018  Rob Nugen
+#    Copyright (C) 2020  Rob Nugen
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ const numberic_offset_pixels = Vector2(-90,-90)			# maybe make into a var and ca
 
 signal displayed_shape			# after shape has been displayed+paused
 signal shrunk_shape				# after shape has finished shrinking
-signal flew_away				# after the wasted swipe has vanished
+signal flew_away				# after the saved_tiles have been counted
 
 # add sprites to this object in the shape they are meant to represent
 # shape_array for bo3 is [3,1,1,1] which comes from ShapeDatabase
@@ -91,7 +91,7 @@ func fly_away_randomly(duration = 0.9):
 
 ##################################################
 #
-#   The idea here is the wasted swipes can be collected somewhere and then count against the user.
+#   The idea here is the saved tiles can be collected somewhere and then help user win level.
 #   Maybe I can just log a number instead of showing the swipes on the side
 #
 func come_back_to_location(obj, key):
@@ -99,7 +99,7 @@ func come_back_to_location(obj, key):
     if key != ':scale':	# (callback only once per tween)
         return
     var duration = 0.9
-    var go_to_loc = HUD.get_node('WastedSwipeCount').get_global_position()
+    var go_to_loc = Helpers.slot_to_pixels(Vector2(4,10)) # was this but it was moved to GameHud and I don't know how to access gamehud from here  HUD.get_node('SavedTileCount').get_global_position()
     var effect = get_node("Tween")
     effect.connect("tween_completed", self, "flew_away")
     effect.interpolate_property(self, 'scale', self.get_scale(), Vector2(0.02, 0.02), duration, Tween.TRANS_QUAD, Tween.EASE_OUT)
@@ -116,7 +116,7 @@ func flew_away(obj, key):
 
 # After shape has been shrunk
 func shrunk_shape(obj, key):
-    # call back to LevelRequirements
+    # call back to StarRequirements
     if key == ':scale':	# (callback only once per tween)
         emit_signal("shrunk_shape")
 
@@ -133,7 +133,7 @@ func display_quantity(quantity):
     spinner.set_target(quantity)	# tell spinner where to stop
     spinner.start_tick_from(1)		# calls back to _displayed_quantity when finished
 
-# call back to LevelRequirements that this particular shape 
+# call back to StarRequirements that this particular shape
 # has finished displaying its number (and now can be shrunk
 # out of the way for game play
 func _displayed_quantity():

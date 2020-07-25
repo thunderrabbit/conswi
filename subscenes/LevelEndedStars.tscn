@@ -3,11 +3,11 @@
 [ext_resource path="res://subscenes/LevelEndedStars.gd" type="Script" id=1]
 [ext_resource path="res://subscenes/SpinnerLabel.tscn" type="PackedScene" id=2]
 
-[node name="LevelEndedStars" type="Node2D"]
+[node name="LevelEndedStars" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
-swipe_lose_delay = 0.5
-lose_points_per_swipe = 5
+swipe_lose_delay = 0.05
+gain_points_per_swipe = 1
 points_per_tile = 25
 
 [node name="BonusPanel" type="Panel" parent="." index="0"]
@@ -35,7 +35,6 @@ margin_left = 7.0
 margin_top = 11.0
 margin_right = 237.0
 margin_bottom = 96.0
-rect_clip_content = false
 size_flags_stretch_ratio = 2.0
 _sections_unfolded = [ "Anchor", "Grow Direction", "Size Flags", "custom_colors", "custom_fonts", "custom_styles" ]
 

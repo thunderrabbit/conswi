@@ -1,4 +1,4 @@
-#    Copyright (C) 2019  Rob Nugen
+#    Copyright (C) 2020  Rob Nugen
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -16,12 +16,14 @@
 extends Area2D
 
 const SwipeShape = preload("res://subscenes/SwipeShape.tscn")
+const SavedTileCounter = preload("res://helpers/SavedTileCounter.gd")
 
 var clicked_this_piece_type = 0				# set when swipe is started
 var swipe_mode= false						# if true, then we are swiping
 var swipe_array = []						# the pieces in the swipe
-var swipe_shape = null						# will animate shape user swiped
-var wasted_swipes = 0						# count against score
+var swipe_shape = null					# will animate shape user swiped
+var saved_tiles          # show on screen
+var saved_tile_counter          # count toward win
 var Game									# will point to GameNode
 var SwipeState = preload("res://enums/SwipeState.gd")
 var swipe_state = SwipeState.SWIPE
@@ -32,9 +34,11 @@ func _ready():
     # Initialization here
     pass
 
-func startLevel():
-    self.wasted_swipes = 0	# wasted swipes will count against bonus
-    Game.game_hud.level_reqs.clarify_requirements()   #  allow win if there are no requirements
+func startLevel(current_level):
+    self.saved_tiles = 0	# increase saved_tiles to beat level
+    self.saved_tile_counter = self.SavedTileCounter.new()
+    self.saved_tile_counter.assess_required_tiles(current_level)
+
 
 # this handles dragging pieces and orphaned swipes
 func _on_GameSwipeDetector_input_event( viewport, event, shape_idx ):
@@ -84,7 +88,7 @@ func piece_unclicked():
 
         var dimensions = ShapeShifter.getSwipeDimensions(swipe_array)
         # figure out if the swipe is required
-        var swipe_was_required = Game.game_hud.level_reqs.swiped_piece(swipe_name)
+        var swipe_was_required = Game.game_hud.star_reqs.swiped_piece(swipe_name)
 
         swipe_shape = SwipeShape.instance()
         swipe_shape.set_shape(ShapeShifter.getBitmapOfSwipeCoordinates(swipe_array),clicked_this_piece_type)
@@ -93,11 +97,12 @@ func piece_unclicked():
         if swipe_was_required:
             swipe_shape.connect("shrunk_shape",self,"shrank_required_shape")
             # after swipe, move shape to correct/required shape location
-            swipe_shape.shrink_shape(Game.game_hud.level_reqs.required_swipe_location(swipe_name))
+            swipe_shape.shrink_shape(Game.game_hud.star_reqs.required_swipe_location(swipe_name))
         else:
-            swipe_shape.connect("flew_away", self, "inc_wasted_swipe_counter")
+            swipe_shape.connect("flew_away", self, "inc_saved_tile_counter")
             swipe_shape.fly_away_randomly()
-            self.wasted_swipes = self.wasted_swipes + 1
+            self.saved_tiles = self.saved_tiles + swipe_array.size()  # eventually only use save_tile_counter
+            self.saved_tile_counter.saved_n_tiles_of_type(swipe_array.size(), clicked_this_piece_type)
         # TODO add animation swipe_shape.animate()
         for pos in swipe_array:
             if Helpers.board[pos] != null:
@@ -119,10 +124,11 @@ func piece_done_dragged(slot):
     swipe_state = SwipeState.IDLE
     dragging_piece = null
 
-func inc_wasted_swipe_counter():
-    print("wasted this many swipes: ", self.wasted_swipes)		# should be displayed on screen
-    print("Add a counter for that number on the screen")
-    HUD.get_node('WastedSwipeCount').set_value(self.wasted_swipes)
+func inc_saved_tile_counter():
+    print("saved this many tiles: ", self.saved_tiles)		# should be spun up on screen
+    Game.game_hud.saved_tiles.set_value(self.saved_tiles)
+    if self.saved_tile_counter.saved_enough_tiles_bool():
+        Game._on_LevelWon()   ## TODO use signal instead of call private function in Game
 
 func piece_entered(position, piece_type):
     if swipe_state != SwipeState.SWIPE:
@@ -163,4 +169,4 @@ func piece_exited(position, piece_type):
 
 func shrank_required_shape():
     swipe_shape.queue_free()
-    Game.game_hud.level_reqs.clarify_requirements()
+    Game.game_hud.star_reqs.clarify_star_requirements()

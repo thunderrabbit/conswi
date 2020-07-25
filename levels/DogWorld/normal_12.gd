@@ -19,4 +19,5 @@ func _init():
     tiles = {"dog":9,"cow":1,"bear":1,"panda":1}
     max_tiles_avail = 8150
     time_limit_in_sec = 8390
-    level_requirements = { "pink_floyd":1 }
+    star_requirements = { "pink_floyd":1 }
+    required_tiles = { "default":1, "cat":280 }   # NormalLevel.gd converts default to a quantity based on level

@@ -21,4 +21,4 @@ func _init():
 
     max_tiles_avail = 300000
     time_limit_in_sec = 300000
-    level_requirements = { "pink_floyd":1 }
+    star_requirements = { "pink_floyd":1 }
