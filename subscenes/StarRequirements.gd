@@ -20,7 +20,7 @@ const SwipeShape = preload("res://subscenes/FingerSwipeShape.tscn")
 signal levelwon
 signal requirements_shown
 
-var star_requirements = {}				# actual dictionary of star_requirements may not need to keep
+var star_requirements				# will point to the dictionary inside level
 var array_of_required_names = []	# so we can loop through (need to keep so we can keep track of which one to display next)
 var location_of_required_shape = {}	# so we know where to display shape
 var required_shapes_hud = {}		# so we can update the shapes as swipes happen
@@ -40,7 +40,7 @@ func show_finger_ka(show_finger):
 # and display each required shape
 func show_star_requirements(star_requirements):
     reset_everything()
-    self.star_requirements = star_requirements
+    self.star_requirements = star_requirements   # point to dictionary in level
     for reqd_name in self.star_requirements:
         var num_required = location_of_required_shape.size()	# will determine where shape should be shown
         array_of_required_names.append(reqd_name)
@@ -117,7 +117,7 @@ func clarify_requirements():
         var required = required_shapes_hud[name]
         required.spinner.set_value(self.star_requirements[name])
         if self.star_requirements[name] == 0:
-            self.star_requirements.erase(name)	# eventually make self.star_requirements empty (so we can win)
+            self.star_requirements.erase(name)	# remove requirement from level
             required_shapes_hud.erase(name)		# so we won't try to hide Deleted nodes in remove_old_requirements()
             required.hide()				# remove piece from screen
             required.queue_free()
