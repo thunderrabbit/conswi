@@ -21,7 +21,7 @@ var clicked_this_piece_type = 0				# set when swipe is started
 var swipe_mode= false						# if true, then we are swiping
 var swipe_array = []						# the pieces in the swipe
 var swipe_shape = null						# will animate shape user swiped
-var wasted_swipes = 0						# count against score
+var saved_tiles = 0						# count against score
 var Game									# will point to GameNode
 var SwipeState = preload("res://enums/SwipeState.gd")
 var swipe_state = SwipeState.SWIPE
@@ -33,7 +33,7 @@ func _ready():
     pass
 
 func startLevel():
-    self.wasted_swipes = 0	# wasted swipes will count against bonus
+    self.saved_tiles = 0	# wasted swipes will count against bonus
 
 # this handles dragging pieces and orphaned swipes
 func _on_GameSwipeDetector_input_event( viewport, event, shape_idx ):
@@ -96,7 +96,7 @@ func piece_unclicked():
         else:
             swipe_shape.connect("flew_away", self, "inc_wasted_swipe_counter")
             swipe_shape.fly_away_randomly()
-            self.wasted_swipes = self.wasted_swipes + swipe_array.size()
+            self.saved_tiles = self.saved_tiles + swipe_array.size()
         # TODO add animation swipe_shape.animate()
         for pos in swipe_array:
             if Helpers.board[pos] != null:
@@ -119,9 +119,9 @@ func piece_done_dragged(slot):
     dragging_piece = null
 
 func inc_wasted_swipe_counter():
-    print("wasted this many swipes: ", self.wasted_swipes)		# should be displayed on screen
+    print("wasted this many swipes: ", self.saved_tiles)		# should be displayed on screen
     print("Add a counter for that number on the screen")
-    HUD.get_node('WastedSwipeCount').set_value(self.wasted_swipes)
+    HUD.get_node('WastedSwipeCount').set_value(self.saved_tiles)
 
 func piece_entered(position, piece_type):
     if swipe_state != SwipeState.SWIPE:
