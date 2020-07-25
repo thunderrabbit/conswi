@@ -17,7 +17,6 @@ extends MarginContainer
 
 const SwipeShape = preload("res://subscenes/FingerSwipeShape.tscn")
 
-signal levelwon
 signal achieved_three_stars   # not yet connected, but will just trigger visual
 signal requirements_shown
 
@@ -31,7 +30,6 @@ var num_tiles_required = 0			# so LevelEndedStars knows how big bonus should be
 var show_finger = false				# usually do not show swiping finger (just on first couple levels)
 
 func set_game_scene(gameScene):
-    connect("levelwon", gameScene, "_on_LevelWon")
     connect("requirements_shown", gameScene, "continue_start_level")
 
 func show_finger_ka(show_finger):
