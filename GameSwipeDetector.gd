@@ -16,13 +16,14 @@
 extends Area2D
 
 const SwipeShape = preload("res://subscenes/SwipeShape.tscn")
+const SavedTileCounter = preload("res://helpers/SavedTileCounter.gd")
 
 var clicked_this_piece_type = 0				# set when swipe is started
 var swipe_mode= false						# if true, then we are swiping
 var swipe_array = []						# the pieces in the swipe
 var swipe_shape = null					# will animate shape user swiped
-var saved_tiles = 0						  # count toward win
-var need_to_save_tiles = 0      # needed to win level
+var saved_tiles          # show on screen
+var saved_tile_counter          # count toward win
 var Game									# will point to GameNode
 var SwipeState = preload("res://enums/SwipeState.gd")
 var swipe_state = SwipeState.SWIPE
@@ -33,8 +34,11 @@ func _ready():
     # Initialization here
     pass
 
-func startLevel():
+func startLevel(current_level):
     self.saved_tiles = 0	# increase saved_tiles to beat level
+    self.saved_tile_counter = self.SavedTileCounter.new()
+    self.saved_tile_counter.assess_required_tiles(current_level)
+
 
 # this handles dragging pieces and orphaned swipes
 func _on_GameSwipeDetector_input_event( viewport, event, shape_idx ):
@@ -97,7 +101,8 @@ func piece_unclicked():
         else:
             swipe_shape.connect("flew_away", self, "inc_saved_tile_counter")
             swipe_shape.fly_away_randomly()
-            self.saved_tiles = self.saved_tiles + swipe_array.size()
+            self.saved_tiles = self.saved_tiles + swipe_array.size()  # eventually only use save_tile_counter
+            self.saved_tile_counter.saved_n_tiles_of_type(swipe_array.size(), clicked_this_piece_type)
         # TODO add animation swipe_shape.animate()
         for pos in swipe_array:
             if Helpers.board[pos] != null:

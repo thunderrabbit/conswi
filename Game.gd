@@ -103,11 +103,12 @@ func start_level(level_num):
         current_level.debug_level = 1
         current_level.fill_level = true
     Helpers.grok_level(current_level)	# so we have level info available everywhere
+
     GRAVITY_TIMEOUT = current_level.gravity_timeout * self.GRAVITY_FACTOR
 
     # turn on buttons and show requirements for level
     game_hud.startLevel(current_level)
-    $GameSwipeDetector.startLevel()
+    $GameSwipeDetector.startLevel(current_level)
 
 # turn input off for all children while display requirements / show cut scenes and the like
 func grok_input(boolean):

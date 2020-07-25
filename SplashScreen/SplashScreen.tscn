@@ -6,7 +6,7 @@
 [ext_resource path="res://images/Folder_2.5/hand1@3x.png" type="Texture" id=4]
 [ext_resource path="res://images/Folder_2.5/hand2@3x.png" type="Texture" id=5]
 
-[node name="SplashScreen" type="MarginContainer"]
+[node name="SplashScreen" type="MarginContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
