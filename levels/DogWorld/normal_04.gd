@@ -16,8 +16,9 @@
 extends "DogLevel.gd"
 
 func _init():
-    max_tiles_avail = 100
-    time_limit_in_sec = 300
-    star_requirements = { "ta3":1,
-                            "bo3":1,
+    gravity_timeout = 1000
+    max_tiles_avail = 1000
+    time_limit_in_sec = 3000
+    star_requirements = { "ta3":3,
+                            "bo3":4,
                             "ta4":1 }
