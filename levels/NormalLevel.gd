@@ -37,20 +37,31 @@ var required_tiles = { "default":1 }  # use same format as tiles to require more
 
 ###########################################
 #
-#   So the same level definition can get harder if it was used for higher world / level
+#   This file is a base class that can be used for multiple worlds and level numbers
+#
+#   Let the level know its world and level number
 #
 func inject_world_and_level(world_num, level):
     var world_name = TileDatabase.tiles[world_num]["ITEM_NAME"]
     print("inside inject_world_and_level world ", world_name, " level ", level)
+    _calculate_requirements(world_name, level)
+
+###########################################
+#
+#   The same level definition will get harder if it is used for higher world / level
+#
+func _calculate_requirements(world_name, level):
+    # 'default' means player must collect N animals from this world, where N is based on level number
     if self.required_tiles["default"] == 1:
-        self.required_tiles.erase("default")
-        self.required_tiles[world_name] = 3 * level * level
+        self.required_tiles[world_name] = 3 * level * level  # Dog world 1 must get 3 dogs
+        self.required_tiles.erase("default")    # remove now-meaningless key
 
 func pretty_print_level():
     print("I am a level")
     print("width x height ", width, " x ", height)
-    print("requirements:")
-    print(star_requirements)
+    print("requirements to pass level:")
     print(required_tiles)
+    print("requirements for 3 stars:")
+    print(star_requirements)
     print("End level pretty-print")
 
