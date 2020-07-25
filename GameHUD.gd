@@ -18,11 +18,13 @@ extends Node
 const Buttons = preload("res://subscenes/Buttons.gd")
 const StarRequirements = preload("res://subscenes/StarRequirements.tscn")
 const StarsAfterLevel = preload("res://subscenes/LevelEndedStars.tscn")
+const SavedTiles = preload("res://subscenes/SpinnerLabel.tscn")
 
 var game
 var buttons					# Steering Pad / Start buttons
 var star_reqs				# HUD showing star requirements
 var stars_after_level		# Show stars after level is over
+var saved_tiles             # Show saved tiles
 
 func addHUDtoGame(game):
     self.game = game
@@ -39,6 +41,11 @@ func addHUDtoGame(game):
     self.stars_after_level = StarsAfterLevel.instance()
     self.stars_after_level.set_game_scene(self.game)
     add_child(self.stars_after_level)
+
+    self.saved_tiles = SavedTiles.instance()
+    self.saved_tiles.anchor_left = G.Saved_Tiles_Anchor_Left
+    self.saved_tiles.anchor_top = G.Saved_Tiles_Anchor_Top
+    add_child(self.saved_tiles)
 
 func startLevel(current_level):
     self.buttons.prepare_to_play_level()
