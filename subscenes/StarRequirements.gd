@@ -114,7 +114,7 @@ func swiped_piece(piece_name):
 
 # THIS NO LONGER CHECKS IF WE WON
 # But I am leaving it here because it correctly removes swipes that have been correctly swiped
-func clarify_requirements():
+func clarify_star_requirements():
     for name in self.star_requirements:
         var required = required_shapes_hud[name]
         required.spinner.set_value(self.star_requirements[name])

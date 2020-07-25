@@ -162,4 +162,4 @@ func piece_exited(position, piece_type):
 
 func shrank_required_shape():
     swipe_shape.queue_free()
-    Game.game_hud.star_reqs.clarify_requirements()
+    Game.game_hud.star_reqs.clarify_star_requirements()
