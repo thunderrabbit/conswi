@@ -18,6 +18,7 @@ extends Node2D
 const SwipeShape = preload("res://subscenes/FingerSwipeShape.tscn")
 
 signal levelwon
+signal achieved_three_stars   # not yet connected, but will just trigger visual
 signal requirements_shown
 
 var star_requirements				# will point to the dictionary inside level
@@ -111,7 +112,8 @@ func swiped_piece(piece_name):
         self.star_requirements[piece_name] = num_required - 1
     return (num_required > 0)		# return true if piece was required
 
-# See if we won
+# THIS NO LONGER CHECKS IF WE WON
+# But I am leaving it here because it correctly removes swipes that have been correctly swiped
 func clarify_requirements():
     for name in self.star_requirements:
         var required = required_shapes_hud[name]
@@ -122,4 +124,4 @@ func clarify_requirements():
             required.hide()				# remove piece from screen
             required.queue_free()
     if self.star_requirements.empty():
-        emit_signal("levelwon")
+        emit_signal("achieved_three_stars")  # use to be levelwon but now the total tiles swiped determines if level is won
