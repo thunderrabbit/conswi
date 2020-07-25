@@ -204,7 +204,7 @@ func _show_stuff_after_level(reason):
     self.level_over_reason = reason		# not sure we need to remember this
     var collect_info_for_stars = {'reason':reason,
                                     'level':self.level_num,
-                                    'num_tiles':game_hud.star_reqs.num_tiles_required,
+                                    'num_tiles':$GameSwipeDetector.saved_tile_counter.num_tiles_all_types(),
                                     'safe_tiles':$GameSwipeDetector.saved_tiles
                                 }
     game_hud.stars_after_level.show_stuff_after_level(collect_info_for_stars)
@@ -223,7 +223,6 @@ func _level_over_display_buttons(reason):
 
 
 func _process(delta):
-
     if gravity_called:
         input_y_direction = 1
 

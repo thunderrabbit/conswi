@@ -47,4 +47,20 @@ func tile_name(tile_type):
     return TileDatabase.tiles[tile_type].ITEM_NAME
 
 func saved_n_tiles_of_type(n, tile_type):
-    print(n, self.tile_name(tile_type))
+    var tile_name = self.tile_name(tile_type)
+    print(n, tile_name)
+    self.local_saved_tiles[tile_name] = self.local_saved_tiles[tile_name] + n
+    self.print_all()
+
+func saved_enough_tiles_bool():
+    for key in self.local_required_tiles:
+        if self.local_saved_tiles[key] < self.local_required_tiles[key]:
+            return false
+    return true
+
+func num_tiles_all_types():
+    var total_tiles = 0
+    for key in self.local_required_tiles:
+        total_tiles = total_tiles + self.local_required_tiles[key]
+    return total_tiles
+    

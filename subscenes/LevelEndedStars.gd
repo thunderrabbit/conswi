@@ -18,8 +18,8 @@ extends Node2D
 var game_scene
 var _todo_after_level
 var _info_for_star_calc
-export var swipe_lose_delay = 0.5
-export var lose_points_per_swipe = 5
+export var swipe_lose_delay = 0.05
+export var gain_points_per_swipe = 1
 export var points_per_tile = 25
 
 #######################################################
@@ -114,13 +114,13 @@ func _display_bonus():
 func _reduce_swipes():
     print("Reduce Swipes")
     var points = get_node("BonusPanel/BonusPoints")
-    var bonus_reduction = self._info_for_star_calc['safe_tiles'] * self.lose_points_per_swipe
-    print("lose ", bonus_reduction, " points")
+    var bonus_reduction = self._info_for_star_calc['safe_tiles'] * self.gain_points_per_swipe
+    print("win ", bonus_reduction, " points")
     points.set_delay(self.swipe_lose_delay)
-    points.set_target_decrease(bonus_reduction)
-    points.set_increment(self.lose_points_per_swipe)
+    points.set_target_increase(bonus_reduction)
+    points.set_increment(self.gain_points_per_swipe)
 
-    var tiles_saved = HUD.get_node('SavedTileCount')
+    var tiles_saved = game_scene.game_hud.saved_tiles
     tiles_saved.set_delay(self.swipe_lose_delay)
     tiles_saved.set_target(0)
     tiles_saved.set_increment(1)
