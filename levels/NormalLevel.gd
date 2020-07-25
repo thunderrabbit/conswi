@@ -33,7 +33,7 @@ var tiles = {"dog": 1,
              "cow": 1}		# fill this to define tile percentages via ratios
 
 var star_requirements = { "bo3":1 }	# swipe these shapes to get 3 stars
-var required_tiles = { "default":1 }  # use same format as tiles to require more things
+var required_tiles = { "default":1 }  # use same format as tiles to require more things, but for now the GameHud can only handle one number
 
 ###########################################
 #
@@ -64,4 +64,3 @@ func pretty_print_level():
     print("requirements for 3 stars:")
     print(star_requirements)
     print("End level pretty-print")
-
