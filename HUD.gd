@@ -18,11 +18,11 @@
 extends Node2D
 
 func _ready():
-	pass
+    pass
 
 func showBottomButtons():
-	$LSBottomButtons.show()
+    $LSBottomButtons.show()
 
 func hideBottomButtons():
-	$LSBottomButtons.hide()
+    $LSBottomButtons.hide()
 
