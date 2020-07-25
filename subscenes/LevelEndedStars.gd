@@ -114,7 +114,7 @@ func _display_bonus():
 func _reduce_swipes():
     print("Reduce Swipes")
     var points = get_node("BonusPanel/BonusPoints")
-    var bonus_reduction = self._info_for_star_calc['waste_swipes'] * self.lose_points_per_swipe
+    var bonus_reduction = self._info_for_star_calc['safe_tiles'] * self.lose_points_per_swipe
     print("lose ", bonus_reduction, " points")
     points.set_delay(self.swipe_lose_delay)
     points.set_target_decrease(bonus_reduction)
