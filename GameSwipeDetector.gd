@@ -34,7 +34,6 @@ func _ready():
 
 func startLevel():
     self.wasted_swipes = 0	# wasted swipes will count against bonus
-    Game.game_hud.star_reqs.clarify_requirements()   #  allow win if there are no requirements (maybe not needed once number of tiles are the actual requirements)
 
 # this handles dragging pieces and orphaned swipes
 func _on_GameSwipeDetector_input_event( viewport, event, shape_idx ):
