@@ -20,8 +20,9 @@ const SwipeShape = preload("res://subscenes/SwipeShape.tscn")
 var clicked_this_piece_type = 0				# set when swipe is started
 var swipe_mode= false						# if true, then we are swiping
 var swipe_array = []						# the pieces in the swipe
-var swipe_shape = null						# will animate shape user swiped
-var saved_tiles = 0						# count against score
+var swipe_shape = null					# will animate shape user swiped
+var saved_tiles = 0						  # count toward win
+var need_to_save_tiles = 0      # needed to win level
 var Game									# will point to GameNode
 var SwipeState = preload("res://enums/SwipeState.gd")
 var swipe_state = SwipeState.SWIPE
@@ -119,8 +120,7 @@ func piece_done_dragged(slot):
     dragging_piece = null
 
 func inc_saved_tile_counter():
-    print("saved this many tiles: ", self.saved_tiles)		# should be displayed on screen
-    print("Add a counter for that number on the screen")
+    print("saved this many tiles: ", self.saved_tiles)		# should be spun up on screen
     Game.game_hud.saved_tiles.set_value(self.saved_tiles)
 
 func piece_entered(position, piece_type):
