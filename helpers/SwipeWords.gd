@@ -17,20 +17,19 @@
 
 extends Node
 
-var wordsFor3Tiles = [];
-var wordsFor4Tiles = [];
-var wordsFor5Tiles = ["five"];
-var wordsFor6Tiles = ["si1x","sihx","sifx","si5x"];
-var wordsFor7Tiles = ["se1ven","s7even","seve5n","seven"];
-var wordsFor8Tiles = ["ei1ght","eig6ht","eigh5t","eight"];
-var wordsFor9Tiles = ["ni1ne","ni6ne","nine","nine"];
-var wordsFor10Tiles = ["t1en","te6n","ten","t5en"];
-var wordsFor11Tiles = ["e1leven","el6even","e5leven","eleven"];
-var wordsFor12Tiles = ["t1welve","twe6lve","t5welve","twelve"];
-var wordsFor13Tiles = ["t1hirteen","thirteen5","thirteen","thirteen"];
-var wordsFor14Tiles = ["c1at","cat","cat","c5at"];
-var wordsFor15Tiles = ["c1at","cat","cat","c5at"];
-var wordsFor16Tiles = ["c1at","cat","cat","c5at"];
+var wordsFor3Tiles = ["ok"];
+var wordsFor4Tiles = ["ok"];
+var wordsFor5Tiles = ["okay","so-so","not bad"];
+var wordsFor6Tiles = ["nice","clear","safe"];
+var wordsFor7Tiles = ["rad", "far out", "groovy"];
+var wordsFor8Tiles = ["sweet", "fresh", "cool"];
+var wordsFor9Tiles = ["neat", "def", "lit"];
+var wordsFor10Tiles = ["super", "tip top", "stellar"];
+var wordsFor11Tiles = ["gnarly", "way out", "snarly"];
+var wordsFor12Tiles = ["good", "fine", "tight"];
+var wordsFor13Tiles = ["great", "grand", "chill"];
+var wordsFor14Tiles = ["boss", "top dog", "fat cat"];
+var wordsFor15Tiles = ["superb!", "wow!", "amazing!"];
 
 
 var wordsForSwipes = {
@@ -38,7 +37,13 @@ var wordsForSwipes = {
     6:wordsFor6Tiles,
     7:wordsFor7Tiles,
     8:wordsFor8Tiles,
-    9:wordsFor9Tiles
+    9:wordsFor9Tiles,
+    10:wordsFor10Tiles,
+    11:wordsFor11Tiles,
+    12:wordsFor12Tiles,
+    13:wordsFor13Tiles,
+    14:wordsFor14Tiles,
+    15:wordsFor15Tiles
 }
 
 
@@ -46,10 +51,10 @@ func _ready():
     randomize()
 
 func random_word(word_length):
-    if word_length < 5:
+    if word_length < 4:
        return ""
-    if word_length > 9:  ## so we don't overrun the array
-       word_length = 9
+    if word_length > 15:  ## so we don't overrun the array
+       word_length = 15
     var wordsForSwipe = wordsForSwipes[word_length]   # get array of possible words
     var random_word_num = (randi() % wordsForSwipe.size())
     return wordsForSwipe[random_word_num]
