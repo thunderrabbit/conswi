@@ -54,6 +54,9 @@ func set_shape(shape_array, tile_type = G.TYPE_DOG):
             _updateDimensions(loc)		# know how big swipe is
     return total_tiles			# So we can eventually tell the level bonus, based on number of required tiles
 
+func set_text_word(word):
+    $SpinnerLabel.text = word
+
 func _updateDimensions(loc) :
     if(loc.x > self.dimensions.x):
         dimensions.x = loc.x
