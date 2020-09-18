@@ -28,6 +28,7 @@ ShapeDatabase="*res://helpers/ShapeDatabase.gd"
 LevelDatabase="*res://levels/LevelDatabase.gd"
 VisibleSwipeOverlay="*res://VisibleSwipeOverlay.gd"
 Background="*res://subscenes/Background.tscn"
+SwipeWords="*res://helpers/SwipeWords.gd"
 
 [display]
 
