@@ -33,6 +33,7 @@ var wordsFor15Tiles = ["superb!", "wow!", "amazing!"];
 
 
 var wordsForSwipes = {
+    4:wordsFor4Tiles,
     5:wordsFor5Tiles,
     6:wordsFor6Tiles,
     7:wordsFor7Tiles,
