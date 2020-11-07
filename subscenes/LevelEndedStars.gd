@@ -52,7 +52,6 @@ func _decide_what_to_show():
         self._PlanToReduceTiles()		# these three can be in any order (this one blacks out the tiles)
         self._PlanToAddTimeRemain()		# these three can be in any order
         self._PlanToDisplayStars()		# add stars below score (or above) or whatever, but should be last
-        self._PlanToRemovePanel()		# remove panel from screen after a delay
     else:
         # this will black out the tiles, but *not* show score because score will not be there
         self._PlanToReduceTiles()
@@ -71,9 +70,6 @@ func _PlanToAddTimeRemain():
 
 func _PlanToDisplayStars():
     self._todo_after_level.push_back(G.STAR_DISPLAY_STARS)
-
-func _PlanToRemovePanel():
-    self._todo_after_level.push_back(G.STAR_REMOVE_PANEL)
 
 func _pause_before_show_stuff():
     var timer = $extra_pauser
@@ -105,13 +101,10 @@ func _show_stuff_after_level():
                 self._add_time_remain()
             G.STAR_DISPLAY_STARS:
                 self._display_stars()
-            G.STAR_REMOVE_PANEL:
-                self._remove_panel()
 
 func _display_bonus():
     print("Display Bonus")
-    $BonusPanel.show()
-    var points = get_node("BonusPanel/BonusPoints")
+    var points = get_node("BonusPoints")
     points.connect("qty_reached",self,"_pause_after_show_stuff")
     points.set_delay(0.05)
     var bonus_target = self._info_for_star_calc['num_tiles'] * self.points_per_tile
@@ -121,7 +114,7 @@ func _display_bonus():
 
 func _reduce_swipes():
     print("Reduce Swipes")
-    var points = get_node("BonusPanel/BonusPoints")
+    var points = get_node("BonusPoints")
     var bonus_reduction = self._info_for_star_calc['safe_tiles'] * self.gain_points_per_swipe
     print("win ", bonus_reduction, " points")
     points.set_delay(self.swipe_lose_delay)
@@ -175,11 +168,6 @@ func _calculate_stars_for_level():
     print("remaining pieces: ", existing_sprites.size())
     Savior.save_num_stars(G.TYPE_DOG, self._info_for_star_calc['level'], num_stars)
     return num_stars
-
-func _remove_panel():
-    print("Remove Panel")
-    $BonusPanel.hide()
-    self._pause_after_show_stuff()  # simulate calling after animation complete
 
 func _on_last_star_displayed():
     self.game_scene._on_level_over_stars_displayed()		# fake signal emitted by star_display.gd
