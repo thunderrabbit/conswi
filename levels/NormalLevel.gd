@@ -52,7 +52,8 @@ func inject_world_and_level(world_num, level):
 #
 func _calculate_requirements(world_name, level):
     # 'default' means player must collect N animals from this world, where N is based on level number
-    if self.required_tiles["default"] == 1:
+    # overwrite in level e.g. required_tiles = { "dog":21 }
+    if self.required_tiles.has("default"):   # default is a key and its value does not matter.  It is defined above in this file 
         self.required_tiles[world_name] = 3 * level * level  # Dog world 1 must get 3 dogs
         self.required_tiles.erase("default")    # remove now-meaningless key
 
