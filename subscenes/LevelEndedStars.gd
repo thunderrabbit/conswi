@@ -81,6 +81,14 @@ func _pause_before_show_stuff():
     timer.set_wait_time(0.5)
     timer.start()
 
+###  this is designed to slow the action so I can see what is happening
+func _pause_after_show_stuff():
+    print("PAUSE after show stuff")
+    var timer = $extra_pauser
+    timer.connect("timeout",self,"_show_stuff_after_level")
+    timer.set_wait_time(1.5)
+    timer.start()
+
 func _show_stuff_after_level():
     if not self._todo_after_level.size():
         self._on_last_star_displayed()	# fake emit
@@ -104,7 +112,7 @@ func _display_bonus():
     print("Display Bonus")
     $BonusPanel.show()
     var points = get_node("BonusPanel/BonusPoints")
-    points.connect("qty_reached",self,"_pause_before_show_stuff")
+    points.connect("qty_reached",self,"_pause_after_show_stuff")
     points.set_delay(0.05)
     var bonus_target = self._info_for_star_calc['num_tiles'] * self.points_per_tile
     points.set_target(bonus_target)	# tell spinner where to stop
@@ -139,11 +147,11 @@ func _reduce_swipes():
 #  to keep the score reduction synced with tile removal
 func _reduce_tiles():
     print("Reduce Tiles")
-    self._show_stuff_after_level()  # simulate calling after animation complete
+    self._pause_after_show_stuff()  # simulate calling after animation complete
 
 func _add_time_remain():
     print("Add Time Remain")
-    self._show_stuff_after_level()  # simulate calling after animation complete
+    self._pause_after_show_stuff()  # simulate calling after animation complete
 
 ###
 # not really thought out, but this will be called if G.STAR_DISPLAY_STARS is in self._todo_after_level
@@ -154,7 +162,7 @@ func _display_stars():
         # if this is last star, tell it to emit _on_last_star_displayed() callback when finished flying
         # fly it into place
         pass
-    self._show_stuff_after_level()  # simulate calling after animation complete
+    self._pause_after_show_stuff()  # simulate calling after animation complete
 
 #######################################################
 #
@@ -171,7 +179,7 @@ func _calculate_stars_for_level():
 func _remove_panel():
     print("Remove Panel")
     $BonusPanel.hide()
-    self._show_stuff_after_level()  # simulate calling after animation complete
+    self._pause_after_show_stuff()  # simulate calling after animation complete
 
 func _on_last_star_displayed():
     self.game_scene._on_level_over_stars_displayed()		# fake signal emitted by star_display.gd
