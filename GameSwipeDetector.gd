@@ -102,8 +102,9 @@ func piece_unclicked():
         else:
             swipe_shape.connect("flew_away", self, "inc_saved_tile_counter")
             swipe_shape.fly_away_randomly()
-            self.saved_tiles = self.saved_tiles + swipe_array.size()  # eventually only use save_tile_counter
-            self.saved_tile_counter.saved_n_tiles_of_type(swipe_array.size(), clicked_this_piece_type)
+
+        self.saved_tiles = self.saved_tiles + swipe_array.size()  # eventually only use save_tile_counter
+        self.saved_tile_counter.saved_n_tiles_of_type(swipe_array.size(), clicked_this_piece_type)
         # TODO add animation swipe_shape.animate()
         for pos in swipe_array:
             if Helpers.board[pos] != null:
