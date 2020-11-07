@@ -23,6 +23,7 @@ var swipe_mode= false						# if true, then we are swiping
 var swipe_array = []						# the pieces in the swipe
 var swipe_shape = null					# will animate shape user swiped
 var saved_tiles          # show on screen
+var correct_swipe_counter       # count toward stars
 var saved_tile_counter          # count toward win
 var Game									# will point to GameNode
 var SwipeState = preload("res://enums/SwipeState.gd")
@@ -36,6 +37,7 @@ func _ready():
 
 func startLevel(current_level):
     self.saved_tiles = 0	# increase saved_tiles to beat level
+    self.correct_swipe_counter = 0  # compare to swipe requirements to determine number of stars (1-3)
     self.saved_tile_counter = self.SavedTileCounter.new()
     self.saved_tile_counter.assess_required_tiles(current_level)
 
@@ -99,6 +101,7 @@ func piece_unclicked():
             swipe_shape.connect("shrunk_shape",self,"shrank_required_shape")
             # after swipe, move shape to correct/required shape location
             swipe_shape.shrink_shape(Game.game_hud.star_reqs.required_swipe_location(swipe_name))
+            self.correct_swipe_counter = self.correct_swipe_counter + 1
         else:
             swipe_shape.connect("flew_away", self, "inc_saved_tile_counter")
             swipe_shape.fly_away_randomly()
@@ -172,3 +175,4 @@ func piece_exited(position, piece_type):
 func shrank_required_shape():
     swipe_shape.queue_free()
     Game.game_hud.star_reqs.clarify_star_requirements()
+    inc_saved_tile_counter()    # count required swipes toward total tiles collected

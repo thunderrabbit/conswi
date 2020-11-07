@@ -205,7 +205,8 @@ func _show_stuff_after_level(reason):
     var collect_info_for_stars = {'reason':reason,
                                     'level':self.level_num,
                                     'num_tiles':$GameSwipeDetector.saved_tile_counter.num_tiles_all_types(),
-                                    'safe_tiles':$GameSwipeDetector.saved_tiles
+                                    'safe_tiles':$GameSwipeDetector.saved_tiles,
+                                    'correct_swipes':$GameSwipeDetector.correct_swipe_counter
                                 }
     game_hud.stars_after_level.show_stuff_after_level(collect_info_for_stars)
 
