@@ -26,5 +26,5 @@
 extends "../NormalLevel.gd"
 
 func _init():
-    tiles = {"dog":3,"cow":0,"bear":0,"panda":0}
+    tiles = {"dog":3,"cow":0,"bear":0,"panda":0}   # these are ratios. (3 parts dog, 0 parts cow 0 parts bear, 0 parts panda) => 100% dog
     fill_level = true    # make it easy to test etc
