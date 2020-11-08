@@ -106,8 +106,7 @@ func swiped_piece(piece_name):
         self.star_requirements[piece_name] = num_required - 1
     return (num_required > 0)		# return true if piece was required
 
-# THIS NO LONGER CHECKS IF WE WON
-# But I am leaving it here because it correctly removes swipes that have been correctly swiped
+# Removes swipes that have been correctly swiped
 func clarify_star_requirements():
     for name in self.star_requirements:
         var required = required_shapes_hud[name]
@@ -118,4 +117,4 @@ func clarify_star_requirements():
             required.hide()				# remove piece from screen
             required.queue_free()
     if self.star_requirements.empty():
-        emit_signal("achieved_three_stars")  # use to be levelwon but now the total tiles swiped determines if level is won
+        emit_signal("achieved_three_stars")  # This is not yet used
