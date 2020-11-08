@@ -80,8 +80,9 @@ func _on_Button_pressed(level):
     get_node("/root/SceneSwitcher").goto_scene("res://Game.tscn")
 
 func _mouse_entered(level):
-    print("hover ", level)
-
+    # print("hover ", level)
+    pass
 
 func _mouse_exited(level):
-    print("out ", level)
+    # print("out ", level)
+    pass
