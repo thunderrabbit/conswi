@@ -43,6 +43,12 @@ func getBitmapOfSwipeCoordinates(swipeCoordinates):
     var bitmapArray = createBitmap(swipeDimensions,swipeCoordinates)
     return prepareBitmap(swipeDimensions,bitmapArray)
 
+##  This only has to work for named swipes because it is only used to 
+##    determine where on the screen required swipes should be shown
+func getWidthOfShapeName(shapeName):
+    var array_of_named_swipe = ShapeDatabase.shapes[shapeName]
+    return array_of_named_swipe[0]
+
 func getBitmapOfSwipeName(swipe_name):
     return ShapeDatabase.shapes[swipe_name]
 
