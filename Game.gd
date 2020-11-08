@@ -38,6 +38,7 @@ const MAGNETISM_TIME = 0.2504
 
 var current_level	= null	# will hold level definition
 var level_over_reason = 0	# remember why we lost so we can slowly end the level, telling each overlay why we lost
+var total_swipes_required_for_three_stars # remember how many swipes were needed for 3 stars
 var level_num = 0			# will hold integer of level number
 var elapsed_time = 10		# pretend it has been 10 seconds so input can definitely be processed upon start
 var time_label				# will display time remain
@@ -50,7 +51,6 @@ var gravity_called = false # true = move down 1 unit via gravity
 var player_position			# Vector2 of slot player is in
 var player					# Two (2) tiles: (player and shadow)
 var game_hud
-
 
 func _ready():
     self.game_hud = GameHUD.new()			# Buttons pre/post level
@@ -108,6 +108,7 @@ func start_level(level_num):
 
     # turn on buttons and show requirements for level
     game_hud.startLevel(current_level)
+    self.total_swipes_required_for_three_stars = game_hud.star_reqs.count_star_requirements()  # so we know how many stars player gets at end of level
     $GameSwipeDetector.startLevel(current_level)
 
 # turn input off for all children while display requirements / show cut scenes and the like
@@ -206,7 +207,8 @@ func _show_stuff_after_level(reason):
                                     'level':self.level_num,
                                     'num_tiles':$GameSwipeDetector.saved_tile_counter.num_tiles_all_types(),
                                     'safe_tiles':$GameSwipeDetector.saved_tiles,
-                                    'correct_swipes':$GameSwipeDetector.correct_swipe_counter
+                                    'correct_swipes':$GameSwipeDetector.correct_swipe_counter,
+                                    'required_swipe_count':self.total_swipes_required_for_three_stars
                                 }
     game_hud.stars_after_level.show_stuff_after_level(collect_info_for_stars)
 

@@ -118,3 +118,11 @@ func clarify_star_requirements():
             required.queue_free()
     if self.star_requirements.empty():
         emit_signal("achieved_three_stars")  # This is not yet used
+
+# count how many swipes are required to get three stars.  Called by Game.md when starting a level
+func count_star_requirements():
+    var total_swipes_required_for_three_stars = 0
+    for name in self.star_requirements:
+        var swipes_required_for_name = self.star_requirements[name]
+        total_swipes_required_for_three_stars = total_swipes_required_for_three_stars + swipes_required_for_name
+    return total_swipes_required_for_three_stars
