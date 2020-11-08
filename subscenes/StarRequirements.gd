@@ -21,6 +21,7 @@ signal achieved_three_stars   # not yet connected, but will just trigger visual
 signal requirements_shown
 
 var star_requirements				# will point to the dictionary inside level
+var star_requirement_furthest_pixels_right  # remember where last was shown
 var array_of_required_names = []	# so we can loop through (need to keep so we can keep track of which one to display next)
 var location_of_required_shape = {}	# so we know where to display shape
 var required_shapes_hud = {}		# so we can update the shapes as swipes happen
@@ -38,12 +39,40 @@ func show_finger_ka(show_finger):
 # and display each required shape
 func show_star_requirements(star_requirements):
     reset_everything()
+
     self.star_requirements = star_requirements   # point to dictionary in level
     for reqd_name in self.star_requirements:
         var num_required = location_of_required_shape.size()	# will determine where shape should be shown
         array_of_required_names.append(reqd_name)
         location_of_required_shape[reqd_name] = Helpers.slot_to_pixels(Vector2(num_required,1),G.REQ_SHAPE_SHRINK_LOCATION)
+        print("SHOWING REQUIRED of ", num_required, " SHAPE AT")
+        print(location_of_required_shape[reqd_name])
     # now that we know what we require, start showing them one by one
+
+
+###  I WAS TRYING TO MAKE JUST THE X COORDINATE get pushed over but maybe it should be Y wtf is going on?
+# 1. determine if it is x or y by looking at what changes above.  The one that changes is the one that should be changed below
+# 2. calculate the first location and don't change anything
+# 3. calculate X or Y component
+# Add x (or y??) component and slide them over
+
+    self.star_requirements = star_requirements   # point to dictionary in level
+    var star_requirement_latest_pixels = Helpers.slot_to_pixels(Vector2(0,1))
+    self.star_requirement_furthest_pixels_right = star_requirement_latest_pixels.x
+    for reqd_name in self.star_requirements:
+        var num_required = location_of_required_shape.size()	# will determine where shape should be shown
+        array_of_required_names.append(reqd_name)
+        var width_of_shape = ShapeShifter.getWidthOfShapeName(reqd_name)
+        print("WIDHT OF REQUREID = ", width_of_shape)
+        location_of_required_shape[reqd_name] = star_requirement_furthest_pixels_right
+        self.star_requirement_furthest_pixels_right = star_requirement_furthest_pixels_right + Helpers.width_to_pixels(width_of_shape,0.5)
+        star_requirement_latest_pixels = star_requirement_latest_pixels + Vector2(self.star_requirement_furthest_pixels_right,0)
+        print("SHOWING REQUIRED of ", num_required, " SHAPE AT")
+        print(location_of_required_shape[reqd_name])
+    # now that we know what we require, start showing them one by one
+    
+
+
     display_next_requirement()
 
 # Used by GameScene to know where swipe shrink animation should end
