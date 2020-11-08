@@ -163,9 +163,18 @@ func _display_stars():
 #   Swiping level-specific shapes will determine the number of stars.
 func _calculate_stars_for_level():
     print(self._info_for_star_calc)
-    var existing_sprites = get_tree().get_nodes_in_group("players")
-    var num_stars = randi()%3+1
-    print("remaining pieces: ", existing_sprites.size())
+    var count_correct_swipes = 1.0 * self._info_for_star_calc['correct_swipes']  # as a float so the division creates a float
+    var count_required_swipes = 1.0 * self._info_for_star_calc['required_swipe_count']
+    var ratio_of_stars_collected = count_correct_swipes / count_required_swipes
+    var num_stars = 0
+    if(ratio_of_stars_collected >= 1.0/3.0):
+        num_stars = 1
+    if(ratio_of_stars_collected >= 2.0/3.0):
+        num_stars = 2
+    if(ratio_of_stars_collected >= 3.0/3.0):
+        num_stars = 3
+    print("ratio of stars collected = ", ratio_of_stars_collected)
+    print("num_stars = ", num_stars)
     Savior.save_num_stars(G.TYPE_DOG, self._info_for_star_calc['level'], num_stars)
     return num_stars
 
