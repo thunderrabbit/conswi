@@ -287,8 +287,8 @@ var shapes = {
                 1, 1, 1,
                 1, 0, 1,
                 1, 1, 1],
-    "8shape_a_day_1": [8,
-      1,1,1,1,1,1,1,1],
+#    "8shape_a_day_1": [8,       # removed because game play is 7 characters wide. 8-width swipe is impossible
+#      1,1,1,1,1,1,1,1],
     "8shape_a_day_2": [7,
       1,0,0,0,0,0,0,
       1,1,1,1,1,1,1],
