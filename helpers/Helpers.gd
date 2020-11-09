@@ -137,6 +137,11 @@ func pixels_to_slot(pixels, debug=false):
     return Vector2(ceil((pixels.x - G.Game_left_space()) / (G.Game_slot_size())),
                     ceil((pixels.y - G.Game_top_space()) / (G.Game_slot_size())))
 
+# return a scalar so we can slide required swipes over the right amount
+func width_to_pixels(width, factor):
+    var stp = slot_to_pixels(Vector2(width,0))
+    return stp.x * factor
+
 # below, xfactor is used to push required swipes to the right so they can be seen
 func slot_to_pixels(slot, xfactor=1, debug=false):
     # do same thing as 3141d61c7e60ff18cfbf573b5879fa1e577edbfc
