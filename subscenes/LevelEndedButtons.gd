@@ -50,19 +50,16 @@ func show_lose_buttons_on_bottom():
     $LevelEndedButtonsContainer/NextLevel.hide()
  #   scale_button_almost_1_third_screen($LevelSelect, fill_this_fraction_of_third_of_screen)
   #  anchor_bottom_left($LevelSelect)
-    $LevelEndedButtonsContainer/LevelSelect.set_button_icon(preload("res://images/buttons/lose_back@3x.png")) #  the lose background was in BackgroundScript.gd but might move it here
+    $LevelEndedButtonsContainer/LevelSelect.set_normal_texture(preload("res://images/buttons/lose_back@3x.png")) #  the lose background was in BackgroundScript.gd but might move it here
     $LevelEndedButtonsContainer/LevelSelect.show()
  #   scale_button_almost_1_third_screen($TryAgain, fill_this_fraction_of_third_of_screen)
  #   anchor_bottom_left($TryAgain)
     $LevelEndedButtonsContainer/TryAgain.show()
-#    scale_button_almost_1_third_screen($WorldMenu, fill_this_fraction_of_third_of_screen)
- #   anchor_bottom_left($WorldMenu)
-    $LevelEndedButtonsContainer/WorldMenu.show()
 
 func show_win_buttons_on_bottom():
     $LevelEndedButtonsContainer/TryAgain.hide()
     $LevelEndedButtonsContainer/NextLevel.show()
-    $LevelEndedButtonsContainer/WorldMenu.hide()
+    $LevelEndedButtonsContainer/LevelSelect.set_normal_texture(preload("res://images/buttons/win_back@3x.png")) #  the lose background was in BackgroundScript.gd but might move it here
     $LevelEndedButtonsContainer/LevelSelect.show()
 
 func level_over_reason(reason):
@@ -90,20 +87,20 @@ func level_over_reason(reason):
         get_node("LevelOverOverlay").set_texture(preload("res://images/level_over/failedillustration@3x.png")) #  the lose background was in BackgroundScript.gd but might move it here
         get_node("LevelOverOverlay").show() #  the lose background was in BackgroundScript.gd but might move it here
 
-func _on_TryAgain_pressed():
+func _on_TryAgain_button_up():
     get_node("LevelOverOverlay").hide() #  the lose background was in BackgroundScript.gd but might move it here
     game_scene.requested_replay_level()
 
-func _on_MainMenu_pressed():
+func _on_LevelSelect_button_up():
     Helpers.clear_game_board() # so no tiles appear behind the main menu buttons
     get_node("LevelOverOverlay").hide() #  the lose background was in BackgroundScript.gd but might move it here
     get_node("/root/SceneSwitcher").goto_scene("res://LevelSelect/LevelSelectScene.tscn")
 
-func _on_WorldMenu_pressed():
+func _on_WorldMenu_pressed_aintused():
     Helpers.clear_game_board() # so no tiles appear behind the main menu buttons
     get_node("LevelOverOverlay").hide() #  the lose background was in BackgroundScript.gd but might move it here
     get_node("/root/SceneSwitcher").goto_scene("res://NightDayMainSplash/NightDayMainSplash.tscn")
 
-func _on_NextLevel_pressed():
+func _on_NextLevel_button_up():
     get_node("LevelOverOverlay").hide() #  the lose background was in BackgroundScript.gd but might move it here
     game_scene.requested_next_level()
