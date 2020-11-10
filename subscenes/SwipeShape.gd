@@ -63,6 +63,17 @@ func _updateDimensions(loc) :
     if(loc.y > self.dimensions.y):
         dimensions.y = loc.y
 
+
+func move_shape_left(pixels_to_slide, duration = 0.21):
+    var go_to_loc = self.get_position()                    # determine where we are now
+    go_to_loc = go_to_loc - Vector2(pixels_to_slide,0)     # slide to left by removing positive number from x
+    var effect = get_node("Tween")
+#    effect.connect("tween_completed", self, "shrunk_shape")
+    effect.interpolate_property(self, "position",
+            self.get_position(), go_to_loc, duration,
+            Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+    effect.start()
+
 # once shape has been shown for requirements, we need to shrink it
 # and put it in a location, so this function accepts a Vector2
 # as the destination.   Plus when shapes are swiped, this
