@@ -22,7 +22,9 @@ signal requirements_shown
 
 var star_requirements				# will point to the dictionary inside level
 var array_of_required_names = []	# so we can loop through (need to keep so we can keep track of which one to display next)
+var array_of_visible_names = []     # so we know what to move when one is erased
 var location_of_required_shape = {}	# so we know where to display shape
+var pixel_width_of_required_shape = {}   # so we know how far to bring them back when a shape is finished
 var required_shapes_hud = {}		# so we can update the shapes as swipes happen
 var currently_showing_shape = null	# so we can come back and know what shape to shrink
 var currently_showing_name = null	# so we can look up where to show it
@@ -47,11 +49,13 @@ func show_star_requirements(star_requirements):
     # loop through `star_requirements` defined in /levels/___World/normal_nn.gd
     for reqd_name in self.star_requirements:
         array_of_required_names.append(reqd_name)     # save the name so display_next_requirement knows what to do
+        array_of_visible_names.append(reqd_name)      # save the name so we can move requirements when others are erased
         location_of_required_shape[reqd_name] = star_requirement_latest_pixels  # dictionary of required shapes so collected swipes shrink to the correct location
 
         # calculate width of this piece so we know where to put next piece
         var width_of_shape = ShapeShifter.getWidthOfShapeName(reqd_name)   # width in 'tiles' e.g. 1 for 'ta3' or 3 for 'bo3'
         var adjusted_width_of_shape_in_pixels = floor(Helpers.width_to_pixels(width_of_shape,G.REQ_SHAPE_SHRINK_FACTOR))  # scalar just for width
+        pixel_width_of_required_shape[reqd_name] = adjusted_width_of_shape_in_pixels  # subsequent shapes move this far to account for this shape being removed from list
         star_requirement_latest_pixels = star_requirement_latest_pixels + Vector2(adjusted_width_of_shape_in_pixels,0)  # location for next piece (if any)
 
     # now that we know what we require, start showing them one by one
@@ -65,7 +69,9 @@ func reset_everything():
     remove_old_requirements()
     self.star_requirements = {}
     array_of_required_names = []
+    array_of_visible_names = []
     location_of_required_shape = {}
+    pixel_width_of_required_shape = {}
     required_shapes_hud = {}
 
 func remove_old_requirements():
@@ -117,6 +123,26 @@ func swiped_piece(piece_name):
         self.star_requirements[piece_name] = num_required - 1
     return (num_required > 0)		# return true if piece was required
 
+func _removed_name_from_visible(name):
+    print("need to remove '", name, "' from this array")
+    print(array_of_visible_names)
+    var key_to_remove = 0
+    for i in range(0, array_of_visible_names.size()):
+        if array_of_visible_names[i] == name:
+            key_to_remove = i
+
+    var slide_left_n_pixels = pixel_width_of_required_shape[name]
+    print("removing a thing this wide ", slide_left_n_pixels)
+
+    for i in range(key_to_remove + 1, array_of_visible_names.size()):
+        var moving_name = array_of_visible_names[i]
+        print("moving ", moving_name)
+        print(required_shapes_hud[moving_name])
+        required_shapes_hud[moving_name].move_shape_left(slide_left_n_pixels) #  = required_shapes_hud[moving_name].x - slide_left_n_pixels
+        location_of_required_shape[moving_name].x = location_of_required_shape[moving_name].x - slide_left_n_pixels   # updates location for collected swipes to go when they shrink      
+
+    array_of_visible_names.erase(name)   # So we don't try to move it again
+
 # Removes swipes that have been correctly swiped
 func clarify_star_requirements():
     for name in self.star_requirements:
@@ -124,9 +150,12 @@ func clarify_star_requirements():
         required.spinner.set_value(self.star_requirements[name])
         if self.star_requirements[name] == 0:
             self.star_requirements.erase(name)	# remove requirement from level
+            print("removed ", name)
+            print(name, " was this wide ", self.pixel_width_of_required_shape[name])
             required_shapes_hud.erase(name)		# so we won't try to hide Deleted nodes in remove_old_requirements()
             required.hide()				# remove piece from screen
             required.queue_free()
+            _removed_name_from_visible(name)
     if self.star_requirements.empty():
         emit_signal("achieved_three_stars")  # This is not yet used
 
