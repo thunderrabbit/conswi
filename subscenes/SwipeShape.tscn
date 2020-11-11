@@ -20,11 +20,11 @@ playback/speed = 1.0
 
 [node name="SpinnerLabel" parent="." index="1" instance=ExtResource( 2 )]
 
-margin_left = -112.0
-margin_top = -1.0
-margin_right = -2.0
-margin_bottom = 61.0
-align = 1
-valign = 1
+margin_left = -65.0
+margin_top = -126.0
+margin_right = 954.0
+margin_bottom = 54.0
+text = "qty"
+valign = 2
 
 
