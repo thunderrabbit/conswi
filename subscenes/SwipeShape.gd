@@ -141,7 +141,8 @@ func shrunk_shape(obj, key):
 func display_quantity(quantity):
     # once the spinner is done, we want it to tell us
     spinner.connect("qty_reached",self,"_displayed_quantity")
-    spinner.set_position(self.numberic_offset_pixels)	# hardcoded until I can figure out positioning
+    print("remove set_position because .tscn position works well enough")
+#    spinner.set_position(self.numberic_offset_pixels)	# hardcoded until I can figure out positioning
     spinner.show()					# just in case
     spinner.set_delay(tick_delay)
     spinner.set_target(quantity)	# tell spinner where to stop
