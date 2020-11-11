@@ -67,7 +67,7 @@ func _updateDimensions(loc) :
 func move_shape_left(pixels_to_slide, duration = 0.21):
     var go_to_loc = self.get_position()                    # determine where we are now
     go_to_loc = go_to_loc - Vector2(pixels_to_slide,0)     # slide to left by removing positive number from x
-    var effect = get_node("Tween")
+    var effect = get_node("Tween")              # in SwipeShape.tscn
 #    effect.connect("tween_completed", self, "shrunk_shape")
     effect.interpolate_property(self, "position",
             self.get_position(), go_to_loc, duration,
@@ -81,7 +81,7 @@ func move_shape_left(pixels_to_slide, duration = 0.21):
 # matches required shape
 func shrink_shape(go_to_loc, duration = 0.9):
     var ratio = G.REQ_SHAPE_SHRINK_FACTOR
-    var effect = get_node("Tween")
+    var effect = get_node("Tween")              # in SwipeShape.tscn
     effect.connect("tween_completed", self, "shrunk_shape")
     effect.interpolate_property(self, "scale",
             self.get_scale(), Vector2(ratio, ratio), duration,
@@ -95,7 +95,7 @@ func shrink_shape(go_to_loc, duration = 0.9):
 func fly_away_randomly(duration = 0.9):
     print("first tween starting")
     var go_to_loc = Helpers.slot_to_pixels(Vector2(4,10))
-    var effect = get_node("Tween")
+    var effect = get_node("Tween")              # in SwipeShape.tscn
     effect.connect("tween_completed", self, "come_back_to_location")
     effect.interpolate_property(self, 'scale', self.get_scale(), Vector2(5, 5), duration, Tween.TRANS_QUAD, Tween.EASE_OUT)
     effect.interpolate_property(self, 'position', self.get_position(), go_to_loc, duration,	Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
@@ -114,7 +114,7 @@ func come_back_to_location(obj, key):
         return
     var duration = 0.9
     var go_to_loc = Helpers.slot_to_pixels(Vector2(4,10)) # was this but it was moved to GameHud and I don't know how to access gamehud from here  HUD.get_node('SavedTileCount').get_global_position()
-    var effect = get_node("Tween")
+    var effect = get_node("Tween")              # in SwipeShape.tscn
     effect.connect("tween_completed", self, "flew_away")
     effect.interpolate_property(self, 'scale', self.get_scale(), Vector2(0.02, 0.02), duration, Tween.TRANS_QUAD, Tween.EASE_OUT)
     effect.interpolate_property(self, 'position', self.get_position(), go_to_loc, duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
