@@ -19,5 +19,7 @@ func _init():
     max_tiles_avail = 3000
     time_limit_in_sec = 3000
     width = 7    # This is a proof of concept.  Erase to make it 7 (level/NormalLevel.gd value)
-    star_requirements = { "ta3":1 }
+    star_requirements = { "ta3":5,
+                          "bo3":2,
+                        }
     show_finger = true			# On early levels, only with straight swipes
