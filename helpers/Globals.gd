@@ -85,7 +85,7 @@ const STAR_REDUCE_SWIPES = 1
 const STAR_REDUCE_TILES = 2
 const STAR_ADD_TIME_REMAIN = 3
 const STAR_DISPLAY_STARS = 4
-const STAR_REMOVE_PANEL = 5
+const STAR_HIDE_REQUIREMENTS = 7
 
 const Saved_Tiles_Anchor_Left = 0.9
 const Saved_Tiles_Anchor_Top = 0.5

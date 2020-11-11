@@ -54,10 +54,15 @@ func _decide_what_to_show():
         self._PlanToDisplayStars()		# add stars below score (or above) or whatever, but should be last
     else:
         # this will black out the tiles, but *not* show score because score will not be there
+        self._PlanToHideRequirements()
         self._PlanToReduceTiles()
 
 func _PlanToDisplayBonus():
     self._todo_after_level.push_back(G.STAR_DISPLAY_BONUS)
+
+func _PlanToHideRequirements():
+    pass     ### will eventually remove the swipe requirements after fail level
+    # self._todo_after_level.push_back(G.STAR_HIDE_REQUIREMENTS)
 
 func _PlanToReduceSwipes():
     self._todo_after_level.push_back(G.STAR_REDUCE_SWIPES)
