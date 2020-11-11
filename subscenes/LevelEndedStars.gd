@@ -104,7 +104,7 @@ func _show_stuff_after_level():
 
 func _display_bonus():
     print("Display Bonus")
-    var points = get_node("BonusPoints")
+    var points = get_node("LevelScore")
     points.connect("qty_reached",self,"_pause_after_show_stuff")
     points.set_delay(0.05)
     var bonus_target = self._info_for_star_calc['num_tiles'] * self.points_per_tile
@@ -114,7 +114,7 @@ func _display_bonus():
 
 func _reduce_swipes():
     print("Reduce Swipes")
-    var points = get_node("BonusPoints")
+    var points = get_node("LevelScore")
     var bonus_reduction = self._info_for_star_calc['safe_tiles'] * self.gain_points_per_swipe
     print("win ", bonus_reduction, " points")
     points.set_delay(self.swipe_lose_delay)

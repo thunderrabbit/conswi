@@ -3,7 +3,7 @@
 [ext_resource path="res://subscenes/LevelEndedStars.gd" type="Script" id=1]
 [ext_resource path="res://subscenes/SpinnerLabel.tscn" type="PackedScene" id=2]
 
-[node name="LevelEndedStars" type="Node2D" index="0"]
+[node name="LevelEndedStars" type="Node2D"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
@@ -11,15 +11,14 @@ swipe_lose_delay = 0.05
 gain_points_per_swipe = 1
 points_per_tile = 25
 
-[node name="BonusPoints" parent="." index="0" instance=ExtResource( 2 )]
+[node name="LevelScore" parent="." index="0" instance=ExtResource( 2 )]
 
-margin_left = 492.0
-margin_top = 915.0
-margin_right = 874.0
-margin_bottom = 1095.0
+margin_left = 489.0
+margin_top = 999.0
+margin_right = 871.0
+margin_bottom = 1179.0
 size_flags_stretch_ratio = 2.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
-text = "0143"
 _sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Hint", "Margin", "Material", "Mouse", "Rect", "Size Flags", "Theme", "Visibility", "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
 
 [node name="extra_pauser" type="Timer" parent="." index="1"]
