@@ -27,6 +27,7 @@ var level_reqs				# HUD showing requirements for passing the level
 var star_reqs				# HUD showing requirements for getting 3 stars
 var stars_after_level		# Show stars after level is over
 var saved_tiles             # Show saved tiles
+var _current_level          # so we can call Star requirements AFTER Level requirements
 
 func addHUDtoGame(game):
     self.game = game
@@ -49,22 +50,31 @@ func addHUDtoGame(game):
     add_child(self.stars_after_level)
 
     self.saved_tiles = SavedTiles.instance()
-    self.saved_tiles.anchor_left = G.Saved_Tiles_Anchor_Left
-    self.saved_tiles.anchor_top = G.Saved_Tiles_Anchor_Top
+#    self.saved_tiles.anchor_left = G.Saved_Tiles_Anchor_Left
+#    self.saved_tiles.anchor_top = G.Saved_Tiles_Anchor_Top
     add_child(self.saved_tiles)
 
 func showed_star_requirements():
     print("STAR Requirements were shown")
+#    self.show_level_requirements(self._current_level)
     self.game.continue_start_level()
 
 func show_star_requirements(current_level):
     self.star_reqs.show_finger_ka(current_level.show_finger)
     self.star_reqs.show_star_requirements(current_level.star_requirements)
 
+func showed_level_requirements():
+    print("LEVEL Requirements were shown")
+    self.show_star_requirements(self._current_level)
+#    self.game.continue_start_level()
+
+func show_level_requirements(current_level):
+    self.level_reqs.show_level_requirements(current_level.required_tiles)
+
 func startLevel(current_level):
     self.buttons.prepare_to_play_level()
-
+    self._current_level = current_level
     # These show level requirements, which takes time
     # after these animations complete, continue_start_level()
     # is called above by self.game.continue_start_level
-    self.show_star_requirements(current_level)
+    self.show_level_requirements(current_level)
