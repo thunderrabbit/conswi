@@ -108,14 +108,15 @@ func shape_has_been_displayed():
     currently_showing_shape.connect("shrunk_shape",self,"display_next_requirement")
     currently_showing_shape.shrink_shape(location_of_required_shape[currently_showing_name])
 
-func swiped_piece(piece_name):
+func saved_n_tiles_of_type(n, tile_type):
+    var piece_name = TileDatabase.tiles[tile_type].ITEM_NAME
+    print(n, piece_name)
     var num_required = 0
     if self.level_requirements.has(piece_name):
         num_required = self.level_requirements[piece_name]
     print("%d %s required" %[num_required, piece_name])
     if num_required > 0:
-        self.level_requirements[piece_name] = num_required - 1
-    return (num_required > 0)		# return true if piece was required
+        self.level_requirements[piece_name] = num_required - n
 
 func _removed_name_from_visible(name):
     print("need to remove '", name, "' from this array")
