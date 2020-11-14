@@ -36,6 +36,10 @@ func addHUDtoGame(game):
     self.buttons.set_game_scene(self.game)
     add_child(self.buttons)
 
+    level_reqs = LevelRequirements.instance()
+    level_reqs.when_finished_callback(self)
+    add_child(level_reqs)
+
     star_reqs = StarRequirements.instance()
     star_reqs.when_finished_callback(self)
     add_child(star_reqs)
