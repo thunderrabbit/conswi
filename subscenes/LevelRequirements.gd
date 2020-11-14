@@ -39,7 +39,7 @@ func show_level_requirements(level_requirements):
     self.level_requirements = level_requirements   # point to dictionary in level
 
     # Calculate the location of first (0th) requirement
-    var level_requirement_latest_pixels = Helpers.slot_to_pixels(Vector2(0,1)) # (0,0) = (left, top (overlaps incoming queue))
+    var level_requirement_latest_pixels = Helpers.slot_to_pixels(Vector2(0,12)) # (0,0) = (left, top (overlaps incoming queue))
 
     # loop through `level_requirements` defined in /levels/___World/normal_nn.gd
     for reqd_name in self.level_requirements:
