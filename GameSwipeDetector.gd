@@ -130,8 +130,8 @@ func piece_done_dragged(slot):
     dragging_piece = null
 
 func inc_saved_tile_counter():
-    print("saved this many tiles: ", self.saved_tiles)		# should be spun up on screen
-    Game.game_hud.saved_tiles.set_value(self.saved_tiles)
+    print("inc_saved_tile_counter is kinda mis-named as the counts are decreased on Game HUD")
+    Game.game_hud.clarify_requirements()
     if self.saved_tile_counter.saved_enough_tiles_bool():
         print("sweet as we won the game by saving tiles")
         Game._on_LevelWon()   ## TODO use signal instead of call private function in Game
