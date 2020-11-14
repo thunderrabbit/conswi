@@ -49,7 +49,10 @@ func tile_name(tile_type):
 func saved_n_tiles_of_type(n, tile_type):
     var tile_name = self.tile_name(tile_type)
     print(n, tile_name)
-    self.local_saved_tiles[tile_name] = self.local_saved_tiles[tile_name] + n
+    if(self.local_saved_tiles.has(tile_name)):
+        self.local_saved_tiles[tile_name] = self.local_saved_tiles[tile_name] + n
+    else:
+        print("btw, no ", tile_name, " found in required_tiles for World ", Helpers.requested_world, " level ", Helpers.requested_level)
     self.print_all()
 
 func saved_enough_tiles_bool():
@@ -63,4 +66,3 @@ func num_tiles_all_types():
     for key in self.local_required_tiles:
         total_tiles = total_tiles + self.local_required_tiles[key]
     return total_tiles
-    
