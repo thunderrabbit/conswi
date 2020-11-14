@@ -79,6 +79,11 @@ func startLevel(current_level):
     # is called above by self.game.continue_start_level
     self.show_level_requirements(current_level)
 
+# wrapper so GameSwipeDetector knows less about internals
+func saved_n_tiles_of_type(n, tile_type):
+    level_reqs.saved_n_tiles_of_type(n, tile_type)
+
 func clarify_requirements():
     print("game hud clarifying requirements")
     star_reqs.clarify_star_requirements()
+    level_reqs.clarify_level_requirements()
