@@ -1,4 +1,4 @@
-#    One of the Pig World levels, based on a Dog World level
+#    One of the Tiger World levels, based on a Dog World level
 #
 #    Copyright (C) 2019  Rob Nugen
 #
@@ -15,7 +15,7 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-extends "PigLevel.gd"
+extends "TigerLevel.gd"
 
 func _init():
 

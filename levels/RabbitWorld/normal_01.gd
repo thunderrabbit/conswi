@@ -1,4 +1,4 @@
-#    One of the Pig World levels, based on a Dog World level
+#    One of the Rabbit World levels, based on a Dog World level
 #
 #    Copyright (C) 2019  Rob Nugen
 #
@@ -15,10 +15,10 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-extends "PigLevel.gd"
+extends "RabbitLevel.gd"
 
 func _init():
 
-    max_tiles_avail = 300000
-    time_limit_in_sec = 300000
-    star_requirements = { "pink_floyd":1 }
+    max_tiles_avail = 3
+    time_limit_in_sec = 30
+    show_finger = true			# On early levels, only with straight swipes

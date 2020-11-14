@@ -1,6 +1,4 @@
-#    One of the Sheep World levels, based on a Dog World level
-#
-#    Copyright (C) 2019  Rob Nugen
+#    Copyright (C) 2018  Rob Nugen
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -15,10 +13,11 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-extends "SheepLevel.gd"
+extends "NormalLevel.gd"
 
 func _init():
-
-    max_tiles_avail = 3
-    time_limit_in_sec = 30
-    show_finger = true			# On early levels, only with straight swipes
+    fill_level = true
+    gravity_timeout = 1000
+    debug_level = 0
+    tiles = {"lion":3,"cow":1,"bear":1}
+    max_tiles_avail = 1330

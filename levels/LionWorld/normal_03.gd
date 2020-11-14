@@ -1,6 +1,4 @@
-#    Sends sheep tiles to any level that extends (inherits) this class
-#
-#    Copyright (C) 2019  Rob Nugen
+#    Copyright (C) 2018  Rob Nugen
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -15,15 +13,10 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#####################################################################################
-#
-#   Eventually I need to figure out a way to succinctly tell how many of each type of animal to show
-#
-#   It is easy enough to write it, but then how to handle the information.  Maybe I can just push them
-#   into an array and randomize the array.
-#
-#####################################################################################
-extends "../NormalLevel.gd"
+extends "LionLevel.gd"
 
 func _init():
-    tiles = {"sheep":1}
+    max_tiles_avail = 70
+    time_limit_in_sec = 120
+    star_requirements = { "ta3":1, 
+                            "bo3":1, }
