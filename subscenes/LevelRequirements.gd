@@ -17,10 +17,9 @@ extends MarginContainer
 
 const SwipeShape = preload("res://subscenes/FingerSwipeShape.tscn")
 
-signal achieved_three_stars   # not yet connected, but will just trigger visual
 signal requirements_shown
 
-var star_requirements				# will point to the dictionary inside level
+var level_requirements				# will point to the dictionary inside level
 var array_of_required_names = []	# so we can loop through (need to keep so we can keep track of which one to display next)
 var array_of_visible_names = []     # so we know what to move when one is erased
 var location_of_required_shape = {}	# so we know where to display shape
@@ -28,35 +27,31 @@ var pixel_width_of_required_shape = {}   # so we know how far to bring them back
 var required_shapes_hud = {}		# so we can update the shapes as swipes happen
 var currently_showing_shape = null	# so we can come back and know what shape to shrink
 var currently_showing_name = null	# so we can look up where to show it
-var show_finger = false				# usually do not show swiping finger (just on first couple levels)
 
 func when_finished_callback(gameHUDScene):
-    connect("requirements_shown", gameHUDScene, "showed_star_requirements")
-
-func show_finger_ka(show_finger):
-    self.show_finger = show_finger
+    connect("requirements_shown", gameHUDScene, "showed_level_requirements")
 
 # first, just get an array of names that we can slowly loop through
 # and display each required shape
-func show_star_requirements(star_requirements):
+func show_level_requirements(level_requirements):
     reset_everything()
 
-    self.star_requirements = star_requirements   # point to dictionary in level
+    self.level_requirements = level_requirements   # point to dictionary in level
 
     # Calculate the location of first (0th) requirement
-    var star_requirement_latest_pixels = Helpers.slot_to_pixels(Vector2(0,1)) # (0,0) = (left, top (overlaps incoming queue))
+    var level_requirement_latest_pixels = Helpers.slot_to_pixels(Vector2(0,12)) # (0,0) = (left, top (overlaps incoming queue))
 
-    # loop through `star_requirements` defined in /levels/___World/normal_nn.gd
-    for reqd_name in self.star_requirements:
+    # loop through `level_requirements` defined in /levels/___World/normal_nn.gd
+    for reqd_name in self.level_requirements:
         array_of_required_names.append(reqd_name)     # save the name so display_next_requirement knows what to do
         array_of_visible_names.append(reqd_name)      # save the name so we can move requirements when others are erased
-        location_of_required_shape[reqd_name] = star_requirement_latest_pixels  # dictionary of required shapes so collected swipes shrink to the correct location
+        location_of_required_shape[reqd_name] = level_requirement_latest_pixels  # dictionary of required shapes so collected swipes shrink to the correct location
 
         # calculate width of this piece so we know where to put next piece
-        var width_of_shape = ShapeShifter.getWidthOfShapeName(reqd_name)   # width in 'tiles' e.g. 1 for 'ta3' or 3 for 'bo3'
+        var width_of_shape = ShapeShifter.getWidthOfShapeName("one_square")   # width in 'tiles' e.g. 1 for 'ta3' or 3 for 'bo3'
         var adjusted_width_of_shape_in_pixels = floor(Helpers.width_to_pixels(width_of_shape,G.REQ_SHAPE_SHRINK_FACTOR))  # scalar just for width
         pixel_width_of_required_shape[reqd_name] = adjusted_width_of_shape_in_pixels  # subsequent shapes move this far to account for this shape being removed from list
-        star_requirement_latest_pixels = star_requirement_latest_pixels + Vector2(adjusted_width_of_shape_in_pixels,0)  # location for next piece (if any)
+        level_requirement_latest_pixels = level_requirement_latest_pixels + Vector2(adjusted_width_of_shape_in_pixels,0)  # location for next piece (if any)
 
     # now that we know what we require, start showing them one by one
     display_next_requirement()
@@ -67,7 +62,7 @@ func required_swipe_location(swipe_name):
 
 func reset_everything():
     remove_old_requirements()
-    self.star_requirements = {}
+    self.level_requirements = {}
     array_of_required_names = []
     array_of_visible_names = []
     location_of_required_shape = {}
@@ -80,9 +75,9 @@ func remove_old_requirements():
 
 # will start the next requirement to display itself and wait for callback
 func display_next_requirement():
-    # if no star_requirements, call back to GameScene to start playing
+    # if no level_requirements, call back to GameScene to start playing
     if array_of_required_names.size() == 0:
-        print("did not find any more star_requirements")
+        print("did not find any more level_requirements")
         emit_signal("requirements_shown")
     else:
         # get first requirement in array
@@ -90,10 +85,9 @@ func display_next_requirement():
         # wipe it from array so we don't show it again
         array_of_required_names.pop_front()
         # look up how many are required
-        var reqd_qty = self.star_requirements[currently_showing_name]
+        var reqd_qty = self.level_requirements[currently_showing_name]
 
         currently_showing_shape = SwipeShape.instance()
-        currently_showing_shape.show_finger = self.show_finger
 
         required_shapes_hud[currently_showing_name] = currently_showing_shape
         # after shape has been displayed (and number counted down) we will shrink the shape
@@ -103,25 +97,26 @@ func display_next_requirement():
         # Godot makes it simple to not worry about this, so Globals it is.
         # if you want to worry about it, look at shape_has_been_displayed()
         # and retool how this function is called
-        var count_tiles_this_shape = currently_showing_shape.set_shape(ShapeShifter.getBitmapOfSwipeName(currently_showing_name),Helpers.requested_world)
+        var count_tiles_this_shape = currently_showing_shape.set_shape(ShapeShifter.getBitmapOfSwipeName("one_square"),TileDatabase.id_of_name(currently_showing_name))
         var swipe_dimensions = currently_showing_shape.dimensions
         currently_showing_shape.set_position(Helpers.offset_bottom_center_slot_in_pixels(swipe_dimensions))
         add_child(currently_showing_shape)
-        currently_showing_shape.display_quantity(reqd_qty)
+        currently_showing_shape.display_quantity_quickly(reqd_qty)
 
 func shape_has_been_displayed():
     # once shape has been shrunk, go to above function to display next shape
     currently_showing_shape.connect("shrunk_shape",self,"display_next_requirement")
     currently_showing_shape.shrink_shape(location_of_required_shape[currently_showing_name])
 
-func swiped_piece(piece_name):
+func saved_n_tiles_of_type(n, tile_type):
+    var piece_name = TileDatabase.tiles[tile_type].ITEM_NAME
+    print(n, piece_name)
     var num_required = 0
-    if self.star_requirements.has(piece_name):
-        num_required = self.star_requirements[piece_name]
+    if self.level_requirements.has(piece_name):
+        num_required = self.level_requirements[piece_name]
     print("%d %s required" %[num_required, piece_name])
     if num_required > 0:
-        self.star_requirements[piece_name] = num_required - 1
-    return (num_required > 0)		# return true if piece was required
+        self.level_requirements[piece_name] = num_required - n
 
 func _removed_name_from_visible(name):
     print("need to remove '", name, "' from this array")
@@ -145,25 +140,25 @@ func _removed_name_from_visible(name):
     array_of_visible_names.erase(name)   # So we don't try to move it again
 
 # Removes swipes that have been correctly swiped
-func clarify_star_requirements():
-    for name in self.star_requirements:
+func clarify_level_requirements():
+    for name in self.level_requirements:
         var required = required_shapes_hud[name]
-        required.spinner.set_value(self.star_requirements[name])
-        if self.star_requirements[name] == 0:
-            self.star_requirements.erase(name)	# remove requirement from level
+        required.spinner.set_value(self.level_requirements[name])
+        if self.level_requirements[name] <= 0:
+            self.level_requirements.erase(name)	# remove requirement from level
             print("removed ", name)
             print(name, " was this wide ", self.pixel_width_of_required_shape[name])
             required_shapes_hud.erase(name)		# so we won't try to hide Deleted nodes in remove_old_requirements()
             required.hide()				# remove piece from screen
             required.queue_free()
             _removed_name_from_visible(name)
-    if self.star_requirements.empty():
-        emit_signal("achieved_three_stars")  # This is not yet used
+    if self.level_requirements.empty():
+        emit_signal("achieved_three_levels")  # This is not yet used
 
-# count how many swipes are required to get three stars.  Called by Game.md when starting a level
-func count_star_requirements():
-    var total_swipes_required_for_three_stars = 0
-    for name in self.star_requirements:
-        var swipes_required_for_name = self.star_requirements[name]
-        total_swipes_required_for_three_stars = total_swipes_required_for_three_stars + swipes_required_for_name
-    return total_swipes_required_for_three_stars
+# count how many swipes are required to get three levels.  Called by Game.md when starting a level
+func count_level_requirements():
+    var total_swipes_required_for_three_levels = 0
+    for name in self.level_requirements:
+        var swipes_required_for_name = self.level_requirements[name]
+        total_swipes_required_for_three_levels = total_swipes_required_for_three_levels + swipes_required_for_name
+    return total_swipes_required_for_three_levels

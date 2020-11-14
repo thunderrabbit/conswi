@@ -148,6 +148,18 @@ func display_quantity(quantity):
     spinner.set_target(quantity)	# tell spinner where to stop
     spinner.start_tick_from(1)		# calls back to _displayed_quantity when finished
 
+# `display_quantity_quickly()` is only used when showing the user what
+# tiles are required to win the level.   Do it quick by starting from required number
+func display_quantity_quickly(quantity):
+    # once the spinner is done, we want it to tell us
+    spinner.connect("qty_reached",self,"_displayed_quantity")
+    print("remove set_position because .tscn position works well enough")
+#    spinner.set_position(self.numberic_offset_pixels)	# hardcoded until I can figure out positioning
+    spinner.show()					# just in case
+    spinner.set_delay(tick_delay)
+    spinner.set_target(quantity)	# tell spinner where to stop
+    spinner.start_tick_from(quantity)		# calls back to _displayed_quantity when finished
+
 # call back to StarRequirements that this particular shape
 # has finished displaying its number (and now can be shrunk
 # out of the way for game play

@@ -108,14 +108,15 @@ func start_level(level_num):
 
     # turn on buttons and show requirements for level
     game_hud.startLevel(current_level)
-    self.total_swipes_required_for_three_stars = game_hud.star_reqs.count_star_requirements()  # so we know how many stars player gets at end of level
-    $GameSwipeDetector.startLevel(current_level)
 
 # turn input off for all children while display requirements / show cut scenes and the like
 func grok_input(boolean):
     game_hud.buttons.grok_input(boolean)
 
 func continue_start_level():
+    self.total_swipes_required_for_three_stars = game_hud.star_reqs.count_star_requirements()  # so we know how many stars player gets at end of level
+    $GameSwipeDetector.startLevel(current_level)
+
     # magnetism makes the nailed pieces fall (all pieces in board{})
     start_magnetism()
 
