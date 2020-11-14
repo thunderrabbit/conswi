@@ -57,11 +57,14 @@ func showed_star_requirements():
     print("STAR Requirements were shown")
     self.game.continue_start_level()
 
+func show_star_requirements(current_level):
+    self.star_reqs.show_finger_ka(current_level.show_finger)
+    self.star_reqs.show_star_requirements(current_level.star_requirements)
+
 func startLevel(current_level):
     self.buttons.prepare_to_play_level()
 
     # These show level requirements, which takes time
     # after these animations complete, continue_start_level()
-    # is called via signal `requirements_shown` by StarRequirements.gd
-    self.star_reqs.show_finger_ka(current_level.show_finger)
-    self.star_reqs.show_star_requirements(current_level.star_requirements)
+    # is called above by self.game.continue_start_level
+    self.show_star_requirements(current_level)
