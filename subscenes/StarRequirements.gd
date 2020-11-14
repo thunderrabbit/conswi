@@ -30,8 +30,8 @@ var currently_showing_shape = null	# so we can come back and know what shape to 
 var currently_showing_name = null	# so we can look up where to show it
 var show_finger = false				# usually do not show swiping finger (just on first couple levels)
 
-func set_game_scene(gameScene):
-    connect("requirements_shown", gameScene, "continue_start_level")
+func when_finished_callback(gameHUDScene):
+    connect("requirements_shown", gameHUDScene, "showed_star_requirements")
 
 func show_finger_ka(show_finger):
     self.show_finger = show_finger

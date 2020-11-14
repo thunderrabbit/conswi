@@ -36,7 +36,7 @@ func addHUDtoGame(game):
     add_child(self.buttons)
 
     star_reqs = StarRequirements.instance()
-    star_reqs.set_game_scene(self.game)
+    star_reqs.when_finished_callback(self)
     add_child(star_reqs)
 
     self.stars_after_level = StarsAfterLevel.instance()
@@ -47,6 +47,10 @@ func addHUDtoGame(game):
     self.saved_tiles.anchor_left = G.Saved_Tiles_Anchor_Left
     self.saved_tiles.anchor_top = G.Saved_Tiles_Anchor_Top
     add_child(self.saved_tiles)
+
+func showed_star_requirements():
+    print("STAR Requirements were shown")
+    self.game.continue_start_level()
 
 func startLevel(current_level):
     self.buttons.prepare_to_play_level()
