@@ -175,5 +175,6 @@ func piece_exited(position, piece_type):
 
 func shrank_required_shape():
     swipe_shape.queue_free()
-    Game.game_hud.star_reqs.clarify_star_requirements()
+    print("Have game hud clarifying requirements now that shape swipe motion is complete")
+    Game.game_hud.clarify_requirements()
     inc_saved_tile_counter()    # count required swipes toward total tiles collected

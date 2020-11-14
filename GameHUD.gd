@@ -78,3 +78,7 @@ func startLevel(current_level):
     # after these animations complete, continue_start_level()
     # is called above by self.game.continue_start_level
     self.show_level_requirements(current_level)
+
+func clarify_requirements():
+    print("game hud clarifying requirements")
+    star_reqs.clarify_star_requirements()
