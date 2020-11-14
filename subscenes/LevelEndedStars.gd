@@ -145,6 +145,8 @@ func _reduce_swipes():
 #  to keep the score reduction synced with tile removal
 func _reduce_tiles():
     print("Reduce Tiles")
+    var existing_sprites = get_tree().get_nodes_in_group("players")
+    print("remaining pieces: ", existing_sprites.size())
     self._pause_after_show_stuff()  # simulate calling after animation complete
 
 func _add_time_remain():
@@ -156,6 +158,7 @@ func _add_time_remain():
 func _display_stars():
     var num_stars = _calculate_stars_for_level()
     for i in range(1,num_stars):
+        print("placeholder create star ",i)
         # instantiate Tile of type TYPE
         # if this is last star, tell it to emit _on_last_star_displayed() callback when finished flying
         # fly it into place
