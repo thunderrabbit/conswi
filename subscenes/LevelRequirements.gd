@@ -144,7 +144,7 @@ func clarify_level_requirements():
     for name in self.level_requirements:
         var required = required_shapes_hud[name]
         required.spinner.set_value(self.level_requirements[name])
-        if self.level_requirements[name] == 0:
+        if self.level_requirements[name] <= 0:
             self.level_requirements.erase(name)	# remove requirement from level
             print("removed ", name)
             print(name, " was this wide ", self.pixel_width_of_required_shape[name])
