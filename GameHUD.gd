@@ -17,6 +17,7 @@ extends Node
 
 const Buttons = preload("res://subscenes/Buttons.gd")
 const StarRequirements = preload("res://subscenes/StarRequirements.tscn")
+const LevelRequirements = preload("res://subscenes/LevelRequirements.tscn")
 const StarsAfterLevel = preload("res://subscenes/LevelEndedStars.tscn")
 const SavedTiles = preload("res://subscenes/SpinnerLabel.tscn")
 
