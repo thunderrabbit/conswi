@@ -1,4 +1,4 @@
-#    Copyright (C) 2018  Rob Nugen
+#    Copyright (C) 2020  Rob Nugen
 #
 #    TileDatabase knows about each type of tile (name and color)
 #
@@ -17,7 +17,7 @@
 
 extends Node
 
-var idsOfNames = {}		# will be filled in automatically based on TileDatbase.tiles
+var idsOfNames = {}		# will be filled in automatically based on TileDatabase.tiles
 
 # Tiles are referenced by constants defined in Globals, and must match the order in items.png
 # e.g.  G.TYPE_PANDA = 0, so Panda must be the zeroth item in array `tiles` below
@@ -116,3 +116,6 @@ func create_name_to_id():
         # (or an error in belief that different swipes produce different arrays)
         idsOfNames[item_name] = i
     print(idsOfNames)
+
+func id_of_name(name):
+    return idsOfNames[name]
