@@ -107,7 +107,10 @@ func piece_unclicked():
             swipe_shape.fly_away_randomly()
 
         self.saved_tiles = self.saved_tiles + swipe_array.size()  # eventually only use save_tile_counter
+        # this line determines if we won, but only after shape shrinks and inc_saved_tile_counter() calls Game._on_LevelWon()
         self.saved_tile_counter.saved_n_tiles_of_type(swipe_array.size(), clicked_this_piece_type)
+        # will update HUD after shape shrinks and inc_saved_tile_counter() calls Game.game_hud.clarify_requirements()
+        Game.game_hud.saved_n_tiles_of_type(swipe_array.size(), clicked_this_piece_type)  # Update only HUD
         # TODO add animation swipe_shape.animate()
         for pos in swipe_array:
             if Helpers.board[pos] != null:
@@ -131,6 +134,7 @@ func piece_done_dragged(slot):
 
 func inc_saved_tile_counter():
     print("inc_saved_tile_counter is kinda mis-named as the counts are decreased on Game HUD")
+    print("Have game hud clarifying requirements now that shape swipe motion is complete")
     Game.game_hud.clarify_requirements()
     if self.saved_tile_counter.saved_enough_tiles_bool():
         print("sweet as we won the game by saving tiles")
@@ -175,6 +179,4 @@ func piece_exited(position, piece_type):
 
 func shrank_required_shape():
     swipe_shape.queue_free()
-    print("Have game hud clarifying requirements now that shape swipe motion is complete")
-    Game.game_hud.clarify_requirements()
     inc_saved_tile_counter()    # count required swipes toward total tiles collected
