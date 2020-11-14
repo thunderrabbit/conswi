@@ -65,8 +65,3 @@ func startLevel(current_level):
     # is called via signal `requirements_shown` by StarRequirements.gd
     self.star_reqs.show_finger_ka(current_level.show_finger)
     self.star_reqs.show_star_requirements(current_level.star_requirements)
-
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
