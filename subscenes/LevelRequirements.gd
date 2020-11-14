@@ -101,7 +101,7 @@ func display_next_requirement():
         var swipe_dimensions = currently_showing_shape.dimensions
         currently_showing_shape.set_position(Helpers.offset_bottom_center_slot_in_pixels(swipe_dimensions))
         add_child(currently_showing_shape)
-        currently_showing_shape.display_quantity(reqd_qty)
+        currently_showing_shape.display_quantity_quickly(reqd_qty)
 
 func shape_has_been_displayed():
     # once shape has been shrunk, go to above function to display next shape
