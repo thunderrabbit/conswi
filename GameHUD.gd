@@ -23,7 +23,8 @@ const SavedTiles = preload("res://subscenes/SpinnerLabel.tscn")
 
 var game
 var buttons					# Steering Pad / Start buttons
-var star_reqs				# HUD showing star requirements
+var level_reqs				# HUD showing requirements for passing the level
+var star_reqs				# HUD showing requirements for getting 3 stars
 var stars_after_level		# Show stars after level is over
 var saved_tiles             # Show saved tiles
 
