@@ -32,11 +32,11 @@ var tiger_texture = preload("res://images/Folder_4/tiger world@3x.png")
 # The order here is the left-to-right ordering of worlds on the side-swipe thing
 var world_textures = [[G.TYPE_DOG,dog_texture]
                      ,[G.TYPE_COW, cow_texture]
-#    DNE in items.png                     ,[G.TYPE_LION,lion_texture]
+                     ,[G.TYPE_LION,lion_texture]
                      ,[G.TYPE_MONKEY,monkey_texture]
                      ,[G.TYPE_PANDA,panda_texture]
-#    DNE in items.png                     ,[G.TYPE_RABBIT,rabbit_texture]
-#    DNE in items.png                     ,[G.TYPE_TIGER,tiger_texture]
+                     ,[G.TYPE_RABBIT,rabbit_texture]
+                     ,[G.TYPE_TIGER,tiger_texture]
                     ]
 var num_buttons = world_textures.size()
 
