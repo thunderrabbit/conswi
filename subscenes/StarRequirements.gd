@@ -140,7 +140,7 @@ func _removed_name_from_visible(name):
         print(required_shapes_hud[moving_name])
         var slide_duration = (i - key_to_remove) * 0.21 # slow down a bit for each one so they sorta appear to move after one another
         required_shapes_hud[moving_name].move_shape_left(slide_left_n_pixels, slide_duration) #  visually move the shapes
-        location_of_required_shape[moving_name].x = location_of_required_shape[moving_name].x - slide_left_n_pixels   # updates location for collected swipes to go when they shrink      
+        location_of_required_shape[moving_name].x = location_of_required_shape[moving_name].x - slide_left_n_pixels   # updates location for collected swipes to go when they shrink
 
     array_of_visible_names.erase(name)   # So we don't try to move it again
 
