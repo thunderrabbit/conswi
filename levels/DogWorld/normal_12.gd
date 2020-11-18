@@ -1,4 +1,4 @@
-#    Copyright (C) 2018  Rob Nugen
+#    Copyright (C) 2020  Rob Nugen
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -16,8 +16,10 @@
 extends "DogLevel.gd"
 
 func _init():
-    tiles = {"dog":9,"cow":1,"bear":1,"panda":1}
-    max_tiles_avail = 8150
-    time_limit_in_sec = 8390
-    star_requirements = { "pink_floyd":1 }
-    required_tiles = { "default":1, "cat":280 }   # NormalLevel.gd converts default to a quantity based on level
+#playable pieces: dog, cat
+
+    max_tiles_avail = 100
+    tiles  = {"dog": 4, "cat": 3}
+    time_limit_in_sec = 360
+    star_requirements = { "left3right2":1, "right3left2":1, "infinityright": 1, "infinityleft": 1,}
+    required_tiles = { "dog":30, "cat": 10 }

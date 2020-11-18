@@ -1,4 +1,4 @@
-#    Copyright (C) 2018  Rob Nugen
+#    Copyright (C) 2020  Rob Nugen
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -16,9 +16,10 @@
 extends "DogLevel.gd"
 
 func _init():
-    gravity_timeout = 1000
-    max_tiles_avail = 1000
-    time_limit_in_sec = 3000
-    star_requirements = { "ta3":3,
-                            "bo3":4,
-                            "ta4":1 }
+#playable pieces: dog
+
+    max_tiles_avail = 18
+    tiles  = {"dog": 1}
+    time_limit_in_sec = 60
+    star_requirements = { "horizontal3":2,"vertical4":3}
+    required_tiles = { "dog":18 }

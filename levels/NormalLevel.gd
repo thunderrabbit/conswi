@@ -34,6 +34,7 @@ var tiles = {"dog": 1,
 
 var star_requirements = { "bo3":1 }	# swipe these shapes to get 3 stars
 var required_tiles = { "default":1 }  # use same format as tiles to require more things, but for now the GameHud can only handle one number
+var show_unlock_image_after_level_won = null
 
 ###########################################
 #

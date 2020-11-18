@@ -1,4 +1,4 @@
-#    Copyright (C) 2018  Rob Nugen
+#    Copyright (C) 2020  Rob Nugen
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -16,10 +16,10 @@
 extends "DogLevel.gd"
 
 func _init():
-    max_tiles_avail = 3000
-    time_limit_in_sec = 3000
-    width = 7    # This is a proof of concept.  Erase to make it 7 (level/NormalLevel.gd value)
-    star_requirements = { "ta3":5,
-                          "bo3":2,
-                        }
-    show_finger = true			# On early levels, only with straight swipes
+#playable pieces: dog
+
+    max_tiles_avail = 9
+    tiles  = {"dog": 1}
+    time_limit_in_sec = 30
+    star_requirements = { "vertical3":3 }
+    required_tiles = { "dog":9 }
