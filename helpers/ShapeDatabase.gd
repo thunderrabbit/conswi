@@ -90,7 +90,7 @@ var shapes = {
     "square":[2,
                 1, 1,
                 1, 1],
-    "rectangle": [2, 
+    "rectangle": [3, 
         1, 1, 1,
         1, 1, 1],
     "ring3":[3,
@@ -264,7 +264,7 @@ var shapes = {
                 1, 1,
                 1, 1,
                 1, 1],
-    "2x3":[3,
+    "2x3":[33,     # was 3.  Killing this for now because it duplicates "rectangle"
                 1, 1, 1,
                 1, 1, 1],
     "4x2":[2,
