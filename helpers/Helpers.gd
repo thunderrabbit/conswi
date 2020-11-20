@@ -142,14 +142,14 @@ func width_to_pixels(width, factor):
     var stp = slot_to_pixels(Vector2(width,0))
     return stp.x * factor
 
-# below, xfactor is used to push required swipes to the right so they can be seen
-func slot_to_pixels(slot, xfactor=1, debug=false):
+# below, skip_assert allows fractional slots to work okay
+func slot_to_pixels(slot, skip_assert=false):
     # do same thing as 3141d61c7e60ff18cfbf573b5879fa1e577edbfc
     var stpv2 = Vector2(floor(G.Game_left_space()+G.Game_slot_size()*(slot.x)),
                     floor(G.Game_top_space()+G.Game_slot_size()*(slot.y)))
     # make sure we know what tiles are being clicked
     var double_check = pixels_to_slot(stpv2)
-    assert(slot == double_check)   # if this fails, then pixels_to_slot will misidentify which tile has been clicked
+    assert(skip_assert || slot == double_check)   # if this fails, then pixels_to_slot will misidentify which tile has been clicked
     return stpv2
 
 # Used for starting position when showing level requirements
