@@ -100,7 +100,7 @@ func is_shadow():
 
 # TODO create images/items_hightlight.png and swap out the image with set_texture
 func highlight():
-    set_modulate(Color(.1,.1,.1, 1))
+    set_modulate(Color(.6,.5,.1,1))
 
 # TODO after create images/items_hightlight.png, unswap the image with set_texture
 func unhighlight():
