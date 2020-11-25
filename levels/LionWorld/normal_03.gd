@@ -18,5 +18,5 @@ extends "LionLevel.gd"
 func _init():
     max_tiles_avail = 70
     time_limit_in_sec = 120
-    star_requirements = { "ta3":1, 
+    star_requirements = { "ta3":1,
                             "bo3":1, }
