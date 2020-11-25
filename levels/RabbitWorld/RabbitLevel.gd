@@ -1,6 +1,6 @@
 #    Sends rabbit tiles to any level that extends (inherits) this class
 #
-#    Copyright (C) 2019  Rob Nugen
+#    Copyright (C) 2020 Rob Nugen
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
