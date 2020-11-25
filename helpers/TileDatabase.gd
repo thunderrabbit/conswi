@@ -69,6 +69,22 @@ var tiles = [
         "ITEM_NAME" : "tiger",
         "ITEM_COLOR" : Color(1.0, 0, 0.5, 1.0),
     },
+    {
+        "ITEM_NAME" : "zebra",
+        "ITEM_COLOR" : Color(1.0, 0, 0.5, 1.0),
+    },
+    {
+        "ITEM_NAME" : "leopard",
+        "ITEM_COLOR" : Color(1.0, 0, 0.5, 1.0),
+    },
+    {
+        "ITEM_NAME" : "polar",
+        "ITEM_COLOR" : Color(1.0, 0, 0.5, 1.0),
+    },
+    {
+        "ITEM_NAME" : "snake",
+        "ITEM_COLOR" : Color(1.0, 0, 0.5, 1.0),
+    },
 ]
 
 func _ready():
