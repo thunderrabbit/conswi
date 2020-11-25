@@ -1,6 +1,4 @@
-#    Sends dog tiles to any level that extends (inherits) this class
-#
-#    Copyright (C) 2018  Rob Nugen
+#    Copyright (C) 2020 Rob Nugen
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -14,8 +12,14 @@
 #
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-extends "../NormalLevel.gd"
+
+extends "DogLevel.gd"
 
 func _init():
-    tiles = {"dog":3,"cow":0,"bear":0,"panda":0}   # these are ratios. (3 parts dog, 0 parts cow 0 parts bear, 0 parts panda) => 100% dog
-   # fill_level = true    # make it easy to test etc
+#playable pieces: dog, cat
+
+    max_tiles_avail = 50
+    tiles  = {"dog": 4, "cat": 2}
+    time_limit_in_sec = 120
+    star_requirements = { "square":1, "rectangle":1, "ring3": 1}
+    required_tiles = { "dog":14, "cat": 10 }

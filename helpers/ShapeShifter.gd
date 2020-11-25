@@ -1,4 +1,4 @@
-#    Copyright (C) 2018  Rob Nugen
+#    Copyright (C) 2020  Rob Nugen
 #
 #    Converts swipes to names of swipes
 #
@@ -29,6 +29,7 @@ func _ready():
         if bitmapNames.has(arr_as_str):
             print("Alert! ", shapeName, " duplicates array ", arr_as_str, " already found in bitmapNames.")
             print("Make sure there are no repeated arrays in ShapeDatabase")
+            get_tree().quit()    # kill the game because swipes do not work if there are duplicates
         bitmapNames[arr_as_str] = shapeName		# e.g. [1,1,1,1] = 'ta3'
 
 func _getBitmapStringOfSwipeCoordinates(swipeCoordinates):
@@ -43,7 +44,7 @@ func getBitmapOfSwipeCoordinates(swipeCoordinates):
     var bitmapArray = createBitmap(swipeDimensions,swipeCoordinates)
     return prepareBitmap(swipeDimensions,bitmapArray)
 
-##  This only has to work for named swipes because it is only used to 
+##  This only has to work for named swipes because it is only used to
 ##    determine where on the screen required swipes should be shown
 func getWidthOfShapeName(shapeName):
     var array_of_named_swipe = ShapeDatabase.shapes[shapeName]
@@ -118,4 +119,3 @@ func prepareBitmap(swipeDimensions,bitmapArray):
 
 func printBitmap(theBitmap):
     print(theBitmap)
-

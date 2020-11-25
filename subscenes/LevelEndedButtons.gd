@@ -17,53 +17,57 @@ extends MarginContainer
 
 var game_scene
 var _buttons_across = 3
+var bottom_left_position     # for back button
+var bottom_right_position    # for next button and retry button
 
 func set_game_scene(my_game_scene):
     game_scene = my_game_scene
 
-func _ready():
+func calc_button_locations():
     # Called every time the node is added to the scene.
     # Initialization here
+    self.bottom_left_position = Helpers.slot_to_pixels(Vector2(0,12))
+    self.bottom_right_position = Helpers.slot_to_pixels(Vector2(4.4,12), true)   # true allows fractional slots
     pass
-
-func percent_of_1_third_screen_width(percent):
-    return G.OneNthOfScreenWidth(3) * percent
-
-## button is any container?
-## percent 0.9 -->  0.9 * 1/3 of screen width (gives a bit of a gap)
-func scale_button_almost_1_third_screen(button, fraction):
-    var button_actual_width = button.get_size().x
-    print(button_actual_width) # hope to be 260 or so
-    var desired_width = percent_of_1_third_screen_width(fraction)
-    print("desired_width = " , desired_width)
-    var scale = desired_width / button_actual_width
-    print(scale)
-    button.set_scale(Vector2(scale, scale))
-    
-func anchor_bottom_left(button):
-    button.anchr = 1
-#    button.anchor_left = 0
-    
 
 func show_lose_buttons_on_bottom():
 #    var fill_this_fraction_of_third_of_screen = 0.85
-    $LevelEndedButtonsContainer/NextLevel.hide()
+    $NextLevel.hide()
  #   scale_button_almost_1_third_screen($LevelSelect, fill_this_fraction_of_third_of_screen)
   #  anchor_bottom_left($LevelSelect)
-    $LevelEndedButtonsContainer/LevelSelect.set_normal_texture(preload("res://images/buttons/lose_back@3x.png")) #  the lose background was in BackgroundScript.gd but might move it here
-    $LevelEndedButtonsContainer/LevelSelect.show()
+    $LevelSelect.set_normal_texture(preload("res://images/buttons/lose_back@3x.png")) #  the lose background was in BackgroundScript.gd but might move it here
+    $LevelSelect.show()
+    $LevelSelect.set_position(self.bottom_left_position)
+    make_button_move($LevelSelect,self.bottom_left_position)
  #   scale_button_almost_1_third_screen($TryAgain, fill_this_fraction_of_third_of_screen)
  #   anchor_bottom_left($TryAgain)
-    $LevelEndedButtonsContainer/TryAgain.show()
+    $TryAgain.show()
+    $TryAgain.set_position(self.bottom_right_position)   ### This does not work!!  WHY????
+    make_button_move($TryAgain,self.bottom_right_position)   ### This makes it work.  WHY??
 
+### make_button_move is ONLY because set_position does not seem to work on the buttons.  I guess it is some problem with anchors, but I am stumped.
+func make_button_move(shape, go_to_loc, duration = 1.21):
+    var effect = Tween.new()
+    add_child(effect)
+    effect.interpolate_property(shape, "rect_position",
+            shape.get_position(), go_to_loc, duration,
+            Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+    effect.start()
+    
 func show_win_buttons_on_bottom():
-    $LevelEndedButtonsContainer/TryAgain.hide()
-    $LevelEndedButtonsContainer/NextLevel.show()
-    $LevelEndedButtonsContainer/LevelSelect.set_normal_texture(preload("res://images/buttons/win_back@3x.png")) #  the lose background was in BackgroundScript.gd but might move it here
-    $LevelEndedButtonsContainer/LevelSelect.show()
+    $TryAgain.hide()
+    $NextLevel.show()
+    $NextLevel.set_position(self.bottom_right_position)
+    make_button_move($NextLevel,self.bottom_right_position)  
+    
+    $LevelSelect.set_normal_texture(preload("res://images/buttons/win_back@3x.png")) #  the lose background was in BackgroundScript.gd but might move it here
+    $LevelSelect.show()
+    $LevelSelect.set_position(self.bottom_left_position)
+    make_button_move($LevelSelect,self.bottom_left_position)
 
 func level_over_reason(reason):
     print(reason)
+    calc_button_locations()
     # Feb 2020 turn detailed failure to just have win or lose.
     # This is effed because the images are full BG images, but the node is "LevelOverTitle"
     if reason == G.LEVEL_WIN:
