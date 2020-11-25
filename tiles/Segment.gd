@@ -145,14 +145,14 @@ func _on_Segment_can_swipe(event):
 
 
 func _on_Segment_mouse_entered():
-    print("segment entered")
+    # print("segment entered")
     if swipe_options != SwipeOptions.CAN_SWIPE:
         print("but not swipeable")
         return
     emit_signal("entered", Helpers.pixels_to_slot(get_position()), self.tile_type)
 
 func _on_Segment_mouse_exited():
-    print("segment exited")
+    # print("segment exited")
     if swipe_options != SwipeOptions.CAN_SWIPE:
         print("but not swipeable")
         return
