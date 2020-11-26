@@ -16,10 +16,17 @@
 extends "DogLevel.gd"
 
 func _init():
-#playable pieces: dog, cat
+# Level 7
+# playable pieces: dog, cat
 
-    max_tiles_avail = 10
-    tiles  = {"dog": 3, "cat": 1}
-    time_limit_in_sec = 60
-    star_requirements = { "verticalzigzagright":1}
-    required_tiles = { "dog":4, "cat": 3 }
+    max_tiles_avail = 100
+    tiles = {"dog": 3, "cat": 2}
+    time_limit_in_sec = 180
+    star_requirements = {
+                          "verticalzigzagleft":2,
+                          "verticalzigzagright":2,
+                          "horizontalzigzagleft":2,
+                          "horizontalzigzagright":2,
+                        }
+    required_tiles = { "dog":20, "cat": 20 }
+    show_unlock_image_after_level_won = "leopard"

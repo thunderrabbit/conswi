@@ -16,10 +16,15 @@
 extends "DogLevel.gd"
 
 func _init():
-#playable pieces: dog
+# Level 4
+# playable pieces: dog, cat
 
-    max_tiles_avail = 18
-    tiles  = {"dog": 1}
-    time_limit_in_sec = 60
-    star_requirements = { "horizontal3":2,"vertical4":3}
-    required_tiles = { "dog":18 }
+    max_tiles_avail = 50
+    tiles = {"dog": 2, "cat":1}
+    time_limit_in_sec = 120
+    star_requirements = {
+                           "vertical4":1,
+                           "horizontal4":1,
+                           "horizontal5":1,
+                        }
+    required_tiles = { "dog":18, "cat":10}

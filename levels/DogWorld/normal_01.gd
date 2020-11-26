@@ -17,9 +17,10 @@ extends "DogLevel.gd"
 
 func _init():
 #playable pieces: dog
+#Level 1
     max_tiles_avail = 3
-    tiles  = {"dog": 1}
+    tiles = {"dog":1}
     time_limit_in_sec = 15
-    show_finger = true	# On early levels, only with straight swipes
+    show_finger = true # On early levels, only with straight swipes
     star_requirements = { "vertical3":1 }
     required_tiles = { "dog":3 }

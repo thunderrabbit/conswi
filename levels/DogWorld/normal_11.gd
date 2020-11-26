@@ -16,10 +16,16 @@
 extends "DogLevel.gd"
 
 func _init():
-#playable pieces: dog, cat
+# Level 11
+# playable pieces: dog, cat, leopard
 
-    max_tiles_avail = 100
-    tiles  = {"dog": 3, "cat": 2}
-    time_limit_in_sec = 180
-    star_requirements = { "cup3":1, "cap3":1, "cup4": 1, "cap4": 1}
-    required_tiles = { "dog":24, "cat": 10 }
+    max_tiles_avail = 200
+    tiles = {"dog":2, "cat": 2, "leopard":2}
+    time_limit_in_sec = 330
+    star_requirements = {
+                          "dogl3downshared2up":2,
+                          "dogl3upshared2down":2,
+                          "dogl2downshared3up":2,
+                          "dogl2upshared3down":2,
+                        }
+    required_tiles = { "dog":30, "cat": 30, "leopard":30}
