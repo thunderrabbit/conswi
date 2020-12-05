@@ -30,14 +30,15 @@ var shapes = {
 var named_swipes_gds = preload("res://helpers/named_swipes/named_swipes.gd")
 var len_8_swipes_gds = preload("res://helpers/named_swipes/len_8_swipes.gd")
 
+# Basically merge dictionaries defined in files above into one dictionary
+# ShapeDatabase.shapes determines which swipes can be detected in the game.
+func collect_swipes(named_swipes_dict: Dictionary):
+    for shapeName in named_swipes_dict.named_swipes.keys():
+        ShapeDatabase.shapes[shapeName] = named_swipes_dict.named_swipes[shapeName]
+
 func _ready():
     var named_swipes = self.named_swipes_gds.new()
-    var len_8_swipes = self.len_8_swipes_gds.new()    
+    var len_8_swipes = self.len_8_swipes_gds.new()
 
-    for shapeName in named_swipes.named_swipes.keys():
-        ShapeDatabase.shapes[shapeName] = named_swipes.named_swipes[shapeName]
-
-    for shapeName in len_8_swipes.named_swipes.keys():
-        ShapeDatabase.shapes[shapeName] = len_8_swipes.named_swipes[shapeName]
-
-
+    collect_swipes(named_swipes)
+    collect_swipes(len_8_swipes)
