@@ -1,5 +1,7 @@
 #    Copyright (C) 2020  Rob Nugen
 #
+#    ShapeDatabase.gd gives names to swipes to help define levels
+#
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
 #    the Free Software Foundation, either version 3 of the License, or
@@ -15,12 +17,7 @@
 
 extends Node
 
-# See commit fe6c6bf99ac3c95e500c80c02d5506e4313bb366
-# For the original naming conventions
-# The first digit in each array is the width of the shape.
-# Subsequent digits are binary on/off
-# e.g. [2,1,1] is a horizontal bar width 2.   [1,1,1] is a vertical bar height 2.
-# The layout of the arrays below are ignored by computer, but hopefully useful for humans.
+#    The swipes are defined in other files in /helpers/named_swipes/ then collected in this dictionary
 var shapes = {
     # one_square is for displaying level_requirements.  It is not an actual swipe
     "one_square": [1,

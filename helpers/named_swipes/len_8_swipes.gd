@@ -15,6 +15,12 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+# See commit fe6c6bf99ac3c95e500c80c02d5506e4313bb366
+# For the original naming conventions
+# The first digit in each array is the width of the shape.
+# Subsequent digits are binary on/off
+# e.g. [2,1,1] is a horizontal bar width 2.   [1,1,1] is a vertical bar height 2.
+# The layout of the arrays below are ignored by computer, but hopefully useful for humans.
 var named_swipes = {
 #    "8shape_a_day_1": [8,       # removed because game play is 7 characters wide. 8-width swipe is impossible
 #      1,1,1,1,1,1,1,1],
