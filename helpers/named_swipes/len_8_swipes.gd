@@ -15,7 +15,7 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-var len_8_swipes = {
+var named_swipes = {
 #    "8shape_a_day_1": [8,       # removed because game play is 7 characters wide. 8-width swipe is impossible
 #      1,1,1,1,1,1,1,1],
     "8shape_a_day_2": [7,

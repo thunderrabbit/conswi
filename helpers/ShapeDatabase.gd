@@ -37,7 +37,7 @@ func _ready():
     for shapeName in named_swipes.named_swipes.keys():
         ShapeDatabase.shapes[shapeName] = named_swipes.named_swipes[shapeName]
 
-    for shapeName in len_8_swipes.len_8_swipes.keys():
-        ShapeDatabase.shapes[shapeName] = len_8_swipes.len_8_swipes[shapeName]
+    for shapeName in len_8_swipes.named_swipes.keys():
+        ShapeDatabase.shapes[shapeName] = len_8_swipes.named_swipes[shapeName]
 
 
