@@ -16,7 +16,7 @@
 extends "LionLevel.gd"
 
 func _init():
-    required_tiles = { "lion":75 } 
+    required_tiles = { "lion":75 }
     max_tiles_avail = 1900
     gravity_timeout = 1
     time_limit_in_sec = 3390
