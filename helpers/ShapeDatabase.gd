@@ -26,3 +26,18 @@ var shapes = {
     "one_square": [1,
                    1],
 }
+
+var named_swipes_gds = preload("res://helpers/named_swipes/named_swipes.gd")
+var len_8_swipes_gds = preload("res://helpers/named_swipes/len_8_swipes.gd")
+
+func _ready():
+    var named_swipes = self.named_swipes_gds.new()
+    var len_8_swipes = self.len_8_swipes_gds.new()    
+
+    for shapeName in named_swipes.named_swipes.keys():
+        ShapeDatabase.shapes[shapeName] = named_swipes.named_swipes[shapeName]
+
+    for shapeName in len_8_swipes.len_8_swipes.keys():
+        ShapeDatabase.shapes[shapeName] = len_8_swipes.len_8_swipes[shapeName]
+
+
