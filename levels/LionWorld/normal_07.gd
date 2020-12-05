@@ -24,7 +24,7 @@ func _init():
     star_requirements = { "ribbondownright":1,
                             "ta3":1,
                             "vertical8":1,
-                            "ta7":1,
+                            "vertical7":1,
                             "bo5":1,
                             "ta6":1,
                             "horizontal8":1,
