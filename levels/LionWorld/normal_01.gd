@@ -20,12 +20,23 @@ func _init():
     time_limit_in_sec = 300
     show_finger = true			# On early levels, only with straight swipes
     fill_level = false    # make it easy to test etc
-    star_requirements = { "bo3":4,"ta3":4 }	# swipe these shapes to get 3 stars
-    tiles  = {"lion": 1,
-             "cow": 1,
-             "bear": 1,
-             "panda": 1,
-            }
+    star_requirements = { "vertical3":1,"horizontal3":1,"vertical4":1,"horizontal4":1 }	# swipe these shapes to get 3 stars
+    tiles  = {"panda":10,
+                "bear":10,
+                "cow":10,
+                "dog":1,
+                "monkey":1,
+                "sheep":1,
+                "pig":1,
+                "cat":1,
+                "lion":10,
+                "rabbit":1,
+                "tiger":1,
+                "zebra":1,
+                "leopard":1,
+                "polar":1,
+                "snake":1
+                        }
     required_tiles = {
              "bear": 6,
              "lion": 6,
