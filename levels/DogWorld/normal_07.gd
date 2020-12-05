@@ -29,4 +29,3 @@ func _init():
                           "horizontalzigzagright":2,
                         }
     required_tiles = { "dog":20, "cat": 20 }
-    show_unlock_image_after_level_won = "leopard"
