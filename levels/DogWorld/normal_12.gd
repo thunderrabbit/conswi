@@ -21,6 +21,9 @@ func _init():
 
     max_tiles_avail = 200
     tiles = {"dog":2, "cat": 2, "leopard":2}
-    time_limit_in_sec = 300
-    star_requirements = { "infinitytopright":1, "infinitytopleft":1 }
+    time_limit_in_sec = 400
+    star_requirements = {
+                          "infinitytopright":1,
+                          "infinitytopleft":1,
+                        }
     required_tiles = { "dog":30, "cat": 30, "leopard":30}

@@ -21,7 +21,7 @@ func _init():
 
     max_tiles_avail = 200
     tiles = {"dog":2, "cat": 2, "leopard":2}
-    time_limit_in_sec = 330
+    time_limit_in_sec = 360
     star_requirements = {
                           "dogl3downshared2up":2,
                           "dogl3upshared2down":2,
