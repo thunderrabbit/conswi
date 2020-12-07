@@ -209,7 +209,8 @@ func _show_stuff_after_level(reason):
                                     'num_tiles':$GameSwipeDetector.saved_tile_counter.num_tiles_all_types(),
                                     'safe_tiles':$GameSwipeDetector.saved_tiles,
                                     'correct_swipes':$GameSwipeDetector.correct_swipe_counter,
-                                    'required_swipe_count':self.total_swipes_required_for_three_stars
+                                    'required_swipe_count':self.total_swipes_required_for_three_stars,
+                                    'unlock_after_win':current_level.show_unlock_image_after_level_won,
                                 }
     game_hud.stars_after_level.show_stuff_after_level(collect_info_for_stars)
 

@@ -90,6 +90,7 @@ const STAR_REDUCE_TILES = 2
 const STAR_ADD_TIME_REMAIN = 3
 const STAR_DISPLAY_STARS = 4
 const STAR_HIDE_REQUIREMENTS = 7
+const SHOW_UNLOCKED_TILE = 8
 
 const Saved_Tiles_Anchor_Left = 0.9
 const Saved_Tiles_Anchor_Top = 0.5
