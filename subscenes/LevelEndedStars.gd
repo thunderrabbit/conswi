@@ -18,9 +18,14 @@ extends Node2D
 var game_scene
 var _todo_after_level
 var _info_for_star_calc
+var _unlocked_tile
+var _need_remove_unlock_button = false
 export var swipe_lose_delay = 0.05
 export var gain_points_per_swipe = 1
 export var points_per_tile = 25
+export var pause_b4_show_stuff_s = 0.05
+export var pause_af_show_stuff_s = 0.05
+export var show_unlock_button_s = 2
 
 #######################################################
 #
@@ -30,9 +35,11 @@ func set_game_scene(my_game_scene):
 
 func _ready():
     # Called every time the node is added to the scene.
-    # Initialization here
-    pass
+    _hide_everything()
 
+func _hide_everything():
+    $UnlockedTileButton.hide()
+    
 #######################################################
 #
 #  	Public so it can be called by Game.gd
@@ -52,6 +59,8 @@ func _decide_what_to_show():
         self._PlanToReduceTiles()		# these three can be in any order (this one blacks out the tiles)
         self._PlanToAddTimeRemain()		# these three can be in any order
         self._PlanToDisplayStars()		# add stars below score (or above) or whatever, but should be last
+        if self._info_for_star_calc['unlock_after_win'] != null:
+            self._PlanToShowUnlockedTile(self._info_for_star_calc['unlock_after_win'])
     else:
         # this will black out the tiles, but *not* show score because score will not be there
         self._PlanToHideRequirements()
@@ -76,10 +85,14 @@ func _PlanToAddTimeRemain():
 func _PlanToDisplayStars():
     self._todo_after_level.push_back(G.STAR_DISPLAY_STARS)
 
+func _PlanToShowUnlockedTile(unlocked_tile):
+    self._unlocked_tile = unlocked_tile     # string will find image filename
+    self._todo_after_level.push_back(G.SHOW_UNLOCKED_TILE)
+
 func _pause_before_show_stuff():
     var timer = $extra_pauser
     timer.connect("timeout",self,"_show_stuff_after_level")
-    timer.set_wait_time(0.5)
+    timer.set_wait_time(self.pause_b4_show_stuff_s)
     timer.start()
 
 ###  this is designed to slow the action so I can see what is happening
@@ -87,7 +100,7 @@ func _pause_after_show_stuff():
     print("PAUSE after show stuff")
     var timer = $extra_pauser
     timer.connect("timeout",self,"_show_stuff_after_level")
-    timer.set_wait_time(1.5)
+    timer.set_wait_time(pause_af_show_stuff_s)
     timer.start()
 
 func _show_stuff_after_level():
@@ -106,6 +119,8 @@ func _show_stuff_after_level():
                 self._add_time_remain()
             G.STAR_DISPLAY_STARS:
                 self._display_stars()
+            G.SHOW_UNLOCKED_TILE:
+                self._show_unlocked_overlay(self._unlocked_tile)  # send parameter in case _show_unlocked_overlay is moved to another object
 
 func _display_bonus():
     print("Display Bonus")
@@ -132,6 +147,14 @@ func _reduce_swipes():
     tiles_saved.set_increment(1)
     tiles_saved.start_tick()
     points.start_tick()
+
+func _show_unlocked_overlay(_unlocked_tile):
+    print("YOU UNLOCKED ", _unlocked_tile)
+    $UnlockedTileButton.set_normal_texture(load("res://images/level_over/unlocked/unlocked_%s.png" % [_unlocked_tile] ))
+    $UnlockedTileButton.show()
+    self._need_remove_unlock_button = true
+    var timer = get_tree().create_timer(self.show_unlock_button_s)
+    timer.connect("timeout",self,"_timeout_unlocked_button")
 
 #####################################################
 #
@@ -188,3 +211,26 @@ func _calculate_stars_for_level():
 
 func _on_last_star_displayed():
     self.game_scene._on_level_over_stars_displayed()		# fake signal emitted by star_display.gd
+
+###  allow button to timeout, including code to prevent race conditions with click
+func _timeout_unlocked_button():
+    print("timed out button")
+    if(self._need_remove_unlock_button == false):
+        # button has already been pressed
+        return
+    self._need_remove_unlock_button = false
+    $UnlockedTileButton.hide()
+    print("_pause_after_show_stuff after timed out button")
+    self._pause_after_show_stuff()  # simulate calling after animation complete
+
+###  allow button to be clicked, including code to prevent race conditions with timeout
+func _on_UnlockedTileButton_down():
+    print("clicked button")
+    if(self._need_remove_unlock_button == false):
+        # button has already timed out
+        return
+    self._need_remove_unlock_button = false
+    $UnlockedTileButton.hide()
+    print("_pause_after_show_stuff after clicked button")
+    self._pause_after_show_stuff()  # simulate calling after animation complete
+
