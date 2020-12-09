@@ -18,6 +18,7 @@ extends Area2D
 const SwipeShape = preload("res://subscenes/SwipeShape.tscn")
 const SavedTileCounter = preload("res://helpers/SavedTileCounter.gd")
 
+enum SwipeState {IDLE, SWIPE = 5, DRAG}		# how should _input_event respond
 var clicked_this_piece_type = 0				# set when swipe is started
 var swipe_mode= false						# if true, then we are swiping
 var swipe_array = []						# the pieces in the swipe
@@ -26,7 +27,6 @@ var saved_tiles          # show on screen
 var correct_swipe_counter       # count toward stars
 var saved_tile_counter          # count toward win
 var Game									# will point to GameNode
-var SwipeState = preload("res://enums/SwipeState.gd")
 var swipe_state = SwipeState.SWIPE
 var dragging_piece = null					# when dragging a piece, this will refer to it
 

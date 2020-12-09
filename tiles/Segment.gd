@@ -24,10 +24,10 @@ signal exited
 
 var tile_type
 var sprite_loc = []
-var SwipeOptions = preload("res://enums/SwipeOptions.gd")
+enum SwipeOptions {CANNOT, CAN_SWIPE = 9, CAN_DRAG}		# can Swipe or Drag be activated?  Shadows CANNOT!
 var swipe_options = SwipeOptions.CANNOT
 
-var SwipeState = preload("res://enums/SwipeState.gd")
+enum SwipeState {IDLE, SWIPE = 5, DRAG}		# how should _input_event respond
 var swipe_state = SwipeState.IDLE
 
 const wd = 100.0			# width of each sprite image in items.png
