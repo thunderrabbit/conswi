@@ -144,6 +144,9 @@ func read_savegame():
     var save_data = read_file.get_line()	# All data is in a single line
     read_file.close()
     self.save_dict = parse_json(save_data)
+    if(self.save_dict == null):
+        # Needed as of Godot 3.2.3, possibly because save file did not get moved to new app storage area??
+        self.save_dict = {}
 
 func _initialize_data():
     self.save_dict["current_world"] = 0;
