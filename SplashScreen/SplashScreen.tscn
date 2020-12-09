@@ -6,70 +6,33 @@
 [ext_resource path="res://images/Folder_2.5/hand1@3x.png" type="Texture" id=4]
 [ext_resource path="res://images/Folder_2.5/hand2@3x.png" type="Texture" id=5]
 
-[node name="SplashScreen" type="MarginContainer" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="SplashScreen" type="MarginContainer"]
 margin_right = 1242.0
 margin_bottom = 2688.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 1 )
-_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Material", "Rect", "Size Flags", "Transform", "Visibility", "Z Index" ]
 
-[node name="Sprite" type="Sprite" parent="." index="0"]
-
+[node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 317.211, 663.238 )
 scale = Vector2( 0.452061, 0.353997 )
 texture = ExtResource( 2 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="Timer" type="Timer" parent="." index="1"]
-
-process_mode = 1
-wait_time = 1.0
+[node name="Timer" type="Timer" parent="."]
 one_shot = true
 autostart = true
 
-[node name="StoryOverlay" type="Sprite" parent="." index="2"]
-
+[node name="StoryOverlay" type="Sprite" parent="."]
 texture = ExtResource( 3 )
 centered = false
-_sections_unfolded = [ "Animation", "Material", "Offset", "Pause", "Region", "Transform", "Visibility", "Z Index" ]
 
-[node name="PawAgreeButton" type="TextureButton" parent="." index="3"]
-
+[node name="PawAgreeButton" type="TextureButton" parent="."]
 visible = false
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 8.0
-margin_right = 1184.0
+margin_right = 1176.0
 margin_bottom = 1071.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 0
 size_flags_vertical = 0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 texture_normal = ExtResource( 4 )
 texture_pressed = ExtResource( 5 )
-_sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Hint", "Margin", "Mouse", "Rect", "Size Flags", "Textures" ]
-
 [connection signal="timeout" from="Timer" to="." method="_on_SplashScreen_Timer_timeout"]
-
 [connection signal="button_up" from="PawAgreeButton" to="." method="_on_PawAgree_button_up"]
-
-
