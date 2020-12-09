@@ -3,20 +3,21 @@
 importer="texture"
 type="StreamTexture"
 path="res://.import/istlogo.png-b64d1f509e0019973fd3261d39bd447e.stex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://SplashScreen/istlogo.png"
-source_md5="a197723ef9cf528cce90b4858228b59e"
-
 dest_files=[ "res://.import/istlogo.png-b64d1f509e0019973fd3261d39bd447e.stex" ]
-dest_md5="ab07eaf2d99927022a6487d84e2f9a36"
 
 [params]
 
 compress/mode=0
 compress/lossy_quality=0.7
 compress/hdr_mode=0
+compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
 flags/filter=true
@@ -26,6 +27,7 @@ flags/srgb=2
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
+process/invert_color=false
 stream=false
 size_limit=0
 detect_3d=true

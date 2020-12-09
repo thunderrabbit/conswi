@@ -3,20 +3,21 @@
 importer="texture"
 type="StreamTexture"
 path="res://.import/swipe_finger.png-b6d026a6343e92044ca96b77839f20d6.stex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://images/swipe_finger.png"
-source_md5="f2dd3a24f0457294db798d732a2b9d05"
-
 dest_files=[ "res://.import/swipe_finger.png-b6d026a6343e92044ca96b77839f20d6.stex" ]
-dest_md5="ab3e680474a9f32bc7abcbedac323d51"
 
 [params]
 
 compress/mode=0
 compress/lossy_quality=0.7
 compress/hdr_mode=0
+compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
 flags/filter=true
@@ -26,6 +27,7 @@ flags/srgb=2
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
+process/invert_color=false
 stream=false
 size_limit=0
 detect_3d=true
