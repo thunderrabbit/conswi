@@ -80,7 +80,7 @@ func _write_value(field, value):
 #   "low" level function just returns value
 func _read_value(field):
 
-    if(self.save_dict.has(field)):
+    if(self.save_dict != null && self.save_dict.has(field)):
         return self.save_dict[field]
     else:
         return 0
