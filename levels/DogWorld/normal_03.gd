@@ -1,5 +1,5 @@
 #    Level 3
-#  Copyright (C) 2020 Rob Nugen
+#    Copyright (C) 2020 Rob Nugen
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -20,9 +20,9 @@ func _init():
 # Level 3
 #playable pieces: dog
 
-   gravity_timeout = 0.92
-   max_tiles_avail = 13
-   tiles = { "dog":1 }
+    gravity_timeout = 0.92
+    max_tiles_avail = 13
+    tiles = { "dog":1 }
     time_limit_in_sec = 180
     star_requirements = {
                           "vertical4":1,
