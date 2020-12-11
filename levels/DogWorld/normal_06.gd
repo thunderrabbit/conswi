@@ -1,4 +1,5 @@
-#    Copyright (C) 2020  Rob Nugen
+#    Level 6
+#    Copyright (C) 2020 Rob Nugen
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -18,9 +19,10 @@ extends "DogLevel.gd"
 func _init():
 # Level 6
 # playable pieces: dog, cat
-
+    
+    gravity_timeout = 0.80
     max_tiles_avail = 100
-    tiles = {"dog": 3, "cat": 2}
+    tiles = { "dog": 3, "cat": 2 }
     time_limit_in_sec = 180
     star_requirements = {
                           "verticalzigzagleft":2,
