@@ -1,5 +1,5 @@
 #    Level 8
-#   Copyright (C) 2020 Rob Nugen
+#    Copyright (C) 2020 Rob Nugen
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@ func _init():
 # playable pieces: dog, cat
 
     gravity_timeout = 0.72
-     max_tiles_avail = 200
+    max_tiles_avail = 200
     tiles = { "dog":3, "cat":2 }
     time_limit_in_sec = 300
     star_requirements = {
