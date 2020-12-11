@@ -1,4 +1,5 @@
-#    Copyright (C) 2020 Rob Nugen
+#    Level 12
+#   Copyright (C) 2020 Rob Nugen
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -19,11 +20,12 @@ func _init():
 # Level 12
 # playable pieces: dog, cat, leopard
 
+    gravity_timeout = 0.56
     max_tiles_avail = 200
-    tiles = {"dog":2, "cat": 2, "leopard":2}
+    tiles = { "dog":2, "cat": 2, "leopard":2 }
     time_limit_in_sec = 400
     star_requirements = {
                           "infinitytopright":1,
                           "infinitytopleft":1,
                         }
-    required_tiles = { "dog":30, "cat": 30, "leopard":30}
+    required_tiles = { "dog":30, "cat": 30, "leopard":30 }
