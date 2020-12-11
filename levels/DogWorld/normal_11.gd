@@ -1,3 +1,4 @@
+#    Level 11
 #    Copyright (C) 2020 Rob Nugen
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -19,8 +20,9 @@ func _init():
 # Level 11
 # playable pieces: dog, cat, leopard
 
+    gravity_timeout = 0.60     
     max_tiles_avail = 200
-    tiles = {"dog":2, "cat": 2, "leopard":2}
+    tiles = { "dog":2, "cat": 2, "leopard":2 }
     time_limit_in_sec = 360
     star_requirements = {
                           "dogl3downshared2up":2,
@@ -28,4 +30,4 @@ func _init():
                           "dogl2downshared3up":2,
                           "dogl2upshared3down":2,
                         }
-    required_tiles = { "dog":30, "cat": 30, "leopard":30}
+    required_tiles = { "dog":30, "cat": 30, "leopard":30 }
