@@ -20,7 +20,7 @@ func _init():
 # Level 4
 # playable pieces: dog, cat
 
-     gravity_timeout = 0.88
+    gravity_timeout = 0.88
     max_tiles_avail = 50
     tiles = { "dog": 2, "cat":1 }
     time_limit_in_sec = 120
