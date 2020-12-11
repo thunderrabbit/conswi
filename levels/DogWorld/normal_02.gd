@@ -19,7 +19,6 @@ extends "DogLevel.gd"
 func _init():
 #Level 2
 #playable pieces: dog
-
     gravity_timeout = 0.96
     max_tiles_avail = 9
     tiles = { "dog":1 }
