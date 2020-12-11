@@ -1,5 +1,5 @@
 #    Level 10
-#   Copyright (C) 2020 Rob Nugen
+#    Copyright (C) 2020 Rob Nugen
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
