@@ -1,4 +1,5 @@
-#    Copyright (C) 2020 Rob Nugen
+#    Level 9
+#   Copyright (C) 2020 Rob Nugen
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -18,9 +19,10 @@ extends "DogLevel.gd"
 func _init():
 # Level 9
 # playable pieces: dog, cat, leopard
-
+    
+    gravity_timeout = 0.68
     max_tiles_avail = 200
-    tiles = {"dog": 3, "cat": 2, "leopard":2}
+    tiles = { "dog": 3, "cat": 2, "leopard":2 }
     time_limit_in_sec = 360
     star_requirements = {
                             "ring4":1,
@@ -28,4 +30,4 @@ func _init():
                             "ribbontopleft":2,
                             "ribbontopright":2,
                         }
-    required_tiles = { "dog":30, "cat": 30, "leopard":30}
+    required_tiles = { "dog":30, "cat": 30, "leopard":30 }
