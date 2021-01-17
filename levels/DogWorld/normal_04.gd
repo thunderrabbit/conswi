@@ -21,7 +21,7 @@ func _init():
 # playable pieces: dog, cat
     gravity_timeout = 0.88
     max_tiles_avail = 50
-    tiles = { "dog":2, "cat":1 }
+    tiles = { "dog":18, "cat":10 }    # this helps the ratios match required tiles
     time_limit_in_sec = 120
     star_requirements = {
                            "vertical4":1,
