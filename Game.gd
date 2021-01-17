@@ -81,6 +81,7 @@ func requested_next_level():
     requested_play_level(Helpers.requested_level)
 
 func requested_play_level(level):
+    game_hud.hide_labels()   # removes score from center of screen
     Helpers.clear_game_board()
     start_level(level)
 

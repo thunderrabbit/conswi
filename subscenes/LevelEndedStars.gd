@@ -39,11 +39,13 @@ func _ready():
 
 func _hide_everything():
     $UnlockedTileButton.hide()
+    $LevelScore.hide()
     
 #######################################################
 #
 #  	Public so it can be called by Game.gd
 func show_stuff_after_level(info_for_star_calculation):
+    $LevelScore.show()
     self._info_for_star_calc = info_for_star_calculation
     self._decide_what_to_show()
     self._show_stuff_after_level()
@@ -233,4 +235,3 @@ func _on_UnlockedTileButton_down():
     $UnlockedTileButton.hide()
     print("_pause_after_show_stuff after clicked button")
     self._pause_after_show_stuff()  # simulate calling after animation complete
-

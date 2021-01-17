@@ -83,6 +83,9 @@ func remove_all_requirements():
     level_reqs.reset_everything()
     star_reqs.reset_everything()
 
+func hide_labels():
+    self.stars_after_level._hide_everything()
+
 # wrapper so GameSwipeDetector knows less about internals
 func saved_n_tiles_of_type(n, tile_type):
     level_reqs.saved_n_tiles_of_type(n, tile_type)
