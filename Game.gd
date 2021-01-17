@@ -1,4 +1,4 @@
-#    Copyright (C) 2020  Rob Nugen
+#    Copyright (C) 2021  Rob Nugen
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -221,6 +221,8 @@ func _on_level_over_stars_displayed():
     self.level_over_stars_were_displayed()
 
 func level_over_stars_were_displayed():
+    self._remove_all_tiles()           # So level clear screen will show up on top (does not remove required swipes)
+    game_hud.remove_all_requirements() # So level clear screen will show up on top
     self._level_over_display_buttons(self.level_over_reason)
 
 func _level_over_display_buttons(reason):

@@ -1,4 +1,4 @@
-#    Copyright (C) 2020 Rob Nugen
+#    Copyright (C) 2021 Rob Nugen
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -78,6 +78,10 @@ func startLevel(current_level):
     # after these animations complete, continue_start_level()
     # is called above by self.game.continue_start_level
     self.show_level_requirements(current_level)
+
+func remove_all_requirements():
+    level_reqs.reset_everything()
+    star_reqs.reset_everything()
 
 # wrapper so GameSwipeDetector knows less about internals
 func saved_n_tiles_of_type(n, tile_type):
