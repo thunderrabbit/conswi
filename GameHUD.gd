@@ -50,8 +50,6 @@ func addHUDtoGame(game):
     add_child(self.stars_after_level)
 
     self.saved_tiles = SavedTiles.instance()
-#    self.saved_tiles.anchor_left = G.Saved_Tiles_Anchor_Left
-#    self.saved_tiles.anchor_top = G.Saved_Tiles_Anchor_Top
     add_child(self.saved_tiles)
 
 func showed_star_requirements():
