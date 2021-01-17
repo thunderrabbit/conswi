@@ -15,7 +15,7 @@
 
 #####################################################################################
 #
-#  Globals can be accessed with G.MAX_STARS, and are generally designed to hold constants
+#  Globals can be accessed with e.g. G.max_splash_screens, and are generally designed to hold constants
 #
 #####################################################################################
 
