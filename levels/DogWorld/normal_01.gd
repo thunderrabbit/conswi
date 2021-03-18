@@ -20,7 +20,7 @@ func _init():
 #Level 1
 #playable pieces: dog
     gravity_timeout = 1
-    max_tiles_avail = 3
+    max_tiles_avail = 3000
     tiles = { "dog":1 }
     time_limit_in_sec = 15
     show_finger = true # On early levels, only with straight swipes

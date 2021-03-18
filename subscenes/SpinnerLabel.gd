@@ -73,5 +73,5 @@ func _check_spin_qty():
     if self.value == self.target:
         tick_timer.stop()
         emit_signal("qty_reached")
-    else: 
+    else:
         print(self.value, " is not yet at target of ", self.target)
