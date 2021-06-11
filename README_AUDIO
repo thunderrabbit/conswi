@@ -1,0 +1,30 @@
+Filenames should be consistent across all worlds.
+
+Right now, these are three filenames of audio background music:
+
+images/world_skins/cow/cow  game 2 2.mp3
+images/world_skins/dog/dog world.mp3
+images/world_skins/lion/lion world sound.mp3
+
+They must be renamed to follow the same pattern each time.
+
+For example
+
+images/world_skins/panda/panda_world.mp3
+images/world_skins/bear/bear_world.mp3
+images/world_skins/cow/cow_world.mp3
+images/world_skins/dog/dog_world.mp3
+images/world_skins/monkey/monkey_world.mp3
+images/world_skins/sheep/sheep_world.mp3
+images/world_skins/pig/pig_world.mp3
+images/world_skins/cat/cat_world.mp3
+images/world_skins/lion/lion_world.mp3
+images/world_skins/rabbit/rabbit_world.mp3
+images/world_skins/tiger/tiger_world.mp3
+images/world_skins/zebra/zebra_world.mp3
+images/world_skins/leopard/leopard_world.mp3
+images/world_skins/polar/polar_world.mp3
+images/world_skins/snake/snake_world.mp3
+
+Animals names come from "ITEM_NAME" values
+in helpers/TileDatabase.gd
