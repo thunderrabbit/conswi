@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/monkey world.mp3-3291360be003358c766308c0990044e9.mp3str"
+
+[deps]
+
+source_file="res://images/world_skins/monkey/monkey world.mp3"
+dest_files=[ "res://.import/monkey world.mp3-3291360be003358c766308c0990044e9.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/lion world sound.mp3-bece4980a042449749a81b757d7d2cf1.mp3str"
+
+[deps]
+
+source_file="res://images/world_skins/lion/lion world sound.mp3"
+dest_files=[ "res://.import/lion world sound.mp3-bece4980a042449749a81b757d7d2cf1.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

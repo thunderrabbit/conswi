@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/dog world.mp3-8a1f3be0c343cb19968eb6b972863e5c.mp3str"
+
+[deps]
+
+source_file="res://images/world_skins/dog/dog world.mp3"
+dest_files=[ "res://.import/dog world.mp3-8a1f3be0c343cb19968eb6b972863e5c.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/panda world.mp3-f1e8f9fa12640be44812bb6136d014b0.mp3str"
+
+[deps]
+
+source_file="res://images/world_skins/panda/panda world.mp3"
+dest_files=[ "res://.import/panda world.mp3-f1e8f9fa12640be44812bb6136d014b0.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

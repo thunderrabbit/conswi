@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/splash screen.mp3-39e23077afa4c34e2d637334737ac751.mp3str"
+
+[deps]
+
+source_file="res://images/Folder_2.5/splash screen.mp3"
+dest_files=[ "res://.import/splash screen.mp3-39e23077afa4c34e2d637334737ac751.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

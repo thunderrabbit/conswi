@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/tiger.mp3-90008c6e1bcaff0af125c167d51b3473.mp3str"
+
+[deps]
+
+source_file="res://images/world_skins/tiger/tiger.mp3"
+dest_files=[ "res://.import/tiger.mp3-90008c6e1bcaff0af125c167d51b3473.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
