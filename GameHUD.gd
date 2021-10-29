@@ -56,8 +56,8 @@ func addHUDtoGame(game):
 
 func showed_star_requirements():
     print("STAR Requirements were shown")
-#    self.show_level_requirements(self._current_level)
-    self.game.continue_start_level()
+#    self.show_level_requirements(self._current_level)   # toggle DSRBLR comments to toggle order of requirements
+    self.game.continue_start_level()                     # toggle DSRBLR comments to toggle order of requirements
 
 func show_star_requirements(current_level):
     self.star_reqs.show_finger_ka(current_level.show_finger)
@@ -65,8 +65,8 @@ func show_star_requirements(current_level):
 
 func showed_level_requirements():
     print("LEVEL Requirements were shown")
-    self.show_star_requirements(self._current_level)
-#    self.game.continue_start_level()
+    self.show_star_requirements(self._current_level)     # toggle DSRBLR comments to toggle order of requirements
+#    self.game.continue_start_level()                    # toggle DSRBLR comments to toggle order of requirements
 
 func show_level_requirements(current_level):
     self.level_reqs.show_level_requirements(current_level.required_tiles)
@@ -77,7 +77,8 @@ func startLevel(current_level):
     # These show level requirements, which takes time
     # after these animations complete, continue_start_level()
     # is called above by self.game.continue_start_level
-    self.show_level_requirements(current_level)
+#    self.show_star_requirements(current_level)          # toggle DSRBLR comments to toggle order of requirements
+    self.show_level_requirements(current_level)          # toggle DSRBLR comments to toggle order of requirements
 
 func remove_all_requirements():
     level_reqs.reset_everything()
