@@ -9,10 +9,10 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Node",
+"base": "Reference",
 "class": "SoundManagerModule",
 "language": "GDScript",
-"path": "res://sound-manager-d16e29afa17cae83a8d58e18733407eb41f582f2/addons/sound_manager/module/internal_scripts/SoundManager_config.gd"
+"path": "res://addons/sound_manager/module/internal_scripts/SoundManager_config.gd"
 } ]
 _global_script_class_icons={
 "SoundManagerModule": ""
@@ -39,6 +39,7 @@ LevelDatabase="*res://levels/LevelDatabase.gd"
 VisibleSwipeOverlay="*res://VisibleSwipeOverlay.gd"
 Background="*res://subscenes/Background.tscn"
 SwipeWords="*res://helpers/SwipeWords.gd"
+SoundManager="*res://addons/sound_manager/module/SoundManager.tscn"
 
 [display]
 
@@ -48,6 +49,10 @@ window/handheld/orientation="portrait"
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 window/stretch/shrink="1"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/sound_manager/plugin.cfg" )
 
 [gdnative]
 

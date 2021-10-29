@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/save_icon.svg-b6de14c98f6e452ce3aa2a5bef0d5577.stex"
+path="res://.import/save_icon.svg-2224c3835042bfaa6d491ab296a77ed1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sound-manager-d16e29afa17cae83a8d58e18733407eb41f582f2/addons/sound_manager/dock/assets/save_icon.svg"
-dest_files=[ "res://.import/save_icon.svg-b6de14c98f6e452ce3aa2a5bef0d5577.stex" ]
+source_file="res://addons/sound_manager/dock/assets/save_icon.svg"
+dest_files=[ "res://.import/save_icon.svg-2224c3835042bfaa6d491ab296a77ed1.stex" ]
 
 [params]
 
