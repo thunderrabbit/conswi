@@ -26,6 +26,7 @@ var splash_texture_5 = preload("res://images/Folder_2.5/05animal suffering@3x.pn
 func _ready():
     $Timer.set_wait_time(G.splashscreen_timeout)
     $Timer.start()
+    SoundManager.play_bgm("Splash screen")
 
 func _on_SplashScreen_Timer_timeout():
     if G.current_screen < G.max_splash_screens:
@@ -51,6 +52,7 @@ func _on_SplashScreen_Timer_timeout():
         $StoryOverlay.texture = splash_texture_5
 
 func _on_PawAgree_button_up():
+        SoundManager.stop("Splash screen")
         gowhere = "res://NightDayMainSplash/NightDayMainSplash.tscn"
         Background.set_timely_background();  # per night or day
         SceneSwitcher.goto_scene(gowhere)
