@@ -20,11 +20,11 @@ var _todo_after_level
 var _info_for_star_calc
 var _unlocked_tile
 var _need_remove_unlock_button = false
-export var swipe_lose_delay = 0.05
+export var swipe_lose_delay = 5.05
 export var gain_points_per_swipe = 1
 export var points_per_tile = 25
-export var pause_b4_show_stuff_s = 0.05
-export var pause_af_show_stuff_s = 0.05
+export var pause_b4_show_stuff_s = 3.05
+export var pause_af_show_stuff_s = 3.05
 export var show_unlock_button_s = 2
 
 #######################################################
@@ -38,9 +38,20 @@ func _ready():
     _hide_everything()
 
 func _hide_everything():
+    print("Hiding everything")
     $UnlockedTileButton.hide()
     $LevelScore.hide()
-    
+
+func _hide_score_then_do_next():
+    print("Hiding score")
+    $LevelScore.hide()
+    self._pause_after_show_stuff()  # simulate calling after animation complete
+
+func _hide_level_and_star_reqs():
+    print("Hiding swipes (just hide them sans ceremony because user failed)")
+    game_scene.game_hud.remove_all_requirements()
+    self._pause_after_show_stuff()  # simulate calling after animation complete
+
 #######################################################
 #
 #  	Public so it can be called by Game.gd
@@ -65,15 +76,22 @@ func _decide_what_to_show():
             self._PlanToShowUnlockedTile(self._info_for_star_calc['unlock_after_win'])
     else:
         # this will black out the tiles, but *not* show score because score will not be there
+        self._PlanToHideScore()
         self._PlanToHideRequirements()
         self._PlanToReduceTiles()
 
 func _PlanToDisplayBonus():
     self._todo_after_level.push_back(G.STAR_DISPLAY_BONUS)
 
+func _PlanToHideScore():
+    ### this did  not exist but make it work by creating CONST or whatever
+    ### will remove score after fail level
+    self._todo_after_level.push_back(G.LEVEL_LOST_HIDE_SCORE)
+
 func _PlanToHideRequirements():
-    pass     ### will eventually remove the swipe requirements after fail level
-    # self._todo_after_level.push_back(G.STAR_HIDE_REQUIREMENTS)
+    ### this was commented out but make it work by creating CONST or whatever
+    ### will remove the swipe requirements after fail level
+    self._todo_after_level.push_back(G.STAR_HIDE_REQUIREMENTS)
 
 func _PlanToReduceSwipes():
     self._todo_after_level.push_back(G.STAR_REDUCE_SWIPES)
@@ -111,6 +129,10 @@ func _show_stuff_after_level():
     else:
         var do_this_next = self._todo_after_level.pop_front()
         match do_this_next:
+            G.STAR_HIDE_REQUIREMENTS:
+                self._hide_level_and_star_reqs()    # Calls GameHUD to just reset all the requirements  (hopefully hides them all)
+            G.LEVEL_LOST_HIDE_SCORE:
+                self._hide_score_then_do_next()
             G.STAR_DISPLAY_BONUS:
                 self._display_bonus()
             G.STAR_REDUCE_SWIPES:
@@ -182,6 +204,7 @@ func _add_time_remain():
 # not really thought out, but this will be called if G.STAR_DISPLAY_STARS is in self._todo_after_level
 func _display_stars():
     var num_stars = _calculate_stars_for_level()
+    print("About to display this many stars: ", num_stars)
     for i in range(1,num_stars):
         print("placeholder create star ",i)
         # instantiate Tile of type TYPE
