@@ -75,6 +75,7 @@ func reset_everything():
     required_shapes_hud = {}
 
 func remove_old_requirements():
+    print("Removing Required swipes")
     for required in required_shapes_hud:
         required_shapes_hud[required].queue_free()				# remove piece from screen
 
