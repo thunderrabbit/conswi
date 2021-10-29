@@ -8,8 +8,14 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node",
+"class": "SoundManagerModule",
+"language": "GDScript",
+"path": "res://sound-manager-d16e29afa17cae83a8d58e18733407eb41f582f2/addons/sound_manager/module/internal_scripts/SoundManager_config.gd"
+} ]
 _global_script_class_icons={
+"SoundManagerModule": ""
 }
 
 [application]
