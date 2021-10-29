@@ -28,11 +28,12 @@ centered = false
 
 [node name="PawAgreeButton" type="TextureButton" parent="."]
 visible = false
-margin_right = 1176.0
-margin_bottom = 1071.0
+margin_right = 1242.0
+margin_bottom = 2688.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture_normal = ExtResource( 4 )
 texture_pressed = ExtResource( 5 )
+
 [connection signal="timeout" from="Timer" to="." method="_on_SplashScreen_Timer_timeout"]
 [connection signal="button_up" from="PawAgreeButton" to="." method="_on_PawAgree_button_up"]
