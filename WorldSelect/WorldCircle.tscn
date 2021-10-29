@@ -4,8 +4,7 @@
 
 [node name="Node" type="Node"]
 
-[node name="Sprite" type="TextureButton" parent="." index="0"]
-
+[node name="Sprite" type="TextureButton" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -15,19 +14,5 @@ margin_top = -257.0
 margin_right = 797.0
 margin_bottom = 793.0
 rect_scale = Vector2( 0.5, 0.5 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 texture_normal = ExtResource( 1 )
 stretch_mode = 3
-_sections_unfolded = [ "Anchor", "Animation", "Focus", "Grow Direction", "Hint", "Margin", "Material", "Mouse", "Offset", "Pause", "Rect", "Region", "Size Flags", "Textures", "Theme", "Transform", "Visibility", "Z Index" ]
-
-

@@ -52,5 +52,5 @@ func _on_SplashScreen_Timer_timeout():
 
 func _on_PawAgree_button_up():
         gowhere = "res://NightDayMainSplash/NightDayMainSplash.tscn"
+        Background.set_timely_background();  # per night or day
         SceneSwitcher.goto_scene(gowhere)
-
