@@ -16,31 +16,32 @@
 extends MarginContainer
 var gowhere
 
-var splash_texture_1 = preload("res://images/Folder_2.5/01_space@3x.png")
-var splash_texture_2 = preload("res://images/Folder_2.5/02planet@3x_.png")
-var splash_texture_3 = preload("res://images/Folder_2.5/03animal living happily@3x.png")
-var splash_texture_4 = preload("res://images/Folder_2.5/04planet disaster@3x.png")
-var splash_texture_5 = preload("res://images/Folder_2.5/05animal suffering@3x.png")
+var splash_texture_0 = preload("res://images/Folder_2.5/01_space@3x.png")
+var splash_texture_1 = preload("res://images/Folder_2.5/02planet@3x_.png")
+var splash_texture_2 = preload("res://images/Folder_2.5/03animal living happily@3x.png")
+var splash_texture_3 = preload("res://images/Folder_2.5/04planet disaster@3x.png")
+var splash_texture_4 = preload("res://images/Folder_2.5/05animal suffering@3x.png")
 # deemed to not make sense var splash_texture_6 = preload("res://images/Folder_2.5/06_wide view@3x.png")
 
 func _ready():
-    $Timer.set_wait_time(G.splashscreen_timeout)
-    $Timer.start()
     SoundManager.play_bgm("Splash screen")
+    _on_SplashScreen_Timer_timeout()   # kick off the first screen
+    G.current_screen = -1              # prepare to start with first image in the array
 
 func _on_SplashScreen_Timer_timeout():
-    if G.current_screen < G.max_splash_screens:
+    if G.current_screen < G.max_splash_screen_id:
         G.current_screen = G.current_screen + 1
+        $Timer.set_wait_time(G.splashscreen_timeouts[G.current_screen])
         $Timer.start()
     else:
         $PawAgreeButton.visible = true
-#        G.current_screen = 1
-#        $Timer.start()
 
-    if G.current_screen > 0 and G.current_screen <= G.max_splash_screens:
+    if G.current_screen >= 0 and G.current_screen < G.max_splash_screen_id:
         $StoryOverlay.visible = true
 
-    if G.current_screen == 1:
+    if G.current_screen == 0:
+        $StoryOverlay.texture = splash_texture_0
+    elif G.current_screen == 1:
         $StoryOverlay.texture = splash_texture_1
     elif G.current_screen == 2:
         $StoryOverlay.texture = splash_texture_2
@@ -48,8 +49,6 @@ func _on_SplashScreen_Timer_timeout():
         $StoryOverlay.texture = splash_texture_3
     elif G.current_screen == 4:
         $StoryOverlay.texture = splash_texture_4
-    elif G.current_screen == 5:
-        $StoryOverlay.texture = splash_texture_5
 
 func _on_PawAgree_button_up():
         SoundManager.stop("Splash screen")

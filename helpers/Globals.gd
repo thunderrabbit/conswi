@@ -1,4 +1,4 @@
-#    Copyright (C) 2020  Rob Nugen
+#    Copyright (C) 2021  Rob Nugen
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -22,8 +22,11 @@
 extends Node
 
 const finger_swipe_duration = .3		# how many seconds finger shows how to swipe
-const splashscreen_timeout = .03		# how many seconds to wait on splash screen
-const max_splash_screens    = 5		# there are several splash screens
+
+#  How long does each splash screen last?   This array controls each one in sequence.  
+#  The zeroeth timeout is added to first time out in that the first image is changed after 0th + 1st timeouts finish
+const splashscreen_timeouts = [2.18,2.18,3.18,2.18,2.18]		# how many seconds to wait on splash screen
+const max_splash_screen_id  = 4		# there are several splash screens
 var   current_screen = 0			# which screen to start
 
 ##  http://www.gamefromscratch.com/post/2015/02/23/Godot-Engine-Tutorial-Part-6-Multiple-Scenes-and-Global-Variables.aspx
