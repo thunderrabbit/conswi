@@ -20,11 +20,11 @@ var _todo_after_level
 var _info_for_star_calc
 var _unlocked_tile
 var _need_remove_unlock_button = false
-export var swipe_lose_delay = 5.05
+export var swipe_lose_delay = 0.05
 export var gain_points_per_swipe = 1
 export var points_per_tile = 25
-export var pause_b4_show_stuff_s = 3.05
-export var pause_af_show_stuff_s = 3.05
+export var pause_b4_show_stuff_s = 0.05
+export var pause_af_show_stuff_s = 0.05
 export var show_unlock_button_s = 2
 
 #######################################################

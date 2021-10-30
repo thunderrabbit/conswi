@@ -6,8 +6,6 @@
 
 [node name="LevelEndedStars" type="Node2D"]
 script = ExtResource( 1 )
-pause_b4_show_stuff_s = 0.05
-pause_af_show_stuff_s = 0.05
 
 [node name="LevelScore" parent="." instance=ExtResource( 2 )]
 margin_left = 489.0
