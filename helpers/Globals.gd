@@ -23,7 +23,7 @@ extends Node
 
 const finger_swipe_duration = .3		# how many seconds finger shows how to swipe
 
-#  How long does each splash screen last?   This array controls each one in sequence.  
+#  How long does each splash screen last?   This array controls each one in sequence.
 #  The zeroeth timeout is added to first time out in that the first image is changed after 0th + 1st timeouts finish
 const splashscreen_timeouts = [0.01,0.01,0.01,0.01,0.01,0.01]
 # const splashscreen_timeouts = [2.18,2.18,3.18,2.18,2.18]		# how many seconds to wait on splash screen
