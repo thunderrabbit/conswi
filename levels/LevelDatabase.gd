@@ -34,6 +34,10 @@ func _ready():
         animal_names[G.TYPE_RABBIT] = "Rabbit"
         animal_names[G.TYPE_TIGER] = "Tiger"
 
+# used by Game.gd to know which bgm to start and stop
+func getAnimalOfId(which_world_id):
+    return animal_names[which_world_id]
+
 # If a too-large level_num is sent, this will
 # spin down through smaller numbers to find one.
 # Define levels in `levels/` directory

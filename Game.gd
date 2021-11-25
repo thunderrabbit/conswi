@@ -118,6 +118,7 @@ func continue_start_level():
     self.total_swipes_required_for_three_stars = game_hud.star_reqs.count_star_requirements()  # so we know how many stars player gets at end of level
     $GameSwipeDetector.startLevel(current_level)
 
+    SoundManager.play_bgm(LevelDatabase.getAnimalOfId(Helpers.requested_world) + " Game")
     # magnetism makes the nailed pieces fall (all pieces in board{})
     start_magnetism()
 
@@ -175,6 +176,7 @@ func new_player():
 func _level_over_prep():
     grok_input(false)	# buttons.level_ended will turn on buttons again
 
+    SoundManager.stop(LevelDatabase.getAnimalOfId(Helpers.requested_world) + " Game")
     stop_magnetism()
     stop_gravity_timer()
     stop_level_timer()
