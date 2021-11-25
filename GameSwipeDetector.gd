@@ -99,6 +99,8 @@ func piece_unclicked():
         add_child(swipe_shape)
         if swipe_was_required:
             var swipe_length = swipe_array.size()
+            if(swipe_length > 12):
+                swipe_length = 12           # ain't no sound for > 12
             SoundManager.play_se("Swipe " + String(swipe_length))
             swipe_shape.connect("shrunk_shape",self,"shrank_required_shape")
             # after swipe, move shape to correct/required shape location
