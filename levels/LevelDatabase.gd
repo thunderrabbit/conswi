@@ -1,4 +1,4 @@
-#    Copyright (C) 2018  Rob Nugen
+#    Copyright (C) 2021  Rob Nugen
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -17,22 +17,22 @@ extends Node
 
 const level_format = "res://levels/%s/%s_%02d.gd"		# DogWorld/normal_01.gd
 
-var world_names = {}
+var animal_names = {}
 
 func _ready():
-    if world_names.empty():
+    if animal_names.empty():
         # these e.g. G.TYPE_BEAR are defined in helpers/Globals.gd
-        world_names[G.TYPE_PANDA] = "PandaWorld"
-        world_names[G.TYPE_BEAR] = "BearWorld"
-        world_names[G.TYPE_COW] = "CowWorld"    # directory inside /levels directory
-        world_names[G.TYPE_DOG] = "DogWorld"    # "DogWorld" is directory in /levels directory
-        world_names[G.TYPE_MONKEY] = "MonkeyWorld"
-        world_names[G.TYPE_SHEEP] = "SheepWorld"
-        world_names[G.TYPE_PIG] = "PigWorld"
-        world_names[G.TYPE_CAT] = "CatWorld"    # CatWorld and below do not exist yet
-        world_names[G.TYPE_LION] = "LionWorld"
-        world_names[G.TYPE_RABBIT] = "RabbitWorld"
-        world_names[G.TYPE_TIGER] = "TigerWorld"
+        animal_names[G.TYPE_PANDA] = "Panda"
+        animal_names[G.TYPE_BEAR] = "Bear"
+        animal_names[G.TYPE_COW] = "Cow"    # directory inside /levels directory
+        animal_names[G.TYPE_DOG] = "Dog"    # "DogWorld" is directory in /levels directory
+        animal_names[G.TYPE_MONKEY] = "Monkey"
+        animal_names[G.TYPE_SHEEP] = "Sheep"
+        animal_names[G.TYPE_PIG] = "Pig"
+        animal_names[G.TYPE_CAT] = "Cat"    # CatWorld and below do not exist yet
+        animal_names[G.TYPE_LION] = "Lion"
+        animal_names[G.TYPE_RABBIT] = "Rabbit"
+        animal_names[G.TYPE_TIGER] = "Tiger"
 
 # If a too-large level_num is sent, this will
 # spin down through smaller numbers to find one.
@@ -41,7 +41,7 @@ func _ready():
 func getExistingLevelGDScript(which_world_id = G.TYPE_DOG, level_num = 1):
     var level_difficulty = "normal"   # TODO add Settings (same as Helpers.gd) and put "normal" into it
                                     #     then Scene > Project Settings > Autoload "Settings"
-    var world_name = world_names[which_world_id]
+    var world_name = animal_names[which_world_id] + "World"
     var level_name = ""
 
     var levelGDScript = null
