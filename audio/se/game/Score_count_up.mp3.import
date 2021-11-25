@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Score_count_up.mp3-e68bfd2320daa024c92d106793077177.mp3str"
+
+[deps]
+
+source_file="res://audio/se/game/Score_count_up.mp3"
+dest_files=[ "res://.import/Score_count_up.mp3-e68bfd2320daa024c92d106793077177.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
