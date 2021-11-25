@@ -98,6 +98,8 @@ func piece_unclicked():
         swipe_shape.set_text_word(SwipeWords.random_word(swipe_array.size()))
         add_child(swipe_shape)
         if swipe_was_required:
+            var swipe_length = swipe_array.size()
+            SoundManager.play_se("Swipe " + String(swipe_length))
             swipe_shape.connect("shrunk_shape",self,"shrank_required_shape")
             # after swipe, move shape to correct/required shape location
             swipe_shape.shrink_shape(Game.game_hud.star_reqs.required_swipe_location(swipe_name))
