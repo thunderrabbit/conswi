@@ -24,34 +24,34 @@ var splash_texture_4 = preload("res://images/Folder_2.5/05animal suffering@3x.pn
 # deemed to not make sense var splash_texture_6 = preload("res://images/Folder_2.5/06_wide view@3x.png")
 
 func _ready():
-    SoundManager.play_bgm("Splash screen")
-    _on_SplashScreen_Timer_timeout()   # kick off the first screen
-    G.current_screen = -1              # prepare to start with first image in the array
+	SoundManager.play_bgm("Splash screen")
+	_on_SplashScreen_Timer_timeout()   # kick off the first screen
+	G.current_screen = -1              # prepare to start with first image in the array
 
 func _on_SplashScreen_Timer_timeout():
-    if G.current_screen < G.max_splash_screen_id:
-        G.current_screen = G.current_screen + 1
-        $Timer.set_wait_time(G.splashscreen_timeouts[G.current_screen])
-        $Timer.start()
-    else:
-        $PawAgreeButton.visible = true
+	if G.current_screen < G.max_splash_screen_id:
+		G.current_screen = G.current_screen + 1
+		$Timer.set_wait_time(G.splashscreen_timeouts[G.current_screen])
+		$Timer.start()
+	else:
+		$PawAgreeButton.visible = true
 
-    if G.current_screen >= 0 and G.current_screen < G.max_splash_screen_id:
-        $StoryOverlay.visible = true
+	if G.current_screen >= 0 and G.current_screen < G.max_splash_screen_id:
+		$StoryOverlay.visible = true
 
-    if G.current_screen == 0:
-        $StoryOverlay.texture = splash_texture_0
-    elif G.current_screen == 1:
-        $StoryOverlay.texture = splash_texture_1
-    elif G.current_screen == 2:
-        $StoryOverlay.texture = splash_texture_2
-    elif G.current_screen == 3:
-        $StoryOverlay.texture = splash_texture_3
-    elif G.current_screen == 4:
-        $StoryOverlay.texture = splash_texture_4
+	if G.current_screen == 0:
+		$StoryOverlay.texture = splash_texture_0
+	elif G.current_screen == 1:
+		$StoryOverlay.texture = splash_texture_1
+	elif G.current_screen == 2:
+		$StoryOverlay.texture = splash_texture_2
+	elif G.current_screen == 3:
+		$StoryOverlay.texture = splash_texture_3
+	elif G.current_screen == 4:
+		$StoryOverlay.texture = splash_texture_4
 
 func _on_PawAgree_button_up():
-        SoundManager.stop("Splash screen")
-        gowhere = "res://NightDayMainSplash/NightDayMainSplash.tscn"
-        Background.set_timely_background();  # per night or day
-        SceneSwitcher.goto_scene(gowhere)
+		SoundManager.stop("Splash screen")
+		gowhere = "res://NightDayMainSplash/NightDayMainSplash.tscn"
+		Background.set_timely_background();  # per night or day
+		SceneSwitcher.goto_scene(gowhere)
