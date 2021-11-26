@@ -149,11 +149,15 @@ func _show_stuff_after_level():
 func _display_bonus():
     print("Display Bonus")
     var points = get_node("LevelScore")
+    var sound_duration = 4.0 # seconds
+    var update_score_every = 0.05 # seconds
+    var update_score_nan_kai = sound_duration / update_score_every
+    SoundManager.play_se("Score count up")
     points.connect("qty_reached",self,"_pause_after_show_stuff")
-    points.set_delay(0.05)
+    points.set_delay(update_score_every)
     var bonus_target = self._info_for_star_calc['num_tiles'] * self.points_per_tile
     points.set_target(bonus_target)	# tell spinner where to stop
-    points.set_increment(floor(bonus_target * 0.05))	# take twenty steps to count
+    points.set_increment(ceil(bonus_target / update_score_nan_kai))	# take update_score_nan_kai steps to count
     points.start_tick_from(0)		# Start from 0 so null requirements level can be won.  Calls back to _displayed_quantity when finished
 
 func _reduce_swipes():
