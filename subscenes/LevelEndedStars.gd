@@ -172,9 +172,9 @@ func _reduce_swipes():
     tiles_saved.start_tick()
     points.start_tick()
 
-func _show_unlocked_overlay(_unlocked_tile):
-    print("YOU UNLOCKED ", _unlocked_tile)
-    $UnlockedTileButton.set_normal_texture(load("res://images/level_over/unlocked/unlocked_%s.png" % [_unlocked_tile] ))
+func _show_unlocked_overlay(local_unlocked_tile):
+    print("YOU UNLOCKED ", local_unlocked_tile)
+    $UnlockedTileButton.set_normal_texture(load("res://images/level_over/unlocked/unlocked_%s.png" % [local_unlocked_tile] ))
     $UnlockedTileButton.show()
     self._need_remove_unlock_button = true
     var timer = get_tree().create_timer(self.show_unlock_button_s)
