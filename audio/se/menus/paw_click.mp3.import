@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/paw_click.mp3-7a3897fe8986ef79781760ed674319a0.mp3str"
+
+[deps]
+
+source_file="res://audio/se/menus/paw_click.mp3"
+dest_files=[ "res://.import/paw_click.mp3-7a3897fe8986ef79781760ed674319a0.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
