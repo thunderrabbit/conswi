@@ -24,7 +24,8 @@ var splash_texture_4 = preload("res://images/Folder_2.5/05animal suffering@3x.pn
 # deemed to not make sense var splash_texture_6 = preload("res://images/Folder_2.5/06_wide view@3x.png")
 
 func _ready():
-    SoundManager.play_bgm("Splash screen")
+    # SoundManager.play_bgm("Splash screen")
+    SoundManager.play_bgm("Game Intro")
     _on_SplashScreen_Timer_timeout()   # kick off the first screen
     G.current_screen = -1              # prepare to start with first image in the array
 
@@ -51,7 +52,8 @@ func _on_SplashScreen_Timer_timeout():
         $StoryOverlay.texture = splash_texture_4
 
 func _on_PawAgree_button_up():
-        SoundManager.stop("Splash screen")
+        # SoundManager.stop("Splash screen")
+        SoundManager.stop("Game Intro")
         SoundManager.play_bgs("Paw Click")
         gowhere = "res://NightDayMainSplash/NightDayMainSplash.tscn"
         Background.set_timely_background();  # per night or day
