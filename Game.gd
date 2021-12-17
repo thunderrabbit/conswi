@@ -227,10 +227,17 @@ func level_over_stars_were_displayed():
     self._remove_all_tiles()           # So level clear screen will show up on top (does not remove required swipes)
     game_hud.remove_all_requirements() # So level clear screen will show up on top
     self._level_over_display_buttons(self.level_over_reason)
+    self._level_over_play_sound(self.level_over_reason)
 
 func _level_over_display_buttons(reason):
     game_hud.buttons.level_ended(reason)
 
+func _level_over_play_sound(reason):
+    print("THIS IS WHY PLAY SOUND")
+    if(reason == 1):
+        SoundManager.play_se("Level Cleared")
+    else:
+        SoundManager.play_se("Level Failed")
 
 func _process(delta):
     if gravity_called:

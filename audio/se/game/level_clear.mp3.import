@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/level_clear.mp3-d400b9ad46279263ce8b3de2db5d30e4.mp3str"
+
+[deps]
+
+source_file="res://audio/se/game/level_clear.mp3"
+dest_files=[ "res://.import/level_clear.mp3-d400b9ad46279263ce8b3de2db5d30e4.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

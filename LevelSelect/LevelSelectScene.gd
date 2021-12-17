@@ -76,6 +76,7 @@ func level_to_pixels(level):
                     _top_space()+_slot_size()*(slot.y))
 
 func _on_Button_pressed(level):
+    SoundManager.play_se("Menu In")
     Helpers.requested_level = level
     get_node("/root/SceneSwitcher").goto_scene("res://Game.tscn")
 
