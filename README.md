@@ -23,7 +23,7 @@
 
 ### Source code License
 
-Source code Copyright (C) 2018  Rob Nugen
+Source code Copyright (C) 2021  Rob Nugen
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -40,4 +40,4 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ### Images License
 
-Images in this game are licensed 2018 ist Associates, under a [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License](http://creativecommons.org/licenses/by-nc-nd/4.0/)
+Images in this game are licensed 2021 ist Associates, under a [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License](http://creativecommons.org/licenses/by-nc-nd/4.0/)
