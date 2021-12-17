@@ -33,8 +33,8 @@ var max_tiles_avail = 0			# number of tiles available,
 var upcoming_tiles = []
 
 # width and height of level board
-var slots_across = 0
-var slots_down = 0
+var slots_across = 7         #  can be overridden by level data .width
+var slots_down = 12          #  but setting values here so LaserGrid can be shown before game is loaded
 var debug_level = 0
 
 # requested_world will be set by WorldSelectScript
