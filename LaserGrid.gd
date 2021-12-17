@@ -32,8 +32,8 @@ func _draw():
                 Helpers.slot_to_pixels(Vector2(verts,Helpers.slots_down)), 
                 Color(255, 0, 0),
                 1)
-    for horiz in Helpers.slots_down:
+    for horiz in Helpers.slots_down+1:
         draw_line(Helpers.slot_to_pixels(Vector2(0,horiz)), 
-                Helpers.slot_to_pixels(Vector2(Helpers.slots_across,horiz)), 
+                Helpers.slot_to_pixels(Vector2(Helpers.slots_across-1,horiz)), 
                 Color(255, 0, 0),
                 1)
