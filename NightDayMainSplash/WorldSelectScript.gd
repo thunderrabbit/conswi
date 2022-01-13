@@ -1,4 +1,4 @@
-#    Copyright (C) 2019  Rob Nugen
+#    Copyright (C) 2022  Rob Nugen
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -21,10 +21,10 @@ extends Node
 
 func _ready():
     # Called when the node is added to the scene for the first time.
-    # Initialization here
-    pass
+    SoundManager.play_bgm("Menu Background")
 
 func world_button_clicked(selected_world_type):
 #    print(TileDatabase.tiles[selected_world_type]["ITEM_NAME"])
+    SoundManager.stop("Menu Background")
     Helpers.requested_world = selected_world_type
     get_node("/root/SceneSwitcher").goto_scene("res://LevelSelect/LevelSelectScene.tscn")
