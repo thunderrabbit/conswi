@@ -174,6 +174,7 @@ func _reduce_swipes():
     tiles_saved.set_target(0)
     tiles_saved.set_increment(1)
     tiles_saved.start_tick()
+    tiles_saved.hide()          # This is in top left corner, but looks bad so remove.  Fixes https://github.com/thunderrabbit/conswi/issues/89
     points.start_tick()
 
 func _show_unlocked_overlay(local_unlocked_tile):
