@@ -2,36 +2,17 @@
 
 [ext_resource path="res://images/world_skins/dog/dog_level_0star@3x.png" type="Texture" id=1]
 [ext_resource path="res://LevelSelect/LevelSelectButton.gd" type="Script" id=2]
-[ext_resource path="res://images/levelselect/numbers/01.png" type="Texture" id=3]
+[ext_resource path="res://images/world_skins/dog/dog_level_1@3x.png" type="Texture" id=3]
 
-[node name="LevelSelectButton" type="TextureButton" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="LevelSelectButton" type="TextureButton"]
 margin_right = 36.0
 margin_bottom = 36.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 texture_normal = ExtResource( 1 )
 script = ExtResource( 2 )
-_sections_unfolded = [ "Textures", "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="level_number" type="Sprite" parent="." index="0"]
-
-position = Vector2( 101.301, 72.7972 )
+[node name="level_number" type="Sprite" parent="."]
 texture = ExtResource( 3 )
 centered = false
-_sections_unfolded = [ "Offset", "Transform" ]
-
-

@@ -59,7 +59,7 @@ func add_buttons_to_scene(button_type):
         button_loc = level_to_pixels(level)
         var level_but = LevelSelectButton.instance()
         level_but.set_position(button_loc)
-        level_but.set_level(level)
+        level_but.set_level(level, button_type)
         level_but.set_size(Vector2(_slot_size(),_slot_size()))
         level_but.set_num_stars(Savior.read_num_stars(self.get_world_type(),level))
         level_but.set_button_type(button_type)

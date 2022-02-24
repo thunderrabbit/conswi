@@ -1,4 +1,4 @@
-#    Copyright (C) 2020  Rob Nugen
+#    Copyright (C) 2022  Rob Nugen
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -25,8 +25,6 @@
 #####################################################################################
 extends TextureButton
 
-var my_type = G.TYPE_BEAR
-var my_type_string = ""
 var num_stars = 0
 
 # must be done before we can set the button type
@@ -34,20 +32,28 @@ var num_stars = 0
 func set_num_stars(num):
     num_stars = num
 
-# should be done before we set the type so we know which level to show
-func set_level(level):
+func set_level(level, type):  #  e.g.  5,   G.TYPE_DOG
+    var my_type = type
+    var my_type_string = TileDatabase.tiles[my_type]["ITEM_NAME"]
     # we do not need to remember the level because
     # LevelSelectScene links the button press to the respective level select
-    var path_to_num = String("res://images/levelselect/numbers/" + String(level).pad_zeros(2) + ".png")
+    print ("res://images/world_skins/" + 
+                            my_type_string + "/" +
+                            my_type_string + "_level_" +
+                            String(level) + "@3x.png");
+    var path_to_num = String("res://images/world_skins/" + 
+                            my_type_string + "/" +
+                            my_type_string + "_level_" +
+                            String(level) + "@3x.png");
     $level_number.set_texture(load(path_to_num))
 
-func set_button_type(type = G.TYPE_DOG):
-    self.my_type = type
-    self.my_type_string = TileDatabase.tiles[my_type]["ITEM_NAME"]
+func set_button_type(type):   #  e.g. G.TYPE_DOG
+    var my_type = type
+    var my_type_string = TileDatabase.tiles[my_type]["ITEM_NAME"]
     # background path example "res://images/world_skins/dog/dog_level_2star@3x.png"
     var background = String("res://images/world_skins/" +
-                            self.my_type_string + "/" +
-                            self.my_type_string + "_level_" +
+                            my_type_string + "/" +
+                            my_type_string + "_level_" +
                             String(num_stars) + "star@3x.png")
     set_normal_texture(load(background))
 
