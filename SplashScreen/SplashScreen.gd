@@ -32,7 +32,7 @@ func _ready():
 func _on_SplashScreen_Timer_timeout():
     if G.current_screen < G.max_splash_screen_id:
         G.current_screen = G.current_screen + 1
-        $Timer.set_wait_time(G.splashscreen_timeouts[G.current_screen])
+        $Timer.set_wait_time(G.splashscreen_timeouts[G.current_screen] * G.ofaster)
         $Timer.start()
     else:
         $PawAgreeButton.visible = true
