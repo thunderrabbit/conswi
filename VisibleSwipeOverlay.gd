@@ -21,31 +21,31 @@ var swipe_color
 var inc_mouse = true
 
 func _ready():
-	set_process(true)
-	draw_slot_list = []
-	z_index = 5
+    set_process(true)
+    draw_slot_list = []
+    z_index = 5
 
 func set_swipe_color(color):
-	swipe_color = color
+    swipe_color = color
 
 func draw_this_swipe(swipe, color = Color(1.0, 1.0, 0.5, 1.0), inc_mouse = true):
-	self.inc_mouse = inc_mouse
-	draw_slot_list = swipe
-	self.swipe_color = color
+    self.inc_mouse = inc_mouse
+    draw_slot_list = swipe
+    self.swipe_color = color
 
 func _process(delta):
-	update()
+    update()
 
 func _draw():
-	if draw_slot_list != []:
-		var draw_list = []
-		for slot in draw_slot_list:
-			draw_list.append(Helpers.slot_to_pixels(slot))
-		if inc_mouse:
-			draw_list.append(get_global_mouse_position())	# make the swipe point to mouse (eventually, finger)
-		var temp_draw_list = []
-		for ob in draw_list:
-			temp_draw_list.append(ob)
-			if temp_draw_list != []:
-				if temp_draw_list != draw_list:
-					draw_line(temp_draw_list[temp_draw_list.size()-1], draw_list[temp_draw_list.size()], self.swipe_color, 3)
+    if draw_slot_list != []:
+        var draw_list = []
+        for slot in draw_slot_list:
+            draw_list.append(Helpers.slot_to_pixels(slot))
+        if inc_mouse:
+            draw_list.append(get_global_mouse_position())	# make the swipe point to mouse (eventually, finger)
+        var temp_draw_list = []
+        for ob in draw_list:
+            temp_draw_list.append(ob)
+            if temp_draw_list != []:
+                if temp_draw_list != draw_list:
+                    draw_line(temp_draw_list[temp_draw_list.size()-1], draw_list[temp_draw_list.size()], self.swipe_color, 3)

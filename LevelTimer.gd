@@ -20,10 +20,10 @@ extends Timer
 # var b = "textvar"
 
 func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
-	start()
-	pass
+    # Called every time the node is added to the scene.
+    # Initialization here
+    start()
+    pass
 
 func _process(delta):
-	$LevelTimerLabel.set_text(String(int(round(self.time_left))))
+    $LevelTimerLabel.set_text(String(int(round(self.time_left))))
