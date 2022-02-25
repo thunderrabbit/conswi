@@ -41,7 +41,7 @@ func prepare_to_play_level():
     print("buttons preparing for game")
     # the steering pad is the left/right buttons at bottom
     steering_pad.set_position(Helpers.steering_pad_pixels())
-    steering_pad.show()
+    steering_pad.hide()      # was show() fixes https://github.com/thunderrabbit/conswi/issues/90
     endLevelButtons.hide()
 
 func level_ended(reason):
@@ -52,4 +52,3 @@ func level_ended(reason):
 #	endLevelButtons.set_alignment(endLevelButtons.ALIGN_CENTER)
     endLevelButtons.level_over_reason(reason)
     endLevelButtons.show()
-
