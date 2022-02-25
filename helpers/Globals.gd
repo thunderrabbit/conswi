@@ -1,4 +1,4 @@
-#    Copyright (C) 2021  Rob Nugen
+#    Copyright (C) 2022  Rob Nugen
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -24,6 +24,9 @@ extends Node
 const ofaster = 0.01    # multiply waits by G.ofaster
 
 const finger_swipe_duration = 3 * ofaster		# how many seconds finger shows how to swipe
+const shrink_reqd_duration = 0.9 * ofaster      # required shapes shrink to bottom of game screen
+const shrink_shape_duration = 0.9 * ofaster     # swipes shrink to top of game screen
+const random_flight_duration = 0.9 * ofaster    # spiraling into oblivions
 
 #  How long does each splash screen last?   This array controls each one in sequence.
 #  The zeroeth timeout is added to first time out in that the first image is changed after 0th + 1st timeouts finish

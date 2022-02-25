@@ -20,7 +20,7 @@ onready var spinner = get_node("SpinnerLabel")
 onready var pauser = Timer.new()
 
 var dimensions = Vector2(0,0)	# will tell the size of the shape
-const tick_delay = 0.73			# pause between countup qty
+const tick_delay = 0.73	 * G.ofaster		# pause between countup qty
 const pause_time = tick_delay	# pause after countup quantity
 const numberic_offset_pixels = Vector2(-90,-90)			# maybe make into a var and calculate an offset when set_shape is called
 
@@ -64,7 +64,7 @@ func _updateDimensions(loc) :
         dimensions.y = loc.y
 
 
-func move_shape_left(pixels_to_slide, duration = 0.21):
+func move_shape_left(pixels_to_slide, duration):
     var go_to_loc = self.get_position()                    # determine where we are now
     go_to_loc = go_to_loc - Vector2(pixels_to_slide,0)     # slide to left by removing positive number from x
     var effect = get_node("Tween")              # in SwipeShape.tscn
@@ -79,7 +79,7 @@ func move_shape_left(pixels_to_slide, duration = 0.21):
 # as the destination.   Plus when shapes are swiped, this
 # same function is used to tell the swipe where to go if it
 # matches required shape
-func shrink_shape(go_to_loc, duration = 0.9):
+func shrink_shape(go_to_loc, duration):
     var ratio = G.REQ_SHAPE_SHRINK_FACTOR
     var effect = get_node("Tween")              # in SwipeShape.tscn
     effect.connect("tween_completed", self, "shrunk_shape")
@@ -92,7 +92,7 @@ func shrink_shape(go_to_loc, duration = 0.9):
     effect.start()
 
 # TODO: make it random
-func fly_away_randomly(duration = 0.9):
+func fly_away_randomly(duration):
     print("first tween starting")
     var go_to_loc = Helpers.slot_to_pixels(Vector2(4,10))
     var effect = get_node("Tween")              # in SwipeShape.tscn

@@ -1,4 +1,4 @@
-#    Copyright (C) 2020  Rob Nugen
+#    Copyright (C) 2022  Rob Nugen
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@ export var gain_points_per_swipe = 1
 export var points_per_tile = 25
 export var pause_b4_show_stuff_s = 0.05
 export var pause_af_show_stuff_s = 0.05
-export var show_unlock_button_s = 2
+export var show_unlock_button_s = 2 * G.ofaster
 
 #######################################################
 #

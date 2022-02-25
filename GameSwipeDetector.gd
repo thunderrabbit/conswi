@@ -108,7 +108,7 @@ func piece_unclicked():
             self.correct_swipe_counter = self.correct_swipe_counter + 1
         else:
             swipe_shape.connect("flew_away", self, "inc_saved_tile_counter")
-            swipe_shape.fly_away_randomly()
+            swipe_shape.fly_away_randomly(G.random_flight_duration)
 
         self.saved_tiles = self.saved_tiles + swipe_array.size()  # eventually only use save_tile_counter
         # this line determines if we won, but only after shape shrinks and inc_saved_tile_counter() calls Game._on_LevelWon()
