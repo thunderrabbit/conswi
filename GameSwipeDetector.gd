@@ -104,7 +104,7 @@ func piece_unclicked():
             SoundManager.play_se("Swipe " + String(swipe_length))
             swipe_shape.connect("shrunk_shape",self,"shrank_required_shape")
             # after swipe, move shape to correct/required shape location
-            swipe_shape.shrink_shape(Game.game_hud.star_reqs.required_swipe_location(swipe_name))
+            swipe_shape.shrink_shape(Game.game_hud.star_reqs.required_swipe_location(swipe_name),G.shrink_shape_duration)
             self.correct_swipe_counter = self.correct_swipe_counter + 1
         else:
             swipe_shape.connect("flew_away", self, "inc_saved_tile_counter")
