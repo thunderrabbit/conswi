@@ -1,4 +1,11 @@
-#    Copyright (C) 2018  Rob Nugen
+#    Part of ConSwi
+#    Segment is a single square that can be interacted with by user.
+#    Segment should know its state and whether it can be interacted.
+#        While falling, can be draggeed  SwipeState = CAN_DRAG
+#        While pinned in place, can be swiped  SwipeState = CAN_SWIPE
+#        Otherwise, SwipeState = CANNOT
+#
+#    Copyright (C) 2022  Rob Nugen
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
