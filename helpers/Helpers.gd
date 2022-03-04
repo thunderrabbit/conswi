@@ -100,6 +100,11 @@ func count_same_color_neighbors(pos):
         i = i + 1
     return scnc
 
+# @param Vector2 pos position to check
+# @return bool or null
+#
+# when searching for same color neighbors, the pos might be off the board
+# so this makes sure the pos is on the board AND a tile exists at that position
 func tile_exists_in_board(pos):
     if 0 <= pos.x and pos.x < slots_across:
       if 0 <= pos.y and pos.y < slots_down:
