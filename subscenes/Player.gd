@@ -24,6 +24,7 @@ var my_position
 var should_show_shadow = false
 var nailed = false
 var tile_type = null
+var my_scnc  # Same Color Neighbor Count
 
 func _ready():
     add_to_group("players")		# to simplify clearing game scene
@@ -42,6 +43,14 @@ func set_type(new_tile_type_ordinal):
     # Tell Tile to tell its sprite it's a shadow
     myshadow.is_shadow()
     add_child(myshadow)
+
+# This isn't actually needed to store scnc here, but just for debuggin
+func set_swipeable_neighbors(scnc):
+    print("my position ")
+    print(my_position)
+    print("my scnc ")
+    print(scnc)
+    self.my_scnc = scnc
 
 # only the Player tiles will be set draggable (not the shadows)
 # This is set to true by Game.gd

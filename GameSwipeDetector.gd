@@ -124,6 +124,7 @@ func piece_unclicked():
                 Helpers.board[pos].remove_yourself()
     swipe_array.clear()
     swipe_state = SwipeState.IDLE
+    Helpers.search_for_swipes()   # there might be a race condition re magnetism_called
 
 ######################################
 #

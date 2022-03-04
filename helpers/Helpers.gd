@@ -74,6 +74,38 @@ func magnetism_called():
         if sprite != null:
             sprite.move_down_if_room()
 
+# if swipes exist on board, the game can continue
+func search_for_swipes():
+    for pos in board:
+        var sprite = board[pos]
+        if sprite != null:
+            # determine scnc (Same Color Neighbor Count)
+            var scnc = self.count_same_color_neighbors(pos)  # how many neighbors are the same color?
+            sprite.set_swipeable_neighbors(scnc)  # useless until Sprite shows this value
+
+func count_same_color_neighbors(pos):
+    # https://www.gamedev.net/forums/topic/516685-best-algorithm-to-find-adjacent-tiles/?tab=comments#comment-4359055
+    var xOffsets = [ 0, 1, 0, -1]
+    var yOffsets = [-1, 0, 1,  0]
+
+    var my_tile_type = board[pos].tile_type
+    var offset_pos = Vector2(-99,-99)
+    var scnc = 0
+    var i = 0
+    while i < xOffsets.size():
+        offset_pos = Vector2(pos.x + xOffsets[i], pos.y + yOffsets[i])
+        if self.tile_exists_in_board(offset_pos):    # there is a tile in this offset
+            if board[offset_pos].tile_type == my_tile_type:
+                scnc = scnc + 1
+        i = i + 1
+    return scnc
+
+func tile_exists_in_board(pos):
+    if 0 <= pos.x and pos.x < slots_across:
+      if 0 <= pos.y and pos.y < slots_down:
+        return board[pos]
+    return false
+
 func queue_wo_fill():
     while queue_upcoming.size() < queue_length and \
             max_tiles_avail > 0:
