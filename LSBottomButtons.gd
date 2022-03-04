@@ -21,8 +21,9 @@ extends Container
 # LSBottomButtons are shown on the Level Select Screen
 
 func _ready():
-	print("hello from Level Select Bottom Buttons")
-	pass
+    print("hello from Level Select Bottom Buttons")
+    pass
 
 func _on_BackButton_pressed():
-	get_node("/root/SceneSwitcher").goto_scene("res://NightDayMainSplash/NightDayMainSplash.tscn")
+    print("bye from Level Select Bottom Buttons")
+    get_node("/root/SceneSwitcher").goto_scene("res://NightDayMainSplash/NightDayMainSplash.tscn")
