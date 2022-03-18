@@ -75,13 +75,18 @@ func magnetism_called():
             sprite.move_down_if_room()
 
 # if swipes exist on board, the game can continue
+# this function returns true if any tile has two or more neighbors
 func search_for_swipes():
+    var swipe_exists = false
     for pos in board:
         var sprite = board[pos]
         if sprite != null:
             # determine scnc (Same Color Neighbor Count)
             var scnc = self.count_same_color_neighbors(pos)  # how many neighbors are the same color?
+            if(scnc >= 2):
+                swipe_exists = true
             sprite.set_swipeable_neighbors(scnc)  # useless until Sprite shows this value
+    return swipe_exists
 
 func count_same_color_neighbors(pos):
     # https://www.gamedev.net/forums/topic/516685-best-algorithm-to-find-adjacent-tiles/?tab=comments#comment-4359055

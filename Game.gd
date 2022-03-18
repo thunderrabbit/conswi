@@ -141,6 +141,17 @@ func fill_game_board():
                 nail_player()
             else:
                 print("no more tiles available to fill game board!")
+                # Just in case the board has no swipes, sorry charlie: game over.
+                _die_unless_swipe_exists()
+
+# So far, this is only called after filling game board randomly
+func _die_unless_swipe_exists():
+    print("let's see if there is a chance to win")
+    var swipe_exists = Helpers.search_for_swipes()
+    if(!swipe_exists):
+        _level_over_prep()
+        _gray_out_tiles()
+        _show_stuff_after_level(G.LEVEL_NO_TILES)   #actually no swipes
 
 func new_player():
     # turn off drop mode
@@ -154,7 +165,6 @@ func new_player():
         _level_over_prep()
         _gray_out_tiles()
         _show_stuff_after_level(G.LEVEL_NO_ROOM)
-
         return
 
     player = Helpers.instantiatePlayer(player_position)
