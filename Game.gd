@@ -149,6 +149,7 @@ func _die_unless_swipe_exists():
     print("let's see if there is a chance to win")
     var swipe_exists = Helpers.search_for_swipes()
     if(!swipe_exists):
+        print("NO Swipes available.  He ded.")
         _level_over_prep()
         _gray_out_tiles()
         _show_stuff_after_level(G.LEVEL_NO_TILES)   #actually no swipes
