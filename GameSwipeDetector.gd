@@ -146,6 +146,13 @@ func inc_saved_tile_counter():
     if self.saved_tile_counter.saved_enough_tiles_bool():
         print("sweet as we won the game by saving tiles")
         Game._on_LevelWon()   ## TODO use signal instead of call private function in Game
+    else:
+        # didnt win; see if we can lose
+        see_if_swipes_remain()
+
+func see_if_swipes_remain():
+    print("Game Swipe Detector checking if swipes remain")
+    Game._die_unless_swipe_exists()  ## TODO use signal instead of call private function in Game?
 
 func piece_entered(position, piece_type):
     if swipe_state != SwipeState.SWIPE:
