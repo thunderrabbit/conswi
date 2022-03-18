@@ -177,6 +177,10 @@ func new_player():
         start_gravity_timer()				# gravity needs to account for dragging somehow...
     else:
         print("no more tiles available to play game!")
+        print("We just looked for a player and found none available")
+        print("So end the game because no more players can be found")
+        print("Please note, this AINT good if there are non-swipe ways to change tiles, e.g. powerups")
+        _die_unless_swipe_exists()
 
 #######################################################
 #
