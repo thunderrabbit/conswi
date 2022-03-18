@@ -31,6 +31,7 @@ var saved_tile_counter          # count toward win
 var Game									# will point to GameNode
 var swipe_state = SwipeState.SWIPE
 var dragging_piece = null					# when dragging a piece, this will refer to it
+var no_swipe_die_bool = false   # if true, we check if swipes remain.  Set true by Game if no more pieces available
 
 func _ready():
     # Called every time the node is added to the scene.
@@ -150,9 +151,14 @@ func inc_saved_tile_counter():
         # didnt win; see if we can lose
         see_if_swipes_remain()
 
+func no_more_pieces_available():
+    print("Now swipe detector will kill level unless a swipe exists")
+    no_swipe_die_bool = true
+
 func see_if_swipes_remain():
-    print("Game Swipe Detector checking if swipes remain")
-    Game._die_unless_swipe_exists()  ## TODO use signal instead of call private function in Game?
+    if(no_swipe_die_bool):
+      print("Game Swipe Detector checking if swipes remain")
+      Game.die_unless_swipe_exists()  ## TODO use signal instead of call private function in Game?
 
 func piece_entered(position, piece_type):
     if swipe_state != SwipeState.SWIPE:

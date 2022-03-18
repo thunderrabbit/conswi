@@ -142,10 +142,14 @@ func fill_game_board():
             else:
                 print("no more tiles available to fill game board!")
                 # Just in case the board has no swipes, sorry charlie: game over.
-                _die_unless_swipe_exists()
+                _start_dying_unless_swipe_exists()
 
-# So far, this is only called after filling game board randomly
-func _die_unless_swipe_exists():
+func _start_dying_unless_swipe_exists():
+    die_unless_swipe_exists()     # if already lack of swipes, die now
+    $GameSwipeDetector.no_more_pieces_available()  # let GameSwipeDetector know to start checking for lack of swipes
+
+# This is called by _start_dying_unless_swipe_exists and later by GameSwipeDetector
+func die_unless_swipe_exists():
     print("let's see if there is a chance to win")
     var swipe_exists = Helpers.search_for_swipes()
     if(!swipe_exists):
@@ -181,7 +185,7 @@ func new_player():
         print("We just looked for a player and found none available")
         print("So end the game because no more players can be found")
         print("Please note, this AINT good if there are non-swipe ways to change tiles, e.g. powerups")
-        _die_unless_swipe_exists()
+        _start_dying_unless_swipe_exists()
 
 #######################################################
 #
