@@ -46,10 +46,10 @@ func set_type(new_tile_type_ordinal):
 
 # This isn't actually needed to store scnc here, but just for debuggin
 func set_swipeable_neighbors(scnc):
-    print("my position ")
-    print(my_position)
-    print("my scnc ")
-    print(scnc)
+    # print("my position ")
+    # print(my_position)
+    # print("my scnc ")
+    # print(scnc)
     self.my_scnc = scnc
 
 # only the Player tiles will be set draggable (not the shadows)
