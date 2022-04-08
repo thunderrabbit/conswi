@@ -68,6 +68,15 @@ func _init():
     sprite_loc.push_back(Rect2(12 * wd, 0, wd, ht));	# leopard
     sprite_loc.push_back(Rect2(13 * wd, 0, wd, ht));	# polar
     sprite_loc.push_back(Rect2(14 * wd, 0, wd, ht));	# snake
+    sprite_loc.push_back(Rect2(15 * wd, 0, wd, ht));	# heart
+    sprite_loc.push_back(Rect2(16 * wd, 0, wd, ht));	# gnu
+    sprite_loc.push_back(Rect2(17 * wd, 0, wd, ht));	# ape
+    sprite_loc.push_back(Rect2(18 * wd, 0, wd, ht));	# fox
+    sprite_loc.push_back(Rect2(19 * wd, 0, wd, ht));	# kirin
+    sprite_loc.push_back(Rect2(20 * wd, 0, wd, ht));	# goat
+    sprite_loc.push_back(Rect2(21 * wd, 0, wd, ht));	# koala
+    sprite_loc.push_back(Rect2(22 * wd, 0, wd, ht));	# sai
+    sprite_loc.push_back(Rect2(23 * wd, 0, wd, ht));	# joker
 
 func set_tile_type(my_tile_type):
     self.tile_type = my_tile_type   # TODO: figure out Database later	TileDatabase.get_item_sprite(my_type_ordinal)

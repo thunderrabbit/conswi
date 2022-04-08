@@ -91,6 +91,16 @@ const TYPE_ZEBRA    = 11
 const TYPE_LEOPARD  = 12
 const TYPE_POLAR    = 13
 const TYPE_SNAKE    = 14
+const TYPE_HEART    = 15
+const TYPE_GNU      = 16
+const TYPE_APE      = 17
+const TYPE_FOX      = 18
+const TYPE_KIRIN    = 19
+const TYPE_GOAT     = 20
+const TYPE_KOALA    = 21
+const TYPE_SAI      = 22
+const TYPE_JOKER    = 23
+
 
 const STAR_DISPLAY_BONUS = 0
 const STAR_REDUCE_SWIPES = 1

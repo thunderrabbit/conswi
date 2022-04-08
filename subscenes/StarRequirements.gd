@@ -104,7 +104,7 @@ func display_next_requirement():
         # Godot makes it simple to not worry about this, so Globals it is.
         # if you want to worry about it, look at shape_has_been_displayed()
         # and retool how this function is called
-        var count_tiles_this_shape = currently_showing_shape.set_shape(ShapeShifter.getBitmapOfSwipeName(currently_showing_name),Helpers.requested_world)
+        var count_tiles_this_shape = currently_showing_shape.set_shape(ShapeShifter.getBitmapOfSwipeName(currently_showing_name),G.TYPE_JOKER)
         var swipe_dimensions = currently_showing_shape.dimensions
         currently_showing_shape.set_position(Helpers.offset_bottom_center_slot_in_pixels(swipe_dimensions))
         add_child(currently_showing_shape)
