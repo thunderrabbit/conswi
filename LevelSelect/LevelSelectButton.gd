@@ -55,5 +55,5 @@ func set_button_type(type):   #  e.g. G.TYPE_DOG
                             my_type_string + "/" +
                             my_type_string + "_level_" +
                             str(num_stars) + "star@3x.png"
-    set_normal_texture(load(background))
+    texture_normal = load(background)
 

@@ -52,12 +52,12 @@ func add_world_buttons():
         var texture_name = named_texture[0]
         var texture = named_texture[1]
         var new_butt = TextureButton.new()
-        new_butt.rect_position.x = get_left_anchor(button_count)
+        new_butt.position.x = get_left_anchor(button_count)
         new_butt.anchor_top = 0.5
-        new_butt.set_normal_texture(texture)
+        new_butt.texture_normal = texture
         var texture_size = texture.get_size()
         new_butt.set_scale(Vector2(button_width/texture_size.x,button_width/texture_size.y))
-        new_butt.margin_top = -button_width / 2
+        new_butt.position.y = -button_width / 2
         print("add texture ", texture_name)
         new_butt.connect("pressed", get_parent().world_button_clicked.bind(texture_name))
         add_child(new_butt)

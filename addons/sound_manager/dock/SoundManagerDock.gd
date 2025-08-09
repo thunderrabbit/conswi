@@ -116,7 +116,7 @@ signal check_file_names_requested()
 # Methods
 
 func _ready() -> void:
-	#self.rect_size.x = get_node("VBoxContainer/ScrollContainer").rect_size.x + 25
+	#self.size.x = get_node("VBoxContainer/ScrollContainer").size.x + 25
 	var json_exists = read_sound_manager_settings()
 	if json_exists:
 		update_sound_manager_settings()
@@ -293,7 +293,7 @@ func populate_files_list(file_names : PoolStringArray)->void:
 			file_line.set_text(file_names[i].get_file())
 			dir_line.set("custom_colors/font_color", Color(1, 1, 1))
 			file_line.set("custom_colors/font_color", Color(1, 1, 1))
-			add_entry_button.set_button_icon(add_icon)
+			add_entry_button.icon = add_icon
 			add_entry_button.set_tooltip("Add a new entry in the dictionary for this sound file")
 			
 			# Add the nodes into the dock scene
@@ -339,9 +339,9 @@ func insert_new_entry(key: String = "", value: String = ""):
 	value_input.set_custom_minimum_size(Vector2(160,0))
 	value_input.set_max_length(280)
 	value_input.set_tooltip("Insert here the name of a sound file (name_file.extension)")
-	save_entry_button.set_button_icon(save_entry_icon)
+	save_entry_button.icon = save_entry_icon
 	save_entry_button.set_tooltip("Save this entry")
-	remove_entry_button.set_button_icon(remove_entry_icon)
+	remove_entry_button.icon = remove_entry_icon
 	remove_entry_button.set_tooltip("Remove this entry")
 	
 	# Insert the new nodes into the scene

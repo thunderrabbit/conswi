@@ -35,7 +35,7 @@ func show_lose_buttons_on_bottom():
     $NextLevel.hide()
  #   scale_button_almost_1_third_screen($LevelSelect, fill_this_fraction_of_third_of_screen)
   #  anchor_bottom_left($LevelSelect)
-    $LevelSelect.set_normal_texture(preload("res://images/buttons/lose_back@3x.png")) #  the lose background was in BackgroundScript.gd but might move it here
+    $LevelSelect.texture_normal = preload("res://images/buttons/lose_back@3x.png") #  the lose background was in BackgroundScript.gd but might move it here
     $LevelSelect.show()
     $LevelSelect.set_position(self.bottom_left_position)
     make_button_move($LevelSelect,self.bottom_left_position)
@@ -49,7 +49,7 @@ func show_lose_buttons_on_bottom():
 func make_button_move(shape, go_to_loc, duration = 1.21):
     var effect = Tween.new()
     add_child(effect)
-    effect.interpolate_property(shape, "rect_position",
+    effect.interpolate_property(shape, "position",
             shape.get_position(), go_to_loc, duration,
             Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
     effect.start()
@@ -60,7 +60,7 @@ func show_win_buttons_on_bottom():
     $NextLevel.set_position(self.bottom_right_position)
     make_button_move($NextLevel,self.bottom_right_position)  
     
-    $LevelSelect.set_normal_texture(preload("res://images/buttons/win_back@3x.png")) #  the lose background was in BackgroundScript.gd but might move it here
+    $LevelSelect.texture_normal = preload("res://images/buttons/win_back@3x.png") #  the lose background was in BackgroundScript.gd but might move it here
     $LevelSelect.show()
     $LevelSelect.set_position(self.bottom_left_position)
     make_button_move($LevelSelect,self.bottom_left_position)
