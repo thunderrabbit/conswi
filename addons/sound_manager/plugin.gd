@@ -19,13 +19,13 @@ signal signals_connected()
 # Set the Sound Manager Module scene as autoload, instance a new dock scene and configure the EditorFileDialog instance 
 func _enter_tree() -> void:
     add_autoload_singleton("SoundManager", "res://addons/sound_manager/module/SoundManager.tscn")
-    dock = preload("res://addons/sound_manager/dock/SoundManagerDock.tscn").instance()
+    dock = preload("res://addons/sound_manager/dock/SoundManagerDock.tscn").instantiate()
     dock.set_name(dock.TITLE)
     add_control_to_dock(DOCK_SLOT_LEFT_UL, dock)
     connect_signals()
     
     # Check for fylesystem changes
-    get_editor_interface().get_resource_filesystem().connect("filesystem_changed", self, "_on_filesystem_changed")
+    get_editor_interface().get_resource_filesystem().connect("filesystem_changed", _on_filesystem_changed)
     
 
 
@@ -37,9 +37,9 @@ func _exit_tree() -> void:
 
 
 func connect_signals() -> void:
-    dock.connect("check_file_names_requested", self, "_on_check_file_names_requested")
-    connect("file_names_updated", dock, "_on_file_names_updated")
-    connect("signals_connected", dock, "_on_plugin_signals_connected")
+    dock.connect("check_file_names_requested", _on_check_file_names_requested)
+    connect("file_names_updated", dock._on_file_names_updated)
+    connect("signals_connected", dock._on_plugin_signals_connected)
     emit_signal("signals_connected")
 
 
@@ -47,16 +47,16 @@ func connect_signals() -> void:
 #	FILE SYSTEM HANDLERS	#
 #############################
 
-func get_sound_file_names_from_path_r(path : String) -> PoolStringArray:
+func get_sound_file_names_from_path_r(path : String) -> PackedStringArray:
     var directory : EditorFileSystemDirectory = get_editor_interface().get_resource_filesystem().get_filesystem_path(path)
     var file_name := get_sound_file_names_from_dir_r(directory)
 #	directory.free()
     return file_name
 
 
-func get_sound_file_names_from_dir_r(directory : EditorFileSystemDirectory) -> PoolStringArray:
+func get_sound_file_names_from_dir_r(directory : EditorFileSystemDirectory) -> PackedStringArray:
     if directory == null:
-        return PoolStringArray([])
+        return PackedStringArray([])
     var file_name = get_sound_file_names_from_dir(directory)
     for i in range(0, directory.get_subdir_count()):
         var subdir = directory.get_subdir(i)
@@ -64,8 +64,8 @@ func get_sound_file_names_from_dir_r(directory : EditorFileSystemDirectory) -> P
             file_name += get_sound_file_names_from_dir_r(directory.get_subdir(i))
     return file_name
 
-func get_sound_file_names_from_dir(directory : EditorFileSystemDirectory) -> PoolStringArray:
-    var file_names : PoolStringArray = []
+func get_sound_file_names_from_dir(directory : EditorFileSystemDirectory) -> PackedStringArray:
+    var file_names : PackedStringArray = []
     if directory:
         for i in range(0, directory.get_file_count()):
             var file_name = directory.get_file(i)

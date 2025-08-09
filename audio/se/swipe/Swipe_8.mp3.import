@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/Swipe_8.mp3-faf009672ea4a9561fa1a60430fca96b.mp3str"
+uid="uid://ch8rswod1ul3n"
+path="res://.godot/imported/Swipe_8.mp3-faf009672ea4a9561fa1a60430fca96b.mp3str"
 
 [deps]
 
 source_file="res://audio/se/swipe/Swipe_8.mp3"
-dest_files=[ "res://.import/Swipe_8.mp3-faf009672ea4a9561fa1a60430fca96b.mp3str" ]
+dest_files=["res://.godot/imported/Swipe_8.mp3-faf009672ea4a9561fa1a60430fca96b.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

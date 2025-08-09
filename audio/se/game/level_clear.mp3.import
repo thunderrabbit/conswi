@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/level_clear.mp3-d400b9ad46279263ce8b3de2db5d30e4.mp3str"
+uid="uid://dh1bu4hs0pd4h"
+path="res://.godot/imported/level_clear.mp3-d400b9ad46279263ce8b3de2db5d30e4.mp3str"
 
 [deps]
 
 source_file="res://audio/se/game/level_clear.mp3"
-dest_files=[ "res://.import/level_clear.mp3-d400b9ad46279263ce8b3de2db5d30e4.mp3str" ]
+dest_files=["res://.godot/imported/level_clear.mp3-d400b9ad46279263ce8b3de2db5d30e4.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

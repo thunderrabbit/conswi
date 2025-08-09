@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/rabbit.mp3-5b9de3747832328b831c1f6ac70ecfdb.mp3str"
+uid="uid://spgxr3vslvix"
+path="res://.godot/imported/rabbit.mp3-5b9de3747832328b831c1f6ac70ecfdb.mp3str"
 
 [deps]
 
 source_file="res://images/world_skins/rabbit/rabbit.mp3"
-dest_files=[ "res://.import/rabbit.mp3-5b9de3747832328b831c1f6ac70ecfdb.mp3str" ]
+dest_files=["res://.godot/imported/rabbit.mp3-5b9de3747832328b831c1f6ac70ecfdb.mp3str"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

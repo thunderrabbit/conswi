@@ -1,8 +1,9 @@
 [remap]
 
 importer="texture"
-type="StreamTexture"
-path="res://.import/home.png-1f26d7bc368e91ec9c5982c09a01556f.stex"
+type="CompressedTexture2D"
+uid="uid://cgiss7tj65x24"
+path="res://.godot/imported/home.png-1f26d7bc368e91ec9c5982c09a01556f.ctex"
 metadata={
 "vram_texture": false
 }
@@ -10,26 +11,24 @@ metadata={
 [deps]
 
 source_file="res://images/buttons/gamescreen_buttons/home.png"
-dest_files=[ "res://.import/home.png-1f26d7bc368e91ec9c5982c09a01556f.stex" ]
+dest_files=["res://.godot/imported/home.png-1f26d7bc368e91ec9c5982c09a01556f.ctex"]
 
 [params]
 
 compress/mode=0
+compress/high_quality=false
 compress/lossy_quality=0.7
-compress/hdr_mode=0
-compress/bptc_ldr=0
+compress/hdr_compression=1
 compress/normal_map=0
-flags/repeat=0
-flags/filter=true
-flags/mipmaps=false
-flags/anisotropic=false
-flags/srgb=2
+compress/channel_pack=0
+mipmaps/generate=false
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
 process/fix_alpha_border=true
 process/premult_alpha=false
-process/HDR_as_SRGB=false
-process/invert_color=false
 process/normal_map_invert_y=false
-stream=false
-size_limit=0
-detect_3d=true
-svg/scale=1.0
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=1

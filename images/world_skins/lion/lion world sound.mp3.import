@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/lion world sound.mp3-bece4980a042449749a81b757d7d2cf1.mp3str"
+uid="uid://daxsr8y7r228o"
+path="res://.godot/imported/lion world sound.mp3-bece4980a042449749a81b757d7d2cf1.mp3str"
 
 [deps]
 
 source_file="res://images/world_skins/lion/lion world sound.mp3"
-dest_files=[ "res://.import/lion world sound.mp3-bece4980a042449749a81b757d7d2cf1.mp3str" ]
+dest_files=["res://.godot/imported/lion world sound.mp3-bece4980a042449749a81b757d7d2cf1.mp3str"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

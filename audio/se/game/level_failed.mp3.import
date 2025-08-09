@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/level_failed.mp3-01abd83a7a08782f9cf7110fb0674f02.mp3str"
+uid="uid://ouvlx5cjyskg"
+path="res://.godot/imported/level_failed.mp3-01abd83a7a08782f9cf7110fb0674f02.mp3str"
 
 [deps]
 
 source_file="res://audio/se/game/level_failed.mp3"
-dest_files=[ "res://.import/level_failed.mp3-01abd83a7a08782f9cf7110fb0674f02.mp3str" ]
+dest_files=["res://.godot/imported/level_failed.mp3-01abd83a7a08782f9cf7110fb0674f02.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
