@@ -152,7 +152,7 @@ func _display_bonus():
     var sound_duration = 4.0 # seconds
     var update_score_every = 0.05 # seconds
     var update_score_nan_kai = sound_duration / update_score_every
-    SoundManager.play_se("Score count up")
+    ### SoundManager.play_se("Score count up")
     points.connect("qty_reached",_pause_after_show_stuff)
     points.set_delay(update_score_every)
     var bonus_target = self._info_for_star_calc['num_tiles'] * self.points_per_tile

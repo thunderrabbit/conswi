@@ -37,14 +37,11 @@ func set_level(level, type):  #  e.g.  5,   G.TYPE_DOG
     var my_type_string = TileDatabase.tiles[my_type]["ITEM_NAME"]
     # we do not need to remember the level because
     # LevelSelectScene links the button press to the respective level select
-    print ("res://images/world_skins/" + 
-                            my_type_string + "/" +
-                            my_type_string + "_level_" +
-                            str(level) + "@3x.png")
-    var path_to_num = "res://images/world_skins/" + 
-                            my_type_string + "/" +
-                            my_type_string + "_level_" +
+    var path_to_num = "res://images/world_skins/" + \
+                            my_type_string + "/" + \
+                            my_type_string + "_level_" + \
                             str(level) + "@3x.png"
+    print(path_to_num)
     $level_number.set_texture(load(path_to_num))
 
 func set_button_type(type):   #  e.g. G.TYPE_DOG
