@@ -111,7 +111,8 @@ func _PlanToShowUnlockedTile(unlocked_tile):
 
 func _pause_before_show_stuff():
     var timer = $extra_pauser
-    timer.connect("timeout",_show_stuff_after_level)
+    if not timer.is_connected("timeout", _show_stuff_after_level):
+        timer.connect("timeout",_show_stuff_after_level)
     timer.set_wait_time(self.pause_b4_show_stuff_s)
     timer.start()
 
@@ -119,7 +120,8 @@ func _pause_before_show_stuff():
 func _pause_after_show_stuff():
     print("PAUSE after show stuff")
     var timer = $extra_pauser
-    timer.connect("timeout",_show_stuff_after_level)
+    if not timer.is_connected("timeout", _show_stuff_after_level):
+        timer.connect("timeout",_show_stuff_after_level)
     timer.set_wait_time(pause_af_show_stuff_s)
     timer.start()
 

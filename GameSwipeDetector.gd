@@ -166,9 +166,9 @@ func piece_entered(position, piece_type):
     if clicked_this_piece_type != piece_type:
         return
     # ensure the position is adjacent to the last item in the array
-    if not adjacent(swipe_array.back(), position):
+    if swipe_array.is_empty() or not adjacent(swipe_array.back(), position):
         return
-    if position == swipe_array[swipe_array.size()-2]:
+    if swipe_array.size() >= 2 and position == swipe_array[swipe_array.size()-2]:
         # we back tracked
         var old_last = swipe_array.back()
         swipe_array.pop_back()

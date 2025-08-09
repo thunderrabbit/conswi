@@ -87,6 +87,8 @@ func display_next_requirement():
         emit_signal("requirements_shown")
     else:
         # get first requirement in array
+        if array_of_required_names.is_empty():
+            return
         currently_showing_name = array_of_required_names.front()
         # wipe it from array so we don't show it again
         array_of_required_names.pop_front()

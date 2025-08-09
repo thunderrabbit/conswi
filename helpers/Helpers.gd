@@ -144,6 +144,8 @@ func queue_wo_fill():
 
 func queue_next():
     queue_wo_fill()
+    if queue_upcoming.is_empty():
+        return null
     var next_piece = queue_upcoming.front()
     if next_piece != null:
         queue_upcoming.pop_front()

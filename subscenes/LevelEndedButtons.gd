@@ -47,12 +47,10 @@ func show_lose_buttons_on_bottom():
 
 ### make_button_move is ONLY because set_position does not seem to work on the buttons.  I guess it is some problem with anchors, but I am stumped.
 func make_button_move(shape, go_to_loc, duration = 1.21):
-    var effect = Tween.new()
-    add_child(effect)
-    effect.interpolate_property(shape, "position",
-            shape.get_position(), go_to_loc, duration,
-            Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-    effect.start()
+    var effect = create_tween()
+    effect.tween_property(shape, "position", go_to_loc, duration)
+    effect.set_trans(Tween.TRANS_LINEAR)
+    effect.set_ease(Tween.EASE_IN_OUT)
     
 func show_win_buttons_on_bottom():
     $TryAgain.hide()

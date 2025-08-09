@@ -67,12 +67,10 @@ func _updateDimensions(loc) :
 func move_shape_left(pixels_to_slide, duration):
     var go_to_loc = self.get_position()                    # determine where we are now
     go_to_loc = go_to_loc - Vector2(pixels_to_slide,0)     # slide to left by removing positive number from x
-    var effect = get_node("Tween")              # in SwipeShape.tscn
-#    effect.connect("tween_completed", self, "shrunk_shape")
-    effect.interpolate_property(self, "position",
-            self.get_position(), go_to_loc, duration,
-            Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-    effect.start()
+    var effect = create_tween()
+    effect.set_trans(Tween.TRANS_LINEAR)
+    effect.set_ease(Tween.EASE_IN_OUT)
+    effect.tween_property(self, "position", go_to_loc, duration)
 
 # once shape has been shown for requirements, we need to shrink it
 # and put it in a location, so this function accepts a Vector2
@@ -81,58 +79,54 @@ func move_shape_left(pixels_to_slide, duration):
 # matches required shape
 func shrink_shape(go_to_loc, duration):
     var ratio = G.REQ_SHAPE_SHRINK_FACTOR
-    var effect = get_node("Tween")              # in SwipeShape.tscn
-    effect.connect("tween_completed", _on_shrunk_shape)
-    effect.interpolate_property(self, "scale",
-            self.get_scale(), Vector2(ratio, ratio), duration,
-            Tween.TRANS_QUAD, Tween.EASE_OUT)
-    effect.interpolate_property(self, "position",
-            self.get_position(), go_to_loc, duration,
-            Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-    effect.start()
+    var effect = create_tween()
+    effect.set_parallel(true)  # Allow multiple properties to tween simultaneously
+    effect.finished.connect(_on_shrunk_shape)
+    effect.set_trans(Tween.TRANS_QUAD)
+    effect.set_ease(Tween.EASE_OUT)
+    effect.tween_property(self, "scale", Vector2(ratio, ratio), duration)
+    effect.set_trans(Tween.TRANS_LINEAR)
+    effect.set_ease(Tween.EASE_IN_OUT)
+    effect.tween_property(self, "position", go_to_loc, duration)
 
 # TODO: make it random
 func fly_away_randomly(duration):
     print("first tween starting")
     var go_to_loc = Helpers.slot_to_pixels(Vector2(4,10))
-    var effect = get_node("Tween")              # in SwipeShape.tscn
-    effect.connect("tween_completed", _on_come_back_to_location)
-    effect.interpolate_property(self, 'scale', self.get_scale(), Vector2(5, 5), duration, Tween.TRANS_QUAD, Tween.EASE_OUT)
-    effect.interpolate_property(self, 'position', self.get_position(), go_to_loc, duration,	Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-    effect.interpolate_property(self, 'rotation', 0, 6, duration, Tween.TRANS_LINEAR, Tween.EASE_OUT_IN)
-    effect.interpolate_property(self, 'opacity', 1, 0, duration, Tween.TRANS_QUAD, Tween.EASE_OUT)
-    effect.start()
+    var effect = create_tween()
+    effect.set_parallel(true)  # Allow multiple properties to tween simultaneously
+    effect.finished.connect(_on_come_back_to_location)
+    effect.tween_property(self, 'scale', Vector2(5, 5), duration).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+    effect.tween_property(self, 'position', go_to_loc, duration).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+    effect.tween_property(self, 'rotation', 6, duration).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT_IN)
+    effect.tween_property(self, 'modulate:a', 0, duration).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
 ##################################################
 #
 #   The idea here is the saved tiles can be collected somewhere and then help user win level.
 #   Maybe I can just log a number instead of showing the swipes on the side
 #
-func _on_come_back_to_location(obj, key):
+func _on_come_back_to_location():
     print("new tween starting")
-    if key != ':scale':	# (callback only once per tween)
-        return
     var duration = 0.9
     var go_to_loc = Helpers.slot_to_pixels(Vector2(4,10)) # was this but it was moved to GameHud and I don't know how to access gamehud from here  HUD.get_node('SavedTileCount').get_global_position()
-    var effect = get_node("Tween")              # in SwipeShape.tscn
-    effect.connect("tween_completed", _on_flew_away)
-    effect.interpolate_property(self, 'scale', self.get_scale(), Vector2(0.02, 0.02), duration, Tween.TRANS_QUAD, Tween.EASE_OUT)
-    effect.interpolate_property(self, 'position', self.get_position(), go_to_loc, duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-    effect.interpolate_property(self, 'rotation', 0, 6, duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-    effect.interpolate_property(self, 'opacity', 0, 1, duration, Tween.TRANS_QUAD, Tween.EASE_OUT)
-    effect.start()
+    var effect = create_tween()
+    effect.set_parallel(true)  # Allow multiple properties to tween simultaneously
+    effect.finished.connect(_on_flew_away)
+    effect.tween_property(self, 'scale', Vector2(0.02, 0.02), duration).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+    effect.tween_property(self, 'position', go_to_loc, duration).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+    effect.tween_property(self, 'rotation', 6, duration).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+    effect.tween_property(self, 'modulate:a', 1, duration).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
 # swipe need not exist after it has flown away
-func _on_flew_away(obj, key):
-    if key == ':scale':	# (callback only once per tween)
-        queue_free()	# cannot get them to act right so just kill them and don't save them
-        emit_signal("flew_away")
+func _on_flew_away():
+    queue_free()	# cannot get them to act right so just kill them and don't save them
+    emit_signal("flew_away")
 
 # After shape has been shrunk
-func _on_shrunk_shape(obj, key):
+func _on_shrunk_shape():
     # call back to StarRequirements
-    if key == ':scale':	# (callback only once per tween)
-        emit_signal("shrunk_shape")
+    emit_signal("shrunk_shape")
 
 # `display_quantity()` is only used when showing the user what
 # shapes are required to win the level.  Add the number to the

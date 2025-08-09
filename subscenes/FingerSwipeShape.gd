@@ -38,17 +38,17 @@ func finger_moved_a_bit ( object, key, elapsed, value ):
 func swipe_finger():
     if self.show_finger:
         $Finger.set_visible(true)
-        $FingerTween.connect("tween_completed", finger_swiped)
-        $FingerTween.connect("tween_step", finger_moved_a_bit)
+        var finger_tween = create_tween()
+        finger_tween.finished.connect(finger_swiped)
         # Move finger relative to the swipe.  (NOTE This only works for horizontal swipes)
-        $FingerTween.interpolate_property($Finger, "position",
-                Vector2(0,0),									# finger start position, relative to the swiped piece
-                Vector2(G.GameGridSlotSize() * (dimensions.x+1),0),		# finger end position.  dimensions.x is the width of piece (starting from 0)
-                G.finger_swipe_duration,						# Duration of tween
-                Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-        $FingerTween.start()
+        finger_tween.set_trans(Tween.TRANS_SINE)
+        finger_tween.set_ease(Tween.EASE_IN_OUT)
+        $Finger.position = Vector2(0,0)  # Set initial position
+        finger_tween.tween_property($Finger, "position",
+                Vector2(G.GameGridSlotSize() * (dimensions.x+1),0),		# finger end position
+                G.finger_swipe_duration)
     else:
-        finger_swiped(null, null)			# usually do this; only show finger in first couple of levels
+        finger_swiped()			# usually do this; only show finger in first couple of levels
 
 # This display_quantity first displays the finger
 func display_quantity(quantity):
@@ -56,7 +56,7 @@ func display_quantity(quantity):
     print("swipe finger before display quantity")
     swipe_finger()
 
-func finger_swiped(obj, key):
+func finger_swiped():
     $Finger.set_visible(false)
     # This is the parent class display_quantity which actually displays the quantity
     super.display_quantity(self.quantity)
