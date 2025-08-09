@@ -9,7 +9,7 @@
 
    a. Extract and run Godot application.
 
-   b. Open robdot_conswi project.
+   b. Open conswi project.
 
 ### To add new shapes to ShapeDatabase
 
