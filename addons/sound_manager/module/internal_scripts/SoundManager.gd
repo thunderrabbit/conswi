@@ -339,7 +339,7 @@ func is_preload_resources_enabled() -> bool:
 
 func preload_audio_files_from_path(path : String):
 	var file_name : String
-	var dir := Directory.new()
+	var dir := DirAccess.open("res:/")
 	dir.open(path)
 	dir.list_dir_begin(true, true)
 	if dir:
@@ -435,7 +435,7 @@ func unload_resource_from_string(file : String) -> void:
 
 
 func unload_resources_from_dir(path : String) -> void:
-	var dir = Directory.new()
+	var dir = DirAccess.open("res:/")
 	if dir.open(path + "/") == OK:
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
@@ -453,7 +453,7 @@ func unload_resources_from_dir(path : String) -> void:
 
 func preinstantiate_nodes_from_path(path : String, sound_type : String = ""):
 	var file_name : String
-	var dir := Directory.new()
+	var dir := DirAccess.open("res:/")
 	dir.open(path)
 	if dir:
 		dir.list_dir_begin(true, true)
@@ -549,7 +549,7 @@ func uninstantiate_node_from_string(file : String) -> void:
 
 
 func uninstantiate_nodes_from_dir(path : String) -> void:
-	var dir = Directory.new()
+	var dir = DirAccess.open("res:/")
 	if dir.open(path + "/") == OK:
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
@@ -589,7 +589,7 @@ func _ready() -> void:
 	if preinstantiate_nodes:
 		if debug:
 			print_debug("Instantiating nodes...")
-		self.preinstantiate_nodes()
+		self.preinstantiate_all_nodes()
 
 
 # Load the Sound Manager settings from the JSON file:  SoundManager.json
@@ -646,7 +646,7 @@ func play(sound_type : String, sound : String, from_position : float = 1.0, volu
 		var Stream
 		if Preloaded_Resources.has(sound_path):
 			if debug:
-				 print_debug("Resource preloaded " + sound_path)
+				print_debug("Resource preloaded " + sound_path)
 			Stream = Preloaded_Resources.get(sound_path)
 		else:
 			Stream = load(sound_path)
@@ -729,13 +729,13 @@ func _on_sound_finished(sound_name : String) -> void:
 
 
 func preload_audio_files() -> void:
-	var directory := Directory.new()
+	var directory := DirAccess.open("res:/")
 	directory.open("res://")
 	self.preload_audio_files_from_path("res://")
 	self.preload_audio_files_r(directory)
 
 
-func preload_audio_files_r(directory : Directory):
+func preload_audio_files_r(directory : DirAccess):
 	if directory == null:
 		return
 	directory.list_dir_begin(true, true)
@@ -748,15 +748,15 @@ func preload_audio_files_r(directory : Directory):
 		dir_name = directory.get_next()
 
 
-func preinstantiate_nodes() -> void:
-	var directory := Directory.new()
+func preinstantiate_all_nodes() -> void:
+	var directory := DirAccess.open("res:/")
 	directory.open("res://")
 	self.enable_node_preinstantiation(true)
 	self.preinstantiate_nodes_from_path("res://")
 	self.preinstatiate_nodes_r(directory)
 
 
-func preinstatiate_nodes_r(directory : Directory):
+func preinstatiate_nodes_r(directory : DirAccess):
 	if directory == null:
 		return
 	directory.list_dir_begin(true, true)

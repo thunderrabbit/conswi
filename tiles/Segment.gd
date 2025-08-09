@@ -41,14 +41,14 @@ const wd = 100.0			# width of each sprite image in items.png
 const ht = 100.0			# height of each sprite images in items.png
 
 func _ready():
-    self.connect("drag_started", get_node("/root/GameNode2D"), "piece_being_dragged")
-    self.connect("drag_started", get_node("/root/GameNode2D/GameSwipeDetector"), "piece_being_dragged")
-    self.connect("drag_ended", get_node("/root/GameNode2D"), "piece_done_dragged")
-    self.connect("drag_ended", get_node("/root/GameNode2D/GameSwipeDetector"), "piece_done_dragged")
-    self.connect("clicked", get_node("/root/GameNode2D/GameSwipeDetector"), "piece_clicked")
-    self.connect("unclicked", get_node("/root/GameNode2D/GameSwipeDetector"), "piece_unclicked")
-    self.connect("entered", get_node("/root/GameNode2D/GameSwipeDetector"), "piece_entered")
-    self.connect("exited", get_node("/root/GameNode2D/GameSwipeDetector"), "piece_exited")
+    self.connect("drag_started", get_node("/root/GameNode2D").piece_being_dragged)
+    self.connect("drag_started", get_node("/root/GameNode2D/GameSwipeDetector").piece_being_dragged)
+    self.connect("drag_ended", get_node("/root/GameNode2D").piece_done_dragged)
+    self.connect("drag_ended", get_node("/root/GameNode2D/GameSwipeDetector").piece_done_dragged)
+    self.connect("clicked", get_node("/root/GameNode2D/GameSwipeDetector").piece_clicked)
+    self.connect("unclicked", get_node("/root/GameNode2D/GameSwipeDetector").piece_unclicked)
+    self.connect("entered", get_node("/root/GameNode2D/GameSwipeDetector").piece_entered)
+    self.connect("exited", get_node("/root/GameNode2D/GameSwipeDetector").piece_exited)
 
 func _init():
     # within the image map, these are the locations of the tiles
@@ -81,7 +81,7 @@ func _init():
 func set_tile_type(my_tile_type):
     self.tile_type = my_tile_type   # TODO: figure out Database later	TileDatabase.get_item_sprite(my_type_ordinal)
     set_texture(preload("res://images/items.png"))		# res://images/items.png is a spritesheet
-    set_region(true)									# we want a small part of it
+    set_region_enabled(true)							# we want a small part of it
     set_region_rect(sprite_loc[self.tile_type])					# this is the part we want
     set_scale(Vector2(G.GameGridSlotSize()/wd,G.GameGridSlotSize()/ht))
 

@@ -26,14 +26,12 @@ func _ready():
 func set_game_background(bg_num = G.TYPE_DOG):
     var my_type_string = TileDatabase.tiles[bg_num]["ITEM_NAME"]
     # background path example "res://images/world_skins/cow/cow background@3x.png"
-    var background = "res://images/world_skins/" +
-                            my_type_string + "/" + 
-                            my_type_string + " background@3x.png"
+    var background = "res://images/world_skins/" + my_type_string + "/" + my_type_string + " background@3x.png"
     $BackgroundSprite.set_texture(load(background))
 
 # set_background keeps _ready() small
 func set_timely_background():
-    var timeDict = OS.get_time();
+    var timeDict = Time.get_time_dict_from_system()
     var hour = timeDict.hour;
     set_background_for_hour(hour)
 
