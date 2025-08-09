@@ -82,7 +82,7 @@ func move_shape_left(pixels_to_slide, duration):
 func shrink_shape(go_to_loc, duration):
     var ratio = G.REQ_SHAPE_SHRINK_FACTOR
     var effect = get_node("Tween")              # in SwipeShape.tscn
-    effect.connect("tween_completed", shrunk_shape)
+    effect.connect("tween_completed", _on_shrunk_shape)
     effect.interpolate_property(self, "scale",
             self.get_scale(), Vector2(ratio, ratio), duration,
             Tween.TRANS_QUAD, Tween.EASE_OUT)
@@ -96,7 +96,7 @@ func fly_away_randomly(duration):
     print("first tween starting")
     var go_to_loc = Helpers.slot_to_pixels(Vector2(4,10))
     var effect = get_node("Tween")              # in SwipeShape.tscn
-    effect.connect("tween_completed", come_back_to_location)
+    effect.connect("tween_completed", _on_come_back_to_location)
     effect.interpolate_property(self, 'scale', self.get_scale(), Vector2(5, 5), duration, Tween.TRANS_QUAD, Tween.EASE_OUT)
     effect.interpolate_property(self, 'position', self.get_position(), go_to_loc, duration,	Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
     effect.interpolate_property(self, 'rotation', 0, 6, duration, Tween.TRANS_LINEAR, Tween.EASE_OUT_IN)
@@ -108,14 +108,14 @@ func fly_away_randomly(duration):
 #   The idea here is the saved tiles can be collected somewhere and then help user win level.
 #   Maybe I can just log a number instead of showing the swipes on the side
 #
-func come_back_to_location(obj, key):
+func _on_come_back_to_location(obj, key):
     print("new tween starting")
     if key != ':scale':	# (callback only once per tween)
         return
     var duration = 0.9
     var go_to_loc = Helpers.slot_to_pixels(Vector2(4,10)) # was this but it was moved to GameHud and I don't know how to access gamehud from here  HUD.get_node('SavedTileCount').get_global_position()
     var effect = get_node("Tween")              # in SwipeShape.tscn
-    effect.connect("tween_completed", flew_away)
+    effect.connect("tween_completed", _on_flew_away)
     effect.interpolate_property(self, 'scale', self.get_scale(), Vector2(0.02, 0.02), duration, Tween.TRANS_QUAD, Tween.EASE_OUT)
     effect.interpolate_property(self, 'position', self.get_position(), go_to_loc, duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
     effect.interpolate_property(self, 'rotation', 0, 6, duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
@@ -123,13 +123,13 @@ func come_back_to_location(obj, key):
     effect.start()
 
 # swipe need not exist after it has flown away
-func flew_away(obj, key):
+func _on_flew_away(obj, key):
     if key == ':scale':	# (callback only once per tween)
         queue_free()	# cannot get them to act right so just kill them and don't save them
         emit_signal("flew_away")
 
 # After shape has been shrunk
-func shrunk_shape(obj, key):
+func _on_shrunk_shape(obj, key):
     # call back to StarRequirements
     if key == ':scale':	# (callback only once per tween)
         emit_signal("shrunk_shape")

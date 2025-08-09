@@ -254,8 +254,10 @@ func _level_over_play_sound(reason):
     print("THIS IS WHY PLAY SOUND")
     if(reason == 1):
         ### SoundManager.play_se("Level Cleared")
+        pass
     else:
         ### SoundManager.play_se("Level Failed")
+        pass
 
 func _process(delta):
     if gravity_called:
