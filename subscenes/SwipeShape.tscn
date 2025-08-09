@@ -9,16 +9,7 @@ position = Vector2( 1.48897, 2.08455 )
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Tween" type="Tween" parent="." index="0"]
-
-repeat = false
-playback_process_mode = 1
-playback_speed = 1.0
-playback/active = false
-playback/repeat = false
-playback/speed = 1.0
-
-[node name="SpinnerLabel" parent="." index="1" instance=ExtResource( 2 )]
+[node name="SpinnerLabel" parent="." index="0" instance=ExtResource( 2 )]
 
 margin_left = -65.0
 margin_top = -126.0

@@ -8,11 +8,7 @@
 
 script = ExtResource( 2 )
 
-[node name="Tween" parent="." index="0"]
-
-_sections_unfolded = [ "Pause", "playback" ]
-
-[node name="Finger" type="Sprite" parent="." index="2"]
+[node name="Finger" type="Sprite" parent="." index="1"]
 
 visible = false
 z_index = 6
@@ -20,14 +16,5 @@ texture = ExtResource( 3 )
 centered = false
 offset = Vector2( -23, -20 )
 _sections_unfolded = [ "Offset", "Z Index" ]
-
-[node name="FingerTween" type="Tween" parent="." index="3"]
-
-repeat = false
-playback_process_mode = 1
-playback_speed = 1.0
-playback/active = false
-playback/repeat = false
-playback/speed = 1.0
 
 
