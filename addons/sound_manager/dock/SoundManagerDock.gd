@@ -102,7 +102,7 @@ var PRELOAD_RES : bool = false
 var PREINSTANTIATE_NODES : bool = false
 var DEBUG : bool = false
 var Audio_Files_Dictionary : Dictionary = {}
-var file : File = File.new()
+var file_access : FileAccess
 var data_settings : Dictionary
 
 #####################
@@ -172,21 +172,24 @@ func connect_signals() -> void:
 
 func parse_json_string(json_file: String) -> Dictionary:
 	var result: Dictionary = {}
-	var json: JSONParseResult = JSON.parse(json_file)
-	if typeof(json.result) == TYPE_DICTIONARY:
-		result = json.result
+	var json = JSON.new()
+	var parse_result = json.parse(json_file)
+	if parse_result == OK:
+		if typeof(json.data) == TYPE_DICTIONARY:
+			result = json.data
 	else:
 		print_debug("Error to parse the JSON file")
 	return result
 
 
 func read_sound_manager_settings() -> bool:
-	if not file.file_exists("res://addons/sound_manager/SoundManager.json"):
+	if not FileAccess.file_exists("res://addons/sound_manager/SoundManager.json"):
 		return false
 	
-	file.open("res://addons/sound_manager/SoundManager.json", File.READ)
-	data_settings = parse_json_string(file.get_as_text())
-	file.close()
+	file_access = FileAccess.open("res://addons/sound_manager/SoundManager.json", FileAccess.READ)
+	if file_access:
+		data_settings = parse_json_string(file_access.get_as_text())
+		file_access.close()
 	
 	# Set the variables
 	for setting in data_settings.keys():
@@ -211,9 +214,10 @@ func update_sound_manager_settings() -> void:
 	data_settings["PRELOAD_RES"] = PRELOAD_RES
 	data_settings["PREINSTANTIATE_NODES"] = PREINSTANTIATE_NODES
 	data_settings["DEBUG"] = DEBUG
-	file.open("res://addons/sound_manager/SoundManager.json", File.WRITE)
-	file.store_string(JSON.print(data_settings, "", true))
-	file.close()
+	file_access = FileAccess.open("res://addons/sound_manager/SoundManager.json", FileAccess.WRITE)
+	if file_access:
+		file_access.store_string(JSON.stringify(data_settings, "", true))
+		file_access.close()
 	self.update_gui()
 
 

@@ -111,7 +111,7 @@ func _PlanToShowUnlockedTile(unlocked_tile):
 
 func _pause_before_show_stuff():
     var timer = $extra_pauser
-    timer.connect("timeout",self,"_show_stuff_after_level")
+    timer.connect("timeout",_show_stuff_after_level)
     timer.set_wait_time(self.pause_b4_show_stuff_s)
     timer.start()
 
@@ -119,7 +119,7 @@ func _pause_before_show_stuff():
 func _pause_after_show_stuff():
     print("PAUSE after show stuff")
     var timer = $extra_pauser
-    timer.connect("timeout",self,"_show_stuff_after_level")
+    timer.connect("timeout",_show_stuff_after_level)
     timer.set_wait_time(pause_af_show_stuff_s)
     timer.start()
 
@@ -153,7 +153,7 @@ func _display_bonus():
     var update_score_every = 0.05 # seconds
     var update_score_nan_kai = sound_duration / update_score_every
     SoundManager.play_se("Score count up")
-    points.connect("qty_reached",self,"_pause_after_show_stuff")
+    points.connect("qty_reached",_pause_after_show_stuff)
     points.set_delay(update_score_every)
     var bonus_target = self._info_for_star_calc['num_tiles'] * self.points_per_tile
     points.set_target(bonus_target)	# tell spinner where to stop
@@ -183,7 +183,7 @@ func _show_unlocked_overlay(local_unlocked_tile):
     $UnlockedTileButton.show()
     self._need_remove_unlock_button = true
     var timer = get_tree().create_timer(self.show_unlock_button_s)
-    timer.connect("timeout",self,"_timeout_unlocked_button")
+    timer.connect("timeout",_timeout_unlocked_button)
 
 #####################################################
 #

@@ -33,7 +33,7 @@ func _init():
     add_buttons_to_scene(world_type)
 
 func _slot_size():
-    var os_window_width = OS.get_window_size().x
+    var os_window_width = get_viewport().get_window().size.x
     var one_third_of_screen = os_window_width / buttons_across
     return one_third_of_screen
 
@@ -57,15 +57,15 @@ func add_buttons_to_scene(button_type):
     var button_loc = Vector2(0,0)
     for level in range(1,num_buttons+1):
         button_loc = level_to_pixels(level)
-        var level_but = LevelSelectButton.instance()
+        var level_but = LevelSelectButton.instantiate()
         level_but.set_position(button_loc)
         level_but.set_level(level, button_type)
         level_but.set_size(Vector2(_slot_size(),_slot_size()))
         level_but.set_num_stars(Savior.read_num_stars(self.get_world_type(),level))
         level_but.set_button_type(button_type)
-        level_but.connect("pressed",self,"_on_Button_pressed",[level])
-        level_but.connect("mouse_entered",self,"_mouse_entered",[level])
-        level_but.connect("mouse_exited",self,"_mouse_exited",[level])
+        level_but.connect("pressed",_on_Button_pressed.bind(level))
+        level_but.connect("mouse_entered",_mouse_entered.bind(level))
+        level_but.connect("mouse_exited",_mouse_exited.bind(level))
         add_child(level_but)
 
 func level_to_pixels(level):

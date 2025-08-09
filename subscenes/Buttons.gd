@@ -22,10 +22,10 @@ var endLevelButtons = null
 var steering_pad = null
 
 func _init():
-    steering_pad = SteeringPad.instance()
+    steering_pad = SteeringPad.instantiate()
     add_child(steering_pad)
 
-    endLevelButtons = EndLevelBut.instance()
+    endLevelButtons = EndLevelBut.instantiate()
     add_child(endLevelButtons)
 
 func grok_input(boolean):

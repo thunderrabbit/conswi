@@ -95,7 +95,7 @@ func piece_unclicked():
         # figure out if the swipe is required
         var swipe_was_required = Game.game_hud.star_reqs.swiped_piece(swipe_name)
 
-        swipe_shape = SwipeShape.instance()
+        swipe_shape = SwipeShape.instantiate()
         swipe_shape.set_shape(ShapeShifter.getBitmapOfSwipeCoordinates(swipe_array),clicked_this_piece_type)
         swipe_shape.set_position(Helpers.slot_to_pixels(dimensions["topleft"]))
         swipe_shape.set_text_word(SwipeWords.random_word(swipe_array.size()))
@@ -105,12 +105,12 @@ func piece_unclicked():
             if(swipe_length > 12):
                 swipe_length = 12           # ain't no sound for > 12
             SoundManager.play_se("Swipe " + str(swipe_length))
-            swipe_shape.connect("shrunk_shape",self,"shrank_required_shape")
+            swipe_shape.connect("shrunk_shape",shrank_required_shape)
             # after swipe, move shape to correct/required shape location
             swipe_shape.shrink_shape(Game.game_hud.star_reqs.required_swipe_location(swipe_name),G.shrink_shape_duration)
             self.correct_swipe_counter = self.correct_swipe_counter + 1
         else:
-            swipe_shape.connect("flew_away", self, "inc_saved_tile_counter")
+            swipe_shape.connect("flew_away", inc_saved_tile_counter)
             swipe_shape.fly_away_randomly(G.random_flight_duration)
 
         self.saved_tiles = self.saved_tiles + swipe_array.size()  # eventually only use save_tile_counter

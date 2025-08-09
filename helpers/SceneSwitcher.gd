@@ -40,13 +40,13 @@ func _deferred_goto_scene(path):
 
     # Immediately free the current scene,
     # there is no risk here.
-    current_scene.free()
+    current_scene.queue_free()
 
     # Load new scene
     var s = ResourceLoader.load(path)
 
     # Instance the new scene
-    current_scene = s.instance()
+    current_scene = s.instantiate()
 
     # Add it to the active scene, as child of root
     get_tree().get_root().add_child(current_scene)

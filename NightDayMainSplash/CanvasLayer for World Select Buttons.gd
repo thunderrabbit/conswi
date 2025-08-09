@@ -59,15 +59,15 @@ func add_world_buttons():
         new_butt.set_scale(Vector2(button_width/texture_size.x,button_width/texture_size.y))
         new_butt.margin_top = -button_width / 2
         print("add texture ", texture_name)
-        new_butt.connect("pressed", get_parent(), "world_button_clicked", [texture_name])
+        new_butt.connect("pressed", get_parent().world_button_clicked.bind(texture_name))
         add_child(new_butt)
         button_count += 1
 
 func get_button_width():
-    return OS.get_window_size().x * button_width_percent_of_screen
+    return get_viewport().get_window().size.x * button_width_percent_of_screen
 
 func get_left_anchor(count):
-    var left_margin = (OS.get_window_size().x - get_button_width()) / 2
+    var left_margin = (get_viewport().get_window().size.x - get_button_width()) / 2
     var push_right = get_button_width() * (1 + button_gap_percent_of_button_width) * count
     return left_margin + push_right
 

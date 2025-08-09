@@ -64,7 +64,7 @@ func _ready():
     stop_level_timer()
 
     # tell the Magnetism timer to call Helpers.magnetism_called (every MAGNETISM_TIME seconds)
-    get_node("Magnetism").connect("timeout", get_node("/root/Helpers"), "magnetism_called", [])
+    get_node("Magnetism").connect("timeout", get_node("/root/Helpers").magnetism_called)
 
 
 

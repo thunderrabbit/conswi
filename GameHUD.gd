@@ -37,19 +37,19 @@ func addHUDtoGame(game):
     self.buttons.set_game_scene(self.game)
     add_child(self.buttons)
 
-    level_reqs = LevelRequirements.instance()
+    level_reqs = LevelRequirements.instantiate()
     level_reqs.when_finished_callback(self)
     add_child(level_reqs)
 
-    star_reqs = StarRequirements.instance()
+    star_reqs = StarRequirements.instantiate()
     star_reqs.when_finished_callback(self)
     add_child(star_reqs)
 
-    self.stars_after_level = StarsAfterLevel.instance()
+    self.stars_after_level = StarsAfterLevel.instantiate()
     self.stars_after_level.set_game_scene(self.game)
     add_child(self.stars_after_level)
 
-    self.saved_tiles = SavedTiles.instance()
+    self.saved_tiles = SavedTiles.instantiate()
 #    self.saved_tiles.anchor_left = G.Saved_Tiles_Anchor_Left
 #    self.saved_tiles.anchor_top = G.Saved_Tiles_Anchor_Top
     add_child(self.saved_tiles)

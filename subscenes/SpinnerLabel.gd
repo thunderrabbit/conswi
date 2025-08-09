@@ -26,7 +26,7 @@ var increment = 1
 signal qty_reached
 
 func _ready():
-    tick_timer.connect("timeout",self,"_check_spin_qty")
+    tick_timer.connect("timeout",_check_spin_qty)
     add_child(tick_timer)  # so it gets processed()
 
 func set_increment(increment):

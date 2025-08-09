@@ -93,12 +93,12 @@ func display_next_requirement():
         # look up how many are required
         var reqd_qty = self.star_requirements[currently_showing_name]
 
-        currently_showing_shape = SwipeShape.instance()
+        currently_showing_shape = SwipeShape.instantiate()
         currently_showing_shape.show_finger = self.show_finger
 
         required_shapes_hud[currently_showing_name] = currently_showing_shape
         # after shape has been displayed (and number counted down) we will shrink the shape
-        currently_showing_shape.connect("displayed_shape",self,"shape_has_been_displayed")
+        currently_showing_shape.connect("displayed_shape",shape_has_been_displayed)
         # note we are using ShapeShifter and Helpers here
         # but not sending them in because I do not know how to send them in via connect().
         # Godot makes it simple to not worry about this, so Globals it is.
@@ -112,7 +112,7 @@ func display_next_requirement():
 
 func shape_has_been_displayed():
     # once shape has been shrunk, go to above function to display next shape
-    currently_showing_shape.connect("shrunk_shape",self,"display_next_requirement")
+    currently_showing_shape.connect("shrunk_shape",display_next_requirement)
     currently_showing_shape.shrink_shape(location_of_required_shape[currently_showing_name], G.shrink_shape_duration)
 
 func swiped_piece(piece_name):

@@ -33,12 +33,12 @@ func _ready():
 func set_type(new_tile_type_ordinal):
     tile_type = new_tile_type_ordinal
     # instantiate 1 Tile each for our player and shadow.
-    mytile = Segment.instance()
+    mytile = Segment.instantiate()
     mytile.set_tile_type(new_tile_type_ordinal)
     # add Tile to scene
     add_child(mytile)
 
-    myshadow = Segment.instance()
+    myshadow = Segment.instantiate()
     myshadow.set_tile_type(new_tile_type_ordinal)
     # Tell Tile to tell its sprite it's a shadow
     myshadow.is_shadow()

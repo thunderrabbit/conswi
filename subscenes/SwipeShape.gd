@@ -46,7 +46,7 @@ func set_shape(shape_array, tile_type = G.TYPE_DOG):
             var x = num % width
             var y = num / width
             loc = Vector2(x,y)			# where to put new sprite
-            var sprite = Sprite.new()
+            var sprite = Sprite2D.new()
             sprite.set_script(sprite_script)
             sprite.set_tile_type(tile_type)
             sprite.set_position(Helpers.slot_to_pixels(loc))
@@ -82,7 +82,7 @@ func move_shape_left(pixels_to_slide, duration):
 func shrink_shape(go_to_loc, duration):
     var ratio = G.REQ_SHAPE_SHRINK_FACTOR
     var effect = get_node("Tween")              # in SwipeShape.tscn
-    effect.connect("tween_completed", self, "shrunk_shape")
+    effect.connect("tween_completed", shrunk_shape)
     effect.interpolate_property(self, "scale",
             self.get_scale(), Vector2(ratio, ratio), duration,
             Tween.TRANS_QUAD, Tween.EASE_OUT)
@@ -96,7 +96,7 @@ func fly_away_randomly(duration):
     print("first tween starting")
     var go_to_loc = Helpers.slot_to_pixels(Vector2(4,10))
     var effect = get_node("Tween")              # in SwipeShape.tscn
-    effect.connect("tween_completed", self, "come_back_to_location")
+    effect.connect("tween_completed", come_back_to_location)
     effect.interpolate_property(self, 'scale', self.get_scale(), Vector2(5, 5), duration, Tween.TRANS_QUAD, Tween.EASE_OUT)
     effect.interpolate_property(self, 'position', self.get_position(), go_to_loc, duration,	Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
     effect.interpolate_property(self, 'rotation', 0, 6, duration, Tween.TRANS_LINEAR, Tween.EASE_OUT_IN)
@@ -115,7 +115,7 @@ func come_back_to_location(obj, key):
     var duration = 0.9
     var go_to_loc = Helpers.slot_to_pixels(Vector2(4,10)) # was this but it was moved to GameHud and I don't know how to access gamehud from here  HUD.get_node('SavedTileCount').get_global_position()
     var effect = get_node("Tween")              # in SwipeShape.tscn
-    effect.connect("tween_completed", self, "flew_away")
+    effect.connect("tween_completed", flew_away)
     effect.interpolate_property(self, 'scale', self.get_scale(), Vector2(0.02, 0.02), duration, Tween.TRANS_QUAD, Tween.EASE_OUT)
     effect.interpolate_property(self, 'position', self.get_position(), go_to_loc, duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
     effect.interpolate_property(self, 'rotation', 0, 6, duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
@@ -140,7 +140,7 @@ func shrunk_shape(obj, key):
 # how many of these shapes are required
 func display_quantity(quantity):
     # once the spinner is done, we want it to tell us
-    spinner.connect("qty_reached",self,"_displayed_quantity")
+    spinner.connect("qty_reached", _displayed_quantity)
     print("remove set_position because .tscn position works well enough")
 #    spinner.set_position(self.numberic_offset_pixels)	# hardcoded until I can figure out positioning
     spinner.show()					# just in case
@@ -152,7 +152,7 @@ func display_quantity(quantity):
 # tiles are required to win the level.   Do it quick by starting from required number
 func display_quantity_quickly(quantity):
     # once the spinner is done, we want it to tell us
-    spinner.connect("qty_reached",self,"_displayed_quantity")
+    spinner.connect("qty_reached", _displayed_quantity)
     print("remove set_position because .tscn position works well enough")
 #    spinner.set_position(self.numberic_offset_pixels)	# hardcoded until I can figure out positioning
     spinner.show()					# just in case
@@ -166,7 +166,7 @@ func display_quantity_quickly(quantity):
 func _displayed_quantity():
     # set up the timer which we will use to pause the action
     # after the shape has counted up to its target
-    pauser.connect("timeout",self,"dramatically_paused_after_display")
+    pauser.connect("timeout", dramatically_paused_after_display)
     pauser.set_wait_time(pause_time)
     pauser.set_one_shot(true)
     add_child(pauser)			# so it gets processed()
