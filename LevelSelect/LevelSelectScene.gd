@@ -30,6 +30,9 @@ const LevelSelectButton = preload("LevelSelectButton.tscn")
 func _init():
     var world_type = get_world_type()
     set_world_background(world_type)
+
+func _ready():
+    var world_type = get_world_type()
     add_buttons_to_scene(world_type)
 
 func _slot_size():

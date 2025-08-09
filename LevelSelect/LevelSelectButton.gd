@@ -48,9 +48,9 @@ func set_button_type(type):   #  e.g. G.TYPE_DOG
     var my_type = type
     var my_type_string = TileDatabase.tiles[my_type]["ITEM_NAME"]
     # background path example "res://images/world_skins/dog/dog_level_2star@3x.png"
-    var background = "res://images/world_skins/" +
-                            my_type_string + "/" +
-                            my_type_string + "_level_" +
+    var background = "res://images/world_skins/" + \
+                            my_type_string + "/" + \
+                            my_type_string + "_level_" + \
                             str(num_stars) + "star@3x.png"
     texture_normal = load(background)
 
