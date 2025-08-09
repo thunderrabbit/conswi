@@ -20,13 +20,13 @@ extends Node
 # var b = "textvar"
 
 func _ready():
-    # Called when the node is added to the scene for the first time.
-    SoundManager.play_bgm("Menu Background")
-    HUD.hideBottomButtons()
+	# Called when the node is added to the scene for the first time.
+	### SoundManager.play_bgm("Menu Background")
+	HUD.hideBottomButtons()
 
 func world_button_clicked(selected_world_type):
 #    print(TileDatabase.tiles[selected_world_type]["ITEM_NAME"])
-    SoundManager.stop("Menu Background")
-    Helpers.requested_world = selected_world_type
-    HUD.showBottomButtons()
-    get_node("/root/SceneSwitcher").goto_scene("res://LevelSelect/LevelSelectScene.tscn")
+	### SoundManager.stop("Menu Background")
+	Helpers.requested_world = selected_world_type
+	HUD.showBottomButtons()
+	get_node("/root/SceneSwitcher").goto_scene("res://LevelSelect/LevelSelectScene.tscn")

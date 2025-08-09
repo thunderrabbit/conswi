@@ -31,7 +31,6 @@ LevelDatabase="*res://levels/LevelDatabase.gd"
 VisibleSwipeOverlay="*res://VisibleSwipeOverlay.gd"
 Background="*res://subscenes/Background.tscn"
 SwipeWords="*res://helpers/SwipeWords.gd"
-SoundManager="*res://addons/sound_manager/module/SoundManager.tscn"
 
 [display]
 
@@ -40,10 +39,6 @@ window/handheld/orientation="portrait"
 window/size/width=1242
 window/size/height=2688
 window/stretch/shrink="1"
-
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/sound_manager/plugin.cfg")
 
 [gdnative]
 

@@ -1,42 +1,36 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=6 format=3 uid="uid://bmll30bjvph71"]
 
-[ext_resource path="res://SplashScreen/SplashScreen.gd" type="Script" id=1]
-[ext_resource path="res://SplashScreen/istlogo.png" type="Texture" id=2]
-[ext_resource path="res://images/Folder_2.5/01_space@3x.png" type="Texture" id=3]
-[ext_resource path="res://images/Folder_2.5/hand1@3x.png" type="Texture" id=4]
-[ext_resource path="res://images/Folder_2.5/hand2@3x.png" type="Texture" id=5]
+[ext_resource type="Script" uid="uid://ce63xs75bo8tk" path="res://SplashScreen/SplashScreen.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://bsdcxoolyvcpm" path="res://SplashScreen/istlogo.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://bh1tt5h1j31or" path="res://images/Folder_2.5/01_space@3x.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://dglxusre11ifw" path="res://images/Folder_2.5/hand1@3x.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://b5u37abyxwj68" path="res://images/Folder_2.5/hand2@3x.png" id="5"]
 
 [node name="SplashScreen" type="MarginContainer"]
-margin_right = 1242.0
-margin_bottom = 2688.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+script = ExtResource("1")
 
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 317.211, 663.238 )
-scale = Vector2( 0.452061, 0.353997 )
-texture = ExtResource( 2 )
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(317.211, 663.238)
+scale = Vector2(0.452061, 0.353997)
+texture = ExtResource("2")
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 autostart = true
 
-[node name="StoryOverlay" type="Sprite" parent="."]
-texture = ExtResource( 3 )
+[node name="StoryOverlay" type="Sprite2D" parent="."]
+texture = ExtResource("3")
 centered = false
 
 [node name="PawAgreeButton" type="TextureButton" parent="."]
 visible = false
-margin_right = 1242.0
-margin_bottom = 2688.0
+layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture_normal = ExtResource( 4 )
-texture_pressed = ExtResource( 5 )
+texture_normal = ExtResource("4")
+texture_pressed = ExtResource("5")
 
 [connection signal="timeout" from="Timer" to="." method="_on_SplashScreen_Timer_timeout"]
 [connection signal="button_up" from="PawAgreeButton" to="." method="_on_PawAgree_button_up"]
