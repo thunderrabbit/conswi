@@ -24,7 +24,7 @@ extends Node2D
 
 # level zero allows for quickly testing swipe functionality
 const always_play_level_zero = false
-export var allow_easy_win = false
+@export var allow_easy_win = false
 
 const GameHUD = preload("res://GameHUD.gd")
 

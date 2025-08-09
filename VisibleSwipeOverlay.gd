@@ -34,7 +34,7 @@ func draw_this_swipe(swipe, color = Color(1.0, 1.0, 0.5, 1.0), inc_mouse = true)
     self.swipe_color = color
 
 func _process(delta):
-    update()
+    queue_redraw()
 
 func _draw():
     if draw_slot_list != []:

@@ -20,7 +20,7 @@ const level_format = "res://levels/%s/%s_%02d.gd"		# DogWorld/normal_01.gd
 var animal_names = {}
 
 func _ready():
-    if animal_names.empty():
+    if animal_names.is_empty():
         # these e.g. G.TYPE_BEAR are defined in helpers/Globals.gd
         animal_names[G.TYPE_PANDA] = "Panda"
         animal_names[G.TYPE_BEAR] = "Bear"

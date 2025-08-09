@@ -23,7 +23,7 @@ func _ready():
     # fill in bitmapNames so we can look up the name of a swipe given its coordinates
     for shapeName in ShapeDatabase.shapes:
         # get the Shape Array as a string to use as a dictionary key in bitmapNames
-        var arr_as_str = String(ShapeDatabase.shapes[shapeName])
+        var arr_as_str = str(ShapeDatabase.shapes[shapeName])
         # if it exists, then presumably there is an error in the ShapeDatabase
         # (or an error in belief that different swipes produce different arrays)
         if bitmapNames.has(arr_as_str):
@@ -34,7 +34,7 @@ func _ready():
 
 func _getBitmapStringOfSwipeCoordinates(swipeCoordinates):
     # we need a String because arrays cannot be reliably used as Dictionary keys
-    return String(getBitmapOfSwipeCoordinates(swipeCoordinates))
+    return str(getBitmapOfSwipeCoordinates(swipeCoordinates))
 
 # private function which gets a string representing a swipe
 # I am going on the unproven assumption that any different swipe shape

@@ -40,20 +40,20 @@ func set_level(level, type):  #  e.g.  5,   G.TYPE_DOG
     print ("res://images/world_skins/" + 
                             my_type_string + "/" +
                             my_type_string + "_level_" +
-                            String(level) + "@3x.png");
-    var path_to_num = String("res://images/world_skins/" + 
+                            str(level) + "@3x.png")
+    var path_to_num = "res://images/world_skins/" + 
                             my_type_string + "/" +
                             my_type_string + "_level_" +
-                            String(level) + "@3x.png");
+                            str(level) + "@3x.png"
     $level_number.set_texture(load(path_to_num))
 
 func set_button_type(type):   #  e.g. G.TYPE_DOG
     var my_type = type
     var my_type_string = TileDatabase.tiles[my_type]["ITEM_NAME"]
     # background path example "res://images/world_skins/dog/dog_level_2star@3x.png"
-    var background = String("res://images/world_skins/" +
+    var background = "res://images/world_skins/" +
                             my_type_string + "/" +
                             my_type_string + "_level_" +
-                            String(num_stars) + "star@3x.png")
+                            str(num_stars) + "star@3x.png"
     set_normal_texture(load(background))
 

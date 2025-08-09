@@ -16,8 +16,8 @@
 extends Node2D
 
 const sprite_script = preload("res://tiles/Segment.gd")
-onready var spinner = get_node("SpinnerLabel")
-onready var pauser = Timer.new()
+@onready var spinner = get_node("SpinnerLabel")
+@onready var pauser = Timer.new()
 
 var dimensions = Vector2(0,0)	# will tell the size of the shape
 const tick_delay = 0.73	 * G.ofaster		# pause between countup qty

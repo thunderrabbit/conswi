@@ -158,7 +158,7 @@ func clarify_star_requirements():
             required.hide()				# remove piece from screen
             required.queue_free()
             _removed_name_from_visible(name)
-    if self.star_requirements.empty():
+    if self.star_requirements.is_empty():
         emit_signal("achieved_three_stars")  # This is not yet used
 
 # count how many swipes are required to get three stars.  Called by Game.md when starting a level

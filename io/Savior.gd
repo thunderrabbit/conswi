@@ -18,8 +18,8 @@ extends Node
 const TEXT_SAVE_PATH = "user://save_game_data.dat"
 const ENCRYPTED_PATH = "user://save_game_data.bin"
 
-var saved_game = File.new() 	# file which will allow us to see what was written
-var encrypted_game = File.new() # file which will actually read the data
+var saved_game 	# file which will allow us to see what was written
+var encrypted_game # file which will actually read the data
 var password					# used to encrypt data
 
 var save_dict = {} 				# variable to store data in memory
@@ -40,9 +40,9 @@ func _ready():
 #
 #   Create local files if necessary
 func _create_files_prn():
-    if not saved_game.file_exists(TEXT_SAVE_PATH):
+    if not FileAccess.file_exists(TEXT_SAVE_PATH):
         self._save_data_encrypted_prn(TEXT_SAVE_PATH,false)		# false = no encryption
-    if not encrypted_game.file_exists(ENCRYPTED_PATH):
+    if not FileAccess.file_exists(ENCRYPTED_PATH):
         self._save_data_encrypted_prn(ENCRYPTED_PATH)
 
 ####################################################
@@ -51,12 +51,12 @@ func _create_files_prn():
 #      secure binary format (default)
 #      debug-friendly text format
 func _save_data_encrypted_prn(filename, encrypt = true):
-    var f = File.new()
+    var f
     if(encrypt):
-        f.open_encrypted_with_pass(filename, File.WRITE, self.password)
+        f = FileAccess.open_encrypted_with_pass(filename, FileAccess.WRITE, self.password)
     else:
-        f.open(filename, File.WRITE)
-    f.store_string(to_json(self.save_dict))
+        f = FileAccess.open(filename, FileAccess.WRITE)
+    f.store_string(JSON.stringify(self.save_dict))
     f.close()
 
 ####################################################
@@ -139,12 +139,14 @@ func read_num_stars(world,level):
 #   If anyone tampers with local text file,
 #      they cannot change their score or w/e
 func read_savegame():
-    var read_file = File.new()
-    read_file.open_encrypted_with_pass(self.ENCRYPTED_PATH, File.READ, self.password)
+    var read_file = FileAccess.open_encrypted_with_pass(self.ENCRYPTED_PATH, FileAccess.READ, self.password)
     var save_data = read_file.get_line()	# All data is in a single line
     read_file.close()
-    self.save_dict = parse_json(save_data)
-    if(self.save_dict == null):
+    var json = JSON.new()
+    var parse_result = json.parse(save_data)
+    if parse_result == OK:
+        self.save_dict = json.get_data()
+    else:
         # Needed as of Godot 3.2.3, possibly because save file did not get moved to new app storage area??
         self.save_dict = {}
 
@@ -158,7 +160,7 @@ func _initialize_data():
 #   CHANGING THIS STRING WILL RESET ALL STARS to zero (or bring old values back from the dead)!
 #
 func _world_string(world):
-    return "world" + String(world) + "_"
+    return "world" + str(world) + "_"
 
 ####################################################
 #
@@ -166,4 +168,4 @@ func _world_string(world):
 #   CHANGING THIS STRING WILL RESET ALL STARS to zero (or bring old values back from the dead)!
 #
 func _level_string(level):
-    return "level" + String(level) + "_"
+    return "level" + str(level) + "_"

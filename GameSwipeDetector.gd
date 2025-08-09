@@ -104,7 +104,7 @@ func piece_unclicked():
             var swipe_length = swipe_array.size()
             if(swipe_length > 12):
                 swipe_length = 12           # ain't no sound for > 12
-            SoundManager.play_se("Swipe " + String(swipe_length))
+            SoundManager.play_se("Swipe " + str(swipe_length))
             swipe_shape.connect("shrunk_shape",self,"shrank_required_shape")
             # after swipe, move shape to correct/required shape location
             swipe_shape.shrink_shape(Game.game_hud.star_reqs.required_swipe_location(swipe_name),G.shrink_shape_duration)

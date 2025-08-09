@@ -14,7 +14,7 @@ extends SoundManagerModule
 
 # Variables
 
-export (Dictionary) var Default_Sounds_Properties = {
+@export var Default_Sounds_Properties: Dictionary = {
 	"BGM" : {
 		"Volume" : 0,
 		"Pitch" : 1,
@@ -33,12 +33,12 @@ export (Dictionary) var Default_Sounds_Properties = {
 	},
 }
 
-export (bool) var preload_resources = false
-export (bool) var preinstantiate_nodes = false
-export (bool) var debug = true
+@export var preload_resources: bool = false
+@export var preinstantiate_nodes: bool = false
+@export var debug: bool = true
 
-onready var Audiostreams : Array = self.get_children()
-onready var soundmgr_dir_rel_path = self.get_script().get_path().get_base_dir()
+@onready var Audiostreams : Array = self.get_children()
+@onready var soundmgr_dir_rel_path = self.get_script().get_path().get_base_dir()
 
 var sounds_playing : Array = []
 var bgm_playing				: String
@@ -582,7 +582,7 @@ func _ready() -> void:
 	if debug:
 		print_debug("Error: sound manager is not enabled")
 			
-	if preload_resources and Preloaded_Resources.empty():
+	if preload_resources and Preloaded_Resources.is_empty():
 		if debug:
 			print_debug("Preloading...")
 		self.preload_audio_files()

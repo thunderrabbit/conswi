@@ -52,7 +52,7 @@ func GameGridSlotSize():
     return OneNthOfScreenWidth(Helpers.slots_across)
 
 func OneNthOfScreenWidth(N):
-    var os_window_width = OS.get_window_size().x
+    var os_window_width = get_viewport().get_window().size.x
     var one_nth_of_screen = os_window_width / N
     return one_nth_of_screen
 

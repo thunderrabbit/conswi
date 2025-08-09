@@ -4,14 +4,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-ConSwi is a swipe-based puzzle game built with Godot Engine 3. The game involves swiping patterns to collect animal tiles across different themed worlds (Dog, Cow, Lion, Monkey, Panda, Rabbit, Tiger, etc.). Players must complete specific swipe patterns to clear tiles and progress through levels.
+ConSwi is a swipe-based puzzle game built with Godot Engine 4. The game involves swiping patterns to collect animal tiles across different themed worlds (Dog, Cow, Lion, Monkey, Panda, Rabbit, Tiger, etc.). Players must complete specific swipe patterns to clear tiles and progress through levels.
+
+**Note**: This project has been migrated from Godot 3 to Godot 4, with all major API changes updated for compatibility.
 
 ## Development Commands
 
 ### Running the Game
-- Open project in Godot Editor: Launch Godot and open the `project.godot` file
+- Open project in Godot Editor: Launch Godot 4.x and open the `project.godot` file
 - Test/Play: Press F5 or use the "Play" button in Godot Editor
 - Export builds: Use Godot's export functionality with presets defined in `export_presets.cfg`
+- **Important**: Must use Godot 4.x or later due to API changes from migration
 
 ### Export Platforms
 The game supports multiple export targets:
@@ -95,3 +98,17 @@ The game's core mechanic revolves around pattern recognition:
 - Level 0 is designed for quick swipe functionality testing
 - Use debug mode flags in Game.gd for development testing
 - Test swipe detection by enabling debug output in GameSwipeDetector.gd
+
+## Migration Notes (Godot 3 → 4)
+
+Key changes that have been applied:
+- File API: `File` → `FileAccess`, `to_json()` → `JSON.stringify()`, `parse_json()` → `JSON.parse_string()`
+- Node types: `Sprite` → `Sprite2D`
+- Rendering: `update()` → `queue_redraw()`
+- Input: Updated input event structure and key codes
+- Export syntax: `export var` → `@export var`
+- Onready: `onready var` → `@onready var`
+- Tool scripts: `tool` → `@tool`
+- Dictionary: `.empty()` → `.is_empty()`
+- String constructor: `String()` → `str()`
+- OS API: `OS.get_window_size()` → `get_viewport().get_window().size`

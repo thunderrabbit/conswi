@@ -1,75 +1,75 @@
-tool
+@tool
 extends ScrollContainer
 
 # Variables
 
 # Sound properties configuration section
-onready var bgm_properties_panel = self.get_node("VBoxContainer/BGMPropertiesPanel")
-onready var bgm_properties_checkbox = self.get_node("VBoxContainer/BGMPropertiesPanel/BGMPropertiesCheck/CheckBox")
-onready var bgm_volume_panel = self.get_node("VBoxContainer/BGMPropertiesPanel/BGMVolume")
-onready var bgm_pitch_panel = self.get_node("VBoxContainer/BGMPropertiesPanel/BGMPitch")
-onready var bgm_volume_value = self.get_node("VBoxContainer/BGMPropertiesPanel/BGMVolume/Value")
-onready var bgm_pitch_value = self.get_node("VBoxContainer/BGMPropertiesPanel/BGMPitch/Value")
-onready var bgm_volume_line_edit = self.get_node("VBoxContainer/BGMPropertiesPanel/BGMVolume/LineEdit")
-onready var bgm_pitch_line_edit = self.get_node("VBoxContainer/BGMPropertiesPanel/BGMPitch/LineEdit")
-onready var bgm_volume_restore_button = self.get_node("VBoxContainer/BGMPropertiesPanel/BGMVolume/ToolButton")
-onready var bgm_pitch_restore_button = self.get_node("VBoxContainer/BGMPropertiesPanel/BGMPitch/ToolButton")
-onready var bgs_properties_panel = self.get_node("VBoxContainer/BGSPropertiesPanel")
-onready var bgs_properties_checkbox = self.get_node("VBoxContainer/BGSPropertiesPanel/BGSPropertiesCheck/CheckBox")
-onready var bgs_volume_panel = self.get_node("VBoxContainer/BGSPropertiesPanel/BGSVolume")
-onready var bgs_pitch_panel = self.get_node("VBoxContainer/BGSPropertiesPanel/BGSPitch")
-onready var bgs_volume_value = self.get_node("VBoxContainer/BGSPropertiesPanel/BGSVolume/Value")
-onready var bgs_pitch_value = self.get_node("VBoxContainer/BGSPropertiesPanel/BGSPitch/Value")
-onready var bgs_volume_line_edit = self.get_node("VBoxContainer/BGSPropertiesPanel/BGSVolume/LineEdit")
-onready var bgs_pitch_line_edit = self.get_node("VBoxContainer/BGSPropertiesPanel/BGSPitch/LineEdit")
-onready var bgs_volume_restore_button = self.get_node("VBoxContainer/BGSPropertiesPanel/BGSVolume/ToolButton")
-onready var bgs_pitch_restore_button = self.get_node("VBoxContainer/BGSPropertiesPanel/BGSPitch/ToolButton")
-onready var se_properties_panel = self.get_node("VBoxContainer/SEPropertiesPanel")
-onready var se_properties_checkbox = self.get_node("VBoxContainer/SEPropertiesPanel/SEPropertiesCheck/CheckBox")
-onready var se_volume_panel = self.get_node("VBoxContainer/SEPropertiesPanel/SEVolume")
-onready var se_pitch_panel = self.get_node("VBoxContainer/SEPropertiesPanel/SEPitch")
-onready var se_volume_value = self.get_node("VBoxContainer/SEPropertiesPanel/SEVolume/Value")
-onready var se_pitch_value = self.get_node("VBoxContainer/SEPropertiesPanel/SEPitch/Value")
-onready var se_volume_line_edit = self.get_node("VBoxContainer/SEPropertiesPanel/SEVolume/LineEdit")
-onready var se_pitch_line_edit = self.get_node("VBoxContainer/SEPropertiesPanel/SEPitch/LineEdit")
-onready var se_volume_restore_button = self.get_node("VBoxContainer/SEPropertiesPanel/SEVolume/ToolButton")
-onready var se_pitch_restore_button = self.get_node("VBoxContainer/SEPropertiesPanel/SEPitch/ToolButton")
-onready var me_properties_panel = self.get_node("VBoxContainer/MEPropertiesPanel")
-onready var me_properties_checkbox = self.get_node("VBoxContainer/MEPropertiesPanel/MEPropertiesCheck/CheckBox")
-onready var me_volume_panel = self.get_node("VBoxContainer/MEPropertiesPanel/MEVolume")
-onready var me_pitch_panel = self.get_node("VBoxContainer/MEPropertiesPanel/MEPitch")
-onready var me_volume_value = self.get_node("VBoxContainer/MEPropertiesPanel/MEVolume/Value")
-onready var me_pitch_value = self.get_node("VBoxContainer/MEPropertiesPanel/MEPitch/Value")
-onready var me_volume_line_edit = self.get_node("VBoxContainer/MEPropertiesPanel/MEVolume/LineEdit")
-onready var me_pitch_line_edit = self.get_node("VBoxContainer/MEPropertiesPanel/MEPitch/LineEdit")
-onready var me_volume_restore_button = self.get_node("VBoxContainer/MEPropertiesPanel/MEVolume/ToolButton")
-onready var me_pitch_restore_button = self.get_node("VBoxContainer/MEPropertiesPanel/MEPitch/ToolButton")
+@onready var bgm_properties_panel = self.get_node("VBoxContainer/BGMPropertiesPanel")
+@onready var bgm_properties_checkbox = self.get_node("VBoxContainer/BGMPropertiesPanel/BGMPropertiesCheck/CheckBox")
+@onready var bgm_volume_panel = self.get_node("VBoxContainer/BGMPropertiesPanel/BGMVolume")
+@onready var bgm_pitch_panel = self.get_node("VBoxContainer/BGMPropertiesPanel/BGMPitch")
+@onready var bgm_volume_value = self.get_node("VBoxContainer/BGMPropertiesPanel/BGMVolume/Value")
+@onready var bgm_pitch_value = self.get_node("VBoxContainer/BGMPropertiesPanel/BGMPitch/Value")
+@onready var bgm_volume_line_edit = self.get_node("VBoxContainer/BGMPropertiesPanel/BGMVolume/LineEdit")
+@onready var bgm_pitch_line_edit = self.get_node("VBoxContainer/BGMPropertiesPanel/BGMPitch/LineEdit")
+@onready var bgm_volume_restore_button = self.get_node("VBoxContainer/BGMPropertiesPanel/BGMVolume/ToolButton")
+@onready var bgm_pitch_restore_button = self.get_node("VBoxContainer/BGMPropertiesPanel/BGMPitch/ToolButton")
+@onready var bgs_properties_panel = self.get_node("VBoxContainer/BGSPropertiesPanel")
+@onready var bgs_properties_checkbox = self.get_node("VBoxContainer/BGSPropertiesPanel/BGSPropertiesCheck/CheckBox")
+@onready var bgs_volume_panel = self.get_node("VBoxContainer/BGSPropertiesPanel/BGSVolume")
+@onready var bgs_pitch_panel = self.get_node("VBoxContainer/BGSPropertiesPanel/BGSPitch")
+@onready var bgs_volume_value = self.get_node("VBoxContainer/BGSPropertiesPanel/BGSVolume/Value")
+@onready var bgs_pitch_value = self.get_node("VBoxContainer/BGSPropertiesPanel/BGSPitch/Value")
+@onready var bgs_volume_line_edit = self.get_node("VBoxContainer/BGSPropertiesPanel/BGSVolume/LineEdit")
+@onready var bgs_pitch_line_edit = self.get_node("VBoxContainer/BGSPropertiesPanel/BGSPitch/LineEdit")
+@onready var bgs_volume_restore_button = self.get_node("VBoxContainer/BGSPropertiesPanel/BGSVolume/ToolButton")
+@onready var bgs_pitch_restore_button = self.get_node("VBoxContainer/BGSPropertiesPanel/BGSPitch/ToolButton")
+@onready var se_properties_panel = self.get_node("VBoxContainer/SEPropertiesPanel")
+@onready var se_properties_checkbox = self.get_node("VBoxContainer/SEPropertiesPanel/SEPropertiesCheck/CheckBox")
+@onready var se_volume_panel = self.get_node("VBoxContainer/SEPropertiesPanel/SEVolume")
+@onready var se_pitch_panel = self.get_node("VBoxContainer/SEPropertiesPanel/SEPitch")
+@onready var se_volume_value = self.get_node("VBoxContainer/SEPropertiesPanel/SEVolume/Value")
+@onready var se_pitch_value = self.get_node("VBoxContainer/SEPropertiesPanel/SEPitch/Value")
+@onready var se_volume_line_edit = self.get_node("VBoxContainer/SEPropertiesPanel/SEVolume/LineEdit")
+@onready var se_pitch_line_edit = self.get_node("VBoxContainer/SEPropertiesPanel/SEPitch/LineEdit")
+@onready var se_volume_restore_button = self.get_node("VBoxContainer/SEPropertiesPanel/SEVolume/ToolButton")
+@onready var se_pitch_restore_button = self.get_node("VBoxContainer/SEPropertiesPanel/SEPitch/ToolButton")
+@onready var me_properties_panel = self.get_node("VBoxContainer/MEPropertiesPanel")
+@onready var me_properties_checkbox = self.get_node("VBoxContainer/MEPropertiesPanel/MEPropertiesCheck/CheckBox")
+@onready var me_volume_panel = self.get_node("VBoxContainer/MEPropertiesPanel/MEVolume")
+@onready var me_pitch_panel = self.get_node("VBoxContainer/MEPropertiesPanel/MEPitch")
+@onready var me_volume_value = self.get_node("VBoxContainer/MEPropertiesPanel/MEVolume/Value")
+@onready var me_pitch_value = self.get_node("VBoxContainer/MEPropertiesPanel/MEPitch/Value")
+@onready var me_volume_line_edit = self.get_node("VBoxContainer/MEPropertiesPanel/MEVolume/LineEdit")
+@onready var me_pitch_line_edit = self.get_node("VBoxContainer/MEPropertiesPanel/MEPitch/LineEdit")
+@onready var me_volume_restore_button = self.get_node("VBoxContainer/MEPropertiesPanel/MEVolume/ToolButton")
+@onready var me_pitch_restore_button = self.get_node("VBoxContainer/MEPropertiesPanel/MEPitch/ToolButton")
 
 # Audiobuses configuration
-onready var bgm_bus_field = get_node("VBoxContainer/BGMBusPanel/NameField")
-onready var bgs_bus_field = get_node("VBoxContainer/BGSBusPanel/NameField")
-onready var se_bus_field = get_node("VBoxContainer/SEBusPanel/NameField")
-onready var me_bus_field = get_node("VBoxContainer/MEBusPanel/NameField")
+@onready var bgm_bus_field = get_node("VBoxContainer/BGMBusPanel/NameField")
+@onready var bgs_bus_field = get_node("VBoxContainer/BGSBusPanel/NameField")
+@onready var se_bus_field = get_node("VBoxContainer/SEBusPanel/NameField")
+@onready var me_bus_field = get_node("VBoxContainer/MEBusPanel/NameField")
 
 # Audio File Panel Toggles
-onready var audio_files_panel = get_node("VBoxContainer/AudioFilesPanel")
-onready var toggle_audio_files_button = get_node("VBoxContainer/ToggleFilesPanelButton")
+@onready var audio_files_panel = get_node("VBoxContainer/AudioFilesPanel")
+@onready var toggle_audio_files_button = get_node("VBoxContainer/ToggleFilesPanelButton")
 
 # File list section
-onready var file_list = get_node("VBoxContainer/AudioFilesPanel/ScrollContainer/Files")
+@onready var file_list = get_node("VBoxContainer/AudioFilesPanel/ScrollContainer/Files")
 
 # Dictionary section
-onready var dictionary_panel = get_node("VBoxContainer/DictionaryContainer/DictionaryPanel")
+@onready var dictionary_panel = get_node("VBoxContainer/DictionaryContainer/DictionaryPanel")
 
 # Advanced options section
-onready var advanced_panel = get_node("VBoxContainer/AdvancedOptions/AdvancedPanel")
-onready var advanced_button = get_node("VBoxContainer/AdvancedOptions/AdvancedPanel/AdvancedButton")
-onready var preload_panel = get_node("VBoxContainer/AdvancedOptions/PreloadPanel")
-onready var preload_button = get_node("VBoxContainer/AdvancedOptions/PreloadPanel/PreloadButton")
-onready var preinstantiate_panel = get_node("VBoxContainer/AdvancedOptions/PreinstantiatePanel")
-onready var preinstantiate_button = get_node("VBoxContainer/AdvancedOptions/PreinstantiatePanel/PreinstantiateButton")
-onready var debug_panel = get_node("VBoxContainer/AdvancedOptions/DebugPanel")
-onready var debug_button = get_node("VBoxContainer/AdvancedOptions/DebugPanel/DebugButton")
+@onready var advanced_panel = get_node("VBoxContainer/AdvancedOptions/AdvancedPanel")
+@onready var advanced_button = get_node("VBoxContainer/AdvancedOptions/AdvancedPanel/AdvancedButton")
+@onready var preload_panel = get_node("VBoxContainer/AdvancedOptions/PreloadPanel")
+@onready var preload_button = get_node("VBoxContainer/AdvancedOptions/PreloadPanel/PreloadButton")
+@onready var preinstantiate_panel = get_node("VBoxContainer/AdvancedOptions/PreinstantiatePanel")
+@onready var preinstantiate_button = get_node("VBoxContainer/AdvancedOptions/PreinstantiatePanel/PreinstantiateButton")
+@onready var debug_panel = get_node("VBoxContainer/AdvancedOptions/DebugPanel")
+@onready var debug_button = get_node("VBoxContainer/AdvancedOptions/DebugPanel/DebugButton")
 
 # Internal variables
 var TITLE : String = "SoundManager"
@@ -355,7 +355,7 @@ func insert_new_entry(key: String = "", value: String = ""):
 
 
 func populate_dictionary_panel():
-	if not Audio_Files_Dictionary.empty():
+	if not Audio_Files_Dictionary.is_empty():
 		
 		# Clean the dictionary panel
 		while dictionary_panel.get_child_count() > 0:

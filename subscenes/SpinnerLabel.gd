@@ -21,7 +21,7 @@ var value = 0		# this is the current value
 var target = 0		# if in spin mode, this is our destination
 var tick_delay = 0.73	# how many seconds to wait between ticks when spinning
 var increment = 1
-onready var tick_timer = Timer.new()
+@onready var tick_timer = Timer.new()
 
 signal qty_reached
 
@@ -34,7 +34,7 @@ func set_increment(increment):
 
 func set_value(value):
     self.value = value
-    set_text(String(value))
+    set_text(str(value))
 
 func set_target(target):
     self.target = target
