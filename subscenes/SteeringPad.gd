@@ -24,10 +24,10 @@ func set_game_scene(my_game_scene):
 # http://docs.godotengine.org/en/stable/learning/features/inputs/mouse_and_input_coordinates.html
 # Start with swipe down as it will be identical to "drop_down" action in _input()
 func _on_Area2D_input_event( viewport, event, shape_idx ):
-    if event.type == InputEvent.MOUSE_BUTTON \
-    and event.button_index == BUTTON_LEFT \
+    if event is InputEventMouseButton \
+    and event.button_index == MOUSE_BUTTON_LEFT \
     and event.pressed:
-        if event.pos.x < self.get_position().x:
+        if event.position.x < self.get_position().x:
             print("pad left")
             game_scene.input_x_direction = -1
         else:

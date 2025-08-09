@@ -29,7 +29,7 @@ var currently_showing_shape = null	# so we can come back and know what shape to 
 var currently_showing_name = null	# so we can look up where to show it
 
 func when_finished_callback(gameHUDScene):
-    connect("requirements_shown", gameHUDScene, "showed_level_requirements")
+    connect("requirements_shown", gameHUDScene.showed_level_requirements)
 
 # first, just get an array of names that we can slowly loop through
 # and display each required shape

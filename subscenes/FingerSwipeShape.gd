@@ -38,8 +38,8 @@ func finger_moved_a_bit ( object, key, elapsed, value ):
 func swipe_finger():
     if self.show_finger:
         $Finger.set_visible(true)
-        $FingerTween.connect("tween_completed", self, "finger_swiped")
-        $FingerTween.connect("tween_step", self, "finger_moved_a_bit")
+        $FingerTween.connect("tween_completed", finger_swiped)
+        $FingerTween.connect("tween_step", finger_moved_a_bit)
         # Move finger relative to the swipe.  (NOTE This only works for horizontal swipes)
         $FingerTween.interpolate_property($Finger, "position",
                 Vector2(0,0),									# finger start position, relative to the swiped piece
@@ -59,4 +59,4 @@ func display_quantity(quantity):
 func finger_swiped(obj, key):
     $Finger.set_visible(false)
     # This is the parent class display_quantity which actually displays the quantity
-    .display_quantity(self.quantity)
+    super.display_quantity(self.quantity)

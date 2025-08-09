@@ -31,7 +31,7 @@ var currently_showing_name = null	# so we can look up where to show it
 var show_finger = false				# usually do not show swiping finger (just on first couple levels)
 
 func when_finished_callback(gameHUDScene):
-    connect("requirements_shown", gameHUDScene, "showed_star_requirements")
+    connect("requirements_shown", gameHUDScene.showed_star_requirements)
 
 func show_finger_ka(show_finger):
     self.show_finger = show_finger
