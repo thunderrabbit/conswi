@@ -156,7 +156,8 @@ func clarify_level_requirements():
             required.queue_free()
             _removed_name_from_visible(name)
     if self.level_requirements.is_empty():
-        emit_signal("achieved_three_levels")  # This is not yet used
+        # emit_signal("achieved_three_levels")  # This is not yet used - signal not declared
+        pass  # No action needed for now
 
 # count how many swipes are required to get three levels.  Called by Game.md when starting a level
 func count_level_requirements():
