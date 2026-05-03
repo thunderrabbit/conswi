@@ -6,6 +6,9 @@ export_presets.cfg
 # This project
 out/*
 
+# Secrets
+.gh-token
+
 # General
 .DS_Store
 .AppleDouble
