@@ -2,6 +2,10 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## GitHub access
+
+Before running any `gh` command, run `source .gh-token` to load the conswi-scoped PAT (`GH_TOKEN`). Without it, `gh` falls back to Rob's user-wide token. Not needed for `git push/pull` (those use SSH).
+
 ## Project Overview
 
 ConSwi is a swipe-based puzzle game built with Godot Engine 4. The game involves swiping patterns to collect animal tiles across different themed worlds (Dog, Cow, Lion, Monkey, Panda, Rabbit, Tiger, etc.). Players must complete specific swipe patterns to clear tiles and progress through levels.
