@@ -64,10 +64,10 @@ func add_world_buttons():
         button_count += 1
 
 func get_button_width():
-    return get_viewport().get_window().size.x * button_width_percent_of_screen
+    return get_viewport().get_visible_rect().size.x * button_width_percent_of_screen
 
 func get_left_anchor(count):
-    var left_margin = (get_viewport().get_window().size.x - get_button_width()) / 2
+    var left_margin = (get_viewport().get_visible_rect().size.x - get_button_width()) / 2
     var push_right = get_button_width() * (1 + button_gap_percent_of_button_width) * count
     return left_margin + push_right
 
