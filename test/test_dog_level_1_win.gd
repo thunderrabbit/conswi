@@ -1,12 +1,29 @@
 extends GutTest
 
-# Goal of this file (per issue #106): drive Dog World Level 1 to completion
-# in an automated test, ending when the CLEAR! screen is visible.
-#
-# Status: scaffolding in place; full input-driven win is still pending.
-# See test_can_win_dog_level_1() below for the playbook the win should follow.
+# Drives Dog World Level 1 to completion via synthesized keyboard input
+# for drops, and direct signal emission on the tile Area2D nodes for the
+# vertical3 swipe (synthesized mouse events do not feed Godot 4's
+# collision-picking subsystem). Per issue #106.
 
 const GAME_SCENE_PATH = "res://Game.tscn"
+
+# Game timings depend on G.ofaster (a const that's 0.01 by default for fast
+# testing, 1.0 for normal play). Rather than calibrate fixed waits — which
+# break when ofaster changes — these tests poll for state with a generous
+# real-time cap.  Polling exits as soon as the condition is true, so the
+# test stays fast at any ofaster value.
+const POLL_MAX_SECS = 60.0
+
+
+# Wait until check.call() returns true, or POLL_MAX_SECS real seconds elapse.
+# Returns whether the condition was met before the deadline.
+func _wait_until(check: Callable) -> bool:
+	var deadline_ms = Time.get_ticks_msec() + int(POLL_MAX_SECS * 1000.0)
+	while not check.call():
+		if Time.get_ticks_msec() > deadline_ms:
+			return false
+		await wait_frames(1)
+	return true
 
 
 func before_each():
@@ -39,19 +56,20 @@ func test_can_drop_three_tiles_via_keyboard():
 	var packed = load(GAME_SCENE_PATH)
 	var game = packed.instantiate()
 	add_child_autofree(game)
-	await wait_seconds(2.0)
-
-	var sender = GutInputSender.new(Input)
-	sender.set_auto_flush_input(true)
-	for i in range(3):
-		sender.action_down("drop_down").wait("2f").action_up("drop_down").wait("0.4s")
-	await wait_for_signal(sender.idle, 5)
+	# Poll until the level finishes setup (player spawns) — ofaster-independent.
+	assert_true(await _wait_until(func(): return game.player != null),
+		"First player should have spawned within %ss" % POLL_MAX_SECS)
 
 	var col: int = int(Helpers.slots_across / 2)
 	var bottom: int = int(Helpers.slots_down) - 1
+	var sender = GutInputSender.new(Input)
+	sender.set_auto_flush_input(true)
+	# Drop one tile; wait for it to land before the next drop. Polling
+	# Helpers.board for the expected slot avoids any reliance on ofaster.
 	for row in [bottom, bottom - 1, bottom - 2]:
-		assert_not_null(Helpers.board[Vector2(col, row)],
-			"Tile expected at column %d row %d after drops" % [col, row])
+		sender.action_down("drop_down").wait("1f").action_up("drop_down")
+		assert_true(await _wait_until(func(): return Helpers.board[Vector2(col, row)] != null),
+			"Tile expected to land at column %d row %d within %ss" % [col, row, POLL_MAX_SECS])
 
 
 func test_can_win_dog_level_1():
@@ -65,25 +83,22 @@ func test_can_win_dog_level_1():
 	var packed = load(GAME_SCENE_PATH)
 	var game = packed.instantiate()
 	add_child_autofree(game)
-	await wait_seconds(2.0)
-	assert_not_null(game.player,
-		"First player should have spawned by now (continue_start_level fired)")
+	# Poll for player spawn (independent of ofaster).
+	assert_true(await _wait_until(func(): return game.player != null),
+		"First player should have spawned within %ss" % POLL_MAX_SECS)
 
-	# 1. Drop three tiles via keyboard input.
-	var sender = GutInputSender.new(Input)
-	sender.set_auto_flush_input(true)
-	for i in range(3):
-		sender.action_down("drop_down").wait("2f").action_up("drop_down").wait("0.4s")
-	await wait_for_signal(sender.idle, 5)
-
+	# 1. Drop three tiles, polling between drops so we don't rely on ofaster timing.
 	var col: int = int(Helpers.slots_across / 2)
 	var bottom: int = int(Helpers.slots_down) - 1
 	var top_pos := Vector2(col, bottom - 2)
 	var mid_pos := Vector2(col, bottom - 1)
 	var bot_pos := Vector2(col, bottom)
-	for pos in [top_pos, mid_pos, bot_pos]:
-		assert_not_null(Helpers.board[pos],
-			"Tile expected at %s after drops" % pos)
+	var sender = GutInputSender.new(Input)
+	sender.set_auto_flush_input(true)
+	for pos in [bot_pos, mid_pos, top_pos]:
+		sender.action_down("drop_down").wait("1f").action_up("drop_down")
+		assert_true(await _wait_until(func(): return Helpers.board[pos] != null),
+			"Tile expected to land at %s within %ss" % [pos, POLL_MAX_SECS])
 
 	# 2. Vertical3 swipe — emit the same signals real picking would emit.
 	# board[pos] holds a Player; the Segment with the swipe signals is .mytile.
@@ -98,18 +113,14 @@ func test_can_win_dog_level_1():
 	await wait_frames(1)
 	bot_seg.emit_signal("unclicked")
 
-	# Wait for the full level-end chain. _display_bonus runs a real-time
-	# 4-second score-spinner animation; _reduce_swipes/_reduce_tiles add more.
-	# Only after all phases complete does the LevelEndedButtons get shown.
-	await wait_seconds(12.0)
-
-	# 3. Assert the CLEAR! screen (LevelEndedButtons) is visible.
-	var level_ended: Node = _find_level_ended_buttons(game)
-	assert_not_null(level_ended,
-		"LevelEndedButtons should exist in the tree after the win")
-	if level_ended:
-		assert_true(level_ended.visible,
-			"LevelEndedButtons should be visible (CLEAR! screen showing)")
+	# 3. Poll for the CLEAR! screen. The level-end chain has phases that use
+	# real-time timers (e.g. _display_bonus's 4s score spinner) plus phases
+	# that scale with ofaster — polling handles both regardless of value.
+	var level_ended: Node = null
+	assert_true(await _wait_until(func():
+		level_ended = _find_level_ended_buttons(game)
+		return level_ended != null and level_ended.visible
+	), "LevelEndedButtons should become visible (CLEAR! screen) within %ss" % POLL_MAX_SECS)
 
 
 func _find_level_ended_buttons(root: Node) -> Node:
