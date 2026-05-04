@@ -36,7 +36,7 @@ func _ready():
     add_buttons_to_scene(world_type)
 
 func _slot_size():
-    var os_window_width = get_viewport().get_window().size.x
+    var os_window_width = get_viewport().get_visible_rect().size.x
     var one_third_of_screen = os_window_width / buttons_across
     return one_third_of_screen
 

@@ -136,7 +136,7 @@ The game's core mechanic revolves around pattern recognition:
 - **Resource management**: `instance()` → `instantiate()`
 - **Control properties**: `rect_position` → `position`, `margin_top` → `position.y`
 - **TextureButton methods**: `set_normal_texture()` → `texture_normal`, `set_button_icon()` → `icon`
-- **Window/OS API**: `OS.get_window_size()` → `get_viewport().get_window().size`
+- **Window/OS API**: `OS.get_window_size()` → `get_viewport().get_visible_rect().size` *(corrected 2026-05-04: original migration used `get_viewport().get_window().size`, which returns the OS window's pixel size — different from Godot 3's design-viewport semantics; the wrong replacement broke layouts on Level Select, World Select, and the LaserGrid debug overlay)*
 - **Rendering**: `update()` → `queue_redraw()`
 - **Export syntax**: `export var` → `@export var`
 - **Onready**: `onready var` → `@onready var`
