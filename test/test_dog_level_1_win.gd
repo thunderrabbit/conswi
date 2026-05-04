@@ -32,30 +32,68 @@ func test_game_scene_loads_and_starts_dog_level_1():
 		"Loaded level should be Dog Level 1 (require 3 dogs)")
 
 
+func test_can_drop_three_tiles_via_keyboard():
+	# What works: keyboard input through GutInputSender reaches SteeringPad's
+	# _input(event), which sets game.drop_mode and ultimately drops tiles.
+	# After 3 drops, three dog tiles should be stacked at the bottom of column 3.
+	var packed = load(GAME_SCENE_PATH)
+	var game = packed.instantiate()
+	add_child_autofree(game)
+	await wait_seconds(2.0)
+
+	var sender = GutInputSender.new(Input)
+	sender.set_auto_flush_input(true)
+	for i in range(3):
+		sender.action_down("drop_down").wait("2f").action_up("drop_down").wait("0.4s")
+	await wait_for_signal(sender.idle, 5)
+
+	var col: int = int(Helpers.slots_across / 2)
+	var bottom: int = int(Helpers.slots_down) - 1
+	for row in [bottom, bottom - 1, bottom - 2]:
+		assert_not_null(Helpers.board[Vector2(col, row)],
+			"Tile expected at column %d row %d after drops" % [col, row])
+
+
 func test_can_win_dog_level_1():
-	# The full automated win, per issue #106 step list:
-	#   1. drop three tiles straight down so they stack vertically
-	#   2. swipe vertical3 across them
-	#   3. assert the CLEAR! screen (level-ended buttons) becomes visible
+	# What does NOT work yet: synthesized mouse events do not trigger the
+	# Area2D collision picking that fires Segment.gd's piece_clicked /
+	# piece_entered / piece_unclicked signals. Tried every combo I can think of:
+	#   - Input.parse_input_event() via GutInputSender (default)
+	#   - viewport.push_input() directly
+	#   - With and without sender.set_auto_flush_input(true)
+	#   - With and without sender.mouse_warp = true
+	#   - With and without viewport.physics_object_picking = true
+	#   - Headless and windowed
+	#   - wait_frames vs await get_tree().physics_frame
+	# In every run, "key drop down activated" prints (keyboard works), but
+	# "swipe seg clicked" never prints (mouse picking does not fire).
 	#
-	# Constraint (per Rob): the test must only do what a human player could do.
-	# That means input synthesis only — no calling game-logic helpers directly
-	# (no Helpers.put_tile_at, no GameSwipeDetector.recognize_pattern, etc.).
+	# Suspected cause: in Godot 4, Area2D's input_event signal is fed by the
+	# viewport's mouse-picking system, which uses the OS cursor's actual
+	# position rather than positions carried in synthesized events. Both
+	# Input.parse_input_event and viewport.push_input route the event through
+	# the global input system but do not feed the picking subsystem with a
+	# synthetic cursor position. Real mouse picking would require either an
+	# OS-level cursor (xdotool / xvfb-run) or a code change in the game so
+	# tiles also receive events via _input(event) instead of only via
+	# Area2D.input_event.
 	#
-	# Implementation notes for whoever picks this up next:
-	#   - Use Input.parse_input_event() to send "drop_down" action three times
-	#     (three drops -> three dogs in a column). The action key is space (32).
-	#   - Vertical3 swipe is mouse/touch-driven, not a keyboard action —
-	#     synthesize InputEventMouseButton (pressed) at the top tile,
-	#     InputEventMouseMotion down through the column, then
-	#     InputEventMouseButton (released).
-	#   - Coordinates must be in design viewport space (1242×2688). Compute tile
-	#     positions from Helpers.slot_to_pixels(Vector2(col, row)).
-	#   - Use await wait_seconds() between phases to let gravity / magnetism /
-	#     tweens settle (game uses MAGNETISM_TIME = 0.2504s, MIN_TIME = 0.07s).
-	#   - The level-clear screen lives in subscenes/LevelEndedButtons.tscn —
-	#     check for it via get_tree().get_first_node_in_group(...) or by
-	#     traversing game_hud.buttons after level_ended() fires.
-	#   - Do NOT use Game.allow_easy_win = true; the test should pass through
-	#     the same code path a real player exercises.
-	pending("Full input-driven Dog Level 1 win not yet implemented — see issue #106")
+	# Path forward needs a decision (see #106 comment): refactor tile input,
+	# use external OS automation, or accept signal-emission as the test path.
+	pending("Synthesized mouse events do not trigger Area2D picking — see in-file comment and issue #106 for next-step options")
+
+
+func _find_level_ended_buttons(root: Node) -> Node:
+	# Walk the tree looking for a node named "LevelEndedButtons" or whose
+	# script path contains that name.
+	var stack: Array = [root]
+	while not stack.is_empty():
+		var node: Node = stack.pop_back()
+		if node.name == "LevelEndedButtons":
+			return node
+		var script: Script = node.get_script()
+		if script and "LevelEndedButtons" in script.resource_path:
+			return node
+		for child in node.get_children():
+			stack.push_back(child)
+	return null
