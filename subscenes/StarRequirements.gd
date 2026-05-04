@@ -115,7 +115,7 @@ func display_next_requirement():
 func shape_has_been_displayed():
     # once shape has been shrunk, go to above function to display next shape
     currently_showing_shape.connect("shrunk_shape",display_next_requirement)
-    currently_showing_shape.shrink_shape(location_of_required_shape[currently_showing_name], G.shrink_shape_duration, G.REQ_HUD_ICON_SCALE)
+    currently_showing_shape.shrink_shape(location_of_required_shape[currently_showing_name], G.shrink_shape_duration, G.REQ_HUD_ICON_SCALE, true)
 
 func swiped_piece(piece_name):
     var num_required = 0
