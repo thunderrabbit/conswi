@@ -122,7 +122,9 @@ func save_num_stars(world,level, stars):
 func read_high_score(world,level):
     var world_string = self._world_string(world)
     var level_string = self._level_string(level)
-    return self._read_value(world_string + level_string + "score")
+    # int() so callers building filenames or string keys get "3" not "3.0"
+    # (JSON.parse_string returns numeric values as float in Godot 4)
+    return int(self._read_value(world_string + level_string + "score"))
 
 ####################################################
 #
@@ -131,7 +133,7 @@ func read_high_score(world,level):
 func read_num_stars(world,level):
     var world_string = self._world_string(world)
     var level_string = self._level_string(level)
-    return self._read_value(world_string + level_string + "stars")
+    return int(self._read_value(world_string + level_string + "stars"))
 
 ####################################################
 #
