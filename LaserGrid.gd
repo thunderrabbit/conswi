@@ -16,10 +16,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 extends Node2D
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
+const SHOW_LASER_LINES = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -27,6 +24,7 @@ func _ready():
 
 
 func _draw():
+    if not SHOW_LASER_LINES: return
     for verts in Helpers.slots_across:
         draw_line(Helpers.slot_to_pixels(Vector2(verts,0)), 
                 Helpers.slot_to_pixels(Vector2(verts,Helpers.slots_down)), 
