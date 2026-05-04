@@ -21,8 +21,8 @@
 
 extends Node
 
-const VERSION = "0.4.0"
-const SENTIMENTAL_VERSION = "Install GUT test framework"
+const VERSION = "0.5.0"
+const SENTIMENTAL_VERSION = "Fix regressions"
 
 const ofaster = 0.01    # multiply waits by G.ofaster
 
