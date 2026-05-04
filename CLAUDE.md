@@ -145,6 +145,7 @@ The game's core mechanic revolves around pattern recognition:
 - **Dictionary methods**: `.empty()` → `.is_empty()`
 - **String constructor**: `String()` → `str()`
 - **Project config**: Updated version and input maps for Godot 4
+- **Project config — display/window** *(discovered post-migration, 2026-05-04)*: `window/size/width` → `window/size/viewport_width`, `window/size/height` → `window/size/viewport_height`, `window/stretch/mode` value `"2d"` → `"canvas_items"`. The Godot 3 names were silently ignored, so the design viewport was falling back to Godot 4's default 1152×648 (16:9 landscape) instead of the intended 1242×2688 portrait — visible only at runtime, not as an error
 
 ### Post-Migration Status:
 ✅ Game loads successfully  
