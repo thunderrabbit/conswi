@@ -41,14 +41,16 @@ const wd = 100.0			# width of each sprite image in items.png
 const ht = 100.0			# height of each sprite images in items.png
 
 func _ready():
-    self.connect("drag_started", get_node("/root/GameNode2D").piece_being_dragged)
-    self.connect("drag_started", get_node("/root/GameNode2D/GameSwipeDetector").piece_being_dragged)
-    self.connect("drag_ended", get_node("/root/GameNode2D").piece_done_dragged)
-    self.connect("drag_ended", get_node("/root/GameNode2D/GameSwipeDetector").piece_done_dragged)
-    self.connect("clicked", get_node("/root/GameNode2D/GameSwipeDetector").piece_clicked)
-    self.connect("unclicked", get_node("/root/GameNode2D/GameSwipeDetector").piece_unclicked)
-    self.connect("entered", get_node("/root/GameNode2D/GameSwipeDetector").piece_entered)
-    self.connect("exited", get_node("/root/GameNode2D/GameSwipeDetector").piece_exited)
+    var game = Helpers.game_scene
+    var swipe_detector = game.get_node("GameSwipeDetector")
+    self.connect("drag_started", game.piece_being_dragged)
+    self.connect("drag_started", swipe_detector.piece_being_dragged)
+    self.connect("drag_ended", game.piece_done_dragged)
+    self.connect("drag_ended", swipe_detector.piece_done_dragged)
+    self.connect("clicked", swipe_detector.piece_clicked)
+    self.connect("unclicked", swipe_detector.piece_unclicked)
+    self.connect("entered", swipe_detector.piece_entered)
+    self.connect("exited", swipe_detector.piece_exited)
 
 func _init():
     # within the image map, these are the locations of the tiles

@@ -15,23 +15,21 @@ func before_each():
 	Helpers.requested_level = 1
 
 
-func test_game_scene_loads_as_resource():
-	# Weak smoke test: confirms Game.tscn parses and instantiates as a Node.
-	# Does NOT add to the scene tree — see note below.
+func test_game_scene_loads_and_starts_dog_level_1():
+	# Integration smoke test: instantiate Game.tscn under the test runner,
+	# add it to the tree, and verify Game._ready ran far enough to load
+	# Dog Level 1 (which is what the test_can_win_dog_level_1 below builds on).
 	var packed = load(GAME_SCENE_PATH)
 	assert_not_null(packed, "Game.tscn should load")
 	var game = packed.instantiate()
 	assert_not_null(game, "Game scene should instantiate")
-	game.free()  # manual free since we never added to tree
-
-	# NOTE: the obvious next step (add_child(game) and assert _ready ran) hits
-	# a hardcoded path issue. tiles/Segment.gd:44-45 connects signals via
-	# `get_node("/root/GameNode2D")` and `/root/GameNode2D/GameSwipeDetector`,
-	# which only resolve when Game.tscn is the actual main scene at /root.
-	# In a test harness, the Game node lives under the GUT runner instead,
-	# so those lookups return null and Segment._ready crashes. Until that
-	# coupling is broken (issue follow-up — make Segment use a relative
-	# path or look up via group), the win test below cannot proceed.
+	add_child_autofree(game)
+	# Let _ready run, level get loaded, requirements display kick off
+	await wait_frames(3)
+	assert_not_null(game.current_level,
+		"Game._ready should populate current_level by frame 3")
+	assert_eq(game.current_level.required_tiles, {"dog": 3},
+		"Loaded level should be Dog Level 1 (require 3 dogs)")
 
 
 func test_can_win_dog_level_1():
