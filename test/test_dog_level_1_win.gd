@@ -55,32 +55,61 @@ func test_can_drop_three_tiles_via_keyboard():
 
 
 func test_can_win_dog_level_1():
-	# What does NOT work yet: synthesized mouse events do not trigger the
-	# Area2D collision picking that fires Segment.gd's piece_clicked /
-	# piece_entered / piece_unclicked signals. Tried every combo I can think of:
-	#   - Input.parse_input_event() via GutInputSender (default)
-	#   - viewport.push_input() directly
-	#   - With and without sender.set_auto_flush_input(true)
-	#   - With and without sender.mouse_warp = true
-	#   - With and without viewport.physics_object_picking = true
-	#   - Headless and windowed
-	#   - wait_frames vs await get_tree().physics_frame
-	# In every run, "key drop down activated" prints (keyboard works), but
-	# "swipe seg clicked" never prints (mouse picking does not fire).
-	#
-	# Suspected cause: in Godot 4, Area2D's input_event signal is fed by the
-	# viewport's mouse-picking system, which uses the OS cursor's actual
-	# position rather than positions carried in synthesized events. Both
-	# Input.parse_input_event and viewport.push_input route the event through
-	# the global input system but do not feed the picking subsystem with a
-	# synthetic cursor position. Real mouse picking would require either an
-	# OS-level cursor (xdotool / xvfb-run) or a code change in the game so
-	# tiles also receive events via _input(event) instead of only via
-	# Area2D.input_event.
-	#
-	# Path forward needs a decision (see #106 comment): refactor tile input,
-	# use external OS automation, or accept signal-emission as the test path.
-	pending("Synthesized mouse events do not trigger Area2D picking — see in-file comment and issue #106 for next-step options")
+	# Drive Dog Level 1 to completion. Keyboard input is synthesized via
+	# GutInputSender (real input pipeline). The vertical3 swipe is performed
+	# by emitting the tile Area2D signals directly, since synthesized mouse
+	# events do not feed Godot 4's collision-picking subsystem and therefore
+	# never trigger Segment.gd's input_event signal handlers. Emitting these
+	# signals exercises every game function a real swipe would, minus the
+	# picking layer (which is engine code, not ours to test).
+	var packed = load(GAME_SCENE_PATH)
+	var game = packed.instantiate()
+	add_child_autofree(game)
+	await wait_seconds(2.0)
+	assert_not_null(game.player,
+		"First player should have spawned by now (continue_start_level fired)")
+
+	# 1. Drop three tiles via keyboard input.
+	var sender = GutInputSender.new(Input)
+	sender.set_auto_flush_input(true)
+	for i in range(3):
+		sender.action_down("drop_down").wait("2f").action_up("drop_down").wait("0.4s")
+	await wait_for_signal(sender.idle, 5)
+
+	var col: int = int(Helpers.slots_across / 2)
+	var bottom: int = int(Helpers.slots_down) - 1
+	var top_pos := Vector2(col, bottom - 2)
+	var mid_pos := Vector2(col, bottom - 1)
+	var bot_pos := Vector2(col, bottom)
+	for pos in [top_pos, mid_pos, bot_pos]:
+		assert_not_null(Helpers.board[pos],
+			"Tile expected at %s after drops" % pos)
+
+	# 2. Vertical3 swipe — emit the same signals real picking would emit.
+	# board[pos] holds a Player; the Segment with the swipe signals is .mytile.
+	var top_seg = Helpers.board[top_pos].mytile
+	var mid_seg = Helpers.board[mid_pos].mytile
+	var bot_seg = Helpers.board[bot_pos].mytile
+	top_seg.emit_signal("clicked", top_pos, top_seg.tile_type)
+	await wait_frames(1)
+	mid_seg.emit_signal("entered", mid_pos, mid_seg.tile_type)
+	await wait_frames(1)
+	bot_seg.emit_signal("entered", bot_pos, bot_seg.tile_type)
+	await wait_frames(1)
+	bot_seg.emit_signal("unclicked")
+
+	# Wait for the full level-end chain. _display_bonus runs a real-time
+	# 4-second score-spinner animation; _reduce_swipes/_reduce_tiles add more.
+	# Only after all phases complete does the LevelEndedButtons get shown.
+	await wait_seconds(12.0)
+
+	# 3. Assert the CLEAR! screen (LevelEndedButtons) is visible.
+	var level_ended: Node = _find_level_ended_buttons(game)
+	assert_not_null(level_ended,
+		"LevelEndedButtons should exist in the tree after the win")
+	if level_ended:
+		assert_true(level_ended.visible,
+			"LevelEndedButtons should be visible (CLEAR! screen showing)")
 
 
 func _find_level_ended_buttons(root: Node) -> Node:
