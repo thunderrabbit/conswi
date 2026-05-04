@@ -7,7 +7,7 @@ export_presets.cfg
 out/*
 
 # Secrets
-.gh-token
+.gh-token*
 
 # General
 .DS_Store
