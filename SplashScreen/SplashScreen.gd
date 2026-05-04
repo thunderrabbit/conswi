@@ -26,6 +26,7 @@ var splash_texture_4 = preload("res://images/Folder_2.5/05animal suffering@3x.pn
 func _ready():
 	# SoundManager.play_bgm("Splash screen")
 	### SoundManager.play_bgm("Game Intro")
+	$VersionCanvasLayer/VersionLabel.text = "v%s" % G.VERSION
 	_on_SplashScreen_Timer_timeout()   # kick off the first screen
 	G.current_screen = -1              # prepare to start with first image in the array
 
