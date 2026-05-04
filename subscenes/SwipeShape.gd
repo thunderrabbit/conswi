@@ -89,7 +89,15 @@ func shrink_shape(go_to_loc, duration, ratio = G.REQ_SHAPE_SHRINK_FACTOR, boost_
     effect.tween_property(self, "position", go_to_loc, duration)
     if boost_spinner:
         var b = G.REQ_SPINNER_HUD_BOOST
-        effect.tween_property(self.spinner, "scale", Vector2(b, b), duration)
+        # Counter-shrink the spinner via font_size override AND scale.
+        # The parent Node2D shrinks to `ratio` (e.g. 0.4); we want digits
+        # readable in the corner without making the icon big. Boosting font
+        # size scales the rendered glyphs without depending on Control->
+        # Node2D scale composition (which produced unreadable output in Godot 4).
+        var base_font_size = 192   # matches SpinnerLableFont.tres
+        var boosted_font_size = int(base_font_size * b)
+        self.spinner.add_theme_font_size_override("font_size", boosted_font_size)
+        print("HUD spinner boost: font_size=", boosted_font_size)
 
 # TODO: make it random
 func fly_away_randomly(duration):
