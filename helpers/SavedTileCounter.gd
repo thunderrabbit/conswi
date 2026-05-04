@@ -19,14 +19,10 @@
 #
 #####################################################################################
 
-extends Node
+extends RefCounted
 
 var local_required_tiles = {}         # our own copy of animals required
 var local_saved_tiles = {}         # our own copy of animals required
-
-func _ready():
-    self.local_required_tiles = {}
-    self.local_saved_tiles = {}
 
 func assess_required_tiles(level_info):
     # https://godotengine.org/qa/19396/how-do-i-duplicate-a-dictionary-in-godot-3-0-alpha-2?show=56050#a56050

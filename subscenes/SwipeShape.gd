@@ -19,6 +19,11 @@ const sprite_script = preload("res://tiles/Segment.gd")
 @onready var spinner = get_node("SpinnerLabel")
 @onready var pauser = Timer.new()
 
+func _ready():
+    # Parent pauser so it's freed with this SwipeShape. Without this, gameplay
+    # swipes (which never call _displayed_quantity) leak the Timer at exit.
+    add_child(pauser)
+
 var dimensions = Vector2(0,0)	# will tell the size of the shape
 const tick_delay = 0.73	 * G.ofaster		# pause between countup qty
 const pause_time = tick_delay	# pause after countup quantity
@@ -193,7 +198,6 @@ func _displayed_quantity():
     pauser.connect("timeout", dramatically_paused_after_display)
     pauser.set_wait_time(pause_time)
     pauser.set_one_shot(true)
-    add_child(pauser)			# so it gets processed()
     pauser.start()
 
 func dramatically_paused_after_display():
