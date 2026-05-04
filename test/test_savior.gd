@@ -28,9 +28,9 @@ func test_read_high_score_returns_int():
 
 func test_str_of_read_num_stars_has_no_decimal():
 	# The actual symptom: building a filename from str(num_stars).
-	# Use a level number that no other test touches — save_num_stars uses
-	# _write_if_larger so a value once written can't be lowered.
-	Savior.save_num_stars(G.TYPE_DOG, 99, 2)
-	var stars = Savior.read_num_stars(G.TYPE_DOG, 99)
-	assert_eq(str(stars), "2",
-		"str() of read_num_stars must be '2' not '2.0' (filenames depend on this)")
+	# Dog Level 1 always earns 3 stars (one required swipe = 1/1 ratio),
+	# so re-using (DOG, 1, 3) is the realistic round-trip — no fake levels.
+	Savior.save_num_stars(G.TYPE_DOG, 1, 3)
+	var stars = Savior.read_num_stars(G.TYPE_DOG, 1)
+	assert_eq(str(stars), "3",
+		"str() of read_num_stars must be '3' not '3.0' (filenames depend on this)")
