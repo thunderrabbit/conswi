@@ -97,7 +97,23 @@ func shrink_shape(go_to_loc, duration, ratio = G.REQ_SHAPE_SHRINK_FACTOR, boost_
         var base_font_size = 192   # matches SpinnerLableFont.tres
         var boosted_font_size = int(base_font_size * b)
         self.spinner.add_theme_font_size_override("font_size", boosted_font_size)
+        _position_spinner_south()
         print("HUD spinner boost: font_size=", boosted_font_size)
+
+# Place the SpinnerLabel directly below the shape's bounding box, horizontally
+# centered on the shape. Local coords — parent's HUD shrink applies on top.
+# Used only in HUD mode (boost_spinner=true) so the digit doesn't overlap the
+# icon column for vertical or square shapes (#110).
+func _position_spinner_south():
+    var slot_size = G.Game_slot_size()
+    var center_slot = Vector2(self.dimensions.x / 2.0, self.dimensions.y)
+    var anchor = Helpers.slot_to_pixels(center_slot, true)  # fractional x ok
+    var rect_w = slot_size * 3.0
+    var rect_h = slot_size * 2.0
+    self.spinner.size = Vector2(rect_w, rect_h)
+    self.spinner.position = Vector2(anchor.x - rect_w / 2.0, anchor.y + slot_size / 2.0)
+    self.spinner.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+    self.spinner.vertical_alignment = VERTICAL_ALIGNMENT_TOP
 
 # TODO: make it random
 func fly_away_randomly(duration):

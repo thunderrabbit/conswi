@@ -55,6 +55,8 @@ func show_star_requirements(star_requirements):
         # calculate width of this piece so we know where to put next piece
         var width_of_shape = ShapeShifter.getWidthOfShapeName(reqd_name)   # width in 'tiles' e.g. 1 for 'ta3' or 3 for 'bo3'
         var adjusted_width_of_shape_in_pixels = floor(Helpers.width_to_pixels(width_of_shape,G.REQ_HUD_ICON_SCALE))  # scalar just for width
+        if width_of_shape == 1:
+            adjusted_width_of_shape_in_pixels += G.REQ_HUD_1x1_GAP  # multi-digit counts under 1-cell shapes need extra horizontal room (#110)
         pixel_width_of_required_shape[reqd_name] = adjusted_width_of_shape_in_pixels  # subsequent shapes move this far to account for this shape being removed from list
         star_requirement_latest_pixels = star_requirement_latest_pixels + Vector2(adjusted_width_of_shape_in_pixels,0)  # location for next piece (if any)
 
