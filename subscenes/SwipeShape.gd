@@ -77,8 +77,7 @@ func move_shape_left(pixels_to_slide, duration):
 # as the destination.   Plus when shapes are swiped, this
 # same function is used to tell the swipe where to go if it
 # matches required shape
-func shrink_shape(go_to_loc, duration):
-    var ratio = G.REQ_SHAPE_SHRINK_FACTOR
+func shrink_shape(go_to_loc, duration, ratio = G.REQ_SHAPE_SHRINK_FACTOR, boost_spinner: bool = false):
     var effect = create_tween()
     effect.set_parallel(true)  # Allow multiple properties to tween simultaneously
     effect.finished.connect(_on_shrunk_shape)
@@ -88,6 +87,33 @@ func shrink_shape(go_to_loc, duration):
     effect.set_trans(Tween.TRANS_LINEAR)
     effect.set_ease(Tween.EASE_IN_OUT)
     effect.tween_property(self, "position", go_to_loc, duration)
+    if boost_spinner:
+        var b = G.REQ_SPINNER_HUD_BOOST
+        # Counter-shrink the spinner via font_size override AND scale.
+        # The parent Node2D shrinks to `ratio` (e.g. 0.4); we want digits
+        # readable in the corner without making the icon big. Boosting font
+        # size scales the rendered glyphs without depending on Control->
+        # Node2D scale composition (which produced unreadable output in Godot 4).
+        var base_font_size = 192   # matches SpinnerLableFont.tres
+        var boosted_font_size = int(base_font_size * b)
+        self.spinner.add_theme_font_size_override("font_size", boosted_font_size)
+        _position_spinner_south()
+        print("HUD spinner boost: font_size=", boosted_font_size)
+
+# Place the SpinnerLabel directly below the shape's bounding box, horizontally
+# centered on the shape. Local coords — parent's HUD shrink applies on top.
+# Used only in HUD mode (boost_spinner=true) so the digit doesn't overlap the
+# icon column for vertical or square shapes (#110).
+func _position_spinner_south():
+    var slot_size = G.Game_slot_size()
+    var center_slot = Vector2(self.dimensions.x / 2.0, self.dimensions.y)
+    var anchor = Helpers.slot_to_pixels(center_slot, true)  # fractional x ok
+    var rect_w = slot_size * 3.0
+    var rect_h = slot_size * 2.0
+    self.spinner.size = Vector2(rect_w, rect_h)
+    self.spinner.position = Vector2(anchor.x - rect_w / 2.0, anchor.y + slot_size / 2.0)
+    self.spinner.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+    self.spinner.vertical_alignment = VERTICAL_ALIGNMENT_TOP
 
 # TODO: make it random
 func fly_away_randomly(duration):

@@ -49,7 +49,9 @@ func show_level_requirements(level_requirements):
 
         # calculate width of this piece so we know where to put next piece
         var width_of_shape = ShapeShifter.getWidthOfShapeName("one_square")   # width in 'tiles' e.g. 1 for 'ta3' or 3 for 'bo3'
-        var adjusted_width_of_shape_in_pixels = floor(Helpers.width_to_pixels(width_of_shape,G.REQ_SHAPE_SHRINK_FACTOR))  # scalar just for width
+        var adjusted_width_of_shape_in_pixels = floor(Helpers.width_to_pixels(width_of_shape,G.REQ_HUD_ICON_SCALE))  # scalar just for width
+        if width_of_shape == 1:
+            adjusted_width_of_shape_in_pixels += G.REQ_HUD_1x1_GAP  # multi-digit counts under 1-cell shapes need extra horizontal room (#110)
         pixel_width_of_required_shape[reqd_name] = adjusted_width_of_shape_in_pixels  # subsequent shapes move this far to account for this shape being removed from list
         level_requirement_latest_pixels = level_requirement_latest_pixels + Vector2(adjusted_width_of_shape_in_pixels,0)  # location for next piece (if any)
 
@@ -109,7 +111,7 @@ func display_next_requirement():
 func shape_has_been_displayed():
     # once shape has been shrunk, go to above function to display next shape
     currently_showing_shape.connect("shrunk_shape",display_next_requirement)
-    currently_showing_shape.shrink_shape(location_of_required_shape[currently_showing_name], G.shrink_reqd_duration)
+    currently_showing_shape.shrink_shape(location_of_required_shape[currently_showing_name], G.shrink_reqd_duration, G.REQ_HUD_ICON_SCALE, true)
 
 func saved_n_tiles_of_type(n, tile_type):
     var piece_name = TileDatabase.tiles[tile_type].ITEM_NAME

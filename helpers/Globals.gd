@@ -122,4 +122,7 @@ const Saved_Tiles_Anchor_Top = 0.5
 # At a shrink factor of 0.2, they fit within one space, but are too small for the player to see
 # We probably need a whole better way to place them, but this works for now.
 const REQ_SHAPE_SHRINK_FACTOR = 0.4			# required shapes become this big compared to normal
+const REQ_HUD_ICON_SCALE = 0.4				# HUD icon scale (matches SHRINK_FACTOR; reserved for future tuning)
+const REQ_SPINNER_HUD_BOOST = 1.0			# spinner-label counter-scale inside HUD icons (#110 visibility); icons shrink to 0.4 so effective = 0.4 * boost
 const REQ_SHAPE_SHRINK_LOCATION = 1.5		# required shapes display this many column widths apart
+const REQ_HUD_1x1_GAP = 60					# extra HUD pixels between adjacent 1-cell shapes so multi-digit counts have breathing room (#110)
