@@ -21,8 +21,8 @@
 
 extends Node
 
-const VERSION = "0.2.0"
-const SENTIMENTAL_VERSION = "Fixed desktop viewport"
+const VERSION = "0.3.0"
+const SENTIMENTAL_VERSION = "Fix window-size API"
 
 const ofaster = 0.01    # multiply waits by G.ofaster
 
