@@ -22,7 +22,7 @@
 extends Node
 
 const VERSION = "0.1.0"
-const SENTIMENTAL_VERSION = "Add version constants"
+const SENTIMENTAL_VERSION = "Added version constants"
 
 const ofaster = 0.01    # multiply waits by G.ofaster
 
