@@ -121,5 +121,6 @@ const Saved_Tiles_Anchor_Top = 0.5
 # If the shrink location is 1, they will each take a single square worth of space
 # At a shrink factor of 0.2, they fit within one space, but are too small for the player to see
 # We probably need a whole better way to place them, but this works for now.
-const REQ_SHAPE_SHRINK_FACTOR = 1.6			# required shapes become this big compared to normal (was 0.4; 4x bump for #110 visibility test)
+const REQ_SHAPE_SHRINK_FACTOR = 0.4			# required shapes become this big compared to normal
+const REQ_HUD_ICON_SCALE = 1.6				# HUD-only icon scale; 4x of SHRINK_FACTOR for #110 visibility test
 const REQ_SHAPE_SHRINK_LOCATION = 1.5		# required shapes display this many column widths apart

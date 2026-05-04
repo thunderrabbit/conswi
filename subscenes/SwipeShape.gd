@@ -77,8 +77,7 @@ func move_shape_left(pixels_to_slide, duration):
 # as the destination.   Plus when shapes are swiped, this
 # same function is used to tell the swipe where to go if it
 # matches required shape
-func shrink_shape(go_to_loc, duration):
-    var ratio = G.REQ_SHAPE_SHRINK_FACTOR
+func shrink_shape(go_to_loc, duration, ratio = G.REQ_SHAPE_SHRINK_FACTOR):
     var effect = create_tween()
     effect.set_parallel(true)  # Allow multiple properties to tween simultaneously
     effect.finished.connect(_on_shrunk_shape)
