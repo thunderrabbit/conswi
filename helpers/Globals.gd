@@ -21,8 +21,8 @@
 
 extends Node
 
-const VERSION = "0.5.0"
-const SENTIMENTAL_VERSION = "Fix regressions"
+const VERSION = "0.6.0"
+const SENTIMENTAL_VERSION = "Make requirements visible"
 
 const ofaster = 0.01    # multiply waits by G.ofaster
 
