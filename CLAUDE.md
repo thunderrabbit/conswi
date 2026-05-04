@@ -2,9 +2,26 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Running the game
+
+`godot` is NOT on PATH. Use the downloaded binary directly:
+
+```
+/home/thunderrabbit/Downloads/Godot_v4.6-stable_linux.x86_64 --path /home/thunderrabbit/Godot/conswi
+```
+
+Run it in the background so Rob can interact with the running game and send screenshots.
+
 ## GitHub access
 
 Before running any `gh` command, run `source .gh-token` to load the conswi-scoped PAT (`GH_TOKEN`). Without it, `gh` falls back to Rob's user-wide token. Not needed for `git push/pull` (those use SSH).
+
+`gh issue view N` and `gh pr view N --comments` fail on this repo with a Projects-classic deprecation GraphQL error. Skip them — go straight to the REST API:
+
+```
+gh api repos/:owner/:repo/issues/N --jq '{title, body, state}'
+gh api repos/:owner/:repo/issues/N/comments --jq '.[] | {user: .user.login, created: .created_at, body}'
+```
 
 ## Collaboration Guidelines
 
