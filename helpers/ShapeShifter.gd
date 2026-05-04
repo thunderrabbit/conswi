@@ -86,9 +86,11 @@ func getSwipeDimensions(swipeCoordinates):
         upmost_y = min(upmost_y,coord.y)
         downmost_y = max(downmost_y, coord.y)
 
-    # see how wide/tall the swipe is
-    var width = (rightmost_x - leftmost_x) + 1
-    var height = (downmost_y - upmost_y) + 1
+    # see how wide/tall the swipe is. Cast to int so the bitmap's width prefix
+    # serializes as `1` not `1.0` — bitmapNames keys come from int-literal
+    # ShapeDatabase entries, and "[1, ...]" != "[1.0, ...]" in Godot 4.
+    var width = int((rightmost_x - leftmost_x) + 1)
+    var height = int((downmost_y - upmost_y) + 1)
 
     return {'topleft': Vector2(leftmost_x,upmost_y),
             'botright': Vector2(rightmost_x, downmost_y),

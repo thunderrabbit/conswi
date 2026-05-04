@@ -32,6 +32,7 @@ var Game									# will point to GameNode
 var swipe_state = SwipeState.SWIPE
 var dragging_piece = null					# when dragging a piece, this will refer to it
 var no_swipe_die_bool = false   # if true, we check if swipes remain.  Set true by Game if no more pieces available
+var win_already_fired = false   # set when level-won is triggered so animations don't double-fire it
 
 func _ready():
     # Called every time the node is added to the scene.
@@ -41,6 +42,7 @@ func _ready():
 func startLevel(current_level):
     self.saved_tiles = 0	# increase saved_tiles to beat level
     self.correct_swipe_counter = 0  # compare to swipe requirements to determine number of stars (1-3)
+    self.win_already_fired = false  # reset so each new level can fire its own win
     self.saved_tile_counter = self.SavedTileCounter.new()
     self.saved_tile_counter.assess_required_tiles(current_level)
 
@@ -118,6 +120,14 @@ func piece_unclicked():
         self.saved_tile_counter.saved_n_tiles_of_type(swipe_array.size(), clicked_this_piece_type)
         # will update HUD after shape shrinks and inc_saved_tile_counter() calls Game.game_hud.clarify_requirements()
         Game.game_hud.saved_n_tiles_of_type(swipe_array.size(), clicked_this_piece_type)  # Update only HUD
+        # Detect win immediately so it isn't gated on the swipe-shape animation
+        # chain (~0.9s real time per chained tween at full speed). The animation
+        # callback inc_saved_tile_counter() still runs but is guarded against
+        # firing the win twice.
+        if !self.win_already_fired and self.saved_tile_counter.saved_enough_tiles_bool():
+            self.win_already_fired = true
+            print("sweet as we won the game by saving tiles (immediate)")
+            Game._on_LevelWon()
         # TODO add animation swipe_shape.animate()
         for pos in swipe_array:
             if Helpers.board[pos] != null:
@@ -145,8 +155,11 @@ func inc_saved_tile_counter():
     print("Have game hud clarifying requirements now that shape swipe motion is complete")
     Game.game_hud.clarify_requirements()
     if self.saved_tile_counter.saved_enough_tiles_bool():
-        print("sweet as we won the game by saving tiles")
-        Game._on_LevelWon()   ## TODO use signal instead of call private function in Game
+        # piece_unclicked already fired the win immediately; don't double-fire
+        if !self.win_already_fired:
+            self.win_already_fired = true
+            print("sweet as we won the game by saving tiles")
+            Game._on_LevelWon()   ## TODO use signal instead of call private function in Game
     else:
         # didnt win; see if we can lose
         see_if_swipes_remain()

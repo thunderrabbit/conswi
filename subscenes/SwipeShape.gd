@@ -108,7 +108,11 @@ func fly_away_randomly(duration):
 #
 func _on_come_back_to_location():
     print("new tween starting")
-    var duration = 0.9
+    # Scale by G.ofaster like fly_away_randomly does — without this the
+    # come-back tween was always 0.9s real time, regardless of testing speed,
+    # which gated win detection (since this tween's `flew_away` signal is
+    # what triggers the saved-tiles win check for non-required swipes).
+    var duration = 0.9 * G.ofaster
     var go_to_loc = Helpers.slot_to_pixels(Vector2(4,10)) # was this but it was moved to GameHud and I don't know how to access gamehud from here  HUD.get_node('SavedTileCount').get_global_position()
     var effect = create_tween()
     effect.set_parallel(true)  # Allow multiple properties to tween simultaneously

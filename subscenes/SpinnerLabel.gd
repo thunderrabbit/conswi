@@ -30,20 +30,20 @@ func _ready():
     add_child(tick_timer)  # so it gets processed()
 
 func set_increment(increment):
-    self.increment = abs(increment)
+    self.increment = int(abs(increment))
 
 func set_value(value):
-    self.value = value
-    set_text(str(value))
+    self.value = int(value)
+    set_text(str(self.value))
 
 func set_target(target):
-    self.target = target
+    self.target = int(target)
 
 func set_target_increase(increase):
-    self.target = self.value + increase
+    self.target = self.value + int(increase)
 
 func set_target_decrease(decrease):
-    self.target = self.value - decrease
+    self.target = self.value - int(decrease)
 
 func set_delay(delay):
     self.tick_delay = delay
