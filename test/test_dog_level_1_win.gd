@@ -123,6 +123,55 @@ func test_can_win_dog_level_1():
 	), "LevelEndedButtons should become visible (CLEAR! screen) within %ss" % POLL_MAX_SECS)
 
 
+func test_can_win_dog_level_2():
+	# Dog Level 2: 9 tiles total, needs 3 vertical3 swipes for 3 stars.
+	# Same column-3 strategy as Level 1, repeated 3 times.
+	Helpers.requested_level = 2
+	var packed = load(GAME_SCENE_PATH)
+	var game = packed.instantiate()
+	add_child_autofree(game)
+	assert_true(await _wait_until(func(): return game.player != null),
+		"First player should have spawned within %ss" % POLL_MAX_SECS)
+
+	var col: int = int(Helpers.slots_across / 2)
+	var bottom: int = int(Helpers.slots_down) - 1
+	var top_pos := Vector2(col, bottom - 2)
+	var mid_pos := Vector2(col, bottom - 1)
+	var bot_pos := Vector2(col, bottom)
+	var sender = GutInputSender.new(Input)
+	sender.set_auto_flush_input(true)
+
+	for cycle in range(3):
+		# Drop three tiles into column 3 (gravity stacks them at the bottom).
+		for pos in [bot_pos, mid_pos, top_pos]:
+			sender.action_down("drop_down").wait("1f").action_up("drop_down")
+			assert_true(await _wait_until(func(): return Helpers.board[pos] != null),
+				"Cycle %d: tile expected to land at %s within %ss" % [cycle, pos, POLL_MAX_SECS])
+
+		# Vertical3 swipe via signal emission (same as Level 1).
+		var top_seg = Helpers.board[top_pos].mytile
+		var mid_seg = Helpers.board[mid_pos].mytile
+		var bot_seg = Helpers.board[bot_pos].mytile
+		top_seg.emit_signal("clicked", top_pos, top_seg.tile_type)
+		await wait_frames(1)
+		mid_seg.emit_signal("entered", mid_pos, mid_seg.tile_type)
+		await wait_frames(1)
+		bot_seg.emit_signal("entered", bot_pos, bot_seg.tile_type)
+		await wait_frames(1)
+		bot_seg.emit_signal("unclicked")
+
+		# Wait for swiped tiles to clear before next cycle's drops.
+		if cycle < 2:
+			assert_true(await _wait_until(func(): return Helpers.board[bot_pos] == null),
+				"Cycle %d: tiles should clear after swipe within %ss" % [cycle, POLL_MAX_SECS])
+
+	var level_ended: Node = null
+	assert_true(await _wait_until(func():
+		level_ended = _find_level_ended_buttons(game)
+		return level_ended != null and level_ended.visible
+	), "Dog Level 2: LevelEndedButtons should become visible within %ss" % POLL_MAX_SECS)
+
+
 func _find_level_ended_buttons(root: Node) -> Node:
 	# Walk the tree looking for a node named "LevelEndedButtons" or whose
 	# script path contains that name.
